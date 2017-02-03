@@ -46,12 +46,38 @@ techniques and repositories to make code and results freely available.
 
 ## How Can The ISC Help?
 
-- Financially by supporting salary of material developers and teachers.
-- Financially by paying for travel costs of teachers and workshop rooms to
-  organize workshops in Ghana, Costa Rica, France and Switzerland.
+```{r, echo=FALSE, message=FALSE}
+library("knitr")
+library("googlesheets")
+costs_sheet <- gs_title("ScoDa R consortium proposal: Costs")
+costs <- gs_read(costs_sheet)
+costs$Notes[is.na(costs$Notes)] <- ""
 
-<!-- TODO: What do we predict, one workshop will cost? Including salary, travel
-costs and room rent? -->
+material <- subset(costs, Info == "material", 
+                   select = c("Work", "Funding requested", 
+                              "School of Data co-funding"))
+workshop <- subset(costs, Info == "workshop",  
+                   select = c("Work", "Funding requested", 
+                              "School of Data co-funding"))
+```
+
+We would like to request financial support of `r sum(material["Funding requested"])` 
+USD from the ISC to develop material for journalists who would like to learn R. 
+The School of Data can support the material development in guidance for the 
+material writing as well as in communication and maintainance.
+The development costs can be split up as follows: 
+```{r, echo=FALSE}
+kable(material)
+```
+
+
+If additional support is possible, we would like to organize workshops in Ghana, 
+Costa Rica, France and Switzerland. The financial support needed are 
+`r sum(workshop["Funding requested"])` USD and can be split up as follows:
+```{r, echo=FALSE}
+kable(workshop)
+```
+
 
 ## Dissemination
 
