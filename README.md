@@ -12,20 +12,19 @@ Application for https://www.r-consortium.org/projects/call-for-proposals
 
 ## The Problem
 R has great tools for accessing and analysing open data sources, which would be
-hugely beneficial to civil society organisations (CSOs) and journalists.
-However there is a low level of awareness of R in these communities and
-specialized courses -- especially in languages other than English -- are not
-available.
+hugely beneficial to journalists.  However there is a low level of awareness of
+R in the journalism community and specialized courses -- especially in
+languages other than English -- are not available.
 
-Being able to work with data and communicating the results will enable CSOs to
-make more informed decisions and to have impact in their fields.  Journalists
-can profit from data skills because they allow them to access diverse data, do
-more profound research and communicate through visualisations.
+Journalists can profit from data skills because they allow them to access
+diverse data, do more profound research and communicate through visualisations.
 
 There are many introductory R courses for a broad audience and we are planning
 to build ontop of them, i.e., do the basic introduction with available material
 (e.g. [swirl](http://swirlstats.com/)) and and beyond this use specialised
-material for CSOs and journalists, which still needs to be developed.
+material for journalists, which still needs to be developed. In order to be
+able to tailor material for the needs of journalists we sent out a survey to
+journalists all over the world to assess what those needs are.
 
 
 ## The Plan
