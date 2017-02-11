@@ -1,6 +1,11 @@
 # r-consortium-proposal
 Application for https://www.r-consortium.org/projects/call-for-proposals
 
+```{r, echo=FALSE, message=FALSE}
+library("knitr")
+library("googlesheets")
+```
+
 
 
 # R Consortium Proposal: School of Data Material Development
@@ -26,6 +31,14 @@ material for journalists, which still needs to be developed. In order to be
 able to tailor material for the needs of journalists we sent out a survey to
 journalists all over the world to assess what those needs are.
 
+```{r, echo=FALSE, message=FALSE}
+responses_sheet <- gs_title("R course for journalists  (Responses)")
+responses <- gs_read(responses_sheet)
+
+tools <- responses["What tools do you normally use to work with data? (select all that apply)"]
+```
+
+
 
 ## The Plan
 
@@ -47,8 +60,7 @@ techniques and repositories to make code and results freely available.
 ## How Can The ISC Help?
 
 ```{r, echo=FALSE, message=FALSE}
-library("knitr")
-library("googlesheets")
+
 costs_sheet <- gs_title("ScoDa R consortium proposal: Costs")
 costs <- gs_read(costs_sheet)
 costs$Notes[is.na(costs$Notes)] <- ""

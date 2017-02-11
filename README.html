@@ -131,6 +131,780 @@ $(document).ready(function () {
 <p>R has great tools for accessing and analysing open data sources, which would be hugely beneficial to journalists. However there is a low level of awareness of R in the journalism community and specialized courses – especially in languages other than English – are not available.</p>
 <p>Journalists can profit from data skills because they allow them to access diverse data, do more profound research and communicate through visualisations.</p>
 <p>There are many introductory R courses for a broad audience and we are planning to build ontop of them, i.e., do the basic introduction with available material (e.g. <a href="http://swirlstats.com/">swirl</a>) and and beyond this use specialised material for journalists, which still needs to be developed. In order to be able to tailor material for the needs of journalists we sent out a survey to journalists all over the world to assess what those needs are.</p>
+<pre><code>## $`How long have you been working as a data journalist?`
+## 
+## 10 years or more        1-4 years        5-9 years Less than a year 
+##                4               49               11               31 
+## 
+## $`Is data journalism your primary employment?`
+## 
+##                                            I'm an undergrad student 
+##                                                                   1 
+##                                   I work fulltime as a data analyst 
+##                                                                   1 
+##                    I work full time in a company, not in a newsroom 
+##                                                                   1 
+##        I work with data often even though it is not my primary work 
+##                                                                   1 
+##                                                                  No 
+##                                                                  30 
+## Yes, but I am still a journalism student interning and freelancing. 
+##                                                                   1 
+##                                 Yes, but i work in a design company 
+##                                                                   1 
+##                                      Yes, but I work only part time 
+##                                                                  23 
+##                                Yes, I work full-time as a freelance 
+##                                                                  11 
+##                             Yes, I work full-time within a newsroom 
+##                                                                  25 
+## 
+## $`What type of organization do you primarily work for?`
+## 
+##                                       All the above 
+##                                                   1 
+##              Comunication team at a research center 
+##                                                   1 
+##                                         Consultancy 
+##                                                   1 
+##                           governmental organization 
+##                                                   1 
+##                          International Organization 
+##                                                   1 
+##                         Non-government Organization 
+##                                                   1 
+##                       Online only news organization 
+##                                                  38 
+##                                                  PR 
+##                                                   1 
+##                                    Print and Online 
+##                                                   1 
+##                  Print and online news organization 
+##                                                  24 
+##                        Print only news organization 
+##                                                   2 
+##                                    public broadcast 
+##                                                   1 
+##             Public Broadcasting (Online, TV, Radio) 
+##                                                   1 
+##             Public Broadcasting (Radio, TV, Online) 
+##                                                   1 
+##                                               Radio 
+##                                                   3 
+##                                    Radio and Online 
+##                                                   1 
+##                                Radio, TV and online 
+##                                                   1 
+##                                            Research 
+##                                                   1 
+##                                      Research firm. 
+##                                                   1 
+## Research organisation producing data on perceptions 
+##                                                   1 
+##                                   Research purposes 
+##                                                   1 
+##                                                Self 
+##                                                   1 
+##                                 Tourism corporation 
+##                                                   1 
+##                                TV news organization 
+##                                                   6 
+##                                TV, Radio and Online 
+##                                                   1 
+##                                          University 
+##                                                   1 
+##                                         you name it 
+##                                                   1 
+## 
+## $`What tasks do you normally perform in a data journalism project (select all that apply)?`
+## 
+##                                                                                                      Data analysis 
+##                                                                                                                  1 
+##                                                    Data analysis, Data visualization, Writing/presenting the story 
+##                                                                                                                  5 
+##                                                                                       Data cleaning, Data analysis 
+##                                                                                                                  2 
+##                                                                   Data cleaning, Data analysis, Data visualization 
+##                                                                                                                  1 
+##                                     Data cleaning, Data analysis, Data visualization, Writing/presenting the story 
+##                                                                                                                  2 
+##                                                                                  Data cleaning, Data visualization 
+##                                                                                                                  1 
+##                                                                                                     Data gathering 
+##                                                                                                                  2 
+##                                                                  Data gathering, Data analysis, Data visualization 
+##                                                                                                                  2 
+##                                                        Data gathering, Data analysis, Writing/presenting the story 
+##                                                                                                                  1 
+##                                                                                      Data gathering, Data cleaning 
+##                                                                                                                  1 
+##                                                                       Data gathering, Data cleaning, Data analysis 
+##                                                                                                                  2 
+##                                                   Data gathering, Data cleaning, Data analysis, Data visualization 
+##                                                                                                                  6 
+##                     Data gathering, Data cleaning, Data analysis, Data visualization, Writing/presenting the story 
+##                                                                                                                 44 
+## Data gathering, Data cleaning, Data analysis, Data visualization, Writing/presenting the story, Open data advocacy 
+##                                                                                                                  1 
+##                                         Data gathering, Data cleaning, Data analysis, Writing/presenting the story 
+##                                                                                                                  7 
+##                                    Data gathering, Data cleaning, Data visualization, Writing/presenting the story 
+##                                                                                                                  1 
+##                                                        Data gathering, Data cleaning, Writing/presenting the story 
+##                                                                                                                  1 
+##                                                                                 Data gathering, Data visualization 
+##                                                                                                                  1 
+##                                                                       Data gathering, Writing/presenting the story 
+##                                                                                                                  4 
+##                                                                                                 Data visualization 
+##                                                                                                                  3 
+##                                                                   Data visualization, Writing/presenting the story 
+##                                                                                                                  1 
+##                                                                                       Writing/presenting the story 
+##                                                                                                                  6 
+## 
+## $`What tools do you normally use to work with data? (select all that apply)`
+## 
+##                                                                                                                                                                                     Open Refine 
+##                                                                                                                                                                                               1 
+##                                                                                 Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+##                                                                                                                                                          Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+##                                                                                                                                                 Spreadsheets (Google sheets, Excel, Libre Calc) 
+##                                                                                                                                                                                              22 
+##                                                                                                                                          Spreadsheets (Google sheets, Excel, Libre Calc), Carto 
+##                                                                                                                                                                                               1 
+##                                                                                                                          Spreadsheets (Google sheets, Excel, Libre Calc), Illustrator and D3.js 
+##                                                                                                                                                                                               1 
+##                                                                                                                                    Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine 
+##                                                                                                                                                                                               5 
+##                                                                                                                        Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, PDF Tables 
+##                                                                                                                                                                                               1 
+##                                                                        Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews) 
+##                                                                                                                                                                                               7 
+##                                Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                               3 
+##                                         Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software) 
+##                                                                                                                                                                                               4 
+## Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                               2 
+##                                                                                                     Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Tableau (or similar software) 
+##                                                                                                                                                                                              11 
+##                                                             Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                               2 
+##                                                                                          Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Tableau (or similar software), Scrappers 
+##                                                                                                                                                                                               1 
+##                                                                                                         Spreadsheets (Google sheets, Excel, Libre Calc), Programming languages (such as Python) 
+##                                                                                                                                                                                               2 
+##                                                                                     Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews) 
+##                                                                                                                                                                                               5 
+##                                             Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                               4 
+##                                                      Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software) 
+##                                                                                                                                                                                               4 
+##              Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+##                                                                                                                  Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software) 
+##                                                                                                                                                                                               8 
+##                                                                                                         Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software), Alteryx 
+##                                                                                                                                                                                               1 
+##                                                                                            Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software), Google Fusion Tables 
+##                                                                                                                                                                                               1 
+##                                                                          Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+##                                                                                                          Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software), SQLite 
+##                                                                                                                                                                                               1 
+##                                                                                                                                      Statistical packages (such as Stata, SPSS, SAS, R, Eviews) 
+##                                                                                                                                                                                               1 
+##                                                                                              Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+##                                                                                                       Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software) 
+##                                                                                                                                                                                               1 
+##                                                                                                                           Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                               1 
+## 
+## $`How would you describe your knowledge in these areas? [Data analysis]`
+## 
+##        High    Moderate        None   Very High Very little 
+##          19          48           2           3          23 
+## 
+## $`How would you describe your knowledge in these areas? [Statistics]`
+## 
+##        High    Moderate        None   Very High Very little 
+##          12          46           4           3          30 
+## 
+## $`How would you describe your knowledge in these areas? [Coding/Programming Languages]`
+## 
+##        High    Moderate        None   Very High Very little 
+##           9          22          23           1          40 
+## 
+## $`How would you describe your knowledge in these areas? [Data visualisation]`
+## 
+##        High    Moderate        None   Very High Very little 
+##          22          37           5           6          25 
+## 
+## $`Do you work within a team?`
+## 
+##  No Yes 
+##  47  48 
+## 
+## $`How many teammates do you have?`
+## 
+##        20-49         5-19  Less than 5 More than 50 
+##            1           13           32            2 
+## 
+## $`Do your teammates use data in their work?`
+## 
+## No, I'm the only one to really use data and data tools 
+##                                                      7 
+##            Yes, but we mostly work on separate stories 
+##                                                     11 
+##       Yes, we collaborate often on data-driven stories 
+##                                                     30 
+## 
+## $`If yes, what tools do they mostly use? (select all that apply)`
+## 
+##                                                                                                                                                                                                                                                   Open Refine 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                                                                                                                               Spreadsheets (Google sheets, Excel, Libre Calc) 
+##                                                                                                                                                                                                                                                            14 
+##                                                                                                                                                                                                        Spreadsheets (Google sheets, Excel, Libre Calc), Carto 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                              Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             3 
+##                                                                                                       Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software) 
+##                                                                                                                                                                                                                                                             1 
+##                                                               Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             3 
+##                                               Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python), Elastic Search 
+##                                                                                                                                                                                                                                                             1 
+## Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python), Vis tools like Gephi come in handy in gaining overside, too. 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                                                                                   Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Tableau (or similar software) 
+##                                                                                                                                                                                                                                                             2 
+##                                                                                                                           Spreadsheets (Google sheets, Excel, Libre Calc), Open Refine, Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                                                                   Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews) 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                           Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             4 
+##                                                                                                                    Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software) 
+##                                                                                                                                                                                                                                                             1 
+##                                                                            Spreadsheets (Google sheets, Excel, Libre Calc), Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Tableau (or similar software), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                                                                                                Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software) 
+##                                                                                                                                                                                                                                                             3 
+##                                                                                                                                                                       Spreadsheets (Google sheets, Excel, Libre Calc), Tableau (or similar software), Alteryx 
+##                                                                                                                                                                                                                                                             1 
+##                                                                                                                                                            Statistical packages (such as Stata, SPSS, SAS, R, Eviews), Programming languages (such as Python) 
+##                                                                                                                                                                                                                                                             2 
+## 
+## $`Do you learn well with... [Text-only content]`
+## 
+##                       It depends                       Not really 
+##                               31                               13 
+## This is my favorite way to learn                  Yes, no problem 
+##                                6                               45 
+## 
+## $`Do you learn well with... [Text and image content]`
+## 
+##                       It depends                       Not really 
+##                               23                                2 
+## This is my favorite way to learn                  Yes, no problem 
+##                               15                               55 
+## 
+## $`Do you learn well with... [Text, image and videos]`
+## 
+##                       It depends                          No idea 
+##                               12                                1 
+##                       Not really This is my favorite way to learn 
+##                                2                               22 
+##                  Yes, no problem 
+##                               58 
+## 
+## $`Do you learn well with... [Interactive online content]`
+## 
+##                       It depends                          No idea 
+##                               15                                2 
+##                       Not really This is my favorite way to learn 
+##                                3                               32 
+##                  Yes, no problem 
+##                               43 
+## 
+## $`Do you learn well with... [a mix of learning content and exercices (quiz...)]`
+## 
+##                       It depends                       Not really 
+##                               18                                7 
+## This is my favorite way to learn                  Yes, no problem 
+##                               25                               45 
+## 
+## $`Do you learn well with... [lessons based on a real project]`
+## 
+##                       It depends                          No idea 
+##                                8                                1 
+##                       Not really This is my favorite way to learn 
+##                                2                               52 
+##                  Yes, no problem 
+##                               32 
+## 
+## $`Are there specific things that do not work for you when you're trying to learn something?`
+## 
+##                                                                                         Abstract examples without any real world applications 
+##                                                                                                                                             1 
+##                                                                                                                        Closed source, Windows 
+##                                                                                                                                             1 
+##                                                                                                                               Course language 
+##                                                                                                                                             1 
+##                                                                                                    courses that have too many live activities 
+##                                                                                                                                             1 
+## Courses that rely too much on self-learning are not efficient. Present the best way(s) to do something or the best recipe(s) for an analysis. 
+##                                                                                                                                             1 
+##                                                                                                                        Few moments of success 
+##                                                                                                                                             1 
+##                                                                                                         hard to come back to previous lessons 
+##                                                                                                                                             1 
+##                                                                                                                      huge information at once 
+##                                                                                                                                             1 
+##                                                                                                               inability to go back and review 
+##                                                                                                                                             1 
+##                                                                                                                                 known content 
+##                                                                                                                                             1 
+##                                                                                                                    Lack of practical examples 
+##                                                                                                                                             1 
+##                                                                                                                            Lake of references 
+##                                                                                                                                             1 
+##                                                                             Moving too quickly through material. Not enough examples/samples. 
+##                                                                                                                                             1 
+##                                                                                                                                            No 
+##                                                                                                                                             2 
+##                                                                        No examples of how something would be used in a real world application 
+##                                                                                                                                             1 
+##                                                                                                                        No hands on excercises 
+##                                                                                                                                             1 
+##                                                                                                                   no indicator of progression 
+##                                                                                                                                             2 
+##                                                                                                                                          None 
+##                                                                                                                                             1 
+##                                                                                                                                  None per say 
+##                                                                                                                                             1 
+##                                                                                                                                    no of KPIs 
+##                                                                                                                                             1 
+##                                                                                                     No options to access the course on the go 
+##                                                                                                                                             1 
+##                                                                                                                                          nope 
+##                                                                                                                                             1 
+##                                                                                                                     No real, tangible outcome 
+##                                                                                                                                             1 
+##       not being able to pause and come back/save progress, no indicator of progression, assuming too much previous knowledge of certain terms 
+##                                                                                                                                             1 
+##                                          Packages in R that may not be available in my country (Colombia) + not engaging content or teaching. 
+##                                                                                                                                             1 
+##                                                                                                                          short time for essay 
+##                                                                                                                                             1 
+##                                                                                                                steps too high between levels. 
+##                                                                                                                                             1 
+##                                                                                   The obligation to participate in forums if it is not needed 
+##                                                                                                                                             1 
+##                                                                                                                        Time consuming courses 
+##                                                                                                                                             1 
+##                                                                                                                   Too much collection of data 
+##                                                                                                                                             1 
+##                                                                                                                          Too much information 
+##                                                                                                                                             1 
+##                                                                                                                 Too much information at once! 
+##                                                                                                                                             1 
+##                                                                                     too much information at once without an example to expose 
+##                                                                                                                                             1 
+##                                                                                                                             Too much pressure 
+##                                                                                                                                             1 
+##                                                                                    Too much technical information \nNo indicator for progress 
+##                                                                                                                                             1 
+##                                                                                                                     too theoretical tutorials 
+##                                                                                                                                             1 
+##                                                                                                                           Video-only contents 
+##                                                                                                                                             1 
+##                                                                                                                               Vídeos too long 
+##                                                                                                                                             1 
+##                                                                                                               Visualization in the next level 
+##                                                                                                                                             1 
+##                                                                           Watching someone perform a process without getting to replicate it. 
+##                                                                                                                                             1 
+##                                                                                             When what is being taught isn't practical enough. 
+##                                                                                                                                             1 
+##                                                                                                                                             x 
+##                                                                                                                                             1 
+##                                                                                    Yes, when there is too much material, its hard to organize 
+##                                                                                                                                             1 
+## 
+## $`Have you taken an R course before?`
+## 
+##  No Yes 
+##  62  33 
+## 
+## $`Which course was it?`
+## 
+##                                             A biology prof. that went to our newspaper and gave us a 4 day- workshop 
+##                                                                                                                    1 
+##                                                                  Advanced R programming, package building, many more 
+##                                                                                                                    1 
+##                                                                                                 Codeschool, Coursera 
+##                                                                                                                    1 
+##                                                                                         codeschool introduction to r 
+##                                                                                                                    1 
+##                                                                                                             Coursera 
+##                                                                                                                    2 
+##                                                                                               Coursera Data Analysis 
+##                                                                                                                    1 
+##                                                                                                  Coursera Intro to R 
+##                                                                                                                    1 
+##                                                         Coursera John Hopkins course, currently doing specialization 
+##                                                                                                                    1 
+##                                                                                              Coursera: R Programming 
+##                                                                                                                    1 
+##                                                                                                               Cousea 
+##                                                                                                                    1 
+##                                                                                                              Cousera 
+##                                                                                                                    1 
+##                                                                                                             DataCamp 
+##                                                                                                                    1 
+##                                                                                                            Data Camp 
+##                                                                                                                    1 
+##                                                                                                         datacamp.com 
+##                                                                                                                    1 
+##                                                                                        Datacamp: Intro to R, ggplot2 
+##                                                                                                                    1 
+##                                                                                             Data Cívica: Data Sprint 
+##                                                                                                                    1 
+##                                                                                  Different MOOCs in Edx and Coursera 
+##                                                                                                                    1 
+##                                                                                                     edx/john hopkins 
+##                                                                                                                    1 
+##                                                                                          http://datascienceandr.org/ 
+##                                                                                                                    1 
+##                                                                                 It was an online course by DATA CAMP 
+##                                                                                                                    1 
+##                                                                                                 Mhub. www.mhubmw.com 
+##                                                                                                                    1 
+##                                                           Northeastern University - Collect, Store and Retrieve data 
+##                                                                                                                    1 
+## &quot;Programming in R&quot; class at the University of Technology Dortmund: https://www.statistik.tu-dortmund.de/proginr.html 
+##                                                                                                                    1 
+##                                                                           Some Coursera courses by Johns Hopkins Uni 
+##                                                                                                                    1 
+##                                                                                                                Swirl 
+##                                                                                                                    1 
+##                                                                         swirl, tryR and Datacamp introductory course 
+##                                                                                                                    1 
+##                                                                                                              Udacity 
+##                                                                                                                    1 
+##                                                                      University course (by Uwe Ligges), one semester 
+##                                                                                                                    1 
+##                                                       University of Lausanne (Switzerland), stat class for biologist 
+##                                                                                                                    1 
+##                                                                                         University Statistics Course 
+##                                                                                                                    1 
+##                                                                                                                   Ur 
+##                                                                                                                    1 
+##                                                                                                       YouTube videos 
+##                                                                                                                    1 
+## 
+## $`Which format was it?`
+## 
+##          In person workshop Online + in person workshop 
+##                           7                           2 
+##                 Online only           Programming class 
+##                          23                           1 
+## 
+## $`How much time did you spend on it?`
+## 
+##         1-2 months          2-4 weeks   Less than a week 
+##                  4                 13                  6 
+## More than 2 months 
+##                 10 
+## 
+## $`Did you manage to finish it?`
+## 
+##  No Yes 
+##  11  22 
+## 
+## $`If you didn't, could you select the reasons why? (Select all that apply)`
+## 
+##                                                                                                    I didn't find it useful for my work 
+##                                                                                                                                      1 
+##                                                                                                              I didn't have enough time 
+##                                                                                                                                      7 
+##                                                                         I didn't have enough time, I didn't find it useful for my work 
+##                                                                                                                                      1 
+## I didn't have enough time, I didn't find it useful for my work, I didn't learn well, the program was very hard for me i don't know why 
+##                                                                                                                                      1 
+##                                                                    I didn't have enough time, Packages of some exercises not available 
+##                                                                                                                                      1 
+##                                                                              I didn't have enough time, The course was too complicated 
+##                                                                                                                                      1 
+##                                         I didn't have enough time, The course was too complicated, I didn't find it useful for my work 
+##                                                                                                                                      1 
+##                                                                                         i have just started and am still on the course 
+##                                                                                                                                      1 
+## 
+## $`Could you select the reasons why? (select all that apply)`
+## 
+##                                                                                        did not find any specific for journalists 
+##                                                                                                                                1 
+##                                                                                         I don't find it useful for my daily work 
+##                                                                                                                                1 
+##                          I don't find it useful for my daily work, I haven't found an appropriate course that addresses my needs 
+##                                                                                                                                1 
+##                                                                                                         I don't have enough time 
+##                                                                                                                                8 
+##                                                                 I don't have enough time, I use other software to work with data 
+##                                                                                                                                2 
+##                                                                                                           I don't know what R is 
+##                                                                                                                               15 
+##                                            I don't know what R is, I haven't found an appropriate course that addresses my needs 
+##                                                                                                                                2 
+##                                                                  I don't know what R is, There aren't any courses in my language 
+##                                                                                                                                1 
+##                                                                    I haven't found an appropriate course that addresses my needs 
+##                                                                                                                                9 
+##                        I haven't found an appropriate course that addresses my needs, All the courses i found are for developers 
+##                                                                                                                                1 
+##                                          I haven't found an appropriate course that addresses my needs, I don't have enough time 
+##                                                                                                                                4 
+##  I haven't found an appropriate course that addresses my needs, I don't have enough time, I feel too inexperienced for the tool. 
+##                                                                                                                                1 
+##  I haven't found an appropriate course that addresses my needs, I don't have enough time, I use other software to work with data 
+##                                                                                                                                2 
+##                            I haven't found an appropriate course that addresses my needs, I use other software to work with data 
+##                                                                                                                                5 
+## I haven't found an appropriate course that addresses my needs, There aren't any courses in my language, I don't have enough time 
+##                                                                                                                                1 
+##                                                                                           I use other software to work with data 
+##                                                                                                                                1 
+##                                                                          I've been pre occupied with work before now I have time 
+##                                                                                                                                1 
+##                                                                                          There aren't any courses in my language 
+##                                                                                                                                1 
+##                        There aren't any courses in my language, I don't have enough time, I use other software to work with data 
+##                                                                                                                                1 
+## 
+## $`Would you be interested in an R course specifically designed for data journalists?`
+## 
+##  No Yes 
+##   3  92 
+## 
+## $`What is your academic background? (select all that apply)`
+## 
+##                                                                     Biology 
+##                                                                           2 
+##                                              Communications/Social Sciences 
+##                                                                           5 
+##                                             Computer Science / Data Science 
+##                                                                           4 
+##             Computer Science / Data Science, Communications/Social Sciences 
+##                                                                           3 
+##                       Computer Science / Data Science, Economics/Statistics 
+##                                                                           2 
+##                                                        Economics/Statistics 
+##                                                                           4 
+##                        Economics/Statistics, Communications/Social Sciences 
+##                                                                           2 
+##                                                                 Engineering 
+##                                                                           1 
+##                                                    Environmental Management 
+##                                                                           1 
+##                                                       Environmental science 
+##                                                                           1 
+##                                                                   Geography 
+##                                                                           1 
+##                                                                     History 
+##                                                                           1 
+##                                                      Information Technology 
+##                                                                           1 
+##                                                                  Journalism 
+##                                                                          42 
+##                                  Journalism, Communications/Social Sciences 
+##                                                                          10 
+##         Journalism, Communications/Social Sciences, Business administration 
+##                                                                           1 
+##                                 Journalism, Computer Science / Data Science 
+##                                                                           2 
+## Journalism, Computer Science / Data Science, Communications/Social Sciences 
+##                                                                           1 
+##                                            Journalism, Economics/Statistics 
+##                                                                           3 
+##            Journalism, Economics/Statistics, Communications/Social Sciences 
+##                                                                           1 
+##                                             Journalism, Information science 
+##                                                                           1 
+##                                                         Journalism, physics 
+##                                                                           1 
+##                                                   Journalism, Science Minor 
+##                                                                           1 
+##                                                                 linguistics 
+##                                                                           1 
+##                                                           political science 
+##                                                                           1 
+##                                                             Pubic Relations 
+##                                                                           1 
+##                                               visualisation and cartography 
+##                                                                           1 
+## 
+## $Country
+## 
+##                                             Algeria 
+##                                                   1 
+##                                             Belgium 
+##                                                   1 
+##                                              Brasil 
+##                                                   1 
+##                                              Brazil 
+##                                                  16 
+##                                              Canada 
+##                                                   1 
+##                                            Colombia 
+##                                                   1 
+##                                          Costa Rica 
+##                                                   2 
+##                                                  CR 
+##                                                   1 
+##                                         Deutschland 
+##                                                   1 
+##                                              France 
+##                                                   3 
+##                                             germany 
+##                                                   1 
+##                                             Germany 
+##                                                   7 
+##                                               Ghana 
+##                                                   8 
+##                                              Greece 
+##                                                   1 
+##                                           Guatemala 
+##                                                   3 
+##                                             Hungary 
+##                                                   2 
+##                                           Indonesia 
+##                                                   1 
+##                                             Ireland 
+##                                                   1 
+##                                               Kenya 
+##                                                   4 
+## Kenya but working across various African countries. 
+##                                                   1 
+##                                              Malawi 
+##                                                   1 
+##                                            Maldives 
+##                                                   1 
+##                                              Mexico 
+##                                                   1 
+##                                               Nepal 
+##                                                   1 
+##                                             Nigeria 
+##                                                   2 
+##                                            Pakistan 
+##                                                   1 
+##                                            Portugal 
+##                                                   1 
+##                                            Scotland 
+##                                                   1 
+##                                           Singapore 
+##                                                   1 
+##                                        South Africa 
+##                                                   3 
+##                                        South África 
+##                                                   1 
+##                                         South Korea 
+##                                                   1 
+##                                               Spain 
+##                                                   3 
+##                                              Sweden 
+##                                                   1 
+##                                         Switzerland 
+##                                                   8 
+##                                              taiwan 
+##                                                   1 
+##                                          Tajikistan 
+##                                                   1 
+##                                              turkey 
+##                                                   1 
+##                                              Turkey 
+##                                                   1 
+##                                                  Uk 
+##                                                   1 
+##                                                  UK 
+##                                                   2 
+##                                       United States 
+##                                                   3 
+##                                            wxcvjhkn 
+##                                                   1 
+## 
+## $`Primary working language`
+## 
+##                                                                    Both English and Spanish 
+##                                                                                           1 
+##                                                                                     Catalan 
+##                                                                                           1 
+##                                                                                      cbv bn 
+##                                                                                           1 
+##                                                                                     deutsch 
+##                                                                                           1 
+##                                                                                       Dutch 
+##                                                                                           1 
+##                                                                                     English 
+##                                                                                          34 
+##                                                                      English and portuguese 
+##                                                                                           1 
+##                                                                           English / Spanish 
+##                                                                                           1 
+##                                                                                     Español 
+##                                                                                           2 
+##                                                                                      French 
+##                                                                                           6 
+##                                                                                      german 
+##                                                                                           2 
+##                                                                                      German 
+##                                                                                           8 
+##                                                                            German / English 
+##                                                                                           1 
+## german (note: only not interested in the course because I can code in R, great idea though) 
+##                                                                                           1 
+##                                                                                       Greek 
+##                                                                                           1 
+##                                                                                   Hungarian 
+##                                                                                           1 
+##                                                                                   Indonesia 
+##                                                                                           1 
+##                                                                                    mandarin 
+##                                                                                           1 
+##                                                                                      Nepali 
+##                                                                                           1 
+##                                                                                   Portugues 
+##                                                                                           1 
+##                                                                                   Português 
+##                                                                                           1 
+##                                                                                  portuguese 
+##                                                                                           1 
+##                                                                                  Portuguese 
+##                                                                                          12 
+##                                                                          Portuguese/English 
+##                                                                                           1 
+##                                            Portuguese (fluent english used in work thought) 
+##                                                                                           1 
+##                                                                                R or English 
+##                                                                                           1 
+##                                                              R, SQL or do you mean german ? 
+##                                                                                           1 
+##                                                                                     russian 
+##                                                                                           1 
+##                                                                                     Spanish 
+##                                                                                           6 
+##                                                                                     Swedish 
+##                                                                                           1 
+##                                                                                     Turkish 
+##                                                                                           1 
+##                                                                            turkish, english 
+##                                                                                           1</code></pre>
 </div>
 <div id="the-plan" class="section level2">
 <h2>The Plan</h2>
