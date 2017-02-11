@@ -29,13 +29,13 @@ journalists all over the world to assess what those needs are.
 
 ## The Plan
 
-- Use lessons already available (e.g. [swirl](http://swirlstats.com/),
+- Use lessons already available (e.g. [.Rddj](https://rddj.info/),
   [existing school of data tutorials](http://www.datactivi.st/IntroR_ODF/)).
 If needed, translate material.
-- Buil ontop of these tutorials to address focus groups (CSOs and journalists
-  in different countries) with focused material including relevant data sets,
+- Buil ontop of these tutorials to address journalists
+  in different countries with focused material including relevant data sets,
 techniques and repositories to make code and results freely available.
-- Make all material available to use and develop further or adjust for
+- Make all the material available to use and develop further or adjust for
   different focus groups (e.g. via GitHub).
 
 <!-- TODO: 
