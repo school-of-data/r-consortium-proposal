@@ -49,8 +49,8 @@ for journalists by using examples, datasets and tips that are tailored to the
 needs and workflow of journalists using R as part of their work.
 There exist many introductory R courses for a broad audience and we are planning
 to build ontop of them, i.e., do the basic introduction with available material
-and and this use specialised
-material for journalists, which still needs to be developed. 
+and and this use specialised material for journalists, which still needs to be 
+developed. 
 
 #### Goals
 
@@ -58,6 +58,7 @@ material for journalists, which still needs to be developed.
 - Design a content format that encourages journalists to learn without feeling overwhelmed
 - Select and organise existing learning resources about R to direct journalists to them
 - Provide all in four languages: English, French, Spanish and German
+- (Optional: Organise workshops in four countries: Ghana, France, Costa Rica and Switzerland)
 
 #### Deliverables
 
@@ -67,6 +68,7 @@ material for journalists, which still needs to be developed.
 - Learning tracks which guide journalists through additional resources after 
   they have finished the introduction
 - Make all the material available via GitHub to use it and develop it further.
+- (Optional: Slides for in-person workshops)
 
 
 #### Timeline
@@ -76,7 +78,7 @@ material for journalists, which still needs to be developed.
 #### Likely failure modes and how to recover
 As we will prepare the material in a modular way, it will not be a big problem
 if we do not manage preparing as much material as we now anticipate. In this
-case we will just have less modules, but quality of those will be ensured.
+case we will have less modules, but quality of those will be ensured.
 
 
 
