@@ -24,12 +24,10 @@ languages other than English -- are not available.
 Journalists can profit from data skills because they allow them to access
 diverse data, do more profound research and communicate through visualisations.
 
-There are many introductory R courses for a broad audience and we are planning
-to build ontop of them, i.e., do the basic introduction with available material
-(e.g. [swirl](http://swirlstats.com/)) and and beyond this use specialised
-material for journalists, which still needs to be developed. In order to be
+In order to be
 able to tailor material for the needs of journalists we sent out a survey to
-journalists all over the world to assess what those needs are.
+journalists all over the world to assess what those needs are. From the survey
+we learned that ... **TODO** ...
 
 ```{r, echo=FALSE, message=FALSE}
 responses_sheet <- gs_title("R course for journalists  (Responses)")
@@ -42,19 +40,44 @@ tools <- responses["What tools do you normally use to work with data? (select al
 
 ## The Plan
 
-- Use lessons already available (e.g. [.Rddj](https://rddj.info/),
-  [existing school of data tutorials](http://www.datactivi.st/IntroR_ODF/)).
-If needed, translate material.
-- Buil ontop of these tutorials to address journalists
-  in different countries with focused material including relevant data sets,
-techniques and repositories to make code and results freely available.
-- Make all the material available to use and develop further or adjust for
-  different focus groups (e.g. via GitHub).
+#### Target audience
+Journalists
 
-<!-- TODO: 
-- timeline
-- What are likely failure modes and how will you recover from them?
--->
+#### Idea
+We aim to create introductory content about R which lowers the barrier to entry 
+for journalists by using examples, datasets and tips that are tailored to the 
+needs and workflow of journalists using R as part of their work.
+There exist many introductory R courses for a broad audience and we are planning
+to build ontop of them, i.e., do the basic introduction with available material
+and and this use specialised
+material for journalists, which still needs to be developed. 
+
+#### Goals
+
+- Write introductory learning content about R tailored for journalists
+- Design a content format that encourages journalists to learn without feeling overwhelmed
+- Select and organise existing learning resources about R to direct journalists to them
+- Provide all in four languages: English, French, Spanish and German
+
+#### Deliverables
+
+- x modules about learning R for journalists, from "why would I want to use R?" to 
+  "using R in a newsroom workflow"
+- A website which presents this content in an attractive format
+- Learning tracks which guide journalists through additional resources after 
+  they have finished the introduction
+- Make all the material available via GitHub to use it and develop it further.
+
+
+#### Timeline
+**TODO: timeline**
+
+
+#### Likely failure modes and how to recover
+As we will prepare the material in a modular way, it will not be a big problem
+if we do not manage preparing as much material as we now anticipate. In this
+case we will just have less modules, but quality of those will be ensured.
+
 
 
 ## How Can The ISC Help?
