@@ -13,7 +13,13 @@ library("googlesheets")
 [Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html),
 [Camila Salazar](),
 [David Opoku](),
-[Cedric Lombion]()
+[Cedric Lombion](http://schoolofdata.org/team)
+
+## The context
+
+The field of data journalism has seen an exponential rise in activity during for the past 10 years, in conjunction with the open data movement and the multiplication of user-friendly tools aimed at journalists and other similar data users.  With its annual [international conferences](https://www.ire.org/nicar), the growth of university classes and [online courses](http://schoolofdata.org), and a sustained funding from traditional journalism supporters and new open data funders, data journalism has become leading topic in regard to innovation in journalism. Defined as practice [allowing journalists to combine their ability to tell a compelling story with the sheer scale and range of digital information now available](http://datajournalismhandbook.org/1.0/en/introduction_0.html), data journalism is also seen as a new approach to improve the role of media as a government watchdog. Concrete examples of the impact of datajournalism are plenty ([Panama Papers](https://panamapapers.icij.org/), [Migrant Files](www.themigrantsfiles.com), [World Bank eviction scandal](https://www.icij.org/project/world-bank)...) and they all reinforce the urgency to increase the adoption of the data journalism methodologies, techniques and tools. 
+
+R is one of them.
 
 ## The Problem
 R has great tools for accessing and analysing open data sources, which would be
