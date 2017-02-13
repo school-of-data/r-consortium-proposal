@@ -19,11 +19,9 @@ Defined as practice [allowing journalists to combine their ability to tell a com
 R is one of them.
 
 ## The Problem
-R has great tools for accessing and analysing open data sources, which can be hugely beneficial to journalists. Some leading newsrooms, such as ProPublica and the New York Times do use R in their data journalism workflow, to great effect. However there is a low level of awareness of R in the journalism community and specialized courses -- especially in languages other than English -- are not available.
+R has great tools for accessing and analysing open data sources, which can be hugely beneficial to journalists. Some leading newsrooms, such as ProPublica and the New York Times do use R in their data journalism workflow, to great effect. However beyond these obvious names, there is a low level of awareness of R in the journalism community. If we also take into account the low availability of specialized R learning content -- especially in languages other than English -- it appears that a substantial effort is needed to reach more journalists across the world.
 
-Journalists can profit from data skills because they allow them to access diverse data, do more profound research and communicate through visualisations.
-
-In order to be able to tailor material for the needs of journalists we sent out a survey to journalists all over the world to assess what those needs are. From the survey we learned that ... **TODO** ...
+This problem is compounded by several other factors, that we explored in a small worldwide survey that we conducted in preparation for this call for project. It appeared that, among the journalists who had never taken an R course, the main reason was the lack of learning content addressing their specific needs. Another substantial portion had never heard of R (cf. Annex 1).  This strengthens our main hypothesis:  there is a need for learning content specially designed for journalists.
 
 ```{r, echo=FALSE, message=FALSE}
 responses_sheet <- gs_title("R course for journalists  (Responses)")
@@ -35,6 +33,7 @@ tools <- responses["What tools do you normally use to work with data? (select al
 
 
 ## The Plan
+
 
 #### Target audience
 Journalists
@@ -109,16 +108,16 @@ We will promote the material among the community and beyond, by sending out news
 
 ## The team
 
-### The people
+#### The people
 
-[Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html), is a Swiss biostatistician, member of OpenData.ch and a proficient R user.
-[Camila Salazar](), is a Costa Rican Data Journalist working at the lead newspaper La Nación. 
-[David Opoku](), is the Africa Lead at Open Knowledge International, focused on capacity building. David is from Ghana and is a proficient R user.
-[Cedric Lombion](http://schoolofdata.org/team) is a member of School of Data's International Coordination Team, responsible for Programme Design and Implementation.
-[Samuel Goëta]() is a French sociology researcher, data trainer and co-founder of Open Knowledge France and specialised in open data
-[Joel Gombin]() is a French political scientist known for his detailed analysis of the political party National Front using R.
+- [Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html), is a Swiss biostatistician, member of OpenData.ch and a proficient R user.
+- [Camila Salazar](), is a Costa Rican Data Journalist working at the lead newspaper La Nación. 
+- [David Opoku](), is the Africa Lead at Open Knowledge International, focused on capacity building. David is from Ghana and is a proficient R user.
+- [Cedric Lombion](http://schoolofdata.org/team) is a member of School of Data's International Coordination Team, responsible for Programme Design and Implementation.
+- [Samuel Goëta]() is a French sociology researcher, data trainer and co-founder of Open Knowledge France and specialised in open data
+- [Joel Gombin]() is a French political scientist known for his detailed analysis of the political party National Front using R.
 
-### The organisation
+#### The organisation
 
 School of Data is a network of data literacy practitioners, both organizations and individuals, implementing training and other data literacy activities in their respective countries and regions. Members of School of Data work to empower civil society organizations (CSOs), journalists, civil servants and citizens with the skills they need to use data effectively in their efforts to create better, more equitable and more sustainable societies. Over the past four years, School of Data has succeeded in developing and sustaining a thriving and active network of data literacy practitioners in partnership with our implementing partners across Europe, Latin America, Asia and Africa.
 
