@@ -10,30 +10,20 @@ library("googlesheets")
 
 # R Consortium Proposal: School of Data Material Development
 
-[Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html),
-[Camila Salazar](),
-[David Opoku](),
-[Cedric Lombion](http://schoolofdata.org/team)
-
 ## The context
 
-The field of data journalism has seen an exponential rise in activity during for the past 10 years, in conjunction with the open data movement and the multiplication of user-friendly tools aimed at journalists and other similar data users.  With its annual [international conferences](https://www.ire.org/nicar), the growth of university classes and [online courses](http://schoolofdata.org), and a sustained funding from traditional journalism supporters and new open data funders, data journalism has become leading topic in regard to innovation in journalism. Defined as practice [allowing journalists to combine their ability to tell a compelling story with the sheer scale and range of digital information now available](http://datajournalismhandbook.org/1.0/en/introduction_0.html), data journalism is also seen as a new approach to improve the role of media as a government watchdog. Concrete examples of the impact of datajournalism are plenty ([Panama Papers](https://panamapapers.icij.org/), [Migrant Files](www.themigrantsfiles.com), [World Bank eviction scandal](https://www.icij.org/project/world-bank)...) and they all reinforce the urgency to increase the adoption of the data journalism methodologies, techniques and tools. 
+The field of data journalism has seen an exponential rise in activity during for the past 10 years, in conjunction with the open data movement and the multiplication of user-friendly tools aimed at journalists and other similar data users.  With its annual [international conferences](https://www.ire.org/nicar), the growth of university classes and [online courses](http://schoolofdata.org), and a sustained funding from traditional journalism supporters and new open data funders, data journalism has become leading topic in regard to innovation in journalism. 
+
+Defined as practice [allowing journalists to combine their ability to tell a compelling story with the sheer scale and range of digital information now available](http://datajournalismhandbook.org/1.0/en/introduction_0.html), data journalism is also seen as a new approach to improve the role of media as a government watchdog. Concrete examples of the impact of datajournalism are plenty ([Panama Papers](https://panamapapers.icij.org/), [Migrant Files](www.themigrantsfiles.com), [World Bank eviction scandal](https://www.icij.org/project/world-bank)...) and they all reinforce the urgency to increase the adoption of the data journalism methodologies, techniques and tools. 
 
 R is one of them.
 
 ## The Problem
-R has great tools for accessing and analysing open data sources, which would be
-hugely beneficial to journalists.  However there is a low level of awareness of
-R in the journalism community and specialized courses -- especially in
-languages other than English -- are not available.
+R has great tools for accessing and analysing open data sources, which can be hugely beneficial to journalists. Some leading newsrooms, such as ProPublica and the New York Times do use R in their data journalism workflow, to great effect. However there is a low level of awareness of R in the journalism community and specialized courses -- especially in languages other than English -- are not available.
 
-Journalists can profit from data skills because they allow them to access
-diverse data, do more profound research and communicate through visualisations.
+Journalists can profit from data skills because they allow them to access diverse data, do more profound research and communicate through visualisations.
 
-In order to be
-able to tailor material for the needs of journalists we sent out a survey to
-journalists all over the world to assess what those needs are. From the survey
-we learned that ... **TODO** ...
+In order to be able to tailor material for the needs of journalists we sent out a survey to journalists all over the world to assess what those needs are. From the survey we learned that ... **TODO** ...
 
 ```{r, echo=FALSE, message=FALSE}
 responses_sheet <- gs_title("R course for journalists  (Responses)")
@@ -50,13 +40,8 @@ tools <- responses["What tools do you normally use to work with data? (select al
 Journalists
 
 #### Idea
-We aim to create introductory content about R which lowers the barrier to entry 
-for journalists by using examples, datasets and tips that are tailored to the 
-needs and workflow of journalists using R as part of their work.
-There exist many introductory R courses for a broad audience and we are planning
-to build ontop of them, i.e., do the basic introduction with available material
-and and this use specialised material for journalists, which still needs to be 
-developed. 
+We aim to create introductory content about R which lowers the barrier to entry  for journalists by using examples, datasets and tips that are tailored to the  needs and workflow of journalists using R as part of their work.
+There exist many introductory R courses for a broad audience and we are planning to build ontop of them, i.e., do the basic introduction with available material and this use specialised material for journalists, which still needs to be developed. 
 
 #### Goals
 
@@ -87,7 +72,6 @@ if we do not manage preparing as much material as we now anticipate. In this
 case we will have less modules, but quality of those will be ensured.
 
 
-
 ## How Can The ISC Help?
 
 ```{r, echo=FALSE, message=FALSE}
@@ -104,18 +88,15 @@ workshop <- subset(costs, Info == "workshop",
                               "School of Data co-funding"))
 ```
 
-We would like to request financial support of `r sum(material["Funding requested"])` 
-USD from the ISC to develop material for journalists who would like to learn R. 
-The School of Data can support the material development in guidance for the 
-material writing as well as in communication and maintainance.
+We would like to request financial support of `r sum(material["Funding requested"])` USD from the ISC to develop material for journalists who would like to learn R. 
+The School of Data can support the material development in guidance for the material writing as well as in communication and maintenance.
 The development costs can be split up as follows: 
 ```{r, echo=FALSE}
 kable(material)
 ```
 
 
-If additional support is possible, we would like to organize workshops in Ghana, 
-Costa Rica, France and Switzerland. The financial support needed are 
+If additional support is possible, we would like to organize workshops in Ghana, Costa Rica, France and Switzerland. The financial support needed are 
 `r sum(workshop["Funding requested"])` USD and can be split up as follows:
 ```{r, echo=FALSE}
 kable(workshop)
@@ -124,12 +105,25 @@ kable(workshop)
 
 ## Dissemination
 The School of Data has a broad community with many members working in journalism.
-We will promote the material among the community and beyond, by sending out
-newsletters, [tweets](https://twitter.com/SchoolOfData) and informations on the main 
-[School of Data website](https://schoolofdata.org/) as well
-as the websites of the chapters in the different countries. We will publish
-the materials under CC-BY license and make it easy for others to build upon the
-content and extend it.
+We will promote the material among the community and beyond, by sending out newsletters, [tweets](https://twitter.com/SchoolOfData) and informations on the main [School of Data website](https://schoolofdata.org/) as well as the websites of the chapters in the different countries. We will publish the materials under CC-BY license and make it easy for others to build upon the content and extend it.
+
+## The team
+
+### The people
+
+[Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html), is a Swiss biostatistician, member of OpenData.ch and a proficient R user.
+[Camila Salazar](), is a Costa Rican Data Journalist working at the lead newspaper La Nación. 
+[David Opoku](), is the Africa Lead at Open Knowledge International, focused on capacity building. David is from Ghana and is a proficient R user.
+[Cedric Lombion](http://schoolofdata.org/team) is a member of School of Data's International Coordination Team, responsible for Programme Design and Implementation.
+[Samuel Goëta]() is a French sociology researcher, data trainer and co-founder of Open Knowledge France and specialised in open data
+[Joel Gombin]() is a French political scientist known for his detailed analysis of the political party National Front using R.
+
+### The organisation
+
+School of Data is a network of data literacy practitioners, both organizations and individuals, implementing training and other data literacy activities in their respective countries and regions. Members of School of Data work to empower civil society organizations (CSOs), journalists, civil servants and citizens with the skills they need to use data effectively in their efforts to create better, more equitable and more sustainable societies. Over the past four years, School of Data has succeeded in developing and sustaining a thriving and active network of data literacy practitioners in partnership with our implementing partners across Europe, Latin America, Asia and Africa.
+
+Our network includes[ 13 organisations across the world and a total of 101 active individuals](https://schoolofdata.carto.com/viz/20b9844e-7c7b-11e6-afd1-0e05a8b3e3d7/public_map), which all contribute to School of Data key programmes: the Fellowship, the Curriculum and Member Support. Together, we have produced or in the process of producing dozens of articles, lessons and hands-on tutorials on how to work with data. Those are published on our website and are widely reused both by our network and beyond, benefitting thousands of people around the world. Additionally, we have trained over 6500 people through our tailored training events and mentored dozens of organisations to become tech savvy and data driven.
+
 
 
 
