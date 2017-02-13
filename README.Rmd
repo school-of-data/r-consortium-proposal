@@ -103,7 +103,7 @@ We will promote the content within and beyond our community, by sending out news
 
 #### The people
 
-- [Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html), is a Swiss biostatistician, member of OpenData.ch and a proficient R user.
+- [Heidi Seibold](http://www.ebpi.uzh.ch/en/aboutus/departments/biostatistics/teambiostats/seibold.html) is a PhD Student in Biostatistics in Switzerland and co-organizer of the Zurich R User Group.
 - [Camila Salazar](), is a Costa Rican Data Journalist working at the lead newspaper La Nación. 
 - [David Opoku](), is the Africa Lead at Open Knowledge International, focused on capacity building. David is from Ghana and is a proficient R user.
 - [Cedric Lombion](http://schoolofdata.org/team) is a member of School of Data's International Coordination Team, responsible for Programme Design and Implementation.
