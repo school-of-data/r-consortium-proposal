@@ -21,7 +21,7 @@ R is one of them.
 ## The Problem
 R has great tools for accessing and analysing open data sources, which can be hugely beneficial to journalists. Some leading newsrooms, such as ProPublica and the New York Times do use R in their data journalism workflow, to great effect. However beyond these obvious names, there is a low level of awareness of R in the journalism community. If we also take into account the low availability of specialized R learning content -- especially in languages other than English -- it appears that a substantial effort is needed to reach more journalists across the world.
 
-This problem is compounded by several other factors, that we explored in a small worldwide survey that we conducted in preparation for this call for project. It appeared that, among the journalists who had never taken an R course, the main reason was the lack of learning content addressing their specific needs. Another substantial portion had never heard of R (cf. Annex 1).  This strengthens our main hypothesis:  there is a need for learning content specially designed for journalists.
+This problem is compounded by several other factors, that we explored in a small worldwide survey that we conducted in preparation for this call for project. It appeared that, among the journalists who had never taken an R course, the main reason was the lack of learning content addressing their specific needs. Another substantial portion had never heard of R (see [our summary on Github](https://github.com/school-of-data/r-consortium-proposal/blob/master/R%20course%20survey%20responses/R%20course%20survey%20responses.md)).  This strengthens our main hypothesis:  there is a need for learning content specially designed for journalists.
 
 ```{r, echo=FALSE, message=FALSE}
 responses_sheet <- gs_title("R course for journalists  (Responses)")
@@ -34,7 +34,7 @@ tools <- responses["What tools do you normally use to work with data? (select al
 
 ## The Plan
 
-With the help of the survey results (see Annex 1), we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers. All our content will be published on Github and the School of Data website, under Creative Commons and MIT licences.
+With the help of the survey results (see [our summary](https://github.com/school-of-data/r-consortium-proposal/blob/master/R%20course%20survey%20responses/R%20course%20survey%20responses.md)), we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers. All our content will be published on Github and the School of Data website, under Creative Commons and MIT licences.
 
 #### Target audience
 Journalists
