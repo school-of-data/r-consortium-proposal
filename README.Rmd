@@ -34,7 +34,7 @@ tools <- responses["What tools do you normally use to work with data? (select al
 
 ## The Plan
 
-With the help of the survey results (see Annex 1), we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers.
+With the help of the survey results (see Annex 1), we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers. All our content will be published on Github and the School of Data website, under Creative Commons and MIT licences.
 
 #### Target audience
 Journalists
@@ -48,13 +48,10 @@ Journalists
 
 #### Deliverables
 
-- x modules about learning R for journalists, from "why would I want to use R?" to 
-  "using R in a newsroom workflow"
-- A website which presents this content in an attractive format
-- Learning tracks which guide journalists through additional resources after 
-  they have finished the introduction
-- Make all the material available via GitHub to use it and develop it further.
-- (Optional: Slides for in-person workshops)
+- Several modules about learning R for journalists, from "why would I want to use R?" to "using R in a newsroom workflow", organised in learning tracks
+- A simple Github-based website displaying the content in an attractive format
+- Optional: Training plan for in-person workshops
+- Optional: Slides for in-person workshops
 
 
 #### Timeline
@@ -62,9 +59,7 @@ Journalists
 
 
 #### Likely failure modes and how to recover
-As we will prepare the material in a modular way, it will not be a big problem
-if we do not manage preparing as much material as we now anticipate. In this
-case we will have less modules, but quality of those will be ensured.
+As we will prepare the material in a modular way, it will not be a big problem if we do not manage preparing as much material as we now anticipate. In this case we will have less modules, but quality of those will be ensured. Our content being open and reusable, anyone from the School of Data community will be able to extend the content beyond our initial work.
 
 
 ## How Can The ISC Help?
@@ -99,8 +94,10 @@ kable(workshop)
 
 
 ## Dissemination
+
 The School of Data has a broad community with many members working in journalism.
-We will promote the material among the community and beyond, by sending out newsletters, [tweets](https://twitter.com/SchoolOfData) and informations on the main [School of Data website](https://schoolofdata.org/) as well as the websites of the chapters in the different countries. We will publish the materials under CC-BY license and make it easy for others to build upon the content and extend it.
+
+We will promote the content within and beyond our community, by sending out newsletters, [tweets](https://twitter.com/SchoolOfData) and information on the main [School of Data website](https://schoolofdata.org/) as well as the websites of the chapters in the different countries. We will publish the materials under CC-BY license and make it easy for others to build upon the content and extend it.
 
 ## The team
 
@@ -118,8 +115,6 @@ We will promote the material among the community and beyond, by sending out news
 School of Data is a network of data literacy practitioners, both organizations and individuals, implementing training and other data literacy activities in their respective countries and regions. Members of School of Data work to empower civil society organizations (CSOs), journalists, civil servants and citizens with the skills they need to use data effectively in their efforts to create better, more equitable and more sustainable societies. Over the past four years, School of Data has succeeded in developing and sustaining a thriving and active network of data literacy practitioners in partnership with our implementing partners across Europe, Latin America, Asia and Africa.
 
 Our network includes[ 13 organisations across the world and a total of 101 active individuals](https://schoolofdata.carto.com/viz/20b9844e-7c7b-11e6-afd1-0e05a8b3e3d7/public_map), which all contribute to School of Data key programmes: the Fellowship, the Curriculum and Member Support. Together, we have produced or in the process of producing dozens of articles, lessons and hands-on tutorials on how to work with data. Those are published on our website and are widely reused both by our network and beyond, benefitting thousands of people around the world. Additionally, we have trained over 6500 people through our tailored training events and mentored dozens of organisations to become tech savvy and data driven.
-
-
 
 
 
