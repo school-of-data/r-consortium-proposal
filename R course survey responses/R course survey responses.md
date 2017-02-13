@@ -10,7 +10,7 @@ Half of the respondents (51%) are data journalists with between 1 and 4 years of
 
    ![image alt text](image_0.png)
 
-Nevertheless, only 4 out of 10 work full time as data journalists in newsrooms, as freelancers or in other types of companies.  A third, don’t consider data journalism their primary employment, and the rest are either students or work part-time. 
+Nevertheless, only 4 out of 10 work full time as data journalists in newsrooms, as freelancers or in other types of companies.  A third don’t consider data journalism their primary employment, and the rest are either students or work part-time. 
 
 Most of the journalists (84%) work in media organisations (print, online, radio or TV), while the others do research or work in other types of organisations. 
 
