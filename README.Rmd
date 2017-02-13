@@ -34,22 +34,17 @@ tools <- responses["What tools do you normally use to work with data? (select al
 
 ## The Plan
 
-With the help of the survey results, we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers.
+With the help of the survey results (see Annex 1), we refined our initial idea of created journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making into contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers.
 
 #### Target audience
 Journalists
 
-#### Idea
-We aim to create introductory content about R which lowers the barrier to entry  for journalists by using examples, datasets and tips that are tailored to the  needs and workflow of journalists using R as part of their work.
-There exist many introductory R courses for a broad audience and we are planning to build ontop of them, i.e., do the basic introduction with available material and this use specialised material for journalists, which still needs to be developed. 
-
 #### Goals
 
-- Write introductory learning content about R tailored for journalists
+- Produce introductory learning content about R tailored for journalists in four languages: English, French, Spanish and German
 - Design a content format that encourages journalists to learn without feeling overwhelmed
 - Select and organise existing learning resources about R to direct journalists to them
-- Provide all in four languages: English, French, Spanish and German
-- (Optional: Organise workshops in four countries: Ghana, France, Costa Rica and Switzerland)
+- Optional: Organise workshops in four countries: Ghana, France, Costa Rica and Switzerland
 
 #### Deliverables
 
