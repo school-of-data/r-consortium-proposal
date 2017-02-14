@@ -24,13 +24,6 @@ R has great tools for accessing and analysing open data sources, which can be hu
 
 This problem is compounded by several other factors, that we explored in a small worldwide survey that we conducted in preparation for this call for project. It appeared that, among the journalists who had never taken an R course, the main reason was the lack of learning content addressing their specific needs. Another substantial portion had never heard of R (see [our summary on Github](https://github.com/school-of-data/r-consortium-proposal/blob/master/R%20course%20survey%20responses/R%20course%20survey%20responses.md)).  This strengthens our main hypothesis:  there is a need for learning content specially designed for journalists.
 
-```{r, echo=FALSE, message=FALSE}
-responses_sheet <- gs_title("R course for journalists  (Responses)")
-responses <- gs_read(responses_sheet)
-
-tools <- responses["What tools do you normally use to work with data? (select all that apply)"]
-```
-
 
 
 ## The Plan
