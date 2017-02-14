@@ -128,3 +128,5 @@ School of Data is a network of data literacy practitioners, both organizations a
 
 Our network includes [13 organisations across the world and a total of 101 active individuals](https://schoolofdata.carto.com/viz/20b9844e-7c7b-11e6-afd1-0e05a8b3e3d7/public_map), which all contribute to School of Data key programs: the Fellowship, the Curriculum and Member Support. Together, we have produced or in the process of producing dozens of articles, lessons and hands-on tutorials on how to work with data. Those are published on our website and are widely reused both by our network and beyond, benefiting thousands of people around the world. Additionally, we have trained over 6500 people through our tailored training events and mentored dozens of organisations to become tech savvy and data driven.
 
+----
+This proposal and further details are available at https://github.com/school-of-data/r-consortium-proposal
