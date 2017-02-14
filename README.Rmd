@@ -4,6 +4,7 @@ Application for https://www.r-consortium.org/projects/call-for-proposals
 ```{r, echo=FALSE, message=FALSE}
 library("knitr")
 library("googlesheets")
+library("ggplot2")
 ```
 
 
@@ -55,10 +56,19 @@ Journalists
 
 
 #### Timeline
-**TODO: timeline**
+
 ```{r, echo=FALSE, message=FALSE}
 costs_sheet <- gs_title("ScoDa R consortium proposal: Costs & Timeline")
-timeline <- gs_read(costs_sheet, ws = 2)
+timel <- as.data.frame(gs_read(costs_sheet, ws = 2))
+names(timel) <- gsub(pattern = " |/", ".", names(timel))
+
+
+ggplot(data = timel) + 
+  geom_segment(aes(x = Start.Date, xend = End.Date, 
+                   y = Work.Activity, yend = Work.Activity)) +
+  ylab("Work / Activity") + 
+  theme(axis.text.x = element_text(angle = 320, hjust = 0))
+
 ```
 
 
