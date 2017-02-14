@@ -32,7 +32,9 @@ This problem is compounded by several other factors, that we explored in a small
 
 ## The Plan
 
-With the help of the survey results (see [our summary](https://github.com/school-of-data/r-consortium-proposal/blob/master/R%20course%20survey%20responses/R%20course%20survey%20responses.md)), we refined our initial idea of creating journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making them contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers. All our content will be published on GitHub and the School of Data website, under Creative Commons and MIT licences.
+With the help of the survey results (see [our summary](https://github.com/school-of-data/r-consortium-proposal/blob/master/R%20course%20survey%20responses/R%20course%20survey%20responses.md)), we refined our initial idea of creating journalism-specific learning content into a series of learning modules organised into tracks and based on real projects.  While the early introductory modules will be fully written by our team in order to fully tailor them to journalists, we plan to use the tracks as a way to curate existing R learning content available online, making them contextually useful for journalists. When necessary we will also translate this content to make it useful for non-English speakers and adapt the data examples for national contexts. All our content will be published on GitHub and the School of Data website, under Creative Commons and MIT licences.
+
+The four languages/countries (France, Switzerland, Ghana and Costa Rica) are chosen due to countries of living of the proposal writers. In the future we plan to extend the materials to other languages/countries using the School of Data network.
 
 
 #### Goals
