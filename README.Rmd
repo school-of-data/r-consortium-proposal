@@ -59,15 +59,17 @@ Journalists
 
 ```{r, echo=FALSE, message=FALSE}
 costs_sheet <- gs_title("ScoDa R consortium proposal: Costs & Timeline")
-timel <- as.data.frame(gs_read(costs_sheet, ws = 2))
+timel <- as.data.frame(gs_read(costs_sheet, ws = 2),
+                       stringsAsFactors = FALSE)
 names(timel) <- gsub(pattern = " |/", ".", names(timel))
-
+timel$Start.Date <- strptime(timel$Start.Date, format = "%d.%m.%Y")
+timel$End.Date <- strptime(timel$End.Date, format = "%d.%m.%Y")
+timel$Work.Activity <- factor(timel$Work.Activity, levels = unique(timel$Work.Activity))
 
 ggplot(data = timel) + 
   geom_segment(aes(x = Start.Date, xend = End.Date, 
                    y = Work.Activity, yend = Work.Activity)) +
-  ylab("Work / Activity") + 
-  theme(axis.text.x = element_text(angle = 320, hjust = 0))
+  ylab("Work / Activity") + xlab("Date")
 
 ```
 
