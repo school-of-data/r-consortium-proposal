@@ -1,7 +1,9 @@
 ---
-title: "R Consortium Proposal: School of Data Material Development"
-# output: html_document
-output: pdf_document
+title: 'R Consortium Proposal: School of Data Material Development'
+output:
+  html_document:
+    keep_md: yes
+  pdf_document: default
 ---
 
 <!-- # r-consortium-proposal -->
@@ -55,6 +57,7 @@ The four languages/countries (French/France, German/Switzerland, English/Ghana a
 #### Timeline
 
 ```{r, echo=FALSE, message=FALSE}
+library(lubridate)
 costs_sheet <- gs_title("ScoDa R consortium proposal: Costs & Timeline")
 timel <- as.data.frame(gs_read(costs_sheet, ws = 2),
                        stringsAsFactors = FALSE)
@@ -64,7 +67,7 @@ timel$End.Date <- strptime(timel$End.Date, format = "%d.%m.%Y")
 timel$Work.Activity <- factor(timel$Work.Activity, levels = rev(timel$Work.Activity))
 
 ggplot(data = timel) + 
-  geom_segment(aes(x = Start.Date, xend = End.Date, 
+  geom_segment(aes(x = as_date(Start.Date), xend = as_date(End.Date), 
                    y = Work.Activity, yend = Work.Activity)) +
   ylab("Work / Activity") + xlab("Date")
 
