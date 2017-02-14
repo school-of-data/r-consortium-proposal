@@ -61,7 +61,7 @@ timel <- as.data.frame(gs_read(costs_sheet, ws = 2),
 names(timel) <- gsub(pattern = " |/", ".", names(timel))
 timel$Start.Date <- strptime(timel$Start.Date, format = "%d.%m.%Y")
 timel$End.Date <- strptime(timel$End.Date, format = "%d.%m.%Y")
-timel$Work.Activity <- factor(timel$Work.Activity, levels = unique(timel$Work.Activity))
+timel$Work.Activity <- factor(timel$Work.Activity, levels = rev(timel$Work.Activity))
 
 ggplot(data = timel) + 
   geom_segment(aes(x = Start.Date, xend = End.Date, 
