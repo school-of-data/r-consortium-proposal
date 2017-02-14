@@ -1,5 +1,11 @@
-# r-consortium-proposal
-Application for https://www.r-consortium.org/projects/call-for-proposals
+---
+title: "R Consortium Proposal: School of Data Material Development"
+# output: html_document
+output: pdf_document
+---
+
+<!-- # r-consortium-proposal -->
+<!-- Application for https://www.r-consortium.org/projects/call-for-proposals -->
 
 ```{r, echo=FALSE, message=FALSE}
 library("knitr")
@@ -8,8 +14,6 @@ library("ggplot2")
 ```
 
 
-
-# R Consortium Proposal: School of Data Material Development
 
 ## The context
 
