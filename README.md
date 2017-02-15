@@ -62,30 +62,30 @@ We would like to request financial support of 11200 USD from the ISC to develop 
 The School of Data can support the material development in guidance for the material writing as well as in communication and maintenance.
 The development costs can be split up as follows: 
 
-Work                                                     Funding requested   School of Data co-funding
-------------------------------------------------------  ------------------  --------------------------
-Writing sprint                                                        5000                        1000
-Translation                                                           1500                           0
-Integration sprint (interactive learning environment)                 1500                           0
-Test workshop                                                         1000                           0
-Iteration workshop                                                    1000                           0
-Development and design sprint (website)                               1200                           0
-Communication and outreach                                               0                        1000
-Website maintenance                                                      0                        1000
+|Work                                                  | Funding requested| School of Data co-funding|
+|:-----------------------------------------------------|-----------------:|-------------------------:|
+|Writing sprint                                        |              5000|                      1000|
+|Translation                                           |              1500|                         0|
+|Integration sprint (interactive learning environment) |              1500|                         0|
+|Test workshop                                         |              1000|                         0|
+|Iteration workshop                                    |              1000|                         0|
+|Development and design sprint (website)               |              1200|                         0|
+|Communication and outreach                            |                 0|                      1000|
+|Website maintenance                                   |                 0|                      1000|
 
 
 If additional support is possible, we would like to organize workshops in Ghana, Costa Rica, France and Switzerland. The financial support needed are 
 7000 USD and can be split up as follows:
 
-Work                                                    Funding requested   School of Data co-funding
------------------------------------------------------  ------------------  --------------------------
-Workshop room                                                         800                           0
-Food                                                                  200                           0
-Communication and outreach                                           2000                        1000
-Workshop content planning                                            1000                           0
-Workshop material (slides, etc)                                      1000                           0
-Time on workshop                                                     1000                           0
-Workshop documentation based on the learning content                 1000                           0
+|Work                                                 | Funding requested| School of Data co-funding|
+|:----------------------------------------------------|-----------------:|-------------------------:|
+|Workshop room                                        |               800|                         0|
+|Food                                                 |               200|                         0|
+|Communication and outreach                           |              2000|                      1000|
+|Workshop content planning                            |              1000|                         0|
+|Workshop material (slides, etc)                      |              1000|                         0|
+|Time on workshop                                     |              1000|                         0|
+|Workshop documentation based on the learning content |              1000|                         0|
 
 
 ## Dissemination

@@ -97,14 +97,14 @@ We would like to request financial support of `r sum(material["Funding requested
 The School of Data can support the material development in guidance for the material writing as well as in communication and maintenance.
 The development costs can be split up as follows: 
 ```{r, echo=FALSE}
-kable(material)
+kable(material, format = "markdown")
 ```
 
 
 If additional support is possible, we would like to organize workshops in Ghana, Costa Rica, France and Switzerland. The financial support needed are 
 `r sum(workshop["Funding requested"])` USD and can be split up as follows:
 ```{r, echo=FALSE}
-kable(workshop)
+kable(workshop, format = "markdown")
 ```
 
 
