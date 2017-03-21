@@ -1,3 +1,34 @@
+# [21.03.2017](https://edupad.ch/MmwmFyiZ6z)
+### Paragraph for R consortium blog
+Everyone likes it so far :) Comments still welcome.
+Heidi will send it out tomorrow.
+
+### Who receives the money?
+OK France would receive it but take management fees (amount unclear).    
+**-> Samuel will ask Pierre**
+
+What happens with cofounding of School of Data    
+**-> Samuel will ask Cedric**
+
+### How to move forward? / Next steps? / Responsibilities?
+Start with thinking about content now
+What R content do we teach in the course?
+What are interesting data bases for different countries (538 : https://github.com/rudeboybert/fivethirtyeight & https://github.com/fivethirtyeight/data)?
+
+Gather somewhere (summer camp?) or work online?
+Work at the same time -> 2 days working 
+Writing sprint (remote/online): 24.4. -- 28.4.
+France, Switzerland - 17 h 00 CET    
+Ouagadougou, Burkina Faso - 16 h 00 GMT    
+San Jose, Costa Rica - 10 h 00 CST    
+
+Until the end of the project: Quick calls at 17 h CET on tuesdays + update each other on slack
+
+### Who gets paid for what?
+Everyone writes down the hours of work.
+At the end we divide the budget by the number of hours worked in total and distribute accordingly.   
+**-> Heidi and Samuel check if there are good tools to take time.**
+
 
 # [14.02.2017](https://edupad.ch/n9Qxo2U9Xe)
 ### Report on TODOs / what has been achieved
@@ -39,33 +70,4 @@ Write the outline of the proposal (pinned stuff from Cedric)
 
 Deadline : end of February
 
-# [21.03.2017](https://edupad.ch/MmwmFyiZ6z)
-### Paragraph for R consortium blog
-Everyone likes it so far :) Comments still welcome.
-Heidi will send it out tomorrow.
 
-### Who receives the money?
-OK France would receive it but take management fees (amount unclear). 
--> Samuel will ask Pierre
-
-What happens with cofounding of School of Data  
--> Samuel will ask Cedric
-
-### How to move forward? / Next steps? / Responsibilities?
-Start with thinking about content now
-What R content do we teach in the course?
-What are interesting data bases for different countries (538 : https://github.com/rudeboybert/fivethirtyeight & https://github.com/fivethirtyeight/data)?
-
-Gather somewhere (summer camp?) or work online?
-Work at the same time -> 2 days working 
-Writing sprint (remote/online): 24.4. -- 28.4.
-France, Switzerland - 17 h 00 CET    
-Ouagadougou, Burkina Faso - 16 h 00 GMT    
-San Jose, Costa Rica - 10 h 00 CST    
-
-Until the end of the project: Quick calls at 17 h CET on tuesdays + update each other on slack
-
-### Who gets paid for what?
-Everyone writes down the hours of work.
-At the end we divide the budget by the number of hours worked in total and distribute accordingly.
--> Heidi and Samuel check if there are good tools to take time.
