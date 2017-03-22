@@ -1,6 +1,3 @@
-The School of Data is a network of people all over the world who are enthusiastic about data. 
-The aim of the network is to improve data literacy among people who can do good with data. One
-of the target groups is journalists. Our R consortium grant project focuses on teaching R to journalists in a way
-that is interesting and relevant to journalists in different countries. This means we will 
-develop material with content relevant for journalists and in different languages (English, 
-French, Spanish and German). 
+School of Data is a network of data literacy practitioners, both organizations and individuals, implementing training and other data literacy activities in their respective countries and regions. Members of School of Data work to empower civil society organizations (CSOs), journalists, civil servants and citizens with the skills they need to use data effectively in their efforts to create better, more equitable and more sustainable societies
+
+Our R consortium grant project focuses on developing learning materials about R for journalists, with a focus on making them accessible and relevant to journalists from various countries. As a consequence, our content will use country-relevant examples and will be translated in several languages (English, French, Spanish, German).
