@@ -10,6 +10,7 @@
 - Making beautiful graphs (ggplot2)
 - Adding your own theme to a graph
 - Adding images to a graph (ggimage)
+- Making maps with R
 - Reproducible workflow with Rmarkdown
 - Working with datetime data (posixct etc)
 - Regular expressions
