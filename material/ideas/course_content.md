@@ -3,17 +3,16 @@
 ## Ideas 
 (add all ideas that come to mind, we can throw them out later)
 
-- Reading csv files
-- Reading (google) spreadsheets
+- Reading csv files, spreadsheets, survey data in Stata or SPSS format (.dta, .sav) +
 - Scraping websites
 - Finding and reading open goverment data
-- Cleanining data (create new variables, delete observations, transform variables)
-- Sumarizing data: tabulate, descriptive statistics, filters.
-- Making beautiful graphs (ggplot2)
-- Adding your own theme to a graph
+- Cleanining data (create new variables, delete observations, transform variables) +
+- Sumarizing data: tabulate, descriptive statistics, filters. +
+- Making beautiful graphs (ggplot2) +
+- Adding your own theme to a graph +
 - Adding images to a graph (ggimage)
 - Reproducible workflow with Rmarkdown
-- Working with datetime data (posixct etc)
-- Regular expressions
+- Working with datetime data (posixct etc) --> this could be part of the cleaning data module +
+- Regular expressions +
 - How to find help about R? (Stackoverflow, ...)
 
