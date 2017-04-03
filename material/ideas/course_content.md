@@ -16,9 +16,9 @@
 - Regular expressions +
 - How to find help about R? (Stackoverflow, ...)
 
-## Modules (based on the data pipeline)
+# Modules (based on the data pipeline)
 
-# 1.Data Gathering
+## 1.  Data Gathering
 
 Objectives: 
 1.  Teach journalists the basics of R (how does the program/console work, how to write commands, installing packages...) so that they become familiar with the programming language.  
@@ -28,10 +28,10 @@ Contents:
 1. 
 
 
-# 2.Data Cleaning
+## 2.  Data Cleaning
 
-3. Data analysis
+## 3. Data analysis
 
-4. Data visualization
+## 4. Data visualization
 
-5. Present
+## 5. Present
