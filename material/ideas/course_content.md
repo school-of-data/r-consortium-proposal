@@ -16,3 +16,22 @@
 - Regular expressions +
 - How to find help about R? (Stackoverflow, ...)
 
+## Modules (based on the data pipeline)
+
+# 1.Data Gathering
+
+Objectives: 
+1.  Teach journalists the basics of R (how does the program/console work, how to write commands, installing packages...) so that they become familiar with the programming language.  
+2.  Learn how to import and export data in different formats: flat files (.txt, .csv), excel files, statistical packages files (from Stata or SPPS). 
+
+Contents: 
+1. 
+
+
+# 2.Data Cleaning
+
+3. Data analysis
+
+4. Data visualization
+
+5. Present
