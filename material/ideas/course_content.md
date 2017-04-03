@@ -25,10 +25,12 @@ Objectives:
 2.  Learn how to import and export data in different formats: flat files (.txt, .csv), excel files, statistical packages files (from Stata or SPPS). 
 
 Contents: 
-1. 
+1.   
 
 
 ## 2.  Data Cleaning
+
+Objectives: 
 
 ## 3. Data analysis
 
