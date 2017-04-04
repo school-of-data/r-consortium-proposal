@@ -11,6 +11,7 @@
 - Making beautiful graphs (ggplot2). Also focus on interactive/js graphs.
 - Adding your own theme to a graph +
 - Adding images to a graph (ggimage)
+- Making maps with R
 - Reproducible workflow with Rmarkdown
 - Working with datetime data (posixct etc) --> this could be part of the cleaning data module +
 - Regular expressions +
