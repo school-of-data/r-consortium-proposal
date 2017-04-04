@@ -39,3 +39,5 @@ Objectives:
 ## 4. Data visualization
 
 ## 5. Present
+
+1. How to concretely integrate my work? Integration with various CMS, etc. 
