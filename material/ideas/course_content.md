@@ -6,15 +6,16 @@
 - Reading csv files, spreadsheets, survey data in Stata or SPSS format (.dta, .sav) +
 - Scraping websites
 - Finding and reading open goverment data
-- Cleanining data (create new variables, delete observations, transform variables) +
+- Cleaning data (create new variables, delete observations, transform variables) +
 - Sumarizing data: tabulate, descriptive statistics, filters. +
-- Making beautiful graphs (ggplot2) +
+- Making beautiful graphs (ggplot2). Also focus on interactive/js graphs.
 - Adding your own theme to a graph +
 - Adding images to a graph (ggimage)
 - Reproducible workflow with Rmarkdown
 - Working with datetime data (posixct etc) --> this could be part of the cleaning data module +
 - Regular expressions +
 - How to find help about R? (Stackoverflow, ...)
+- data applications/Shiny
 
 # Modules (based on the data pipeline)
 
