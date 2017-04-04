@@ -1,3 +1,36 @@
+# [04.04.2017](https://hackmd.io/CwEwDATBDGFgtAZgOwDNj2I4BDeAjADlT0TBwE4xhp8cBGEVIA==#)
+
+
+### Who receives the money?
+Samuel: **OK France** should a priori not take a fee. I asked for confirmation. If no answer within the next 24h, we should consider it agreed. 
+
+**-> Transfer money to OK France, Heidi makes sure the money gets there**
+
+
+### What tools should we use to track time and progress?
+http://www.toggl.com/
+
+
+### Content planning
+- First ideas in GitHub [document](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/ideas/course_content.md).
+- Data pipeline
+- What content around R does exist (we can then sort it along the data pipeline)
+- What are the key questions that matter for journalists: it's not just 'how to analyse data with R' but 'when do I use R in my workflow', 'how can I make R work with other tools used by my colleagues' etc. 
+- Make sure we ask journalists about their opinions along the way
+(Joel will give a talk at French R conference and presents our project there)
+
+**-> Heidi talks to Timo about what we can reuse from RDDJ website**
+**-> Camila adds the general learning objectives**
+**-> R users add details on how to achieve objectives**
+
+
+
+### Write blog post announcing the project
+- Include a summary of the results from the previous survey
+
+**-> Camila sets up the blog post**
+
+
 # [21.03.2017](https://edupad.ch/MmwmFyiZ6z)
 ### Paragraph for R consortium blog
 Everyone likes it so far :) Comments still welcome.
