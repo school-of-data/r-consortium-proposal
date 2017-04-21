@@ -1,0 +1,23 @@
+---
+title: 'R course template' # I would suggest using something like 'Data pipeline step 1: Ask'
+author: "Heidi Seibold"
+date: "April 21, 2017"
+output: html_document
+---
+
+# Howto
+
+If you work with RStudio:
+
+- Go to File -> New File -> R Markdown
+- Enter title, e.g. *Data pipeline step 1: Ask*
+- Enter your name as author
+- Click *OK*
+- Save file in the [GitHub repo](https://github.com/school-of-data/r-consortium-proposal)
+  under `/r-consortium-proposal/material/lessons`; Naming should be sensible, such as
+  `pipeline_1_ask.Rmd` for the document that explains the *ASK* step of the data pipeline.
+- Add your text
+- Push the *knit* button (or use `rmarkdown::render("rmarkdown_template.Rmd")`)
+
+If you need help with RMarkdown, check out [this page](http://rmarkdown.rstudio.com/lesson-1.html).
+
