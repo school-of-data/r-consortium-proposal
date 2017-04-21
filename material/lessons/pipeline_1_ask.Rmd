@@ -1,0 +1,11 @@
+---
+title: 'Data pipeline step 1: Ask'
+author: "Heidi Seibold"
+date: "April 21, 2017"
+output: html_document
+---
+
+<!-- TODO: Add content.  -->
+
+You can find the template for lessons
+[here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/ideas/rmarkdown_template.Rmd).
