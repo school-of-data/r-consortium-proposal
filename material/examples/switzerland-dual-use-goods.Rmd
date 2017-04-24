@@ -1,0 +1,29 @@
+---
+title: 'Data set: Swiss exports of dual-use goods'
+author: "Heidi Seibold"
+date: "April 24, 2017"
+output: html_document
+---
+
+Dual-use goods are goods that can be used for civil and military purposes. 
+In Switzerland, these goods are governed with a special legislation – 
+unlike in other countries, where they are looked at as conventional arms exports. 
+
+Thanks to [SRF data](https://github.com/srfdata/2017-01-dual-use) we have 
+access to the raw dual-use data in Switzerland (2012 - 2016) as well as data 
+cleaning procedures in R.
+
+## What can be learned using this data?
+
+- Reading excel files (data are given to the user in xlsx format); package `xlsx`
+- Data cleaning; packages `tidyr`, `dplyr`
+- Automation (data is realeased every year and can simply be added to the script)
+- Plausability checks
+- Saving data as csv so it can be passed on
+- Reproducibility by using GitHub, thorough documentation, `rmarkdown`
+- Visualisation with `ggplot2`
+- Publishing with github pages
+
+
+
+
