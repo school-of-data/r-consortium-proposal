@@ -33,14 +33,14 @@
 
 ### Get
 
-In Excel: have to download the data manually, open it, and make sure that you know where to put the data.
-In R: add url to line of code.
-Relevant advantage: automate easily some processes
+In Excel: have to download the data manually, open it, and make sure that you know where to put the data.    
+In R: add url to line of code.    
+Relevant advantage: automate easily some processes    
 
 ### Verify
 
-In Excel: creating sums of elements to check against total, etc. 
-In R: ...
+In Excel: creating sums of elements to check against total, etc.     
+In R: ...    
 
 ### Clean
 
@@ -56,16 +56,16 @@ In R: ...
 
 ### recipe1: more advanced electoral map. 
 
-**context**: we're going to use the same dataset, and rerun the programme until the cleaning phase.
-**relevant advantage**: keep track of the changes and allow reproducibility of the contents
+**context**: we're going to use the same dataset, and rerun the programme until the cleaning phase.    
+**relevant advantage**: keep track of the changes and allow reproducibility of the contents    
 steps: ....
 
 ### recipe2 : analysing electoral map against other demographic data
 
-**context**: we're going to use a functionality of R which allows you to easily merge datasets, and automate the download of two different datasets to be merged! 
+**context**: we're going to use a functionality of R which allows you to easily merge datasets, and automate the download of two different datasets to be merged!     
 **relevant advantage**:  ...
 
 ### recipe3: when something goes wrong
 
-**context**: we're going to add another layer of information, but we'll also have to fix a mistake in the code.
+**context**: we're going to add another layer of information, but we'll also have to fix a mistake in the code.    
 **relevant advantage**: ...
