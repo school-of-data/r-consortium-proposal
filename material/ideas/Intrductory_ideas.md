@@ -31,26 +31,48 @@
 
 ## Introductory steps - phase 1
 
-### Get
+### The context
+
+The presidential election is over, you want to do a post-election analysis
+
+### Getting the data
 
 In Excel: have to download the data manually, open it, and make sure that you know where to put the data.    
 In R: add url to line of code.    
 Relevant advantage: automate easily some processes    
 
-### Verify
+### Verifying the data
 
 In Excel: creating sums of elements to check against total, etc.     
 In R: ...    
 
-### Clean
+### Cleaning the data
 
 ...
 
-### Analyse
+### Analysing the data
 
 ...
 
-### Visualise
+### Showing analysis to your colleagues
+
+(in order to choose one or several angles, for example).
+
+### Try various visualisations
+
+...
+
+### Edit the visualisations based on feedback from your editor
+
+...
+
+### Send the final visualisation and article to the online editor
+
+...
+
+### Send another version of the visualisation to the print editor
+
+...
 
 ## Introductory steps - phase 2
 
@@ -67,5 +89,5 @@ steps: ....
 
 ### recipe3: when something goes wrong
 
-**context**: we're going to add another layer of information, but we'll also have to fix a mistake in the code.    
+**context**: we're going to add another layer of information and use R code from your colleague, but we'll also have to fix a mistake in the code.    
 **relevant advantage**: ...
