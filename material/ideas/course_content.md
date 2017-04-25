@@ -21,22 +21,23 @@
 # Modules (based on the data pipeline)
 
 ## 1.  Data Gathering
-
-Objectives: 
+Objectives/Contents: 
 1.  Teach journalists the basics of R (how does the program/console work, how to write commands, installing packages...) so that they become familiar with the programming language.  
 2.  Learn how to import and export data in different formats: flat files (.txt, .csv), excel files, statistical packages files (from Stata or SPPS). 
 
-Contents: 
-1.   
-
-
 ## 2.  Data Cleaning
-
-Objectives: 
+Objectives/Contents: 
+1.  Learn how to clean data in R using the tidyr and dplr package and other commands: transform variables, delete observations, create new variables, change formats, rename variables, label variables, recoding variables
 
 ## 3. Data analysis
+Objectives/Contents: 
+1. Learn how to tabulate data: summarize data, frequency tables, crosstabs.
+2. Basic descriptive statistics with R
+3. Run regressions 
 
 ## 4. Data visualization
+Objectives/Contents: 
+1. Learn how to visualize data using ggplot2
 
 ## 5. Present
 
