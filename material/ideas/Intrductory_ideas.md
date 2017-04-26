@@ -40,7 +40,7 @@ The introductory steps are a guided process through which:
 * we contextualise the step within a data-driven story writing workflow.
 
 ### Main intro
-_interactive quiz used as a way to start engaging the vsitor right away, and to get statistics from various populations_
+_interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations_
 
 Are you a journalist?      
 -> Yes -> No      
@@ -54,8 +54,8 @@ ____ -> Yes -> No
 
      ____-> Yes -> No   
          |     
-         |____ (if no) Well, despite its mysterious and concise name, R is a [...] 
-         Our mission today will be to convince you that R is worth your precious time. 
+         |____ (if no) Well, despite its mysterious and concise name, R is an open source programming language and environment for     statistical computing, widely used among data analysts, statisticians, programmers and more recently, by data journalists. 
+         Our mission today will be to convince you that R is worth your precious time and will help you improve your work in the newsroom. 
          
          |     
          |____ (if yes) Do you already use R your work?     
