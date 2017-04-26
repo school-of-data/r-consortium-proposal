@@ -81,7 +81,8 @@ ____ -> Yes -> No
 ### The context
 _Here we set up the story that will be used to contextualise all actions in the tutorial_
 
-The presidential election is over, you are tasked to do a post-election analysis. Geographic distribution of the votes, demographics of the vote, many angles are possible. In order to see what would make a godo story, you decide to analyse and visualise the data.
+The presidential election is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
+Even though you normally work with spreadsheets, you want to try R.  
 
 ### Getting the data
 
