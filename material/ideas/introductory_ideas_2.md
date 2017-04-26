@@ -71,30 +71,51 @@ We are going to guide in each step, don't worry, it won't be that hard. Let's st
 
 You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format. Ugh, Excel doesn't read that easily.
 
-You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format. Excel reads those. Good.
+You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLS. Excel reads those. Good.
+
+_the idea is to use different data formats, we have to select the final databases, for this example I'm using fictional files_
+
+Let's download those 3 files and store them in a folder called `electoral-data`.
+Your must have 3 files in your folder:  
+`electoral1.XML`
+`electoral2.cvs`
+`electoral3.xls`
 
 Now let's try reading in the data:
-1. Create a folder in your computer called `electoral-data`
-2. Open your R editor (e.g. RStudio)
-3. Set your working directory to `electoral-data`. To do this enter
+1. Open your R editor (e.g. RStudio)
+2. Set your working directory to `electoral-data`. To do this enter
 ```{r, eval=FALSE}
 setwd("/PATH/electoral-data")
 ```
 in the console.
+Then, we are going to need two specialised packages to read xml and xls files into R: `XML` and `readxl`.
+To install the packages run
+```{r, eval=FALSE}
+install.packages("readxl")
+install.packages("XML")
+```
+To load the packages run
+```{r}
+library("readxl") 
+library("XML") 
+```
+Now we can read the data: 
+
+
+See? That was easy! Now you have your data loaded into the program and can start working.  
+
+> **Let's review the commands we learned in this step: **<
+set your folder `setwd()` 
+Install Packages `install.packages()`
+Load Libraries `library()`
+Read files `read.csv` `read_excel` `xmlTreeParse`
 
 
 
-
-> **Wait, what?**
+> **Want to learn what other types of data can be imported into R**
 >   
-> how do I even know how write this code? I'm not a programmer! 
+> Check this! https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo
 >    
-> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
-
-**Are you convinced yet that R is worth your time?**     
-____ not really    
-____ hmmm, I need to see more to decide     
-____ yes, R won my heart     
 
 ### Verifying the data
 
