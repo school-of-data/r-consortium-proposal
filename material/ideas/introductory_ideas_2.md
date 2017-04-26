@@ -1,1 +1,154 @@
+## Introductory steps - phase 1
+
+The introductory steps are a guided process through which:
+
+* we spell out clearly how R can be used for a basic data story
+* we show how Excel compares, for each step
+* we introduce the reader to the basics of R, iterating on each notion learned in the previous step
+* we contextualise the step within a data-driven story writing workflow.
+
+### Main intro
+_interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations_
+
+Are you a journalist?      
+-> Yes -> No      
+
+|____(if no) this tutorial is delibarately, intensely, exclusively focused on journalists. If you want to continue you'll have to pretend to be a journalist and, believe us, it's not pleasant. Do you still want to continue?
+
+____ -> Yes -> No     
+
+     |     
+     |____ (if yes) Have you ever heard about this thing we call R?     
+
+     ____-> Yes -> No   
+         |     
+         |____ (if no) Well, despite its mysterious and concise name, R is an open source programming 
+         language and environment for statistical computing, widely used among data analysts, statisticians, 
+         programmers and more recently, by data journalists.   Our mission today will be to convince you
+         that R is worth your precious time and will help you improve your work in the newsroom. 
+         
+         |     
+         |____ (if yes) Do you already use R your work?     
+
+          ____-> Yes -> No   
+
+                |    
+                |____________ (if yes) What follows is a beginner tutorial for R-newbies. 
+                You could jump directly to [our list of R recipes]() or still follow the introduction tutorial 
+                to steal ideas for your own R trainings (we know who you are!).
+
+                |     
+                |____________ (if no) So an R atheist? Or maybe agnostic? 
+                Our mission will be to convice you to actually start using R in your workflow. 
+                If we fail, we allow you the privilege to send us an angry tweet.
+
+      --------------------     
+     | Challenge accepted |    
+      --------------------    
+
+### The context
+_Here we set up the story that will be used to contextualise all actions in the tutorial_
+
+The presidential election is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
+Even though you normally work with spreadsheets, you want to try R.  Here are a few reasons why:
+
+Excel | R 
+--- | ---
+It's a "point and click program", with | You write a functions directly in the R interface and R does all the magic
+If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated
+Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
+.... | .....
+
+> **Wait, what?**
+>   
+> how do I even know how write R code? I'm not a programmer! 
+>    
+> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
+
+We are going to guide in each step, don't worry, it won't be that hard. 
+
+### Getting the data
+
+You stretch your arms, grab a coffee, and off you go. First, the data. The ministry of the interior publishes the detailed election data, in xml format (?){what is XML?}. Ugh, Excel doesn't read that easily.
+
+You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format. Excel reads those. Good.
+
+Now let's get to work:
+
+Step | Excel | R 
+--- | --- | ---
+1 | You download the two data files from their respective websites | You write a function directly in the R interface which downloads and loads the data, allowing you to only change the URL to update this part of the process next year.
+2 | You opt to convert the XML data using an XML converter. The result is not perfect, but you can work with it now. |
+3 | You load the files in your Excel workbook, within two different spreadsheets. | 
+
+Step saved using R: 2. Winner? R!
+
+* A simple line of code can replace cumbersome manual operations
+* R loads all sort of file formats, and doesn't complain
+* Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
+* Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
+
+> **Wait, what?**
+>   
+> how do I even know how write this code? I'm not a programmer! 
+>    
+> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
+
+**Are you convinced yet that R is worth your time?**     
+____ not really    
+____ hmmm, I need to see more to decide     
+____ yes, R won my heart     
+
+### Verifying the data
+
+In Excel: creating sums of elements to check against total, etc.     
+In R: ...    
+
+### Cleaning the data
+
+...
+
+#### Analysing the data
+
+...
+
+### Showing analysis to your colleagues
+
+(in order to choose one or several angles, for example).
+
+### Try various visualisations
+
+...
+
+### Edit the visualisations based on feedback from your editor
+
+...
+
+### Send the final visualisation and article to the online editor
+
+...
+
+### Send another version of the visualisation to the print editor
+
+...
+
+This was the last step! Are you convinced yet? If not, check out [other scenarios]() or [send us an angry tweet]()
+
+## Introductory steps - phase 2
+
+### recipe1: more advanced electoral map. 
+
+**context**: we're going to use the same dataset, and rerun the programme until the cleaning phase.    
+**relevant advantage**: keep track of the changes and allow reproducibility of the contents    
+steps: ....
+
+### recipe2 : analysing electoral map against other demographic data
+
+**context**: we're going to use a functionality of R which allows you to easily merge datasets, and automate the download of two different datasets to be merged!     
+**relevant advantage**:  ...
+
+### recipe3: when something goes wrong
+
+**context**: we're going to add another layer of information and use R code from your colleague, but we'll also have to fix a mistake in the code.    
+**relevant advantage**: ...
 
