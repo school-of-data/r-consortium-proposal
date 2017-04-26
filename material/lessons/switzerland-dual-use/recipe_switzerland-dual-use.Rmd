@@ -27,7 +27,7 @@ The reasons for using R for this task are various:
 - R can export data to csv so it can be used in other programs (e.g. Excel)
 - R produces good graphics and allows for individualised themes
 - With R reproducible documents (e.g. HTML or PDF) can be created, changes are 
-  included without major efforts
+included without major efforts
 
 You can find the entire analysis on the [SRF data GitHub repository](https://github.com/srfdata/2017-01-dual-use)
 and the article from January 2017 on the 
@@ -55,8 +55,8 @@ We propose the following:
 
 ```{}
 └── switzerland-dual-use
-    ├── data_clean
-    └── data_raw
+├── data_clean
+└── data_raw
 ```
 
 
@@ -74,16 +74,16 @@ The data can be downloaded simply clicking on the data links on the
 Yor file structure should now look like this,
 ```{}
 └── switzerland-dual-use
-    ├── data_clean
-    └── data_raw
-        ├── 1_Quartal_2016_Bewilligungen.xlsx
-        ├── 2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-        ├── 3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-        ├── 4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-        ├── Stat_IP_2015_Bewilligungen.xlsx
-        ├── Statistik Dual-Use 2014 Elic.xlsx
-        ├── Statistik Dual-Use Jan. 2012 - Sep. 2014 Tracker.xlsx
-        └── Statistik ML 2005-2013.xlsx
+├── data_clean
+└── data_raw
+├── 1_Quartal_2016_Bewilligungen.xlsx
+├── 2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+├── 3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+├── 4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+├── Stat_IP_2015_Bewilligungen.xlsx
+├── Statistik Dual-Use 2014 Elic.xlsx
+├── Statistik Dual-Use Jan. 2012 - Sep. 2014 Tracker.xlsx
+└── Statistik ML 2005-2013.xlsx
 ```
 i.e. you should have the dual-use Excel files corresponding to years 2012 to 2016.
 
@@ -118,72 +118,112 @@ library("readxl")
 ```
 Now we can read the data of the first two quarters of 2016:
 ```{r}
-elic_2016_1_raw <- read_excel(path = "data_raw/1_Quartal_2016_Bewilligungen.xlsx")
-elic_2016_2_raw <- read_excel(path = "data_raw/2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
+elic_2016_q1_raw <- read_excel(path = "data_raw/1_Quartal_2016_Bewilligungen.xlsx")
+elic_2016_q2_raw <- read_excel(path = "data_raw/2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
+elic_2016_q3_raw <- read_excel(path = "data_raw/3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
+elic_2016_q4_raw <- read_excel(path = "data_raw/4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
 ```
 
 # Verify
 To check whether reading in worked and the data is what we wanted, there are a 
-couple of useful commands in R. Let's now first work with `elic_2016_1_raw`:
+couple of useful commands in R. Let's now first work with `elic_2016_q1_raw`:
 
 - `names()` shows the collumn names of the data frame
 ```{r}
-names(elic_2016_1_raw)
+names(elic_2016_q1_raw)
 ```
 - `head()` shows the first few rows of the data frame
 ```{r}
-head(elic_2016_1_raw)
+head(elic_2016_q1_raw)
 ```
 - `tail()` shows the last few rows of the data frame
 ```{r}
-tail(elic_2016_1_raw)
+tail(elic_2016_q1_raw)
 ```
 - `summary()` shows a summary of the data. For numeric variables such as the price (`Wert [CHF]`) it 
 shows the [five number summary](https://en.wikipedia.org/wiki/Five-number_summary) and the mean (average).
 For character variables such as receiving country (`Bestimmungsland`) it shows the length and the information
 that it is a character variable.
 ```{r}
-summary(elic_2016_1_raw)
+summary(elic_2016_q1_raw)
 ```
 - `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the
 first few values
 ```{r}
-str(elic_2016_1_raw)
+str(elic_2016_q1_raw)
 ```
 
 
 # Clean
 
+In this section we will need the `dplyr` package
 ```{r}
 library("dplyr")   ## if not available install by typing install.packages("dplyr")
-
-elic_2016_1_1 <- elic_2016_1_raw %>% 
-  mutate(Datum = as.Date("2016-01-01 00:00:01")) %>% 
-  mutate(Quartal = paste(format(Datum, "%y"), sprintf("%02i", (as.POSIXlt(Datum)$mon) %/% 3L + 1L), sep="/"))
-str(elic_2016_1_1)
-
-elic_2016_1_2 <- elic_2016_1_1 %>% select(GN = Geschäftsnummer, 
-                                          Datum, 
-                                          Quartal, 
-                                          Land = Bestimmungsland, 
-                                          Wert = `Wert [CHF]`, 
-                                          Position_Gueterart = Güterart, 
-                                          Position_EKN = `Exportkontrollnummer [EKN]`, 
-                                          Art = Richtung)
-str(elic_2016_1_2)
-
-elic_2016_1_3 <- elic_2016_1_2 %>% filter(Art == "Ausfuhr")
-str(elic_2016_1_3)
-
-elic_2016_1_4 <- elic_2016_1_3 %>% select(-Art)
-str(elic_2016_1_4)
+```
 
 
-# elic_2016_2 <- elic_2016_2_raw %>% 
-#   mutate(Datum = as.Date("2016-04-01 00:00:01")) %>% 
-#   mutate(Quartal = paste(format(Datum, "%y"), sprintf("%02i", (as.POSIXlt(Datum)$mon) %/% 3L + 1L), sep="/")) %>%
-#   select(GN = Geschäftsnummer, Datum, Quartal, Land = Bestimmungsland, Wert = `Wert [CHF]`, Position_Gueterart = Güterart, Position_EKN = `Exportkontrollnummer [EKN]`, Art = Richtung) %>% 
-#   filter(Art == "Ausfuhr") %>% 
-#   select(-Art)
+As a first step we want to combine the four 2016 data sets. You might have already
+realised that the first data set has one collumn that is just `NA`. `NA` is the 
+missing value indicator in R. So basically this collumn does not contain any 
+information. Let's see what happens to this collumn if we combine the four 
+data sets using function `bind_rows()`.
+
+```{r}
+names(elic_2016_q1_raw)
+names(elic_2016_q2_raw)
+
+elic_2016_1 <- bind_rows("16/01" = elic_2016_q1_raw, 
+                         "16/02" = elic_2016_q2_raw, 
+                         "16/03" = elic_2016_q3_raw, 
+                         "16/04" = elic_2016_q4_raw, 
+                         .id = "Quartal")
+
+names(elic_2016_1)
+str(elic_2016_1)
+```
+`bind_rows()` keeps all collumns in all data sets and fills them with `NA` for the 
+data sets that do not contain this collumn. Also it created a new collumn called
+`Quartal`. It did that because we told it that the `.id` collumn is `Quartal` and
+the values for each `Quartal` is given in the quotation marks `"`. 
+
+Now we do not want to keep the collumn with just `NA` values and we want to 
+rename a few variables. We can do this with function `select()`:
+
+- To just select a variable, name it (e.g. `Quartal`)
+- To select and rename a variable, put `newname = oldname` (e.g. `GN = Geschäftsnummer`)
+- For variables with spaces or special symbols, use to show where it starts and ends
+  (see e.g. `Wert [CHF]`)
+- To select all except one variable, use the minus symbol 
+  (e.g. `select(.data = elic_2016_3, -Art)` below)
+```{r}
+elic_2016_2 <- select(.data = elic_2016_1,
+                      GN = Geschäftsnummer, 
+                      Quartal, 
+                      Land = Bestimmungsland, 
+                      Wert = `Wert [CHF]`, 
+                      Position_Gueterart = Güterart, 
+                      Position_EKN = `Exportkontrollnummer [EKN]`, 
+                      Art = Richtung)
+str(elic_2016_2)
+```
+
+We are only interested in exports (variable `Art`, value `"Ausfuhr"`), so we use
+`filter()` to select the rows in the data set where this is the case. Before that
+we check how many rows contain other values. `elic_2016_2$Art` gives us the variable
+we are interested in and functin `table()` creates a table for the frequencies of
+the different values. 
+```{r}
+table(elic_2016_2$Art)
+```
+The data set after using `filter()` should have 
+`r sum(elic_2016_2$Art == "Ausfuhr")` rows.
+```{r}
+elic_2016_3 <- filter(.data = elic_2016_2, Art == "Ausfuhr")
+str(elic_2016_3)
+```
+Now the collumn `Art` is not needed anymore. Let's unselect it.
+```{r}
+elic_2016_4 <- select(.data = elic_2016_3, -Art)
+str(elic_2016_4)
 ```
 
