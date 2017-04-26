@@ -84,6 +84,7 @@ _Here we set up the story that will be used to contextualise all actions in the 
 The presidential election is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
 Even though you normally work with spreadsheets, you want to try R.  
 
+
 ### Getting the data
 
 You stretch your arms, grab a coffee, and off you go. First, the data. The ministry of the interior publishes the detailed election data, in xml format (?){what is XML?}. Ugh, Excel doesn't read that easily.
