@@ -42,21 +42,23 @@ The introductory steps are a guided process through which:
 #### Main intro
 _interactive quiz used as a way to start engaging the vsitor right away, and to get statistics from various populations_
 
-Are you a journalist?
--> Yes -> No
+Are you a journalist?      
+-> Yes -> No      
 
 |____(if no) this tutorial is delibarately, intensely, exclusively focused on journalists. If you want to continue you'll have to pretend to be a journalist and, believe us, it's not pleasant. Do you still want to continue?
 
 ____ -> Yes -> No     
+
      |     
-     |____ (if yes) Have you ever heard about this thing we call R?
+     |____ (if yes) Have you ever heard about this thing we call R?     
 
      ____-> Yes -> No   
          |     
          |____ (if no) Well, despite its mysterious and concise name, R is a [...] 
          Our mission today will be to convince you that R is worth your precious time. 
+         
          |     
-         |____ (if yes) Do you already use R your work?
+         |____ (if yes) Do you already use R your work?     
 
           ____-> Yes -> No   
 
@@ -93,9 +95,7 @@ Step | Excel | R
 2 | You opt to convert the XML data using an XML converter. The result is not perfect, but you can work with it now. |
 3 | You load the files in your Excel workbook, within two different spreadsheets. | 
 
-Step saved using R: 2
-
-Winner: R
+Step saved using R: 2. Winner? R!
 
 * A simple line of code can replace cumbersome manual operations
 * R loads all sort of file formats, and doesn't complain
@@ -108,10 +108,10 @@ Winner: R
 >    
 > Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
 
-**Are you convinced yet that R is worth your time?**
-____ not really
-____ hmmm, I need to see more to decide
-____ yes, R won my heart
+**Are you convinced yet that R is worth your time?**     
+____ not really    
+____ hmmm, I need to see more to decide     
+____ yes, R won my heart     
 
 #### Verifying the data
 
