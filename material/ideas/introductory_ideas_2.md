@@ -71,15 +71,15 @@ We are going to guide in each step, don't worry, it won't be that hard. Let's st
 
 You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format. Ugh, Excel doesn't read that easily.
 
-You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLS. Excel reads those. Good.
+You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLSX. Excel reads those. Good.
 
-_the idea is to use different data formats, we have to select the final databases, for this example I'm using fictional files_
+(_the idea is to use different data formats, we have to select the final databases, for this example I'm using fictional files_)
 
-Let's download those 3 files and store them in a folder called `electoral-data`.
-Your must have 3 files in your folder:  
-`electoral1.XML`
+Let's download those 2 files and store them in a folder called `electoral-data`.
+Your must have 2 files in your folder:  
 `electoral2.cvs`
-`electoral3.xls`
+`electoral3.xlsx`
+And a link for the XML file.
 
 Now let's try reading in the data:
 1. Open your R editor (e.g. RStudio)
@@ -100,22 +100,33 @@ library("readxl")
 library("XML") 
 ```
 Now we can read the data: 
+```{r}
+data1 <- xmlTreeParse(link to your data)
+data2 <2 read.csv("electoral2.xlsx", header = FALSE)
+data3 <- read_excel(path = "electoral3.xlsx")
 
+```
 
 See? That was easy! Now you have your data loaded into the program and can start working.  
+Are you seeing the magic yet? 
+* A simple line of code can replace cumbersome manual operations that you have to do in Excel to import the data
+* R loads all sort of file formats, and doesn't complain
+* Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
+* Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
 
-> **Let's review the commands we learned in this step: **<
-set your folder `setwd()` 
-Install Packages `install.packages()`
-Load Libraries `library()`
-Read files `read.csv` `read_excel` `xmlTreeParse`
-
+> **Let's review the commands we learned in this step: **
+>set your folder `setwd()` 
+>Install Packages `install.packages()`
+>Load Libraries `library()`
+>Read files `read.csv` `read_excel` `xmlTreeParse`
 
 
 > **Want to learn what other types of data can be imported into R**
 >   
 > Check this! https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo
 >    
+
+Now let's move on with the analysis!
 
 ### Verifying the data
 
