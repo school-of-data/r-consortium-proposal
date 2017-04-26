@@ -54,8 +54,8 @@ Even though you normally work with spreadsheets, you want to try R.  Here are a 
 
 Excel | R 
 --- | ---
-It's a "point and click program", with | You write a functions directly in the R interface and R does all the magic
-If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated
+It's a "point and click program" | You write a functions directly in the R interface and R does all the magic
+If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated.  rite once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
 Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
 .... | .....
 
@@ -65,28 +65,25 @@ Only allows some types of files | Can load different kinds of files that can be 
 >    
 > Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
 
-We are going to guide in each step, don't worry, it won't be that hard. 
+We are going to guide in each step, don't worry, it won't be that hard. Let's start with getting the data.
 
 ### Getting the data
 
-You stretch your arms, grab a coffee, and off you go. First, the data. The ministry of the interior publishes the detailed election data, in xml format (?){what is XML?}. Ugh, Excel doesn't read that easily.
+You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format. Ugh, Excel doesn't read that easily.
 
 You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format. Excel reads those. Good.
 
-Now let's get to work:
+Now let's try reading in the data:
+1. Create a folder in your computer called `electoral-data`
+2. Open your R editor (e.g. RStudio)
+3. Set your working directory to `electoral-data`. To do this enter
+```{r, eval=FALSE}
+setwd("/PATH/electoral-data")
+```
+in the console.
 
-Step | Excel | R 
---- | --- | ---
-1 | You download the two data files from their respective websites | You write a function directly in the R interface which downloads and loads the data, allowing you to only change the URL to update this part of the process next year.
-2 | You opt to convert the XML data using an XML converter. The result is not perfect, but you can work with it now. |
-3 | You load the files in your Excel workbook, within two different spreadsheets. | 
 
-Step saved using R: 2. Winner? R!
 
-* A simple line of code can replace cumbersome manual operations
-* R loads all sort of file formats, and doesn't complain
-* Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
-* Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
 
 > **Wait, what?**
 >   
