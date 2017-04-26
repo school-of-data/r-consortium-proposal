@@ -54,8 +54,10 @@ ____ -> Yes -> No
 
      ____-> Yes -> No   
          |     
-         |____ (if no) Well, despite its mysterious and concise name, R is an open source programming language and environment for     statistical computing, widely used among data analysts, statisticians, programmers and more recently, by data journalists. 
-         Our mission today will be to convince you that R is worth your precious time and will help you improve your work in the newsroom. 
+         |____ (if no) Well, despite its mysterious and concise name, R is an open source programming 
+         language and environment for statistical computing, widely used among data analysts, statisticians, 
+         programmers and more recently, by data journalists.   Our mission today will be to convince you
+         that R is worth your precious time and will help you improve your work in the newsroom. 
          
          |     
          |____ (if yes) Do you already use R your work?     
