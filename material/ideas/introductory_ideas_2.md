@@ -114,11 +114,12 @@ Are you seeing the magic yet?
 * Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
 * Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
 
-> **Let's review the commands we learned in this step: **
->set your folder `setwd()` 
->Install Packages `install.packages()`
->Load Libraries `library()`
->Read files `read.csv` `read_excel` `xmlTreeParse`
+> **Let's review the commands we learned in this step:**
+>
+> set your folder `setwd()` 
+> Install Packages `install.packages()`
+> Load Libraries `library()`
+> Read files `read.csv` `read_excel` `xmlTreeParse`
 
 
 > **Want to learn what other types of data can be imported into R**
