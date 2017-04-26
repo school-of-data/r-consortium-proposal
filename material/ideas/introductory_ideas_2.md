@@ -1,35 +1,3 @@
-## In what contexts would a journalist use R instead of Excel?
-
-### Some resources
-
-* https://www.r-bloggers.com/using-excel-versus-using-r/
-* https://www.quora.com/Why-is-SAS-and-R-programming-used-instead-of-MS-excel
-* http://blog.revolutionanalytics.com/2014/10/why-r-is-better-than-excel.html
-* https://r-dir.com/blog/2013/11/r-vs-excel-for-data-analysis.html
-* https://www.rforexcelusers.com/excel-vs-r-when-to-use-what/
-
-### When Excel can not do it
-
-* working with large volumes of data, for example: electoral data, household surveys, census data. 
-* Make advanced statistical analysis.
-* Create less common visualisations quickly (violon chart, slope graph) to explore the data
-* keep track of the changes and allow reproducibility of the contents
-
-### When Excel can not do it as well
-
-* make transformations to variables: create new variables, transform variables, delete values or observations. (Even though you can do this in Excel, it’s easier to do it in R with a few lines of code)
-* Create publishable data visualizations without the need of using another program after doing the analysis.  
-* automate easily some processes (VBA vs R code)
-
-## In what context would Excel make sense instead of R?
-
-...
-
-## Which dataset can be used to quickly guide a learner through the R vs Excel differences
-
-* electoral data (most likely available in all countries where we want to localise the content)
-* 
-
 ## Introductory steps - phase 1
 
 The introductory steps are a guided process through which:
@@ -82,40 +50,84 @@ ____ -> Yes -> No
 _Here we set up the story that will be used to contextualise all actions in the tutorial_
 
 The presidential election is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
-Even though you normally work with spreadsheets, you want to try R.  
+Even though you normally work with spreadsheets, you want to try R.  Here are a few reasons why:
 
+Excel | R 
+--- | ---
+It's a "point and click program" | You write a functions directly in the R interface and R does all the magic
+If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated.  rite once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
+Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
+.... | .....
+
+> **Wait, what?**
+>   
+> how do I even know how write R code? I'm not a programmer! 
+>    
+> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
+
+We are going to guide in each step, don't worry, it won't be that hard. Let's start with getting the data.
 
 ### Getting the data
 
-You stretch your arms, grab a coffee, and off you go. First, the data. The ministry of the interior publishes the detailed election data, in xml format (?){what is XML?}. Ugh, Excel doesn't read that easily.
+You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format. Ugh, Excel doesn't read that easily.
 
-You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format. Excel reads those. Good.
+You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLSX. Excel reads those. Good.
 
-Now let's get to work:
+(_the idea is to use different data formats, we have to select the final databases, for this example I'm using fictional files_)
 
-Step | Excel | R 
---- | --- | ---
-1 | You download the two data files from their respective websites | You write a function directly in the R interface which downloads and loads the data, allowing you to only change the URL to update this part of the process next year.
-2 | You opt to convert the XML data using an XML converter. The result is not perfect, but you can work with it now. |
-3 | You load the files in your Excel workbook, within two different spreadsheets. | 
+Let's download those 2 files and store them in a folder called `electoral-data`.
+Your must have 2 files in your folder:  
+`electoral2.cvs`
+`electoral3.xlsx`
+And a link for the XML file.
 
-Step saved using R: 2. Winner? R!
+Now let's try reading in the data:
+1. Open your R editor (e.g. RStudio)
+2. Set your working directory to `electoral-data`. To do this enter
+```{r, eval=FALSE}
+setwd("/PATH/electoral-data")
+```
+in the console.
+Then, we are going to need two specialised packages to read xml and xls files into R: `XML` and `readxl`.
+To install the packages run
+```{r, eval=FALSE}
+install.packages("readxl")
+install.packages("XML")
+```
+To load the packages run
+```{r}
+library("readxl") 
+library("XML") 
+```
+Now we can read the data: 
+```{r}
+data1 <- xmlTreeParse(link to your data)
+data2 <2 read.csv("electoral2.xlsx", header = FALSE)
+data3 <- read_excel(path = "electoral3.xlsx")
 
-* A simple line of code can replace cumbersome manual operations
+```
+
+See? That was easy! Now you have your data loaded into the program and can start working.  
+Are you seeing the magic yet? 
+* A simple line of code can replace cumbersome manual operations that you have to do in Excel to import the data
 * R loads all sort of file formats, and doesn't complain
 * Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
 * Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
 
-> **Wait, what?**
->   
-> how do I even know how write this code? I'm not a programmer! 
->    
-> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
+> **Let's review the commands we learned in this step:**
+>
+> set your folder `setwd()` 
+> Install Packages `install.packages()`
+> Load Libraries `library()`
+> Read files `read.csv` `read_excel` `xmlTreeParse`
 
-**Are you convinced yet that R is worth your time?**     
-____ not really    
-____ hmmm, I need to see more to decide     
-____ yes, R won my heart     
+
+> **Want to learn what other types of data can be imported into R**
+>   
+> Check this! https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo
+>    
+
+Now let's move on with the analysis!
 
 ### Verifying the data
 
@@ -169,3 +181,4 @@ steps: ....
 
 **context**: we're going to add another layer of information and use R code from your colleague, but we'll also have to fix a mistake in the code.    
 **relevant advantage**: ...
+
