@@ -39,7 +39,7 @@ The introductory steps are a guided process through which:
 * we introduce the reader to the basics of R, iterating on each notion learned in the previous step
 * we contextualise the step within a data-driven story writing workflow.
 
-#### Main intro
+### Main intro
 _interactive quiz used as a way to start engaging the vsitor right away, and to get statistics from various populations_
 
 Are you a journalist?      
@@ -76,12 +76,12 @@ ____ -> Yes -> No
      | Challenge accepted |    
       --------------------    
 
-#### The context
+### The context
 _Here we set up the story that will be used to contextualise all actions in the tutorial_
 
 The presidential election is over, you are tasked to do a post-election analysis. Geographic distribution of the votes, demographics of the vote, many angles are possible. In order to see what would make a godo story, you decide to analyse and visualise the data.
 
-#### Getting the data
+### Getting the data
 
 You stretch your arms, grab a coffee, and off you go. First, the data. The ministry of the interior publishes the detailed election data, in xml format (?){what is XML?}. Ugh, Excel doesn't read that easily.
 
@@ -113,12 +113,12 @@ ____ not really
 ____ hmmm, I need to see more to decide     
 ____ yes, R won my heart     
 
-#### Verifying the data
+### Verifying the data
 
 In Excel: creating sums of elements to check against total, etc.     
 In R: ...    
 
-#### Cleaning the data
+### Cleaning the data
 
 ...
 
@@ -126,25 +126,27 @@ In R: ...
 
 ...
 
-#### Showing analysis to your colleagues
+### Showing analysis to your colleagues
 
 (in order to choose one or several angles, for example).
 
-#### Try various visualisations
+### Try various visualisations
 
 ...
 
-#### Edit the visualisations based on feedback from your editor
+### Edit the visualisations based on feedback from your editor
 
 ...
 
-#### Send the final visualisation and article to the online editor
+### Send the final visualisation and article to the online editor
 
 ...
 
-#### Send another version of the visualisation to the print editor
+### Send another version of the visualisation to the print editor
 
 ...
+
+This was the last step! Are you convinced yet? If not, check out [other scenarios]() or [send us an angry tweet]()
 
 ## Introductory steps - phase 2
 
