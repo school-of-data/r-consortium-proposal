@@ -65,13 +65,13 @@ Only allows some types of files | Can load different kinds of files that can be 
 >    
 > Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
 
-We are going to guide in each step, don't worry, it won't be that hard. Let's start with getting the data.
+We are going to guide you in each step, don't worry, it won't be that hard. Let's start with getting the data.
 
 ### Getting the data
 
-You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format. Ugh, Excel doesn't read that easily.
+You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. The ministry of the interior publishes the detailed election data, in xlm format.
 
-You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLSX. Excel reads those. Good.
+You also want to align it with a dataset which gives various information about regions, in order to try various analyses. The file you use is published by the National Statistics Institute in CSV format and other files are in XLSX. 
 
 (_the idea is to use different data formats, we have to select the final databases, for this example I'm using fictional files_)
 
@@ -130,9 +130,19 @@ Are you seeing the magic yet?
 Now let's move on with the analysis!
 
 ### Verifying the data
+Now that you have imported your data into R, it's time to start exploring it.  Here are some useful commands:
 
-In Excel: creating sums of elements to check against total, etc.     
-In R: ...    
+- `names()` shows the collumn names of the data frame
+```{r}
+names(electoral2)
+```
+- `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the
+first few values
+```{r}
+str(electoral2)
+```
+Now you can see that your database has X variables, Y of wich are numeric and the others that are strings.  
+    
 
 ### Cleaning the data
 
