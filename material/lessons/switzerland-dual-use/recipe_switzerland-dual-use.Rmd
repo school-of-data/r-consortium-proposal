@@ -201,8 +201,8 @@ elic_2016_2 <- select(.data = elic_2016_1,
                       Quartal, 
                       Land = Bestimmungsland, 
                       Wert = `Wert [CHF]`, 
-                      Position_Gueterart = Güterart, 
-                      Position_EKN = `Exportkontrollnummer [EKN]`, 
+                      Typ = Güterart, 
+                      Signatur = `Exportkontrollnummer [EKN]`, 
                       Art = Richtung)
 str(elic_2016_2)
 ```
@@ -225,5 +225,43 @@ Now the collumn `Art` is not needed anymore. Let's unselect it.
 ```{r}
 elic_2016_4 <- select(.data = elic_2016_3, -Art)
 str(elic_2016_4)
+```
+
+
+
+
+# Analyse
+
+Let's try making a first plot, which shows how much worth the goods were that 
+were exported to each country.
+
+```{r, fig.height=12, fig.width=7}
+library("ggplot2")
+ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+```{r, fig.height=12, fig.width=7}
+library("ggplot2")
+
+## CHF sum per country
+wert_land <- summarise(group_by(elic_2016_4, Land), sum = sum(Wert))
+ordered_land <- wert_land$Land[order(wert_land$sum)]
+
+elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
+
+ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+
+But wait, why are there countries listed, that do not seem to have gotten anything
+from switzerland? Let's look at those:
+
+```{r}
+novalue  <- filter(.data = elic_2016_4, Wert == 0)
+str(novalue)
 ```
 
