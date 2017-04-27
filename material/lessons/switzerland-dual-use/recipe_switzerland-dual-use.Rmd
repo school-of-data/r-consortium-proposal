@@ -227,31 +227,61 @@ elic_2016_4 <- select(.data = elic_2016_3, -Art)
 str(elic_2016_4)
 ```
 
+```{r}
+table(elic_2016_4$Typ)
+```
 
 
 
 # Analyse
 
-Let's try making a first plot, which shows how much worth the goods were that 
-were exported to each country.
-
-```{r, fig.height=12, fig.width=7}
+For this section we'll produce some nice graphics with package `ggplot2`
+```{r}
 library("ggplot2")
-ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
-  geom_bar(stat = "identity") +
+```
+
+
+Let's try making a first plot, which shows how often Switzerland has exported
+to each country.
+```{r, fig.height=12, fig.width=7}
+
+# table(elic_2016_4$Land, useNA = "always")
+
+ggplot(elic_2016_4, aes(x = Land)) + 
+  geom_bar() +
   coord_flip()
 ```
 
-```{r, fig.height=12, fig.width=7}
-library("ggplot2")
+Let's sort the country in the plot by number of exports to it. `summarize()` helps
+us computing the number of exports, `order()` helps us getting the correct order,
+and `factor()` helps us define that we want the country levels according to a
+fixed order. `ggplot()` automatically understands that it should plot the factor
+levels in the order given.
 
-## CHF sum per country
+```{r, fig.height=12, fig.width=7}
+n_land <- summarise(group_by(elic_2016_4, Land), n = NROW(Land))
+ord <- order(n_land$n)
+str(ord)
+ordered_land <- n_land$Land[ord]
+str(ordered_land)
+elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
+str(elic_2016_4$Land)
+
+ggplot(elic_2016_4, aes(x = Land)) + 
+  geom_bar() +
+  coord_flip()
+```
+
+
+And now one, which shows how much worth the goods were that 
+were exported to each country. Again we want to have that in a specific order.
+
+```{r, fig.height=12, fig.width=7}
 wert_land <- summarise(group_by(elic_2016_4, Land), sum = sum(Wert))
 ordered_land <- wert_land$Land[order(wert_land$sum)]
-
 elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
 
-ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
+ggplot(elic_2016_4, aes(x = Land, y = Wert, fill = Typ)) + 
   geom_bar(stat = "identity") +
   coord_flip()
 ```
@@ -260,8 +290,24 @@ ggplot(elic_2016_4, aes(x = Land, y = Wert)) +
 But wait, why are there countries listed, that do not seem to have gotten anything
 from switzerland? Let's look at those:
 
-```{r}
+```{r, fig.height=2, fig.width=7}
+p <- ggplot(elic_2016_4, aes(x = Wert)) + stat_ecdf()
+p
+
+p + coord_cartesian(xlim = c(0, 10^5))
+
 novalue  <- filter(.data = elic_2016_4, Wert == 0)
 str(novalue)
 ```
+
+```{r, fig.height=2, fig.width=7}
+elic_2016_value <- filter(.data = elic_2016_4, Wert > 0)
+elic_2016_value$Land <- droplevels(elic_2016_value$Land)
+```
+```{r, fig.height=10, fig.width=7}
+ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
 
