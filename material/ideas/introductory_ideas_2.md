@@ -141,7 +141,7 @@ first few values
 ```{r}
 str(electoral2)
 ```
-Now you can see that your database has X variables, Y of wich are numeric and the others that are strings.  
+Now you can see that your database has X variables, Y of which are numeric and the others that are strings.  
     
 
 ### Cleaning the data
