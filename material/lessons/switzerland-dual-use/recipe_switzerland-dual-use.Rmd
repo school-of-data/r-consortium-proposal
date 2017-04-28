@@ -8,6 +8,16 @@ output: html_document
 knitr::opts_chunk$set(message = FALSE)
 ```
 
+TODO:
+- Beginning of the recipe:
+    + End result
+    + ingredients (packages, etc.)
+- Comment the code
+- Tell a story
+- Easy explanations
+- This is what we will do, this is what we are doing and this is what we've done
+
+----
 
 Dual-use goods are goods that can be used for civil and military purposes. 
 In Switzerland, these goods are governed with a special legislation – 
