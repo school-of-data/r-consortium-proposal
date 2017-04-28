@@ -55,8 +55,8 @@ We propose the following:
 
 ```{}
 └── switzerland-dual-use
-├── data_clean
-└── data_raw
+    ├── data_clean
+    └── data_raw
 ```
 
 
@@ -74,16 +74,16 @@ The data can be downloaded simply clicking on the data links on the
 Yor file structure should now look like this,
 ```{}
 └── switzerland-dual-use
-├── data_clean
-└── data_raw
-├── 1_Quartal_2016_Bewilligungen.xlsx
-├── 2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-├── 3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-├── 4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
-├── Stat_IP_2015_Bewilligungen.xlsx
-├── Statistik Dual-Use 2014 Elic.xlsx
-├── Statistik Dual-Use Jan. 2012 - Sep. 2014 Tracker.xlsx
-└── Statistik ML 2005-2013.xlsx
+    ├── data_clean
+    └── data_raw
+        ├── 1_Quartal_2016_Bewilligungen.xlsx
+        ├── 2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+        ├── 3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+        ├── 4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx
+        ├── Stat_IP_2015_Bewilligungen.xlsx
+        ├── Statistik Dual-Use 2014 Elic.xlsx
+        ├── Statistik Dual-Use Jan. 2012 - Sep. 2014 Tracker.xlsx
+        └── Statistik ML 2005-2013.xlsx
 ```
 i.e. you should have the dual-use Excel files corresponding to years 2012 to 2016.
 
@@ -227,8 +227,37 @@ elic_2016_4 <- select(.data = elic_2016_3, -Art)
 str(elic_2016_4)
 ```
 
+It looks like the variable `Typ` needs a bit of cleaning:
 ```{r}
-table(elic_2016_4$Typ)
+unique(elic_2016_4$Typ)
+```
+```{r}
+typ_from <- c("Chemikalien CWÜ",
+              "Dual Use Güter\r\nDual Use Güter",
+              "Chemikalien CWÜ\r\nDual Use Güter",
+              "Besondere militärische Güter\r\nBesondere militärische Güter",
+              "Chemikalien CWÜ\r\nBesondere militärische Güter",
+              "Dual Use Güter\r\nChemikalien CWÜ")
+typ_to <- c("Chemikalien",
+            "Dual Use Güter",
+            "Chemikalien",
+            "Besondere militärische Güter",
+            "Chemikalien",
+            "Dual Use Güter")
+
+
+change_charval <- function(x, from, to) {
+  
+  for(i in 1:length(from)) {
+    x[x == from[i]] <- to[i]
+  }
+  
+  return(x)
+}
+
+Typ <- change_charval(x = elic_2016_4$Typ, from = typ_from, to = typ_to)
+elic_2016_4$Typ_raw <- elic_2016_4$Typ
+elic_2016_4$Typ <- Typ
 ```
 
 
@@ -304,10 +333,51 @@ str(novalue)
 elic_2016_value <- filter(.data = elic_2016_4, Wert > 0)
 elic_2016_value$Land <- droplevels(elic_2016_value$Land)
 ```
-```{r, fig.height=10, fig.width=7}
-ggplot(elic_2016_4, aes(x = Land, y = Wert)) + 
+```{r, fig.width=9}
+elic_2016_4$Land2 <- elic_2016_4$Land
+highest10 <- tail(levels(elic_2016_4$Land), 10)
+
+levels(elic_2016_4$Land2)[!(levels(elic_2016_4$Land2) %in% highest10)] <- "andere"
+
+
+wert_typ <- summarise(group_by(elic_2016_4, Typ), sum = sum(Wert))
+ordered_typ <- wert_typ$Typ[order(wert_typ$sum)]
+elic_2016_4$Typ <- factor(elic_2016_4$Typ, levels = rev(ordered_typ))
+
+p_cntry <- ggplot(elic_2016_4, aes(x = Land2, y = Wert, fill = Typ)) + 
   geom_bar(stat = "identity") +
-  coord_flip()
+  coord_flip() +
+  xlab("Land")
+p_cntry
 ```
 
+```{r}
+p_cntry + theme_minimal()
+p_cntry + theme_bw()
+```
+
+With the `ggthemes` package you can go even more wild and try themes that are
+similar to the themes of famous newsrooms...
+```{r, fig.width=9}
+library("ggthemes")
+```
+...such as the Economist,...
+```{r, fig.width=9}
+p_cntry + theme_economist() + scale_fill_economist()
+```
+...FiveThirtyEight,...
+```{r, fig.width=9}
+my_palette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00")
+p_cntry + theme_fivethirtyeight() + scale_fill_manual(values = my_palette)
+```
+...or the Wall Street Journal.
+```{r, fig.width=9}
+p_cntry + theme_wsj() + scale_fill_wsj()
+```
+
+And if you want to really badly go back to an ungly 2003 Excel style, you 
+can do that too :)
+```{r}
+p_cntry + theme_excel()
+```
 
