@@ -351,6 +351,10 @@ p_cntry <- ggplot(elic_2016_4, aes(x = Land2, y = Wert, fill = Typ)) +
 p_cntry
 ```
 
+
+The cool thing with `ggplot2` for a newsroom is that you can have different 
+themes.
+
 ```{r}
 p_cntry + theme_minimal()
 p_cntry + theme_bw()
@@ -361,15 +365,18 @@ similar to the themes of famous newsrooms...
 ```{r, fig.width=9}
 library("ggthemes")
 ```
+
 ...such as the Economist,...
 ```{r, fig.width=9}
 p_cntry + theme_economist() + scale_fill_economist()
 ```
+
 ...FiveThirtyEight,...
 ```{r, fig.width=9}
 my_palette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00")
 p_cntry + theme_fivethirtyeight() + scale_fill_manual(values = my_palette)
 ```
+
 ...or the Wall Street Journal.
 ```{r, fig.width=9}
 p_cntry + theme_wsj() + scale_fill_wsj()
@@ -379,5 +386,18 @@ And if you want to really badly go back to an ungly 2003 Excel style, you
 can do that too :)
 ```{r}
 p_cntry + theme_excel()
+```
+
+Or you take a theme you like and modify it 
+(for colors, see http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf):
+```{r, fig.width=9}
+p_cntry + theme_classic() + 
+  theme(text = element_text(family = "AvantGarde"), 
+        legend.position = "bottom", 
+        panel.grid.major.x = element_line(color = "grey85"),
+        panel.grid.minor.x = element_line(color = "grey85"),
+        panel.background = element_rect(fill = "darkseagreen3"),
+        plot.background = element_rect(fill = "darkseagreen1"),
+        legend.background = element_rect(fill = "darkseagreen3"))
 ```
 
