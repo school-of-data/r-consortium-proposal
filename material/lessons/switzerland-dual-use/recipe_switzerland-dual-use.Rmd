@@ -388,16 +388,20 @@ can do that too :)
 p_cntry + theme_excel()
 ```
 
-Or you take a theme you like and modify it 
-(for colors, see http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf):
+Or you take a theme you like and modify it. 
+To create a School of Data themed plot you can use the following colors and
+fonts.
 ```{r, fig.width=9}
-p_cntry + theme_classic() + 
-  theme(text = element_text(family = "AvantGarde"), 
-        legend.position = "bottom", 
-        panel.grid.major.x = element_line(color = "grey85"),
-        panel.grid.minor.x = element_line(color = "grey85"),
-        panel.background = element_rect(fill = "darkseagreen3"),
-        plot.background = element_rect(fill = "darkseagreen1"),
-        legend.background = element_rect(fill = "darkseagreen3"))
+scodablue <- "#00AFF0" 
+scodagrey <- "#333333"
+scodagrey2 <- "#C9C9C9"
+scodacol <- c(scodablue, "#CCCC33", "#FF358B", "#59631E", "#29D9C2", "#C9C9C9")
+p_cntry + theme_classic(base_family = "Open Sans") + 
+  theme(axis.text = element_text(family = "Open Sans Bold", colour = scodagrey),  
+        panel.grid.major.x = element_line(color = scodagrey2),
+        panel.grid.minor.x = element_line(color = scodagrey2), 
+        line = element_line(colour = scodagrey),
+        legend.position = "bottom") +
+  scale_fill_manual(values = scodacol) 
 ```
 
