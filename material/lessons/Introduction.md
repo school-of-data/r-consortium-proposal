@@ -71,12 +71,13 @@ We are going to guide you in each step, don't worry, it won't be that hard. Let'
 You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. For this example, we are going to analyze the Brexit Referendum Results.  The results data, compiled by the Electoral Comission are available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/results.csv) 
 in .csv format 
 
-You also want to align it with a dataset which gives various demographic information about regions, in order to try various analyses. We are going to use 2 files: a .dta file (a filetype that you can not open in Excel) that is available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta)  and a .xlsx file available [here] (https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx). 
+You also want to align it with a dataset which gives various demographic information about regions, in order to try various analyses. We are going to use 2 files: a .dta file (a filetype that you can not open in Excel) that is available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta)  and a .xlsx file available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx). 
 
-Let's download those 2 files and store them in a folder called `electoral-data`.
+Let's download those 3 files and store them in a folder called `electoral-data`.
 Your must have 2 files in your folder:  
 `results.cvs`
-`demographics.dta`
+`demographics1.xlsx`
+`demographics2.dta`
 
 Now let's try reading in the data:
 1. Open your R editor (e.g. RStudio)
@@ -85,22 +86,22 @@ Now let's try reading in the data:
 setwd("/PATH/electoral-data")
 ```
 in the console.
-Then, we are going to need two specialised packages to read .dta files into R: `XML` and .
+Then, we are going to need two specialised packages to read .dta and .xlsx files into R: `readxl` and `foreign`.
 To install the packages run
 ```{r, eval=FALSE}
 install.packages("readxl")
-install.packages("XML")
+install.packages("foreign")
 ```
 To load the packages run
 ```{r}
 library("readxl") 
-library("XML") 
+library("foreign") 
 ```
 Now we can read the data: 
 ```{r}
-data1 <- xmlTreeParse(link to your data)
-data2 <2 read.csv("electoral2.xlsx", header = FALSE)
-data3 <- read_excel(path = "electoral3.xlsx")
+results <- read.csv("results.csv", header = FALSE)
+demographic1 <- read_excel("<Path to file>")
+demographic2 <- read.dta("<Path to file>")
 
 ```
 
@@ -116,12 +117,12 @@ Are you seeing the magic yet?
 > set your folder `setwd()` 
 > Install Packages `install.packages()`
 > Load Libraries `library()`
-> Read files `read.csv` `read_excel` `xmlTreeParse`
+> Read files `read.csv` `read_excel` `read.dta`
 
 
 > **Want to learn what other types of data can be imported into R**
 >   
-> Check this! https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo
+> [Check this!](https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo)
 >    
 
 Now let's move on with the analysis!
