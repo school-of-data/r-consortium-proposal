@@ -198,13 +198,25 @@ First, we are going to delete the variables that we don't need.  To do this we j
 ```{r}
 ##Let's list all the variables first
 names(mydata)
+
 ##Delete the variables we don't need
 mydata$new_id.x <- NULL
 mydata$area_name.x <- NULL
 mydata$new_id.y <- NULL
 mydata$area_name.y <- NULL
 ```
-...
+To analyze the data we also need the percentage of Remain, Leave and Rejected votes for each area.  We are going to create those three variables:
+```{r}
+mydata$perc_remain <- (mydata$Remain / mydata$Valid_Votes)*100
+mydata$perc_leave <- (mydata$Leave / mydata$Valid_Votes)*100
+mydata$perc_rejected <- (mydata$Rejected_Ballots / mydata$Votes_Cast)*100
+```
+Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that contains the percentage of residents in each area with professional occupations:
+```{r}
+mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
+```
+
+
 
 ### Analysing the data
 
