@@ -135,7 +135,7 @@ library("foreign")
 Now we can read the data: 
 ```{r}
 results <- read.csv("results.csv", header = TRUE)
-demographic1 <- read.xlsx(Path = "<Path to file>", sheetIndex = 1)
+demographic1 <- read.xlsx("<Path to file>", sheetIndex = 1)
 demographic2 <- read.dta("<Path to file>")
 
 ```
