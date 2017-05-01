@@ -142,15 +142,40 @@ first few values
 str()
 ```
 Now that you know the variables of your databases is time to start with the cleaning part.
+
+Metadata of the variables:
+-`id` Unique id
+`Region_Code` Region Code
+`Region` Region Name                 
+`area_code` Unique area code
+`Area` Area Name
+`Electorate` Number of registered voters             
+`ExpectedBallots` Expected ballots
+`VerifiedBallotPapers` Verified Ballots
+ `Pct_Turnout` Percentage of voter turnout.  VerifiedBallotPapers/Electorate
+`Votes_Cast` Casted Votes
+`Valid_Votes` Number of Valid votes
+`Remain` Number of "Remain" votes                
+`Leave` Number of "Leave" votes                   
+`Rejected_Ballots` Number of rejected ballots
+
     
 
 ### Cleaning the data
 Before you can start your analysis, you need a clean database with all the information.  Nevertheless you have the information scattered in 3 different data.frames, which you would like to combine.  
-To merge two or more datasets we need a common variable.  In the previous step, where we explored the data you can see that the three databases have the variable: area_code.  What we want to do is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.
-To do this we are going to use the `merge` function.
+
+Our objective is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.  But in order to do this, we need a common variable in all the datasets.  In the previous step, where we explored the data you can see that the three databases have the variable: `area_code`.  
+
+Now that we have a common variable, we are going to merge the databases using the `merge` function.
+
 Simply type:
+```{r}
+mydata <- merge(results, demographic1 by=c("area_code"))
+mydata <- merge(mydata, demographic2 by=c("area_code"))
+```
+Now you have a new dataframe with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
 
-
+First, we are going to delete the variables that we don't need
 ...
 
 #### Analysing the data
