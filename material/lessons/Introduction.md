@@ -301,34 +301,13 @@ But wait, we can understand better the data if we plot a correlation matrix. To 
 
 ...
 
-### Edit the visualisations based on feedback from your editor
+##
 
 ...
-
-### Send the final visualisation and article to the online editor
-
-...
-
-### Send another version of the visualisation to the print editor
 
 ...
 
 This was the last step! Are you convinced yet? If not, check out [other scenarios]() or [send us an angry tweet]()
 
-## Introductory steps - phase 2
+## Introductory steps - Recipes
 
-### recipe1: more advanced electoral map. 
-
-**context**: we're going to use the same dataset, and rerun the programme until the cleaning phase.    
-**relevant advantage**: keep track of the changes and allow reproducibility of the contents    
-steps: ....
-
-### recipe2 : analysing electoral map against other demographic data
-
-**context**: we're going to use a functionality of R which allows you to easily merge datasets, and automate the download of two different datasets to be merged!     
-**relevant advantage**:  ...
-
-### recipe3: when something goes wrong
-
-**context**: we're going to add another layer of information and use R code from your colleague, but we'll also have to fix a mistake in the code.    
-**relevant advantage**: ...
