@@ -283,7 +283,7 @@ you want to answer:
 - How does some demographic variables correlate with the leave and remain percentage of votes?
 
 First we need to tabulate the data:
-- 
+
 
 
 Now let's calculate some correlations:
@@ -296,8 +296,6 @@ But wait, we can understand better the data if we plot a correlation matrix. To 
 ...
 
 
-
-(in order to choose one or several angles, for example).
 
 ## Visualize
 
