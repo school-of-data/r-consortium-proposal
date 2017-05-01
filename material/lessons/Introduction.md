@@ -194,7 +194,7 @@ Simply type:
 mydata <- merge(results, demographic1 by=c("area_code"))
 mydata <- merge(mydata, demographic2 by=c("area_code"))
 ```
-Now you have a new dataframe with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
+Now you have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
 
 First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`.
 
