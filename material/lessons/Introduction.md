@@ -62,7 +62,7 @@ Only allows some types of files | Can load different kinds of files that can be 
 >   
 > how do I even know how write R code? I'm not a programmer! 
 >    
-> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutoriels]() or [existing projects]().
+> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutorials]() or [existing projects]().
 
 We are going to guide you in each step, don't worry, it won't be that hard. Let's start with getting the data.
 
@@ -86,10 +86,10 @@ Now let's try reading in the data:
 setwd("/PATH/electoral-data")
 ```
 in the console.
-Then, we are going to need two specialised packages to read .dta and .xlsx files into R: `readxl` and `foreign`.
+Then, we are going to need two specialised packages to read .dta and .xlsx files into R: `xlsx` and `foreign`.
 To install the packages run
 ```{r, eval=FALSE}
-install.packages("readxl")
+install.packages("xlsx")
 install.packages("foreign")
 ```
 To load the packages run
@@ -99,8 +99,8 @@ library("foreign")
 ```
 Now we can read the data: 
 ```{r}
-results <- read.csv("results.csv", header = FALSE)
-demographic1 <- read_excel("<Path to file>")
+results <- read.csv("results.csv", header = TRUE)
+demographic1 <- read.xlsx(Path = "<Path to file>", sheetIndex = 1)
 demographic2 <- read.dta("<Path to file>")
 
 ```
@@ -117,7 +117,7 @@ Are you seeing the magic yet?
 > set your folder `setwd()` 
 > Install Packages `install.packages()`
 > Load Libraries `library()`
-> Read files `read.csv` `read_excel` `read.dta`
+> Read files `read.csv` `read.xlsx` `read.dta`
 
 
 > **Want to learn what other types of data can be imported into R**
@@ -132,17 +132,24 @@ Now that you have imported your data into R, it's time to start exploring it.  H
 
 - `names()` shows the collumn names of the data frame
 ```{r}
-names(electoral2)
+names(results)
+names(demographic1)
+names(demographic2)
 ```
 - `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the
 first few values
 ```{r}
-str(electoral2)
+str()
 ```
-Now you can see that your database has X variables, Y of which are numeric and the others that are strings.  
+Now that you know the variables of your databases is time to start with the cleaning part.
     
 
 ### Cleaning the data
+Before you can start your analysis, you need a clean database with all the information.  Nevertheless you have the information scattered in 3 different data.frames, which you would like to combine.  
+To merge two or more datasets we need a common variable.  In the previous step, where we explored the data you can see that the three databases have the variable: area_code.  What we want to do is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.
+To do this we are going to use the `merge` function.
+Simply type:
+
 
 ...
 
