@@ -297,15 +297,31 @@ First we need to tabulate the data:
 ##How many areas voted to Remain or leave
 
 ```
-You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table:
+You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package:
 ```{r}
-##Tab Region result
+install.packages("gmodels")
+library("gmodels") 
+CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=FALSE, prop.t=FALSE, prop.chisq=FALSE)
+##See that we set the prop.r = TRUE in order to show row percetages.  If we wanted for instance to show column percentages
+we can set prop.c=TRUE
 ```
 With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland
-and Northern Ireland.  
+and Northern Ireland.  This could be interesting for your story!
 
+We can also calculate some summary statistics for the `perc_remain` variable:
+```{r}
+summary(mydata$perc_remain)
+table(mydata$Remain_cat)
+```
+You can see that only one area had a very low vote to Remain with 24.4% of the vote.
 
+We can also tabulate the 10 areas with the highest Leave vote:
+```{r}
+CODE
+```
+So far you have answered some of your questions: the majority of areas in the UK voted to leave the EU.  London, Scotland and Northern Ireland voted by majority to Remain.  
 
+So it's time to go deeper in the analysis.  
 
 
 Now let's calculate some correlations:
