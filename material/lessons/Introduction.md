@@ -375,11 +375,34 @@ CODE
 ```
 So far you have answered some of your questions: the majority of areas in the UK voted to leave the EU.  London, Scotland and Northern Ireland voted by majority to Remain.  
 
-So it's time to go deeper in the analysis.  
+So it's time to go deeper in the analysis.  We can calculate some correlations between the leave vote and some of the demographic variables.  The hyphotesis is that the regions with older population, less educated residents and less diverse voted to Leave the EU.  
 
-
-Now let's calculate some correlations:
-
+Now let's calculate some correlations.  To calculate a correlation between two variables just use the fuction `cor()` and plot it using `plot(x, y)`:
+```{r}
+cor(mydata$perc_leave, mydata$no_educ)
+plot(mydata$perc_leave, mydata$no_educ)
+```
+To see if our correlation is statistically significant we can use the `rcorr()` function in the `Hmsc` package, that shows the pvalue:
+```{r}
+install.packages("Hmsc")
+library("Hmsc")
+rcorr(mydata$perc_leave, mydata$no_educ)
+```
+To calculate a correlation matrix, let's create a new dataframe only with the varaibles we need and then use the `cor()` function again:
+```{r}
+datacor <- data.frame(mydata$perc_leave, mydata$perc_remain, mydata$median_age, mydata$born_uk, 
+mydata$no_educ, mydata$higher_educ, mydata$prof_ocu)
+cor(datacor)
+                   mydata.perc_leave mydata.perc_remain mydata.median_age mydata.born_uk mydata.no_educ mydata.higher_educ mydata.prof_ocu
+mydata.perc_leave          1.0000000         -1.0000000         0.3344219      0.4781973      0.5563877         -0.7708179      -0.5849986
+mydata.perc_remain        -1.0000000          1.0000000        -0.3344219     -0.4781973     -0.5563877          0.7708179       0.5849986
+mydata.median_age          0.3344219         -0.3344219         1.0000000      0.7368753      0.1892295         -0.2176862      -0.1497925
+mydata.born_uk             0.4781973         -0.4781973         0.7368753      1.0000000      0.4524213         -0.5447494      -0.4035716
+mydata.no_educ             0.5563877         -0.5563877         0.1892295      0.4524213      1.0000000         -0.8812980      -0.9095549
+mydata.higher_educ        -0.7708179          0.7708179        -0.2176862     -0.5447494     -0.8812980          1.0000000       0.8868166
+mydata.prof_ocu           -0.5849986          0.5849986        -0.1497925     -0.4035716     -0.9095549          0.8868166       1.0000000
+```
+You can see that there's a high negative correlation between the leave vote and the areas with a high number of residents with higher education and professional occupations.  
 
 But wait, we can understand better the data if we plot a correlation matrix. To do this..... 
 
