@@ -1,4 +1,4 @@
-## Introductory steps - phase 1
+# Introductory steps - phase 1
 
 The introductory steps are a guided process through which:
 
@@ -6,7 +6,7 @@ The introductory steps are a guided process through which:
 * we introduce the reader to the basics of R, iterating on each notion learned in the previous step
 * we contextualise the step within a data-driven story writing workflow.
 
-### Main intro
+## Main intro
 _interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations_
 
 Are you a journalist?      
@@ -45,7 +45,7 @@ ____ -> Yes -> No
      | Challenge accepted |    
       --------------------    
 
-### The context
+## The context
 _Here we set up the story that will be used to contextualise all actions in the tutorial_
 
 A referendum in your country is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
@@ -66,7 +66,7 @@ Only allows some types of files | Can load different kinds of files that can be 
 
 We are going to guide you in each step, don't worry, it won't be that hard. Let's start with getting the data.
 
-### Getting the data
+## Getting the data
 
 You stretch your arms, grab a coffee, and off you go! First, you have to find the electoral data. For this example, we are going to analyze the Brexit Referendum Results.  The results data, compiled by the Electoral Comission are available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/results.csv) 
 in .csv format 
@@ -150,10 +150,10 @@ Are you seeing the magic yet?
 
 > **Let's review the commands we learned in this step:**
 >
-> set your folder `setwd()` 
-> Install Packages `install.packages()`
-> Load Libraries `library()`
-> Read files `read.csv` `read.xlsx` `read.dta`
+- set your folder `setwd()` 
+- Install Packages `install.packages()`
+- Load Libraries `library()`
+- Read files `read.csv` `read.xlsx` `read.dta`
 
 
 > **Want to learn what other types of data can be imported into R**
@@ -163,7 +163,7 @@ Are you seeing the magic yet?
 
 Now let's move on with the analysis!
 
-### Verifying the data
+## Verifying the data
 Now that you have imported your data into R, it's time to start exploring it.  Here are some useful commands:
 
 - `names()` shows the collumn names of the data frame
@@ -182,7 +182,7 @@ str()
 Now that you know the variables of your databases is time to start with the cleaning part.
     
 
-### Cleaning the data
+## Cleaning the data
 Before you can start your analysis, you need a clean database with all the information.  Nevertheless you have the information scattered in 3 different data.frames, which you would like to combine.  
 
 Our objective is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.  But in order to do this, we need a common variable in all the datasets.  In the previous step, where we explored the data you can see that the three databases have the variable: `area_code`.  
@@ -220,14 +220,16 @@ mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
 
-```{r} HELP: Create a new variable Remain_cat with the following conditios, if perc_remain:
+```{r} 
+HELP: Create a new variable Remain_cat with the following conditios, if perc_remain:
 <25 = 1
 >=25 & <50 = 2
 >=50 & <75 = 3
 >=75 = 4
 ```
 Now we can add labels to the variable `Remain_cat`
-```{r} HELP:
+```{r} 
+HELP:
 1= "very low"
 2=  "low"
 3= "high"
@@ -236,16 +238,20 @@ Now we can add labels to the variable `Remain_cat`
 
 We are almost done, don't give up just yet!  Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
 
-```{r} HELP Heidi: What I want to do is to generate new variables that sums all the observations of a variable by region in Stata the command would be for example: 
-egen newvar = total(Valid_Votes), by(Region_Code), this would generate a new variable that has all the Valid votes for each region._
+```{r} 
+HELP Heidi: What I want to do is to generate new variables that sums all the observations 
+of a variable by region in Stata the command would be for example: 
+egen newvar = total(Valid_Votes), by(Region_Code), this would generate a new variable that has all the Valid votes for each region.
 The new variables would be:
 valid_region  Valid votes by region
 leave_region  leave votes by region
 remain_region remain votes by region
 
+##Calculate the percentages
 mydata$perc_remain_region <- (mydata$remain_region / mydata$valid_region)*100
 mydata$perc_leave_region <- (mydata$leave_region/ mydata$valid_region)*100
 ```
+_Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_
 
 Now that you have cleaned your data, you're ready to start the analysis! 
 
@@ -265,18 +271,34 @@ ____ yes, R won my heart
 > Create new variables
 > Delete variables
 > Create new categorical variables and asign labels
-> The `dplyr` package
 
 
-### Analysing the data
+## Analyze
+Now let's start with the fun part.  You need to write a story based on those electoral results, and you already have some questions 
+you want to answer:
+- Which areas voted to remain or to leave?
+- Which regions? 
+- Which were the more divided regions
+- How does some demographic variables correlate with the leave and remain percentage of votes?
+
+First we need to tabulate the data:
+- 
+
+
+Now let's calculate some correlations:
+
+
+But wait, we can understand better the data if we plot a correlation matrix. To do this..... 
+
+
 
 ...
 
-### Showing analysis to your colleagues
+
 
 (in order to choose one or several angles, for example).
 
-### Try various visualisations
+## Visualize
 
 ...
 
