@@ -402,9 +402,12 @@ mydata.no_educ             0.5563877         -0.5563877         0.1892295      0
 mydata.higher_educ        -0.7708179          0.7708179        -0.2176862     -0.5447494     -0.8812980          1.0000000       0.8868166
 mydata.prof_ocu           -0.5849986          0.5849986        -0.1497925     -0.4035716     -0.9095549          0.8868166       1.0000000
 ```
-You can see that there's a high negative correlation between the leave vote and the areas with a high number of residents with higher education and professional occupations.  
+You can see that there's a positive correlation between the Remain vote and the areas with a high number of residents with higher education and professional occupations.  On the contrary, there seem to be a positive correlation between the areas with a higher proportion of no educated residents and the leave vote. 
 
-But wait, we can understand better the data if we plot a correlation matrix. To do this..... 
+*Don't forget: Correlation DOES NOT imply causation!!
+
+But wait, we can understand better the data if we plot a correlation matrix.  To do that we need the package `ggcorrplot` :
+
 
 
 
