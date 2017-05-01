@@ -296,6 +296,15 @@ First we need to tabulate the data:
 ```{r}
 ##How many areas voted to Remain or leave
 
+```
+You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table:
+```{r}
+##Tab Region result
+```
+With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland
+and Northern Ireland.  
+
+
 
 
 
