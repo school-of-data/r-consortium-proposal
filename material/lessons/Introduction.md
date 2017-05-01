@@ -73,6 +73,41 @@ in .csv format
 
 You also want to align it with a dataset which gives various demographic information about regions, in order to try various analyses. We are going to use 2 files: a .dta file (a filetype that you can not open in Excel) that is available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta)  and a .xlsx file available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx). 
 
+Metadata: 
+
+_Results_
+
+- `id` Unique id
+- `Region_Code` Region Code
+- `Region` Region Name                 
+- `area_code` Unique area code
+- `Area` Area Name
+- `Electorate` Number of registered voters             
+- `ExpectedBallots` Expected ballots
+- `VerifiedBallotPapers` Verified Ballots
+- `Pct_Turnout` Percentage of voter turnout.  VerifiedBallotPapers/Electorate
+- `Votes_Cast` Casted Votes
+- `Valid_Votes` Number of Valid votes
+- `Remain` Number of "Remain" votes                
+- `Leave` Number of "Leave" votes                   
+- `Rejected_Ballots` Number of rejected ballots
+
+_Demographics1_
+- `new_id` unique Id
+- `area_code` Unique area code
+- `area_name` Area Name
+- `median_age` Median age of residents
+- `prof_ocu_1`  Percentage of residents with higher and intermediate professional occupations 
+- `prof_ocu_2`  Percentage of residents with junior professional occupations 
+
+_Demographics1_
+- `new_id` unique Id
+- `area_code` Unique area code
+- `area_name` Area Name
+- `born_uk` Percentage of residents born in the UK
+- `no_educ` Percentage of residents with no formal education
+- `higher_educ` Percentage of residents with higher education
+
 Let's download those 3 files and store them in a folder called `electoral-data`.
 Your must have 2 files in your folder:  
 `results.cvs`
@@ -142,24 +177,6 @@ first few values
 str()
 ```
 Now that you know the variables of your databases is time to start with the cleaning part.
-
-Metadata of the variables:
-
-- `id` Unique id
-- `Region_Code` Region Code
-- `Region` Region Name                 
-- `area_code` Unique area code
-- `Area` Area Name
-`Electorate` Number of registered voters             
-`ExpectedBallots` Expected ballots
-`VerifiedBallotPapers` Verified Ballots
- `Pct_Turnout` Percentage of voter turnout.  VerifiedBallotPapers/Electorate
-`Votes_Cast` Casted Votes
-`Valid_Votes` Number of Valid votes
-`Remain` Number of "Remain" votes                
-`Leave` Number of "Leave" votes                   
-`Rejected_Ballots` Number of rejected ballots
-
     
 
 ### Cleaning the data
