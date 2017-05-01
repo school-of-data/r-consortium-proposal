@@ -267,10 +267,10 @@ ____ yes, R won my heart
 
 > **Let's review what we learned in this step:**
 >
-> Merge datasets `merge()` 
-> Create new variables
-> Delete variables
-> Create new categorical variables and asign labels
+- Merge datasets `merge()` 
+- Create new variables
+- Delete variables
+- Create new categorical variables and asign labels
 
 
 ## Analyze
