@@ -141,6 +141,7 @@ demographic2 <- read.dta("<Path to file>")
 ```
 
 See? That was easy! Now you have your data loaded into the program and can start working.  
+
 Are you seeing the magic yet? 
 * A simple line of code can replace cumbersome manual operations that you have to do in Excel to import the data
 * R loads all sort of file formats, and doesn't complain
@@ -176,6 +177,8 @@ first few values
 ```{r}
 str()
 ```
+- `view()` shows your dataframe with all the variables and observations
+
 Now that you know the variables of your databases is time to start with the cleaning part.
     
 
@@ -215,7 +218,54 @@ Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that 
 ```{r}
 mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
+We can also create a new categorical variable that allows to group the Remain vote in different categories:
 
+```{r} HELP: Create a new variable Remain_cat with the following conditios, if perc_remain:
+<25 = 1
+>=25 & <50 = 2
+>=50 & <75 = 3
+>=75 = 4
+```
+Now we can add labels to the variable `Remain_cat`
+```{r} HELP:
+1= "very low"
+2=  "low"
+3= "high"
+4= "very high"
+```
+
+We are almost done, don't give up just yet!  Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
+
+```{r} HELP Heidi: What I want to do is to generate new variables that sums all the observations of a variable by region in Stata the command would be for example: 
+egen newvar = total(Valid_Votes), by(Region_Code), this would generate a new variable that has all the Valid votes for each region._
+The new variables would be:
+valid_region  Valid votes by region
+leave_region  leave votes by region
+remain_region remain votes by region
+
+mydata$perc_remain_region <- (mydata$remain_region / mydata$valid_region)*100
+mydata$perc_leave_region <- (mydata$leave_region/ mydata$valid_region)*100
+```
+
+Now that you have cleaned your data, you're ready to start the analysis! 
+
+**Are you convinced yet that R is worth your time?**     
+____ not really    
+____ hmmm, I need to see more to decide     
+____ yes, R won my heart  
+
+**Let's list some advantages of R so far:** 
+* With simple lines of code you can rearrange your data, create new variables, delete observations
+* Something went wrong? Don't worry, just fix your code, run it and the error goes away easily
+* You can keep your original datafiles in the workspace if you need to review them.  
+
+> **Let's review what we learned in this step:**
+>
+> Merge datasets `merge()` 
+> Create new variables
+> Delete variables
+> Create new categorical variables and asign labels
+> The `dplyr` package
 
 
 ### Analysing the data
