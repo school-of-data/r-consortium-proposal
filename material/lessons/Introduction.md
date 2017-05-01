@@ -94,7 +94,7 @@ install.packages("foreign")
 ```
 To load the packages run
 ```{r}
-library("readxl") 
+library("xlsx") 
 library("foreign") 
 ```
 Now we can read the data: 
