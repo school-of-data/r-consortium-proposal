@@ -218,35 +218,32 @@ Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that 
 ```{r}
 mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
-We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain:
+We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain.  to do this we are going to use the `ifelse()` function:
 ```{r} 
-HELP: Create a new variable Result with the following conditios, if perc_remain:
-<50 = 1
->=50 = 2
+##This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, and 0 otherwise
+
+mydata$result <- ifelse(mydata$perc_remain<50, 1, 0)
 ```
 Now we can add labels to the variable `Result`
 ```{r} 
-HELP:
-1= "Leave"
-2=  "Remain"
+mydata$result <- factor(mydata$result,
+                    levels = c(1,0),
+                    labels = c("leave", "remain"))
 ```
 
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
 
 ```{r} 
-HELP: Create a new variable Remain_cat with the following conditios, if perc_remain:
-<25 = 1
->=25 & <50 = 2
->=50 & <75 = 3
->=75 = 4
+mydata$Remain_cat[mydata$perc_remain<25]<- 1
+mydata$Remain_cat[mydata$perc_remain>=25 & mydata$perc_remain<50]<- 2
+mydata$Remain_cat[mydata$perc_remain>=50 & mydata$perc_remain<75]<- 3
+mydata$Remain_cat[mydata$perc_remain>=75]<- 4
 ```
 Now we can add labels to the variable `Remain_cat`
 ```{r} 
-HELP:
-1= "very low"
-2=  "low"
-3= "high"
-4= "very high"
+mydata$Remain_cat <- factor(mydata$Remain_cat,
+                    levels = c(1,2, 3, 4),
+                    labels = c("very low", "low", "high", "very high"))
 ```
 
 We are almost done, don't give up just yet!  Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
@@ -296,6 +293,9 @@ you want to answer:
 - How does some demographic variables correlate with the leave and remain percentage of votes?
 
 First we need to tabulate the data:
+```{r}
+##How many areas voted to Remain or leave
+
 
 
 
