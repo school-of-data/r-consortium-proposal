@@ -241,7 +241,8 @@ We are almost done, don't give up just yet!  Now to finish we want to aggregate 
 ```{r} 
 HELP Heidi: What I want to do is to generate new variables that sums all the observations 
 of a variable by region in Stata the command would be for example: 
-egen newvar = total(Valid_Votes), by(Region_Code), this would generate a new variable that has all the Valid votes for each region.
+egen newvar = total(Valid_Votes), by(Region_Code), 
+this would generate a new variable that has all the Valid votes for each region.
 The new variables would be:
 valid_region  Valid votes by region
 leave_region  leave votes by region
