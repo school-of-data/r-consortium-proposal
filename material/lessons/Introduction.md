@@ -166,6 +166,8 @@ Now let's move on with the analysis!
 ## Verifying the data
 Now that you have imported your data into R, it's time to start exploring it.  Here are some useful commands:
 
+- `view()` shows your dataframe with all the variables and observations
+
 - `names()` shows the collumn names of the data frame
 ```{r}
 names(results)
@@ -177,7 +179,6 @@ first few values
 ```{r}
 str()
 ```
-- `view()` shows your dataframe with all the variables and observations
 
 Now that you know the variables of your databases is time to start with the cleaning part.
     
@@ -187,14 +188,14 @@ Before you can start your analysis, you need a clean database with all the infor
 
 Our objective is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.  But in order to do this, we need a common variable in all the datasets.  In the previous step, where we explored the data you can see that the three databases have the variable: `area_code`.  
 
-Now that we have a common variable, we are going to merge the databases using the `merge` function.
+That common variable will allow us to merge the databases using the `merge` function.
 
 Simply type:
 ```{r}
 mydata <- merge(results, demographic1 by=c("area_code"))
 mydata <- merge(mydata, demographic2 by=c("area_code"))
 ```
-Now you have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
+You now have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
 
 First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`.
 
@@ -220,7 +221,8 @@ mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
 We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain.  to do this we are going to use the `ifelse()` function:
 ```{r} 
-##This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, and 0 otherwise
+##This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
+and 0 otherwise
 
 mydata$result <- ifelse(mydata$perc_remain<50, 1, 0)
 ```
@@ -285,25 +287,72 @@ ____ yes, R won my heart
 
 
 ## Analyze
-Now let's start with the fun part.  You need to write a story based on those electoral results, and you already have some questions 
+Let's start with the fun part.  You need to write a story based on those electoral results, and you already have some questions 
 you want to answer:
 - Which areas voted to remain or to leave?
 - Which regions? 
-- Which were the more divided regions
+- Which were the more divided regions?
 - How does some demographic variables correlate with the leave and remain percentage of votes?
 
 First we need to tabulate the data:
 ```{r}
 ##How many areas voted to Remain or leave
-
+table(mydata$result)
+prop.table((table(mydata$result)))
+   leave    remain 
+0.6902887 0.3097113 
 ```
 You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package:
 ```{r}
 install.packages("gmodels")
 library("gmodels") 
-CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=FALSE, prop.t=FALSE, prop.chisq=FALSE)
+CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected=FALSE, 
+prop.r=TRUE, prop.c=FALSE, prop.t=FALSE, prop.chisq=FALSE)
+
 ##See that we set the prop.r = TRUE in order to show row percetages.  If we wanted for instance to show column percentages
-we can set prop.c=TRUE
+we can set prop.c=TRUE 
+Total Observations in Table:  381 
+                         | mydata$result 
+           mydata$Region |     leave |    remain | Row Total | 
+-------------------------|-----------|-----------|-----------|
+                    East |        42 |         5 |        47 | 
+                         |     0.894 |     0.106 |     0.123 | 
+-------------------------|-----------|-----------|-----------|
+           East Midlands |        38 |         2 |        40 | 
+                         |     0.950 |     0.050 |     0.105 | 
+-------------------------|-----------|-----------|-----------|
+                  London |         5 |        28 |        33 | 
+                         |     0.152 |     0.848 |     0.087 | 
+-------------------------|-----------|-----------|-----------|
+              North East |        11 |         1 |        12 | 
+                         |     0.917 |     0.083 |     0.031 | 
+-------------------------|-----------|-----------|-----------|
+              North West |        32 |         7 |        39 | 
+                         |     0.821 |     0.179 |     0.102 | 
+-------------------------|-----------|-----------|-----------|
+        Northern Ireland |         0 |         1 |         1 | 
+                         |     0.000 |     1.000 |     0.003 | 
+-------------------------|-----------|-----------|-----------|
+                Scotland |         0 |        32 |        32 | 
+                         |     0.000 |     1.000 |     0.084 | 
+-------------------------|-----------|-----------|-----------|
+              South East |        43 |        24 |        67 | 
+                         |     0.642 |     0.358 |     0.176 | 
+-------------------------|-----------|-----------|-----------|
+              South West |        28 |         9 |        37 | 
+                         |     0.757 |     0.243 |     0.097 | 
+-------------------------|-----------|-----------|-----------|
+                   Wales |        17 |         5 |        22 | 
+                         |     0.773 |     0.227 |     0.058 | 
+-------------------------|-----------|-----------|-----------|
+           West Midlands |        29 |         1 |        30 | 
+                         |     0.967 |     0.033 |     0.079 | 
+-------------------------|-----------|-----------|-----------|
+Yorkshire and The Humber |        18 |         3 |        21 | 
+                         |     0.857 |     0.143 |     0.055 | 
+-------------------------|-----------|-----------|-----------|
+            Column Total |       263 |       118 |       381 | 
+-------------------------|-----------|-----------|-----------|
 ```
 With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland
 and Northern Ireland.  This could be interesting for your story!
@@ -312,6 +361,11 @@ We can also calculate some summary statistics for the `perc_remain` variable:
 ```{r}
 summary(mydata$perc_remain)
 table(mydata$Remain_cat)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  24.44   39.65   45.73   46.88   52.85   78.62 
+  
+  very low       low      high very high 
+        1       262       112         6 
 ```
 You can see that only one area had a very low vote to Remain with 24.4% of the vote.
 
