@@ -144,11 +144,12 @@ str()
 Now that you know the variables of your databases is time to start with the cleaning part.
 
 Metadata of the variables:
--`id` Unique id
-`Region_Code` Region Code
-`Region` Region Name                 
-`area_code` Unique area code
-`Area` Area Name
+
+- `id` Unique id
+- `Region_Code` Region Code
+- `Region` Region Name                 
+- `area_code` Unique area code
+- `Area` Area Name
 `Electorate` Number of registered voters             
 `ExpectedBallots` Expected ballots
 `VerifiedBallotPapers` Verified Ballots
