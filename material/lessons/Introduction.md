@@ -218,6 +218,19 @@ Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that 
 ```{r}
 mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
+We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain:
+```{r} 
+HELP: Create a new variable Result with the following conditios, if perc_remain:
+<50 = 1
+>=50 = 2
+```
+Now we can add labels to the variable `Result`
+```{r} 
+HELP:
+1= "Leave"
+2=  "Remain"
+```
+
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
 
 ```{r} 
