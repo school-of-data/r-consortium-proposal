@@ -100,7 +100,7 @@ _Demographics1_
 - `prof_ocu_1`  Percentage of residents with higher and intermediate professional occupations 
 - `prof_ocu_2`  Percentage of residents with junior professional occupations 
 
-_Demographics1_
+_Demographics2_
 - `new_id` unique Id
 - `area_code` Unique area code
 - `area_name` Area Name
