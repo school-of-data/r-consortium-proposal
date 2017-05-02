@@ -192,8 +192,8 @@ That common variable will allow us to merge the databases using the `merge` func
 
 Simply type:
 ```{r}
-mydata <- merge(results, demographic1 by=c("area_code"))
-mydata <- merge(mydata, demographic2 by=c("area_code"))
+mydata <- merge(results, demographic1, by=c("area_code"))
+mydata <- merge(mydata, demographic2, by=c("area_code"))
 ```
 You now have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
 
@@ -384,7 +384,7 @@ plot(mydata$perc_leave, mydata$no_educ)
 ```
 To see if our correlation is statistically significant we can use the `rcorr()` function in the `Hmsc` package, that shows the pvalue:
 ```{r}
-install.packages("Hmsc")
+install.packages("Hmisc")
 library("Hmsc")
 rcorr(mydata$perc_leave, mydata$no_educ)
 ```
@@ -392,22 +392,34 @@ To calculate a correlation matrix, let's create a new dataframe only with the va
 ```{r}
 datacor <- data.frame(mydata$perc_leave, mydata$perc_remain, mydata$median_age, mydata$born_uk, 
 mydata$no_educ, mydata$higher_educ, mydata$prof_ocu)
+
+#Lets rename the variables, to have shorter names
+library("plyr")
+datacor <- rename(datacor,c("mydata.perc_leave" = "leave", "mydata.perc_remain" = "remain", 
+"mydata.median_age"="age", "mydata.born_uk" = "bornUk", "mydata.no_educ" = "no_educ", 
+"mydata.higher_educ" = "h_educ","mydata.prof_ocu" ="prof_ocu" ))
+
+#Lets calculate the correlation matrix
 cor(datacor)
-                   mydata.perc_leave mydata.perc_remain mydata.median_age mydata.born_uk mydata.no_educ mydata.higher_educ mydata.prof_ocu
-mydata.perc_leave          1.0000000         -1.0000000         0.3344219      0.4781973      0.5563877         -0.7708179      -0.5849986
-mydata.perc_remain        -1.0000000          1.0000000        -0.3344219     -0.4781973     -0.5563877          0.7708179       0.5849986
-mydata.median_age          0.3344219         -0.3344219         1.0000000      0.7368753      0.1892295         -0.2176862      -0.1497925
-mydata.born_uk             0.4781973         -0.4781973         0.7368753      1.0000000      0.4524213         -0.5447494      -0.4035716
-mydata.no_educ             0.5563877         -0.5563877         0.1892295      0.4524213      1.0000000         -0.8812980      -0.9095549
-mydata.higher_educ        -0.7708179          0.7708179        -0.2176862     -0.5447494     -0.8812980          1.0000000       0.8868166
-mydata.prof_ocu           -0.5849986          0.5849986        -0.1497925     -0.4035716     -0.9095549          0.8868166       1.0000000
+              leave     remain        age     bornUk    no_educ     h_educ   prof_ocu
+leave     1.0000000 -1.0000000  0.3344219  0.4781973  0.5563877 -0.7708179 -0.5849986
+remain   -1.0000000  1.0000000 -0.3344219 -0.4781973 -0.5563877  0.7708179  0.5849986
+age       0.3344219 -0.3344219  1.0000000  0.7368753  0.1892295 -0.2176862 -0.1497925
+bornUk    0.4781973 -0.4781973  0.7368753  1.0000000  0.4524213 -0.5447494 -0.4035716
+no_educ   0.5563877 -0.5563877  0.1892295  0.4524213  1.0000000 -0.8812980 -0.9095549
+h_educ   -0.7708179  0.7708179 -0.2176862 -0.5447494 -0.8812980  1.0000000  0.8868166
+prof_ocu -0.5849986  0.5849986 -0.1497925 -0.4035716 -0.9095549  0.8868166  1.0000000
 ```
 You can see that there's a positive correlation between the Remain vote and the areas with a high number of residents with higher education and professional occupations.  On the contrary, there seem to be a positive correlation between the areas with a higher proportion of no educated residents and the leave vote. 
 
 *Don't forget: Correlation DOES NOT imply causation!!
 
-But wait, we can understand better the data if we plot a correlation matrix.  To do that we need the package `ggcorrplot` :
-
+But wait, we can understand better the data if we plot a correlation matrix.  To do that we need the package `GGally` and the package `ggplot2`:
+```{r}
+library("ggplot2")
+library("GGally")
+ggpairs(datacor) 
+```
 
 
 
