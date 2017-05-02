@@ -423,7 +423,11 @@ ggpairs(datacor)
 ```
 ![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png)
 
+Now you h ave some interesting insishts and can start writing your story! But wait! how about we try some nice visualizations for the data?
 
+> **Let's review the commands we learned in this step:**
+- ....
+-.....
 ...
 
 
