@@ -419,9 +419,9 @@ But wait, we can understand better the data if we plot a correlation matrix.  To
 library("ggplot2")
 library("GGally")
 ggpairs(datacor) 
-![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png)
-```
 
+```
+![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png)
 
 
 ...
