@@ -54,7 +54,7 @@ Even though you normally work with spreadsheets, you want to try R.  Here are a 
 Excel | R 
 --- | ---
 It's a "point and click program" | You write a functions directly in the R interface and R does all the magic
-If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated.  rite once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
+If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated. Write once, reuse several times: Not only can you update your code easily, but you can easily share it with other projects.
 Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
 .... | .....
 
@@ -109,7 +109,7 @@ _Demographics2_
 - `higher_educ` Percentage of residents with higher education
 
 Let's download those 3 files and store them in a folder called `electoral-data`.
-Your must have 2 files in your folder:  
+You must have 3 files in your folder: 
 `results.cvs`
 `demographics1.xlsx`
 `demographics2.dta`
@@ -135,8 +135,8 @@ library("foreign")
 Now we can read the data: 
 ```{r}
 results <- read.csv("results.csv", header = TRUE)
-demographic1 <- read.xlsx("<Path to file>", sheetIndex = 1)
-demographic2 <- read.dta("<Path to file>")
+demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
+demographic2 <- read.dta("demographics2.dta")
 
 ```
 
@@ -177,7 +177,7 @@ names(demographic2)
 - `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the
 first few values
 ```{r}
-str()
+str(results)
 ```
 
 Now that you know the variables of your databases is time to start with the cleaning part.
@@ -221,8 +221,8 @@ mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
 We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain.  to do this we are going to use the `ifelse()` function:
 ```{r} 
-##This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
-and 0 otherwise
+## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
+## and 0 otherwise
 
 mydata$result <- ifelse(mydata$perc_remain<50, 1, 0)
 ```
@@ -251,18 +251,18 @@ mydata$Remain_cat <- factor(mydata$Remain_cat,
 We are almost done, don't give up just yet!  Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
 
 ```{r} 
-HELP Heidi: What I want to do is to generate new variables that sums all the observations 
-of a variable by region in Stata the command would be for example: 
-egen newvar = total(Valid_Votes), by(Region_Code), 
-this would generate a new variable that has all the Valid votes for each region.
-The new variables would be:
-valid_region  Valid votes by region
-leave_region  leave votes by region
-remain_region remain votes by region
+# HELP Heidi: What I want to do is to generate new variables that sums all the observations 
+# of a variable by region in Stata the command would be for example: 
+# egen newvar = total(Valid_Votes), by(Region_Code), 
+# this would generate a new variable that has all the Valid votes for each region.
+# The new variables would be:
+# valid_region  Valid votes by region
+# leave_region  leave votes by region
+# remain_region remain votes by region
 
-##Calculate the percentages
-mydata$perc_remain_region <- (mydata$remain_region / mydata$valid_region)*100
-mydata$perc_leave_region <- (mydata$leave_region/ mydata$valid_region)*100
+# ##Calculate the percentages
+# mydata$perc_remain_region <- (mydata$remain_region / mydata$valid_region)*100
+# mydata$perc_leave_region <- (mydata$leave_region/ mydata$valid_region)*100
 ```
 _Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_
 
@@ -299,60 +299,60 @@ First we need to tabulate the data:
 ##How many areas voted to Remain or leave
 table(mydata$result)
 prop.table((table(mydata$result)))
-   leave    remain 
-0.6902887 0.3097113 
+#    leave    remain 
+# 0.6902887 0.3097113 
 ```
 You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package:
 ```{r}
-install.packages("gmodels")
+# install.packages("gmodels")
 library("gmodels") 
 CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected=FALSE, 
-prop.r=TRUE, prop.c=FALSE, prop.t=FALSE, prop.chisq=FALSE)
+           prop.r=TRUE, prop.c=FALSE, prop.t=FALSE, prop.chisq=FALSE)
 
 ##See that we set the prop.r = TRUE in order to show row percetages.  If we wanted for instance to show column percentages
-we can set prop.c=TRUE 
-Total Observations in Table:  381 
-                         | mydata$result 
-           mydata$Region |     leave |    remain | Row Total | 
--------------------------|-----------|-----------|-----------|
-                    East |        42 |         5 |        47 | 
-                         |     0.894 |     0.106 |     0.123 | 
--------------------------|-----------|-----------|-----------|
-           East Midlands |        38 |         2 |        40 | 
-                         |     0.950 |     0.050 |     0.105 | 
--------------------------|-----------|-----------|-----------|
-                  London |         5 |        28 |        33 | 
-                         |     0.152 |     0.848 |     0.087 | 
--------------------------|-----------|-----------|-----------|
-              North East |        11 |         1 |        12 | 
-                         |     0.917 |     0.083 |     0.031 | 
--------------------------|-----------|-----------|-----------|
-              North West |        32 |         7 |        39 | 
-                         |     0.821 |     0.179 |     0.102 | 
--------------------------|-----------|-----------|-----------|
-        Northern Ireland |         0 |         1 |         1 | 
-                         |     0.000 |     1.000 |     0.003 | 
--------------------------|-----------|-----------|-----------|
-                Scotland |         0 |        32 |        32 | 
-                         |     0.000 |     1.000 |     0.084 | 
--------------------------|-----------|-----------|-----------|
-              South East |        43 |        24 |        67 | 
-                         |     0.642 |     0.358 |     0.176 | 
--------------------------|-----------|-----------|-----------|
-              South West |        28 |         9 |        37 | 
-                         |     0.757 |     0.243 |     0.097 | 
--------------------------|-----------|-----------|-----------|
-                   Wales |        17 |         5 |        22 | 
-                         |     0.773 |     0.227 |     0.058 | 
--------------------------|-----------|-----------|-----------|
-           West Midlands |        29 |         1 |        30 | 
-                         |     0.967 |     0.033 |     0.079 | 
--------------------------|-----------|-----------|-----------|
-Yorkshire and The Humber |        18 |         3 |        21 | 
-                         |     0.857 |     0.143 |     0.055 | 
--------------------------|-----------|-----------|-----------|
-            Column Total |       263 |       118 |       381 | 
--------------------------|-----------|-----------|-----------|
+# we can set prop.c=TRUE 
+# Total Observations in Table:  381 
+#                          | mydata$result 
+#            mydata$Region |     leave |    remain | Row Total | 
+# -------------------------|-----------|-----------|-----------|
+#                     East |        42 |         5 |        47 | 
+#                          |     0.894 |     0.106 |     0.123 | 
+# -------------------------|-----------|-----------|-----------|
+#            East Midlands |        38 |         2 |        40 | 
+#                          |     0.950 |     0.050 |     0.105 | 
+# -------------------------|-----------|-----------|-----------|
+#                   London |         5 |        28 |        33 | 
+#                          |     0.152 |     0.848 |     0.087 | 
+# -------------------------|-----------|-----------|-----------|
+#               North East |        11 |         1 |        12 | 
+#                          |     0.917 |     0.083 |     0.031 | 
+# -------------------------|-----------|-----------|-----------|
+#               North West |        32 |         7 |        39 | 
+#                          |     0.821 |     0.179 |     0.102 | 
+# -------------------------|-----------|-----------|-----------|
+#         Northern Ireland |         0 |         1 |         1 | 
+#                          |     0.000 |     1.000 |     0.003 | 
+# -------------------------|-----------|-----------|-----------|
+#                 Scotland |         0 |        32 |        32 | 
+#                          |     0.000 |     1.000 |     0.084 | 
+# -------------------------|-----------|-----------|-----------|
+#               South East |        43 |        24 |        67 | 
+#                          |     0.642 |     0.358 |     0.176 | 
+# -------------------------|-----------|-----------|-----------|
+#               South West |        28 |         9 |        37 | 
+#                          |     0.757 |     0.243 |     0.097 | 
+# -------------------------|-----------|-----------|-----------|
+#                    Wales |        17 |         5 |        22 | 
+#                          |     0.773 |     0.227 |     0.058 | 
+# -------------------------|-----------|-----------|-----------|
+#            West Midlands |        29 |         1 |        30 | 
+#                          |     0.967 |     0.033 |     0.079 | 
+# -------------------------|-----------|-----------|-----------|
+# Yorkshire and The Humber |        18 |         3 |        21 | 
+#                          |     0.857 |     0.143 |     0.055 | 
+# -------------------------|-----------|-----------|-----------|
+#             Column Total |       263 |       118 |       381 | 
+# -------------------------|-----------|-----------|-----------|
 ```
 With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland
 and Northern Ireland.  This could be interesting for your story!
@@ -361,17 +361,17 @@ We can also calculate some summary statistics for the `perc_remain` variable:
 ```{r}
 summary(mydata$perc_remain)
 table(mydata$Remain_cat)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  24.44   39.65   45.73   46.88   52.85   78.62 
-  
-  very low       low      high very high 
-        1       262       112         6 
+  #  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  # 24.44   39.65   45.73   46.88   52.85   78.62 
+  # 
+  # very low       low      high very high 
+  #       1       262       112         6 
 ```
 You can see that only one area had a very low vote to Remain with 24.4% of the vote.
 
 We can also tabulate the 10 areas with the highest Leave vote:
 ```{r}
-CODE
+# CODE
 ```
 So far you have answered some of your questions: the majority of areas in the UK voted to leave the EU.  London, Scotland and Northern Ireland voted by majority to Remain.  
 
@@ -384,8 +384,8 @@ plot(mydata$perc_leave, mydata$no_educ)
 ```
 To see if our correlation is statistically significant we can use the `rcorr()` function in the `Hmsc` package, that shows the pvalue:
 ```{r}
-install.packages("Hmisc")
-library("Hmsc")
+# install.packages("Hmisc")
+library("Hmisc")
 rcorr(mydata$perc_leave, mydata$no_educ)
 ```
 To calculate a correlation matrix, let's create a new dataframe only with the varaibles we need and then use the `cor()` function again:
@@ -401,14 +401,14 @@ datacor <- rename(datacor,c("mydata.perc_leave" = "leave", "mydata.perc_remain" 
 
 #Lets calculate the correlation matrix
 cor(datacor)
-              leave     remain        age     bornUk    no_educ     h_educ   prof_ocu
-leave     1.0000000 -1.0000000  0.3344219  0.4781973  0.5563877 -0.7708179 -0.5849986
-remain   -1.0000000  1.0000000 -0.3344219 -0.4781973 -0.5563877  0.7708179  0.5849986
-age       0.3344219 -0.3344219  1.0000000  0.7368753  0.1892295 -0.2176862 -0.1497925
-bornUk    0.4781973 -0.4781973  0.7368753  1.0000000  0.4524213 -0.5447494 -0.4035716
-no_educ   0.5563877 -0.5563877  0.1892295  0.4524213  1.0000000 -0.8812980 -0.9095549
-h_educ   -0.7708179  0.7708179 -0.2176862 -0.5447494 -0.8812980  1.0000000  0.8868166
-prof_ocu -0.5849986  0.5849986 -0.1497925 -0.4035716 -0.9095549  0.8868166  1.0000000
+#               leave     remain        age     bornUk    no_educ     h_educ   prof_ocu
+# leave     1.0000000 -1.0000000  0.3344219  0.4781973  0.5563877 -0.7708179 -0.5849986
+# remain   -1.0000000  1.0000000 -0.3344219 -0.4781973 -0.5563877  0.7708179  0.5849986
+# age       0.3344219 -0.3344219  1.0000000  0.7368753  0.1892295 -0.2176862 -0.1497925
+# bornUk    0.4781973 -0.4781973  0.7368753  1.0000000  0.4524213 -0.5447494 -0.4035716
+# no_educ   0.5563877 -0.5563877  0.1892295  0.4524213  1.0000000 -0.8812980 -0.9095549
+# h_educ   -0.7708179  0.7708179 -0.2176862 -0.5447494 -0.8812980  1.0000000  0.8868166
+# prof_ocu -0.5849986  0.5849986 -0.1497925 -0.4035716 -0.9095549  0.8868166  1.0000000
 ```
 You can see that there's a positive correlation between the Remain vote and the areas with a high number of residents with higher education and professional occupations.  On the contrary, there seem to be a positive correlation between the areas with a higher proportion of no educated residents and the leave vote. 
 
@@ -421,7 +421,8 @@ library("GGally")
 ggpairs(datacor) 
 
 ```
-![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png)
+
+<!-- ![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png) -->
 
 Now you h ave some interesting insishts and can start writing your story! But wait! how about we try some nice visualizations for the data?
 
