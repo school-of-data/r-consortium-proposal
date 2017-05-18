@@ -1,3 +1,9 @@
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(message = FALSE)
+```
+
+
 # Introductory steps - phase 1
 
 The introductory steps are a guided process through which:
@@ -52,7 +58,7 @@ A referendum in your country is over and you are tasked to do a post-election an
 Even though you normally work with spreadsheets, you want to try R.  Here are a few reasons why:
 
 Excel | R 
---- | ---
+-------------------------------- | --------------------------------
 It's a "point and click program" | You write a functions directly in the R interface and R does all the magic
 If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated. Write once, reuse several times: Not only can you update your code easily, but you can easily share it with other projects.
 Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
@@ -93,6 +99,7 @@ _Results_
 - `Rejected_Ballots` Number of rejected ballots
 
 _Demographics1_
+
 - `new_id` unique Id
 - `area_code` Unique area code
 - `area_name` Area Name
@@ -101,6 +108,7 @@ _Demographics1_
 - `prof_ocu_2`  Percentage of residents with junior professional occupations 
 
 _Demographics2_
+
 - `new_id` unique Id
 - `area_code` Unique area code
 - `area_name` Area Name
@@ -143,6 +151,7 @@ demographic2 <- read.dta("demographics2.dta")
 See? That was easy! Now you have your data loaded into the program and can start working.  
 
 Are you seeing the magic yet? 
+
 * A simple line of code can replace cumbersome manual operations that you have to do in Excel to import the data
 * R loads all sort of file formats, and doesn't complain
 * Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
@@ -192,28 +201,31 @@ That common variable will allow us to merge the databases using the `merge` func
 
 Simply type:
 ```{r}
+## merge the data sets
 mydata <- merge(results, demographic1, by=c("area_code"))
 mydata <- merge(mydata, demographic2, by=c("area_code"))
+
+## list all variables in mydata
+names(mydata)
 ```
 You now have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
 
-First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`.
+<!-- HS: Do we need to delete the variables? If, so I would use package dplyr, function select. -->
 
-```{r}
-##Let's list all the variables first
-names(mydata)
+<!-- First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`. -->
 
-##Delete the variables we don't need
-mydata$new_id.x <- NULL
-mydata$area_name.x <- NULL
-mydata$new_id.y <- NULL
-mydata$area_name.y <- NULL
-```
+<!-- ```{r} -->
+<!-- ##Delete the variables we don't need -->
+<!-- mydata$new_id.x <- NULL -->
+<!-- mydata$area_name.x <- NULL -->
+<!-- mydata$new_id.y <- NULL -->
+<!-- mydata$area_name.y <- NULL -->
+<!-- ``` -->
 To analyze the data we also need the percentage of Remain, Leave and Rejected votes for each area.  We are going to create those three variables:
 ```{r}
-mydata$perc_remain <- (mydata$Remain / mydata$Valid_Votes)*100
-mydata$perc_leave <- (mydata$Leave / mydata$Valid_Votes)*100
-mydata$perc_rejected <- (mydata$Rejected_Ballots / mydata$Votes_Cast)*100
+mydata$perc_remain <- (mydata$Remain / mydata$Valid_Votes) * 100
+mydata$perc_leave <- (mydata$Leave / mydata$Valid_Votes) * 100
+mydata$perc_rejected <- (mydata$Rejected_Ballots / mydata$Votes_Cast) * 100
 ```
 Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that contains the percentage of residents in each area with professional occupations:
 ```{r}
@@ -224,31 +236,28 @@ We can also create a new categorical variable `Result` that shows which areas vo
 ## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
 ## and 0 otherwise
 
-mydata$result <- ifelse(mydata$perc_remain<50, 1, 0)
+mydata$result <- ifelse(mydata$perc_remain < 50, 1, 0)
 ```
 Now we can add labels to the variable `Result`
 ```{r} 
 mydata$result <- factor(mydata$result,
-                    levels = c(1,0),
-                    labels = c("leave", "remain"))
+                        levels = c(1, 0),
+                        labels = c("leave", "remain"))
 ```
 
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
-
 ```{r} 
-mydata$Remain_cat[mydata$perc_remain<25]<- 1
-mydata$Remain_cat[mydata$perc_remain>=25 & mydata$perc_remain<50]<- 2
-mydata$Remain_cat[mydata$perc_remain>=50 & mydata$perc_remain<75]<- 3
-mydata$Remain_cat[mydata$perc_remain>=75]<- 4
+## create 4 categories of voting percentages
+mydata$Remain_cat <- cut(mydata$perc_remain, breaks = c(0, 25, 50, 75, 100))
+table(mydata$Remain_cat)
 ```
 Now we can add labels to the variable `Remain_cat`
 ```{r} 
-mydata$Remain_cat <- factor(mydata$Remain_cat,
-                    levels = c(1,2, 3, 4),
-                    labels = c("very low", "low", "high", "very high"))
+mydata$Remain_cat <- factor(mydata$Remain_cat, labels = c("very low", "low", "high", "very high"))
+table(mydata$Remain_cat)
 ```
 
-We are almost done, don't give up just yet!  Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
+We are almost done, don't give up just yet! Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
 
 ```{r} 
 # HELP Heidi: What I want to do is to generate new variables that sums all the observations 
