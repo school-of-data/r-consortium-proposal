@@ -1,6 +1,6 @@
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(message = FALSE, cache = TRUE)
 ```
 
 
@@ -15,37 +15,37 @@ The introductory steps are a guided process through which:
 ## Main intro
 _interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations_
 
-Are you a journalist?      
--> Yes -> No      
-
-|____(if no) this tutorial is delibarately, intensely, exclusively focused on journalists. If you want to continue you'll have to pretend to be a journalist and, believe us, it's not pleasant. Do you still want to continue?
-
-____ -> Yes -> No     
-
-     |     
-     |____ (if yes) Have you ever heard about this thing we call R?     
-
-     ____-> Yes -> No   
+    Are you a journalist?      
+    -> Yes -> No      
+    
+    |____(if no) this tutorial is delibarately, intensely, exclusively focused on journalists. If you want to continue you'll have to pretend to be a journalist and, believe us, it's not pleasant. Do you still want to continue?
+    
+    ____ -> Yes -> No     
+    
          |     
-         |____ (if no) Well, despite its mysterious and concise name, R is an open source programming 
-         language and environment for statistical computing, widely used among data analysts, statisticians, 
-         programmers and more recently, by data journalists.   Our mission today will be to convince you
-         that R is worth your precious time and will help you improve your work in the newsroom. 
-         
-         |     
-         |____ (if yes) Do you already use R your work?     
-
-          ____-> Yes -> No   
-
-                |    
-                |____________ (if yes) What follows is a beginner tutorial for R-newbies. 
-                You could jump directly to [our list of R recipes]() or still follow the introduction tutorial 
-                to steal ideas for your own R trainings (we know who you are!).
-
-                |     
-                |____________ (if no) So an R atheist? Or maybe agnostic? 
-                Our mission will be to convice you to actually start using R in your workflow. 
-                If we fail, we allow you the privilege to send us an angry tweet.
+         |____ (if yes) Have you ever heard about this thing we call R?     
+    
+         ____-> Yes -> No   
+             |     
+             |____ (if no) Well, despite its mysterious and concise name, R is an open source programming 
+             language and environment for statistical computing, widely used among data analysts, statisticians, 
+             programmers and more recently, by data journalists.   Our mission today will be to convince you
+             that R is worth your precious time and will help you improve your work in the newsroom. 
+             
+             |     
+             |____ (if yes) Do you already use R your work?     
+    
+              ____-> Yes -> No   
+    
+                    |    
+                    |____________ (if yes) What follows is a beginner tutorial for R-newbies. 
+                    You could jump directly to [our list of R recipes]() or still follow the introduction tutorial 
+                    to steal ideas for your own R trainings (we know who you are!).
+    
+                    |     
+                    |____________ (if no) So an R atheist? Or maybe agnostic? 
+                    Our mission will be to convice you to actually start using R in your workflow. 
+                    If we fail, we allow you the privilege to send us an angry tweet.
 
       --------------------     
      | Challenge accepted |    
@@ -142,11 +142,14 @@ library("foreign")
 ```
 Now we can read the data: 
 ```{r}
+# read results data
 results <- read.csv("results.csv", header = TRUE)
+
+# read demographic data
 demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
 demographic2 <- read.dta("demographics2.dta")
-
 ```
+(Note the the hash: it can be used to add comments. You should use it to help future you remember what you did.)
 
 See? That was easy! Now you have your data loaded into the program and can start working.  
 
@@ -159,10 +162,11 @@ Are you seeing the magic yet?
 
 > **Let's review the commands we learned in this step:**
 >
-- set your folder `setwd()` 
+- Set the folder you work in (working directory) `setwd()` 
 - Install Packages `install.packages()`
 - Load Libraries `library()`
 - Read files `read.csv` `read.xlsx` `read.dta`
+- Add code comments `# my comment`
 
 
 > **Want to learn what other types of data can be imported into R**
@@ -202,13 +206,13 @@ That common variable will allow us to merge the databases using the `merge` func
 Simply type:
 ```{r}
 ## merge the data sets
-mydata <- merge(results, demographic1, by=c("area_code"))
-mydata <- merge(mydata, demographic2, by=c("area_code"))
+mydata <- merge(results, demographic1, by.x = "Area_Code", by.y = "area_code")
+mydata <- merge(mydata, demographic2, by.x = "Area_Code", by.y = "area_code")
 
 ## list all variables in mydata
 names(mydata)
 ```
-You now have a new dataframe `mydata` with the electoral and the demographic information.  Nevertheless we need to further clean the database.  
+You now have a new dataframe `mydata` with the electoral and the demographic information. Nevertheless we need to further clean the database.  
 
 <!-- HS: Do we need to delete the variables? If, so I would use package dplyr, function select. -->
 
@@ -231,18 +235,23 @@ Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that 
 ```{r}
 mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
-We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain.  to do this we are going to use the `ifelse()` function:
+We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain. To do this we are going to use the `ifelse()` function. To look at the number of areas who voted for and against remaining we can use the `table()` function.
 ```{r} 
 ## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
 ## and 0 otherwise
-
 mydata$result <- ifelse(mydata$perc_remain < 50, 1, 0)
+
+## Table of the result
+table(mydata$result)
 ```
 Now we can add labels to the variable `Result`
 ```{r} 
 mydata$result <- factor(mydata$result,
                         levels = c(1, 0),
                         labels = c("leave", "remain"))
+
+## Table of the result
+table(mydata$result)
 ```
 
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
@@ -257,27 +266,38 @@ mydata$Remain_cat <- factor(mydata$Remain_cat, labels = c("very low", "low", "hi
 table(mydata$Remain_cat)
 ```
 
-We are almost done, don't give up just yet! Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region.  
+We are almost done, don't give up just yet! Now to finish we want to aggregate regional data in new varaibles, in order the see the voting results by region. A simple way to do this is with the `summarise()` function from the `dplyr` package. If you don't have the package installed, install it with the command `install.packages("dplyr")`.
 
-```{r} 
-# HELP Heidi: What I want to do is to generate new variables that sums all the observations 
-# of a variable by region in Stata the command would be for example: 
-# egen newvar = total(Valid_Votes), by(Region_Code), 
-# this would generate a new variable that has all the Valid votes for each region.
-# The new variables would be:
-# valid_region  Valid votes by region
-# leave_region  leave votes by region
-# remain_region remain votes by region
+```{r}
 library("dplyr")
-dataregion <- summarise(group_by(mydata, Region), Valid_Votes = sum(Valid_Votes), Remain = sum(Remain), Leave = sum(Leave))
+datahasc <- summarise(group_by(mydata, HASC_code),        ## Group mydata by HASC code
+                        Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per HASC code, i.e. the sum of valid votes in the areas of the HASC code
+                        Remain = sum(Remain), 
+                        Leave = sum(Leave))
 
-##Calculate the percentages
-dataregion$perc_remain <- (dataregion$Remain / dataregion$Valid_Votes)*100
-dataregion$perc_leave <- (dataregion$Leave/ dataregion$Valid_Votes)*100
+## Calculate the percentages
+datahasc$perc_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
+datahasc$perc_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
 
-dataregion
+datahasc
 ```
-_Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_
+
+
+<!-- ```{r}  -->
+<!-- library("dplyr") -->
+<!-- dataregion <- summarise(group_by(mydata, Region),        ## Group mydata by variable Region -->
+<!--                         Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per region, i.e. the sum of valid votes in the areas of the region -->
+<!--                         Remain = sum(Remain),  -->
+<!--                         Leave = sum(Leave)) -->
+
+<!-- ## Calculate the percentages -->
+<!-- dataregion$perc_remain <- (dataregion$Remain / dataregion$Valid_Votes)*100 -->
+<!-- dataregion$perc_leave <- (dataregion$Leave/ dataregion$Valid_Votes)*100 -->
+
+<!-- dataregion -->
+<!-- ``` -->
+<!-- _Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_ -->
+<!-- I think we should keep it short, so I would leave it as is. -->
 
 Now that you have cleaned your data, you're ready to start the analysis! 
 
@@ -295,27 +315,27 @@ ____ yes, R won my heart
 >
 - Merge datasets `merge()` 
 - Create new variables
-- Delete variables
+<!-- - Delete variables -->
 - Create new categorical variables and asign labels
+- Create a new data set with summaries of an existing data set 
 
 
 ## Analyze
-Let's start with the fun part.  You need to write a story based on those electoral results, and you already have some questions 
+Let's start with the most fun part. You need to write a story based on those electoral results, and you already have some questions 
 you want to answer:
 - Which areas voted to remain or to leave?
 - Which regions? 
 - Which were the more divided regions?
-- How does some demographic variables correlate with the leave and remain percentage of votes?
+- How do the demographic variables correlate with the leave and remain percentage of votes?
 
 First we need to tabulate the data:
 ```{r}
-##How many areas voted to Remain or leave
+## How many areas voted to remain or leave
 table(mydata$result)
 prop.table(table(mydata$result))
 ```
-You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package:
+You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package (rember to install it with `install.packages("gmodels")`):
 ```{r}
-# install.packages("gmodels")
 library("gmodels") 
 CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected = FALSE, 
            prop.r = TRUE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE)
@@ -401,7 +421,34 @@ Now you have some interesting insights and can start writing your story! But wai
 
 ## Visualize
 
-...
+
+
+```{r}
+## remeber to install all packages
+## with install.packages()
+library("raster")
+library("maptools")
+library("broom")
+library("ggplot2")
+gbr_sp <- getData("GADM", country = "GBR", level = 2)
+mapdat <- gbr_sp@data
+ni <- mapdat[mapdat$NAME_1 == "Northern Ireland",]
+
+gbr <- fortify(gbr_sp, region = "HASC_2")
+gbr$id[gbr$id %in% ni$HASC_2] <- "Northern Ireland"
+gbr_brexit <- merge(gbr, datahasc, by.x = "id", by.y = "HASC_code", all.x = TRUE)
+ord <- order(gbr_brexit$order)
+gbr_brexit <- gbr_brexit[ord, ]
+# nim <- gbr_brexit[gbr_brexit$id %in% ni$HASC_2, ]
+# datahasc[datahasc$HASC_code == "Northern Ireland", ]
+
+p1 <- ggplot() +
+  geom_polygon(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = perc_remain)) +
+  coord_map()
+p1
+```
+
+
 
 ##
 
