@@ -428,6 +428,8 @@ library("raster")
 library("maptools")
 library("broom")
 library("ggplot2")
+library("gpclib")
+gpclibPermit()
 
 ## get the spatial data for Great Britain (GBR)
 gbr_sp <- getData("GADM", country = "GBR", level = 2)
