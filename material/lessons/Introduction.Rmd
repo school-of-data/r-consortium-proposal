@@ -63,7 +63,7 @@ It's a "point and click program" | You write a functions directly in the R inter
 If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated. Write once, reuse several times: Not only can you update your code easily, but you can easily share it with other projects.
 Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in a spreadsheet
 Allows you to make some graphics, but you are limited by the program to what type and what do they look like | Allows you to customize every aspect of your visualization
-You fo through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
+You go through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
 ... | ...
 
 > **Wait, what?**
