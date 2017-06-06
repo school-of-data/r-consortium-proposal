@@ -124,6 +124,8 @@ You must have 3 files in your folder:
 `demographics1.xlsx`
 `demographics2.dta`
 
+<!-- Gibran: Should we introduce here the idea of the script and how you can run commands in the console while saving all of your work in the script for further reproducing it? -->
+
 Now let's try reading in the data:
 1. Open your R editor (e.g. RStudio)
 2. Set your working directory to `electoral-data`. To do this enter
@@ -152,6 +154,7 @@ demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
 demographic2 <- read.dta("demographics2.dta")
 ```
 (Note the the hash: it can be used to add comments. You should use it to help future you remember what you did.)
+Note also than the "string" or text on the left of the <- can be whatever name you want it to be, and the function on the right side of it is assigned to that number. This is what in R is called creating an object and assigning it with a function or value.
 
 See? That was easy! Now you have your data loaded into the program and can start working.  
 
@@ -168,6 +171,7 @@ Are you seeing the magic yet?
 - Install Packages `install.packages()`
 - Load Libraries `library()`
 - Read files `read.csv` `read.xlsx` `read.dta`
+- Creating objects and assigning values to them
 - Add code comments `# my comment`
 
 
@@ -241,13 +245,14 @@ We can also create a new categorical variable `Result` that shows which areas vo
 ```{r} 
 ## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
 ## and 0 otherwise
-mydata$result <- ifelse(mydata$perc_remain < 50, 1, 0)
+mydata$result <- ifelse(mydata$Pct_Remain < 50, 1, 0)
 
 ## Table of the result
 table(mydata$result)
 ```
 Now we can add labels to the variable `Result`
 ```{r} 
+#Adding labels to 'Result'
 mydata$result <- factor(mydata$result,
                         levels = c(1, 0),
                         labels = c("leave", "remain"))
@@ -259,7 +264,7 @@ table(mydata$result)
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
 ```{r} 
 ## create 4 categories of voting percentages
-mydata$Remain_cat <- cut(mydata$perc_remain, breaks = c(0, 25, 50, 75, 100))
+mydata$Remain_cat <- cut(mydata$Pct_Remain, breaks = c(0, 25, 50, 75, 100))
 table(mydata$Remain_cat)
 ```
 Now we can add labels to the variable `Remain_cat`
@@ -278,8 +283,8 @@ datahasc <- summarise(group_by(mydata, HASC_code),        ## Group mydata by HAS
                         Leave = sum(Leave))
 
 ## Calculate the percentages
-datahasc$perc_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
-datahasc$perc_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
+datahasc$Pct_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
+datahasc$Pct_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
 
 datahasc
 ```
