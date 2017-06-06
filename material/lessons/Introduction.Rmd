@@ -57,12 +57,14 @@ _Here we set up the story that will be used to contextualise all actions in the 
 A referendum in your country is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
 Even though you normally work with spreadsheets, you want to try R.  Here are a few reasons why:
 
-Excel | R 
+Spreadsheet | R 
 -------------------------------- | --------------------------------
 It's a "point and click program" | You write a functions directly in the R interface and R does all the magic
 If you want to repeat a process you have to do it every time | R allows for automation of processes that have to be repeated. Write once, reuse several times: Not only can you update your code easily, but you can easily share it with other projects.
-Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in Excel
-.... | .....
+Only allows some types of files | Can load different kinds of files that can be complicated or impossible to work with in a spreadsheet
+Allows you to make some graphics, but you are limited by the program to what type and how do they look | Allows you to customize every aspect of your visualization
+You fo through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
+... | ...
 
 > **Wait, what?**
 >   
