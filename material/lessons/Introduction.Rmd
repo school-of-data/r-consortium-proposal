@@ -147,7 +147,7 @@ library("foreign")
 Now we can read the data: 
 ```{r}
 # read results data
-results <- read.csv("results.csv", header = TRUE)
+results <- read.csv("https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv", header = TRUE)
 
 # read demographic data
 demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
