@@ -88,8 +88,9 @@ _Results_
 - `id` Unique id
 - `Region_Code` Region Code
 - `Region` Region Name                 
-- `area_code` Unique area code
+- `Area_Code` Unique area code
 - `Area` Area Name
+- `HASC_code` [HASC](https://en.wikipedia.org/wiki/Hierarchical_administrative_subdivision_codes) code
 - `Electorate` Number of registered voters             
 - `ExpectedBallots` Expected ballots
 - `VerifiedBallotPapers` Verified Ballots
@@ -245,7 +246,7 @@ We can also create a new categorical variable `Result` that shows which areas vo
 ```{r} 
 ## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50, 
 ## and 0 otherwise
-mydata$result <- ifelse(mydata$Pct_Remain < 50, 1, 0)
+mydata$result <- ifelse(mydata$perc_remain < 50, 1, 0)
 
 ## Table of the result
 table(mydata$result)
@@ -264,7 +265,7 @@ table(mydata$result)
 We can also create a new categorical variable that allows to group the Remain vote in different categories:
 ```{r} 
 ## create 4 categories of voting percentages
-mydata$Remain_cat <- cut(mydata$Pct_Remain, breaks = c(0, 25, 50, 75, 100))
+mydata$Remain_cat <- cut(mydata$perc_remain, breaks = c(0, 25, 50, 75, 100))
 table(mydata$Remain_cat)
 ```
 Now we can add labels to the variable `Remain_cat`
@@ -283,8 +284,8 @@ datahasc <- summarise(group_by(mydata, HASC_code),        ## Group mydata by HAS
                         Leave = sum(Leave))
 
 ## Calculate the percentages
-datahasc$Pct_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
-datahasc$Pct_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
+datahasc$perc_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
+datahasc$perc_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
 
 datahasc
 ```
@@ -428,6 +429,10 @@ Now you have some interesting insights and can start writing your story! But wai
 
 ## Visualize
 <!-- https://freakonometrics.hypotheses.org/49832 helped me here -->
+
+A common task in the work of a journalist is to bring the results into a form
+that are nice to look at. Often this form is a map.  For this we need a couple
+of packages:
 ```{r}
 ## remeber to install all packages
 ## with install.packages()
@@ -435,41 +440,99 @@ library("raster")
 library("maptools")
 library("broom")
 library("ggplot2")
+```
+
+Maps are complicated and on some computers the code below won't work. A fix is to use
+```{r, eval=FALSE}
 library("gpclib")
 gpclibPermit()
+```
+BUT the licence for gpclib is not Free or Open Source and explicitly forbids 
+commercial use, which is why we recommend not to use it if not needed. 
 
+
+Now let's get started: First we need to get the spatial data needed to create a
+map. `getData` can get you geographic data from all over the world from different
+sources. We use [GADM.org](http://www.gadm.org/) as a source here. The country of
+interest is Great Britain (GBR) and we need info on 2nd level administrative 
+subdivision. Check out what other geographic information you can get by typing
+`?raster::getData` into the R console.
+```{r}
 ## get the spatial data for Great Britain (GBR)
 gbr_sp <- getData("GADM", country = "GBR", level = 2)
+```
 
-## convert the data to a data frame we can work with
+Next, we convert the data to a data frame we can work with (this is just
+a technical detail you don't need to understand at this point):
+```{r}
 gbr <- fortify(gbr_sp, region = "HASC_2")
 str(gbr)
+```
 
-## Our data set has no detailed info on the districts in Northern Ireland
-## so we have to change the HASC code (gbr$id) for these districts to just
-## "Northern Ireland"
+Our data set `datahasc` has no detailed info on the districts in Northern Ireland
+(check out for yourself `datahasc$HASC_code`) so we have to change the HASC code (gbr$id) 
+for these districts to just "Northern Ireland" to be able to merge the geographical data
+with the voting results.
+```{r}
 # (1) get data from spatial object which contains info on HASC code and which
 #     of the codes correspond to Northern Ireland
 mapdat <- gbr_sp@data
+
 # (2) get the HASC codes that correspond to Northern Ireland
 NI_HASC <- mapdat$HASC_2[mapdat$NAME_1 == "Northern Ireland"]
+
 # (3) change the relevant HASC codes in gbr to "Northern Ireland"
 table(gbr$id[gbr$id %in% NI_HASC]) 
 gbr$id[gbr$id %in% NI_HASC] <- "Northern Ireland"
+```
 
+Now we can merge
+```{r}
 ## Merge the map data with the brexit data for the HASC areas we created earlier
 gbr_brexit <- merge(gbr, datahasc, by.x = "id", by.y = "HASC_code", all.x = TRUE)
+```
 
-## For plotting spatial data it is important that the order is correct 
+For plotting spatial data it is important that the order is correct. Let's get
+the order right:
+fortunately we have a variable `order` in our gbr_brexit data set (you always get
+the order with the geographic data, see `str(gbr)`. 
+The function `order()` gives us the info on how we need to reorder our data set:
+```{r}
 ord <- order(gbr_brexit$order)
 gbr_brexit <- gbr_brexit[ord, ]
+```
 
-## Now plot
-p1 <- ggplot() +
-  geom_polygon(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = perc_remain)) +
-  coord_map() + xlim(-10, NA)
+Now we can plot the map. `ggplot` is like lego bricks. In this case our foundation
+is the `gbr_brexit` data. Longitude and latitude variables (`long` and `lat`) go 
+on the x and y axes, `group` is a variable with the geographic details needed and
+we want to color (`fill`) the administrative divisions according to the percentage
+of remain votes `perc_remain`. `geom_polygon` is responsible for plotting the
+colored polygons:
+```{r}
+p1 <- ggplot(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = perc_remain)) +
+  geom_polygon() 
 p1
 ```
+
+But this map is not quite correct, we need to make sure that it has the right proportions:
+```{r}
+p2 <- p1 + coord_map()
+p2
+```
+
+Also it seems like the x axis is a bit too long, let's shorten it:
+```{r}
+p3 <- p2 + xlim(-10, NA)
+p3
+```
+
+We can now add nicer x- and y-axis labels as well as the legend title:
+```{r}
+p3 + labs(x = "Longitude", 
+          y = "Latitude", 
+          fill = "Percentage\nRemain") # pro tip: \n creates a line break
+```
+TADA!
 
 
 
