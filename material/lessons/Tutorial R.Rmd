@@ -1,0 +1,141 @@
+---
+title: "Tutorial R para periodistas"
+author: "Camila Salazar""
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+```
+
+## R para periodistas: Cómo iniciar
+R es un entorno y lenguaje de programación para analizar datos.  R es una herramienta muy útil para hacer periodismo de datos, ya que nos permite realizar todo el proceso de obtener, limpiar, analizar y visualizar la información desde el mismo lugar.  En estos tutoriales aprenderá cómo utilizar el programa para sus proyectos periodísticos.  
+
+### Contenidos
+
+En este tutorial aprenderá:
+
+* Cómo instalar R
+* Cómo instalar RStudio
+* Cómo instalar paquetes en R
+* Generalidades del programa
+
+Empecemos
+
+## ¿Cómo instalar R?
+
+![](https://vimeo.com/203516510)
+
+Tal como se observa en el video, para instalar R vamos a la dirección [cloud.r-project](https://cloud.r-project.org) y seleccionamos R para Linux, Mac o Windows.  Una vez descargado, se siguen las instrucciones de instalación.  
+
+Algunas de las ventajas de R:  
+
+* Es gratuito
+* Es colaborativo, por lo que constantemente surgen nuevas actualizaciones según las necesidades de los usuarios.
+
+## ¿Cómo instalar RStudio?
+
+RStudio es una interfaz desarrollada para R.  ¿Qué significa esto? R Studio nos ayuda a escribir código, visualizar resultados y en general trabajar con el lenguaje de programación R de una forma más fácil.  Como recomendación, es mucho más sencillo trabajar con RStudio y es la herramienta que vamos a utilizar en los siguientes tutoriales.  
+
+Algo a tomar en cuenta es que es necesario tener instalado R para poder utilizar RStudio. Veamos cómo instalarlo: 
+
+![](https://vimeo.com/203516968)
+
+Tal como se observa en el video, para instalar R vamos a la dirección [rstudio.com](https://rstudio.com/download) y seleccionamos la versión para nuestro sistema operativo.  
+
+Una vez descargado, lo abrimos y estamos listos para comenzar. 
+
+### Quiz #1: Instalar R y RStudio
+
+```{r quiz3, echo=FALSE}
+quiz(caption = "Instalar R y RStudio",
+  question("¿Qué es R studio?",
+    answer("Una aplicación que nos ayuda a usar de forma más fácil R.", correct = TRUE, message = "RStudio tiene una interfaz amigable, que nos facilita escribir, usar y salvar código de R."),
+    answer("Una aplicación para usar R sin escribir código", message = "¡No! El código es una de las grandes ventajas que tiene R frente a otros programas como Excel.  El Código nos permite llevar un registro del trabajo que estamos haciendo y permite la reproductibilidad de los contenidos."),
+    answer("Un programa de hogas de cálculo como Excel"),
+    answer("Es lo mismo que R", message = "No.  Como ya vimos anteriormente son dos cosas diferentes.  R es un lenguaje, como el español.  RStudio es un programa que nos permite usar ese lenguaje, de la misma forma que un programa como Work nos permite escribir textos en español."),
+    allow_retry = TRUE
+  ),
+  question("¿RStudio es gratuito?",
+    answer("Sí", correct = TRUE, message = "Al igual que R, Rstudio es gratis y open-source."),
+    answer("No.")
+  ),
+  question("¿Es necesario instalar R si ya tengo RStudio?",
+    answer("Yes.", correct = TRUE, message = "R no viene con RStudio;hay que instalarlos de forma separada."), 
+    answer("No.", message = "R no viene con RStudio;hay que instalarlos de forma separada.")
+  )
+)
+```
+
+## Instalar y utilizar paquetes
+Un paquete de R es un conjunto de funciones, datasets, documentacion que permite ampliar la funcionalidad de R.  Por ejemplo, existen paquetes para hacer gráficos, importar archivos de Excel, hacer análisis estadístico, entre otros.  En la actualidad existen cerca de 10.500 paquetes en R.    
+
+¿Cómo instalarlos? 
+
+![](https://vimeo.com/203516241)
+
+###Instalar paquetes
+
+Como vimos en el video para instalar un paquete escribimos en la consola `install.packages()`, y ponemos entre __paréntesis y con comillas__ el nombre del paquete que queremos instalar.  Por ejemplo, si queremos instalar el paquete `tidyverse`, escribimos `install.packages("tidyverse")` en la consola.  
+Si queremos instalar varios paquetes a la vez lo hacemos así: `install.packages(c("tidyverse", "ggplot2", "xlsx"))`, es decir, ponemos los diferentes nombres de los paquetes en un vector (c)  y los separamos por comas.
+
+Es importante considerar que los paquetes se instalan una sola vez en la computadora, por lo que no hay necesidad de instalarlos cada vez que abrimos RStudio.
+
+###Cargar paquetes al programa
+Una vez que hemos instalado un paquete, tenemos que cargarlos a Rstudio para poder utilizarlos.  Para hacer esto usamos el comando `libray(nombre del paquete)`.  De esta forma si quisieramos utilizar el paquete `ggplot2`, el orden sería el siguente:
+`install.packages("ggplot2")`
+`library(ggplot2)`
+
+También existe otra forma de cargar paquetes al programa sin necesidad de instalarlos.  Esto se hace con el comando `require(nombre del paquete)`.
+
+¿Cuáles paquetes instalar?  Como se mencionó al inicio R tiene cerca de 10.500 paquetes.  Según las tareas que queramos realizar vamos a necesitar diferentes paquetes.  A lo largo de estos materiales vamos a ir conociendo algunos de ellos.  
+
+Para iniciar es recomendable instalar el paquete `tidyverse`, que contiene un conjunto de paquetes de uso frecuente. 
+
+
+### Quizz: Instalar paquetes
+
+```{r names, echo = FALSE}
+quiz(caption = "Quiz - Paquetes en R",
+  question("¿Cuál comando se utiliza para instalar paquetes?",
+    answer("`library()`", message = "No, library se utiliza luego de instalar un programa"),
+    answer("`install.packages()`", correct = TRUE),
+    answer("`install_packages()`"),
+    answer("No hay ningún comando se tiene que ir al sitio [cran.r-project.org](http://cran.r-project.org) y bajar los paquetes manualmente.", message = "R permite descargar los paquetes desde el programa, solo se necesita conexión a interntet"),
+    allow_retry = TRUE
+  ),
+  question("¿Cada cuánto hay que instalar un paquete?",
+    answer("Cada vez que abrimos R"),
+    answer("Cada vez que reseteamos nuestra computadora"),
+    answer("Solamente una vez. Una vez instalado, el paquete queda almacenado en nuestra computadora.", correct = TRUE),
+    answer("No es necesario instalar paquetes para usar R.", message = "Aunque algunas funciones se pueden realizar sin el uso de paquetes, estos son los que nos permiten ampliar las posibilidades de R y las tareas que podemos hacer con el programa"),
+    allow_retry = TRUE
+  ),
+  question("¿Cuál comando usamos para cargar los paquetes ya instalados?",
+    answer("`library.load()`"),
+    answer("`require()`",  message ="Este comando se utiliza cuando queremos usar un programa sin instalarlo previamente" ),
+    answer("`library()`", correct = TRUE),
+    answer("No es necesario un comando, una vez instalado el paquete se puede utlizar."),
+    allow_retry = TRUE
+  )
+)
+```
+
+## Antes de comenzar
+Una vez que ya hemos instalado R, RStudio y algunos paquetes, podemos comenzar a trabajar. Lo primero que tenemos que hacer es elegir un directorio de trabajo, donde vamos a guardar nuestros archivos y de dónde vamos a cargar nuestros archivos.  
+
+Para saber en cuál directorio estamos trabajando, usamos el comando `getwd()`.   Si queremos cambiar el directorio de trabajo usamos `setwd("directorio de trabajo")` y listo! 
+
+Lo ideal es tener todos los archivos que vayamos a necesitar en esa carpeta.  
+
+## Importar archivos
+
+Cuando trabajamos con datos nos enfrenteamos a diferentes tipos de archivos: .csv, .xlsx, .dta, .sav, entre otros.   En este segmento vamos a ver cómo importar archivos a R para poder analizarlos.
+
+###Importar .csv
+
