@@ -2,10 +2,15 @@
 title: "Recipe for analysis of the dual-use data"
 author: "Heidi Seibold"
 date: "April 25, 2017"
-output: html_document
+output: learnr::tutorial
+runtime: shiny_prerendered
 ---
-```{r}
+html_document
+```{r echo=FALSE}
+# set the knitr option so that no chunks produce messages 
+# silently load the learnr library so that the file will run as a shiny document
 knitr::opts_chunk$set(message = FALSE)
+library("learnr")
 ```
 
 TODO:
@@ -36,8 +41,7 @@ The reasons for using R for this task are various:
 - R allows for automation of data cleaning and analyses that have to be repeated
 - R can export data to csv so it can be used in other programs (e.g. Excel)
 - R produces good graphics and allows for individualised themes
-- With R reproducible documents (e.g. HTML or PDF) can be created, changes are 
-included without major efforts
+- Reproducible documents (e.g. HTML or PDF) can be created with R, while changes  and updates can be included without major effort
 
 You can find the entire analysis on the [SRF data GitHub repository](https://github.com/srfdata/2017-01-dual-use)
 and the article from January 2017 on the 
@@ -70,7 +74,7 @@ We propose the following:
 ```
 
 
-# Find
+# Find 
 
 The data can be found (in German) on the [SECO website](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html). SRF also keeps the data available in their [GitHub repo](https://github.com/srfdata/2017-01-dual-use/tree/master/analysis/input).
 
@@ -78,8 +82,8 @@ The data can be found (in German) on the [SECO website](https://www.seco.admin.c
 
 # Get
 
-The data can be downloaded simply clicking on the data links on the 
-[SECO website](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html). Get the data and store it in Folder `data_raw`.
+The data can be downloaded by clicking on the data links on the 
+[SECO website](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html). Get the data files and store them in the folder `data_raw`.
 
 Yor file structure should now look like this,
 ```{}
@@ -126,7 +130,7 @@ To load the package run
 ```{r}
 library("readxl") 
 ```
-Now we can read the data of the first two quarters of 2016:
+Now we can read the data of the four quarters of 2016:
 ```{r}
 elic_2016_q1_raw <- read_excel(path = "data_raw/1_Quartal_2016_Bewilligungen.xlsx")
 elic_2016_q2_raw <- read_excel(path = "data_raw/2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
@@ -135,10 +139,9 @@ elic_2016_q4_raw <- read_excel(path = "data_raw/4. Quartal 2016 Erteilte Ausfuhr
 ```
 
 # Verify
-To check whether reading in worked and the data is what we wanted, there are a 
-couple of useful commands in R. Let's now first work with `elic_2016_q1_raw`:
+To check whether reading in worked and the data is what we wanted, there are a couple of useful commands in R. Let's now first work with `elic_2016_q1_raw`:
 
-- `names()` shows the collumn names of the data frame
+- `names()` shows the column names of the data frame
 ```{r}
 names(elic_2016_q1_raw)
 ```
@@ -150,10 +153,8 @@ head(elic_2016_q1_raw)
 ```{r}
 tail(elic_2016_q1_raw)
 ```
-- `summary()` shows a summary of the data. For numeric variables such as the price (`Wert [CHF]`) it 
-shows the [five number summary](https://en.wikipedia.org/wiki/Five-number_summary) and the mean (average).
-For character variables such as receiving country (`Bestimmungsland`) it shows the length and the information
-that it is a character variable.
+- `summary()` shows a summary of the data. For numeric variables such as the price (`Wert [CHF]`) this function 
+shows the [five number summary](https://en.wikipedia.org/wiki/Five-number_summary) and the mean (average).  For character variables such as receiving country (`Bestimmungsland`) the function shows the variable's length and informs that it is of the character class and mode.
 ```{r}
 summary(elic_2016_q1_raw)
 ```
@@ -237,11 +238,14 @@ elic_2016_4 <- select(.data = elic_2016_3, -Art)
 str(elic_2016_4)
 ```
 
-It looks like the variable `Typ` needs a bit of cleaning:
+Let's see what the types of good are in the dataset.
 ```{r}
 unique(elic_2016_4$Typ)
 ```
+It looks like the variable `Typ` needs a bit of cleaning because some values are clearly variants that can be set to the simpler version. We can do that by writing a function.
 ```{r}
+# Here are two 'vectors' that have the original values and the replacement values
+
 typ_from <- c("Chemikalien CWÜ",
               "Dual Use Güter\r\nDual Use Güter",
               "Chemikalien CWÜ\r\nDual Use Güter",
@@ -255,7 +259,7 @@ typ_to <- c("Chemikalien",
             "Chemikalien",
             "Dual Use Güter")
 
-
+# The function, below, has three arguments: the column in the data set where the values are found, and the vectors of original and replacement values. It contains a for-loop that proceeds through each original value, identifying where in the column the values occur, and replacing those values with the corresponding new values. The following lines define the function:
 change_charval <- function(x, from, to) {
   
   for(i in 1:length(from)) {
@@ -264,12 +268,13 @@ change_charval <- function(x, from, to) {
   
   return(x)
 }
-
+# Now we will call (run) the function.  We'll assign the cleaned-up values to a new variable, 'Typ', which is not in the data set.
 Typ <- change_charval(x = elic_2016_4$Typ, from = typ_from, to = typ_to)
+# Now we'll create a new column named 'Typ_raw' to have the original values.
 elic_2016_4$Typ_raw <- elic_2016_4$Typ
+# Next we will assign the cleaned-up values in 'Typ' to the data set column with the same name, effectively over-writing the original values.
 elic_2016_4$Typ <- Typ
 ```
-
 
 
 # Analyse
@@ -286,58 +291,64 @@ to each country.
 
 # table(elic_2016_4$Land, useNA = "always")
 
-ggplot(elic_2016_4, aes(x = Land)) + 
-  geom_bar() +
+ggplot(elic_2016_4, aes(x = Land)) + # The plus sign here is particular to ggplot and means that an additional
+  geom_bar() +                       # element will be specified
   coord_flip()
 ```
 
-Let's sort the country in the plot by number of exports to it. `summarize()` helps
-us computing the number of exports, `order()` helps us getting the correct order,
-and `factor()` helps us define that we want the country levels according to a
-fixed order. `ggplot()` automatically understands that it should plot the factor
-levels in the order given.
+Let's sort the destination countries by number of exports they receive. `summarize()` 
+lets us compute the number of exports, in this case line entries, which are grouped by each country. `order()` orders (i.e., sorts) the data based on the number of rows `n` associated with each country.  Then `factor()` helps us define that we want the country levels according to a fixed order. `ggplot()` automatically understands that it should plot the factor levels in order.
 
-```{r, fig.height=12, fig.width=7}
+```{r sort_by_number_of_exports}
+# This code groups elic_2016_4 by the variable country ('Land'), then uses summarise() to find the number of rows (i.e. exports) that went to each. 
 n_land <- summarise(group_by(elic_2016_4, Land), n = NROW(Land))
+
+# order() then sorts the data set in terms of exports, i.e. n, in ascending order
 ord <- order(n_land$n)
 str(ord)
 ordered_land <- n_land$Land[ord]
 str(ordered_land)
+# Here we convert the column 'Land' to the factor variable type, and set the order of the levels (i.e. values) using the ordered vector of country names 'ordered_land'.  This makes the data print or plot in this order when the factor variable is used.
 elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
 str(elic_2016_4$Land)
 
+```
+The next plot makes a horizontal bar chart.  When specified in this way, the length of the bars is determined by the number of times that a value shows up in the data.  In this case, that means the number of times a country occurs in the column `Land` in data set `elic_2016_4`.
+
+```{r, fig.height=12, fig.width=7}
 ggplot(elic_2016_4, aes(x = Land)) + 
   geom_bar() +
   coord_flip()
 ```
 
 
-And now one, which shows how much worth the goods were that 
-were exported to each country. Again we want to have that in a specific order.
+The following plot shows the worth of the goods that were exported to each country. Again we want to have the countries in a specific order, but this time the value we use to sort the data is the sum of the monitary value (the variable `Wert`) of exports to each country.  So we re-order the countries based on the summed export value, and assign this order in the `levels =` specification.
 
-```{r, fig.height=12, fig.width=7}
+```{r} 
 wert_land <- summarise(group_by(elic_2016_4, Land), sum = sum(Wert))
 ordered_land <- wert_land$Land[order(wert_land$sum)]
 elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
+```
 
+The plot is similar, but by writing `stat = "identity"`, the total value of `Wert` is plotted for each country, and these are displayed in the order we just specified above.
+
+```{r, fig.height=12, fig.width=7}
 ggplot(elic_2016_4, aes(x = Land, y = Wert, fill = Typ)) + 
   geom_bar(stat = "identity") +
   coord_flip()
 ```
 
-
 But wait, why are there countries listed, that do not seem to have gotten anything
 from switzerland? Let's look at those:
 
-```{r, fig.height=2, fig.width=7}
-p <- ggplot(elic_2016_4, aes(x = Wert)) + stat_ecdf()
-p
-
-p + coord_cartesian(xlim = c(0, 10^5))
+```{r}
+library('knitr') # kable() in this package will make nice tables
 
 novalue  <- filter(.data = elic_2016_4, Wert == 0)
-str(novalue)
+kable(summarize(group_by(.data=novalue,Land,Typ),n=n()),format = "html",caption = "Number Exports without Declared Value")
 ```
+
+Let's look at the 10 countries that had the highest value exports in the data set.
 
 ```{r, fig.height=2, fig.width=7}
 elic_2016_value <- filter(.data = elic_2016_4, Wert > 0)
@@ -347,7 +358,7 @@ elic_2016_value$Land <- droplevels(elic_2016_value$Land)
 elic_2016_4$Land2 <- elic_2016_4$Land
 highest10 <- tail(levels(elic_2016_4$Land), 10)
 
-levels(elic_2016_4$Land2)[!(levels(elic_2016_4$Land2) %in% highest10)] <- "andere"
+levels(elic_2016_4$Land2)[!(levels(elic_2016_4$Land2) %in% highest10)] <- "Other countries"
 
 
 wert_typ <- summarise(group_by(elic_2016_4, Typ), sum = sum(Wert))
@@ -362,8 +373,7 @@ p_cntry
 ```
 
 
-The cool thing with `ggplot2` for a newsroom is that you can have different 
-themes.
+One cool thing about using `ggplot2` in a newsroom is that you can have different themes.
 
 ```{r}
 p_cntry + theme_minimal()
@@ -399,19 +409,24 @@ p_cntry + theme_excel()
 ```
 
 Or you take a theme you like and modify it. 
-To create a School of Data themed plot you can use the following colors and
-fonts.
-```{r, fig.width=9}
+To create a School of Data themed plot, you can use the following colors and
+fonts.  Gill Sans MT is used because it should work on both Windows and Mac.
+```{r fig.width=9}
 scodablue <- "#00AFF0" 
 scodagrey <- "#333333"
 scodagrey2 <- "#C9C9C9"
 scodacol <- c(scodablue, "#CCCC33", "#FF358B", "#59631E", "#29D9C2", "#C9C9C9")
-p_cntry + theme_classic(base_family = "Open Sans") + 
-  theme(axis.text = element_text(family = "Open Sans Bold", colour = scodagrey),  
+p_cntry + 
+  scale_fill_manual(values = scodacol) +
+  theme_classic(base_size = 11, base_family = "Gill Sans MT") +
+  theme(axis.text = element_text(family = "Gill Sans MT Bold", colour = scodagrey),  
         panel.grid.major.x = element_line(color = scodagrey2),
         panel.grid.minor.x = element_line(color = scodagrey2), 
         line = element_line(colour = scodagrey),
-        legend.position = "bottom") +
-  scale_fill_manual(values = scodacol) 
+        legend.position = "bottom")
+  
+ 
 ```
 
+
+# Present
