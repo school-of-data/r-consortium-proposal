@@ -36,6 +36,7 @@ The reasons for using R for this task are various:
 - R allows for automation of data cleaning and analyses that have to be repeated
 - R can export data to csv so it can be used in other programs (e.g. Excel)
 - R produces good graphics and allows for individualised themes
+- R allows you to document how you have transformed the data to be accountable on your work to the readers 
 - With R reproducible documents (e.g. HTML or PDF) can be created, changes are 
 included without major efforts
 
