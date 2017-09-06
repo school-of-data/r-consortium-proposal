@@ -1,0 +1,17 @@
+Package: ddj-course
+Title: Data Journalism R Learning Materials
+Date: 2017-09-01
+Version: 0.0-1
+Authors@R: c(person(given = "Heidi", family = "Seibold", 
+                    role = c("aut", "cre"), email = "Heidi.Seibold@uzh.ch"))
+Description: R learning materials created with learnr. Material is focused on
+  teaching journalists and is available in languages English, German, French and
+  Spanish.
+Depends:
+    R (>= 3.1.0),
+    learnr
+Imports:
+    ggplot2,
+    dplyr
+License: GPL-2 | GPL-3
+
