@@ -21,7 +21,7 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
   
  ### Wanna get involved?
  
- Send an email do heidi@schoolofdata.ch or join the #r-projects channel on the School of Data slack chat.
+ Send an email to heidi@schoolofdata.ch or join the #r-projects channel on the School of Data slack chat.
  
  We currently need help with:
  
