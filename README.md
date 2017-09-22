@@ -5,7 +5,13 @@ This project contains
 - The [proposal](https://github.com/school-of-data/r-consortium-proposal/blob/master/proposal.md) 
 we wrote for the R Consortium
 - Templates for [data recipes](https://github.com/school-of-data/r-consortium-proposal/tree/master/r-package/inst/tutorials/en-recipe-template)
-and [skills lessons](https://github.com/school-of-data/r-consortium-proposal/tree/master/r-package/inst/tutorials/en-skills-template)
+and [skills lessons](https://github.com/school-of-data/r-consortium-proposal/tree/master/r-package/inst/tutorials/en-skills-template). You can also check them out in R via
+```
+devtools::install_github("school-of-data/r-consortium-proposal", 
+                         subdir="r-package")
+learnr::run_tutorial("en-recipe-template", package = "ddj")
+learnr::run_tutorial("en-skills-template", package = "ddj")
+```
 - The [intro lesson](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Introduction.Rmd)
 - The following data recipes
     + [Switzerland dual use goods](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/switzerland-dual-use/recipe_switzerland-dual-use.Rmd)
