@@ -6,6 +6,7 @@ output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 
+
 ```{r echo=FALSE}
 # set the knitr option so that no chunks produce messages 
 # silently load the learnr library so that the file will run as a shiny document
