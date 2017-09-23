@@ -25,7 +25,7 @@ TODO:
 - This is what we will do, this is what we are doing and this is what we've done
 
 ----
-
+## What are dual-use goods?
 Dual-use goods are goods that can be used for civil and military purposes. 
 In Switzerland, these goods are governed with a special legislation – 
 unlike in other countries, where they are looked at as conventional arms exports. 
@@ -328,7 +328,7 @@ ggplot(elic_2016_4, aes(x = Land)) +
   coord_flip()
 ```
 
-### Plot the countries in order of export value
+### Plot countries in order of export value
 The following plot shows the worth of the goods that were exported to each country. Again we want to have the countries in a specific order, but this time the value we use to sort the data is the sum of the monitary value (the variable `Wert`) of exports to each country.  So we re-order the countries based on the summed export value, and assign this order in the `levels =` specification.
 
 ```{r} 
