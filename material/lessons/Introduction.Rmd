@@ -431,7 +431,7 @@ Now you have some interesting insights and can start writing your story! But wai
 <!-- https://freakonometrics.hypotheses.org/49832 helped me here -->
 
 A common task in the work of a journalist is to bring the results into a form
-that are nice to look at. Often this form is a map.  For this we need a couple
+that is nice to look at. Often this form is a map.  For this we need a couple
 of packages:
 ```{r}
 ## remeber to install all packages

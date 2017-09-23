@@ -5,7 +5,7 @@ date: "April 25, 2017"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
-html_document
+
 ```{r echo=FALSE}
 # set the knitr option so that no chunks produce messages 
 # silently load the learnr library so that the file will run as a shiny document
@@ -14,6 +14,7 @@ library("learnr")
 ```
 
 TODO:
+
 - Beginning of the recipe:
     + End result
     + ingredients (packages, etc.)
@@ -238,13 +239,13 @@ elic_2016_4 <- select(.data = elic_2016_3, -Art)
 str(elic_2016_4)
 ```
 
-Let's see what the types of good are in the dataset.
+Let's see what the types of goods are in the dataset.
 ```{r}
 unique(elic_2016_4$Typ)
 ```
 It looks like the variable `Typ` needs a bit of cleaning because some values are clearly variants that can be set to the simpler version. We can do that by writing a function.
 ```{r}
-# Here are two 'vectors' that have the original values and the replacement values
+# Here are two 'vectors', the first with the original values and the second with the replacement values
 
 typ_from <- c("Chemikalien CWÜ",
               "Dual Use Güter\r\nDual Use Güter",
@@ -259,7 +260,7 @@ typ_to <- c("Chemikalien",
             "Chemikalien",
             "Dual Use Güter")
 
-# The function, below, has three arguments: the column in the data set where the values are found, and the vectors of original and replacement values. It contains a for-loop that proceeds through each original value, identifying where in the column the values occur, and replacing those values with the corresponding new values. The following lines define the function:
+# The function, below, has three arguments: the name of the column in the data set where the values are found, and the vectors of original and replacement values. It contains a for-loop that proceeds through each original value, identifying where in the column the value occur, and replacing those values with the corresponding new value. The following lines define the function:
 change_charval <- function(x, from, to) {
   
   for(i in 1:length(from)) {
@@ -268,11 +269,14 @@ change_charval <- function(x, from, to) {
   
   return(x)
 }
-# Now we will call (run) the function.  We'll assign the cleaned-up values to a new variable, 'Typ', which is not in the data set.
+
+# Now we will call (i.e., run) the function.  We'll assign the cleaned-up values to a new variable, 'Typ', which is not in the data set.
 Typ <- change_charval(x = elic_2016_4$Typ, from = typ_from, to = typ_to)
-# Now we'll create a new column named 'Typ_raw' to have the original values.
+
+# Now we'll create a new column named 'Typ_raw' to hold the original values.
 elic_2016_4$Typ_raw <- elic_2016_4$Typ
-# Next we will assign the cleaned-up values in 'Typ' to the data set column with the same name, effectively over-writing the original values.
+
+# Next we assign the cleaned-up values in 'Typ' to the data set column with the same name, effectively over-writing the original values.
 elic_2016_4$Typ <- Typ
 ```
 
@@ -284,36 +288,38 @@ For this section we'll produce some nice graphics with package `ggplot2`
 library("ggplot2")
 ```
 
-
+### A first plot
 Let's try making a first plot, which shows how often Switzerland has exported
-to each country.
+to each country. The plus sign below is particular to ggplot and means that an additional graphic element will be specified. When specified in this way, the length of the bars is determined by the number of times that a value occurs in the data. In this case, that means the number of times a country name occurs in the column `Land` in data set `elic_2016_4`.  This is determined by the ggplot aesthetic function, aes(), when specified as it is below, and a call is made to geom_bar().
 ```{r, fig.height=12, fig.width=7}
 
-# table(elic_2016_4$Land, useNA = "always")
-
-ggplot(elic_2016_4, aes(x = Land)) + # The plus sign here is particular to ggplot and means that an additional
-  geom_bar() +                       # element will be specified
-  coord_flip()
+ggplot(elic_2016_4, aes(x = Land)) +  
+  geom_bar() +                        
+  coord_flip()   #this makes the bars horizontal
 ```
+### Order the countries by export volume
 
-Let's sort the destination countries by number of exports they receive. `summarize()` 
-lets us compute the number of exports, in this case line entries, which are grouped by each country. `order()` orders (i.e., sorts) the data based on the number of rows `n` associated with each country.  Then `factor()` helps us define that we want the country levels according to a fixed order. `ggplot()` automatically understands that it should plot the factor levels in order.
+Let's sort the destination countries by number of exports they receive. This takes a few steps. First we group the rows by country ('Land'), using group_by(). Then the function `summarize()` computes by country the number of exports, here 'n', actually the number of rows of entries for each country. Here, group_by() is nested within summarize(). Then `order()` identifies the row order of the data based on the number of rows `n` associated with each country.  Then `factor()` helps us define that when plotted, the country levels should be in the specified order. `ggplot()` automatically understands that it should plot the factor levels in this order.
 
 ```{r sort_by_number_of_exports}
-# This code groups elic_2016_4 by the variable country ('Land'), then uses summarise() to find the number of rows (i.e. exports) that went to each. 
+# This code groups elic_2016_4 by the variable country ('Land'), then uses summarise() to find the number of rows (the entries, i.e. exports) for each country. It assigns these values to the variable 'n'. 
 n_land <- summarise(group_by(elic_2016_4, Land), n = NROW(Land))
+head(n_land)
 
-# order() then sorts the data set in terms of exports, i.e. n, in ascending order
+# The function order() then gets the order in terms of the value of 'n', and provides an ascending index of the resulting row order
 ord <- order(n_land$n)
-str(ord)
-ordered_land <- n_land$Land[ord]
-str(ordered_land)
-# Here we convert the column 'Land' to the factor variable type, and set the order of the levels (i.e. values) using the ordered vector of country names 'ordered_land'.  This makes the data print or plot in this order when the factor variable is used.
+str(ord)  # the row position of each country, in ascending order by the magnitude of n 
+ordered_land <- n_land$Land[ord] # impose the sorted order and store in a variable
+head(ordered_land)  #the first six values
+tail(ordered_land)  #the last six values
+
+# Now we convert the column 'Land' to the factor variable type, and set the order of the levels (i.e. values) by specifying the ordered vector of country names 'ordered_land'.  This does not change the row order of the data set, but makes the data print and plot in this order when the factor variable is used.
 elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
 str(elic_2016_4$Land)
 
 ```
-The next plot makes a horizontal bar chart.  When specified in this way, the length of the bars is determined by the number of times that a value shows up in the data.  In this case, that means the number of times a country occurs in the column `Land` in data set `elic_2016_4`.
+### Plot the countries in order of export volume
+The next plot makes another horizontal bar chart in which the order of the countries is determined by the factor level we specified above.  So the bar length and the country order both depend on the number of rows associated with each country, the first because ggplot counts the number of rows, the second because elic_2016_4$Land is now an ordered factor. 
 
 ```{r, fig.height=12, fig.width=7}
 ggplot(elic_2016_4, aes(x = Land)) + 
@@ -321,16 +327,18 @@ ggplot(elic_2016_4, aes(x = Land)) +
   coord_flip()
 ```
 
-
+### Plot the countries in order of export value
 The following plot shows the worth of the goods that were exported to each country. Again we want to have the countries in a specific order, but this time the value we use to sort the data is the sum of the monitary value (the variable `Wert`) of exports to each country.  So we re-order the countries based on the summed export value, and assign this order in the `levels =` specification.
 
 ```{r} 
 wert_land <- summarise(group_by(elic_2016_4, Land), sum = sum(Wert))
-ordered_land <- wert_land$Land[order(wert_land$sum)]
+# the re-ordering and assignment to a variable are here done in one line
+ordered_land <- wert_land$Land[order(wert_land$sum)] 
+# then the levels of the factor are assigned
 elic_2016_4$Land <- factor(elic_2016_4$Land, levels = ordered_land)
 ```
 
-The plot is similar, but by writing `stat = "identity"`, the total value of `Wert` is plotted for each country, and these are displayed in the order we just specified above.
+The plot is similar, but by writing `stat = "identity"`, the total value of `Wert` is plotted for each country, and these are displayed in the order of value, which we just specified above.
 
 ```{r, fig.height=12, fig.width=7}
 ggplot(elic_2016_4, aes(x = Land, y = Wert, fill = Typ)) + 
@@ -344,44 +352,51 @@ from switzerland? Let's look at those:
 ```{r}
 library('knitr') # kable() in this package will make nice tables
 
-novalue  <- filter(.data = elic_2016_4, Wert == 0)
+novalue  <- filter(.data = elic_2016_4, Wert == 0) # get only the lines with zero value
 kable(summarize(group_by(.data=novalue,Land,Typ),n=n()),format = "html",caption = "Number Exports without Declared Value")
 ```
 
+### Countries receiving the highest value of exports
 Let's look at the 10 countries that had the highest value exports in the data set.
 
 ```{r, fig.height=2, fig.width=7}
 elic_2016_value <- filter(.data = elic_2016_4, Wert > 0)
 elic_2016_value$Land <- droplevels(elic_2016_value$Land)
 ```
-```{r, fig.width=9}
+```{r}
 elic_2016_4$Land2 <- elic_2016_4$Land
 highest10 <- tail(levels(elic_2016_4$Land), 10)
+```
+All the countries that aren't in the group of 10 will be pooled into "Other countries" by specifying for them all just a single factor level, "Other countries".  This is done by constructing an expression that returns TRUE for the levels of elic_2016_4$Land2 (i.e., the countries) that are in highest10, using %in%, then negating it with '!', the negation operator.
+```{r}
+head(levels(elic_2016_4$Land2) %in% highest10)
+head(!levels(elic_2016_4$Land2) %in% highest10)
 
 levels(elic_2016_4$Land2)[!(levels(elic_2016_4$Land2) %in% highest10)] <- "Other countries"
-
-
+```
+```{r}
 wert_typ <- summarise(group_by(elic_2016_4, Typ), sum = sum(Wert))
 ordered_typ <- wert_typ$Typ[order(wert_typ$sum)]
 elic_2016_4$Typ <- factor(elic_2016_4$Typ, levels = rev(ordered_typ))
-
+```
+```{r, fig.width=9}
 p_cntry <- ggplot(elic_2016_4, aes(x = Land2, y = Wert, fill = Typ)) + 
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  xlab("Land")
+  geom_bar(stat = "identity") +  # so tha values in Wert are used for bar length 
+  coord_flip() +  # Remember, we have to flip the plot to horizontal bars
+  xlab("Land") # There is a lot of flexibility in the labeling of the plots. Here is a start.
 p_cntry
 ```
 
-
-One cool thing about using `ggplot2` in a newsroom is that you can have different themes.
+# Present
+One cool thing about using `ggplot2` in a newsroom is that you can have different themes (color and font schemes).
 
 ```{r}
 p_cntry + theme_minimal()
 p_cntry + theme_bw()
 ```
 
-With the `ggthemes` package you can go even more wild and try themes that are
-similar to the themes of famous newsrooms...
+
+With the `ggthemes` package you can go even more wild and try themes that are similar to the themes of famous newsrooms...
 ```{r, fig.width=9}
 library("ggthemes")
 ```
@@ -429,4 +444,3 @@ p_cntry +
 ```
 
 
-# Present
