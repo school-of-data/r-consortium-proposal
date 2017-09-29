@@ -18,6 +18,7 @@ learnr::run_tutorial("en-recipe-template", package = "ddj")
 learnr::run_tutorial("en-skills-template", package = "ddj")
 ```
 - The [intro lesson](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Introduction.Rmd)
+- A [data journalists view on R](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/why_use_R.md) by Timo Grossenbacher
 - The following data recipes
     + [Switzerland dual use goods](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/switzerland-dual-use/recipe_switzerland-dual-use.Rmd)
 - The following skills lessons 
