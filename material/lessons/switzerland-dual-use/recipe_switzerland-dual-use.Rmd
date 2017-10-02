@@ -42,6 +42,9 @@ The reasons for using R for this task are various:
 - R can export data to csv so it can be used in other programs (e.g. Excel)
 - R produces good graphics and allows for individualised themes
 - Reproducible documents (e.g. HTML or PDF) can be created with R, while changes  and updates can be included without major effort
+- R allows you to document how you have transformed the data to be accountable on your work to the readers 
+- With R reproducible documents (e.g. HTML or PDF) can be created, changes are 
+included without major efforts
 
 You can find the entire analysis on the [SRF data GitHub repository](https://github.com/srfdata/2017-01-dual-use)
 and the article from January 2017 on the 
