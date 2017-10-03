@@ -29,14 +29,6 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
  
  ### Wanna get involved?
  
-We are very thankful for any contributions. You don't need to be an R specialist or know R at all. Come talk to us to find out how you could possibly help :cake: :smiley: :clap:
+We are very thankful for any contributions. You don't need to be an R specialist or know R at all. 
  
-Send an email to heidi@schoolofdata.ch (Heidi is very friendly and will help you figure out how you can best contribute to the project) or join the #r-projects channel on the School of Data slack chat.
- 
-We currently need help with:
- 
- - Creating tutorials (data recipes and skills lessons)
- - Translation (no R knowledge required)
- - Beta testing (no R knowledge required): go through the existing material and point out 
- things you don't understand or points where you get stuck.
- - Planning of the website
+Check out [CONTRIBUTING.md](https://github.com/school-of-data/r-consortium-proposal/blob/master/CONTRIBUTING.md) for infos on how you can help :cake: :smiley: :clap:
