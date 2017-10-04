@@ -59,6 +59,14 @@ polls_round1<- polls_round1 %>%
 polls_round1_long <- polls_round1 %>% gather(Candidates, Percentage, Abstention:Cheminade) #gather
 
 save(polls_round1_long, file = "./polls_round1_long.Rdata")
+
+
+```
+
+
+---
+# Visualize 
+
 devtools::install_github("hrbrmstr/hrbrthemes")
 library(hrbrthemes)
 
@@ -75,11 +83,5 @@ polls_round1_long %>%
   theme_ipsum() +
   theme(legend.position="right") #reminder, keep track: do it after +
 
-
-```
-
-
----
-# Visualize 
 --- 
 # Present
