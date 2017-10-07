@@ -10,11 +10,11 @@ can best contribute to the project) or join our [gitter chat](https://gitter.im/
  
 We currently need help with:
  
+ - Creating tutorials (data recipes and skills lessons)
  - Translation (no R knowledge required)
  - Beta testing (no R knowledge required): go through the existing material and point out 
  things you don't understand or points where you get stuck.
  - Planning of the website
- - Creating tutorials (data recipes and skills lessons)
  
  ### Creating tutorials
  If you want to add a data recipe or skills lesson, please use the templates to get started:
