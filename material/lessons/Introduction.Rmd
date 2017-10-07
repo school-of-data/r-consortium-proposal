@@ -557,7 +557,7 @@ p3 + labs(x = "Longitude",
 ```
 TADA!
 
-
+![Final map](p4.png)
 
 ##
 
