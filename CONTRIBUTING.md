@@ -29,3 +29,11 @@ devtools::install_github("school-of-data/r-consortium-proposal",
 learnr::run_tutorial("en-recipe-template", package = "ddj")
 learnr::run_tutorial("en-skills-template", package = "ddj")
 ```
+
+#### Process of creating a data recipe
+
+1. Find an interesting story for journalists based on a dataset. Note: The dataset should be publicly available data. Datasets containing personal information will not be accepted.
+2. Clone to the repo or simply copy the Rmarkdown file
+3. Following the data pipeline described in the template, create your recipe with: one section of your recipe = one section of the data pipeline. Note: the recipe should be self-contained: readers should not have to look up external material to complete it.
+4. Create a pull request on Github in order for your recipe to be reviewed and added to the list. Alternatively, send an email to heidi [at] schoolofdata [dot] ch
+
