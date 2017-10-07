@@ -6,7 +6,7 @@ We are very thankful for any contribution. You don't need to be an R specialist 
 Come talk to us to find out how you could possibly help :cake: :smiley: :clap:
  
 Send an email to heidi@schoolofdata.ch (Heidi is very friendly and will help you figure out how you 
-can best contribute to the project) or join the #r-projects channel on the School of Data slack chat.
+can best contribute to the project) or join our [gitter chat](https://gitter.im/school-of-data/r-consortium-proposal).
  
 We currently need help with:
  
