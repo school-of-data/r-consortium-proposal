@@ -1,0 +1,372 @@
+---
+title: "Clase 6 - Limpieza de datos"
+author: Camila Salazar
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ¿Qué vamos a aprender?
+
+En esta clase vamos a aprender a usar algunos paquetes para limpiar datos y estructurar información en R. En las clases anteriores vimos algunas características que deben tener los datos limpios:  
+
+1.  Cada columna es una variable: una variable contiene todos los valores que miden el atributo (altura, peso, temperatura, etc)  
+2.  Cada fila es una observación
+
+## ¿Qué paquetes vamos a necesitar?
+
+```{r echo=T, message=FALSE, warning=FALSE}
+
+library(dplyr)
+library(tidyr) 
+library(readxl)
+```
+
+## Importar los datos
+Antes de comenzar, hay que cambiar el directorio de trabajo y seleccionar el folder en donde tenemos nuestros archivos.  Esto se hace con el comando `setwd()`.
+
+Ahora podemos importar los archivos de varias formas.  Podemos hacerlo desde el menú de arriba, usando: File -> Import Dataset y seleccionando el tipo de archivo que queremos importar.  
+
+También podemos hacerlo escribiendo el código.  Es siempre recomendable asignar el archivo que importamos a un objeto con el símbolo `<-`.  Inicialmente vamos a importar unos archivos .xlsx, por lo que usamos el paquete `readxl`, que ya instalamos.  
+
+Los archivos que vamos a usar inicialmente son:
+```{r echo=T, message=FALSE, warning=FALSE}
+#Recuerden cambiar el directorio de trabajo
+setwd("/Users/Camila/Documents/Curso periodismo datos/2017/Clases/Limpieza_R")
+morosidad16 <- read_xlsx("morosidad16.xlsx")
+morosidad17<- read_xlsx("morosidad17.xlsx")
+```
+
+##Explorar los datos y unir las bases
+Antes de comenzar a limpiar o analizar los datos tenemos que explorar los datos.  Para estos primeros ejercicios vamos a usar las bases de datos de morosidad con la CCSS. 
+
+Ambas bases de datos tienen las siguientes variables:
+
+* `id`: cédula del deudor ya sea cédula física o jurídica.  
+* `nombre`: Nombre de la persona física o jurídica.  
+* `deuda16` y `deuda17` : monto de la deuda en colones.  
+* `situación`: situación en la que se encuentra la deuda  
+* `lugar.pago`: sucursal donde se tiene que cancelar la deuda  
+* `Estado`:  Estado de la deuda  
+
+Cómo primer paso vamos a unir ambas bases de datos. 
+
+###Unir bases de datos
+
+Para unir bases de datos necesitamos una o más variables en común entre las dos bases de datos.  Existen varias funciones para unir bases de datos.  Una de ellas es `merge`, que sirve para unir columnas de dos bases de datos diferentes.  Para unir bases es clave hacerse la pregunta: **¿Queremos conservar todas las variables o solo las que hacen match?**.  De acuerdo a la respuesta, así va a depender la fórmula que usemos.  
+
+La sintaxis de `merge()` es simple:  
+`merge(base1, base2, by.x="nombre variable base 1", by.y="nombre variable base 2")`
+
+En el caso en el que la variable se llame igual en las dos bases:
+`merge(base1, base2, by="nombre variable")`
+
+En esos ejemplos, el comando une solamente los casos en común entre las dos bases.  
+
+Si queremos que se unan **todos** los casos, usamos la opción `all=TRUE`:
+`merge(base1, base2, by="nombre variable", all=TRUE)`
+
+Pueden ver este documento donde se muestra cómo funciona esta función con detalle.  [link](http://www.princeton.edu/~otorres/Merge101R.pdf)
+
+Para este ejercicio queremos unir las dos bases de morosidad en una sola, dejando todas las observaciones de ambas bases, entonces usamos el comando:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad<-merge(morosidad17, morosidad16, by= "id", all=TRUE)
+```
+
+Ahora podemos convertirla  base a una tibble para facilitar la lectura
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad <-tbl_df(morosidad)
+```
+
+###Explorar los datos
+Ahora que tenemos una nueva base de datos, podemos explorar sus contenidos. Usemos las siguientes funciones:
+
+Si queremos imprimir la base de datos, nada más ponemos el nombre del objeto:
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad
+```
+
+`dim()`  Esta función nos permite ver la dimensión de la base de datos, en este caso tenemos 10 variables y 78.703 observaciones
+```{r echo=T, message=FALSE, warning=FALSE}
+dim(morosidad)
+```
+
+`head()` Nos permite ver las primeras filas de la base de datos.  Incluso podemos seleccionar la cantidad de filas que queremos ver por ejemplo `head(base, n=20)`, lo cual nos muestra las primeras 20 filas.  También podemos ver que nos muestra el tipo de variable.  
+```{r echo=T, message=FALSE, warning=FALSE}
+head(morosidad)
+```
+
+`tail()` Nos permite ver las últimas filas.  Tiene la misma sintaxis que head()
+```{r echo=T, message=FALSE, warning=FALSE}
+tail(morosidad)
+```
+
+`glimpse()` nos permite exploarar las variables.  Nos dice, al lado de cada variable cuál es el tipo.  Por ejemplo nos dice que nombre.x es caracter y que deuda17 es "double", el cual es un formato numérico.
+```{r echo=T, message=FALSE, warning=FALSE}
+glimpse(morosidad)
+```
+
+
+# dplyr
+Uno de los paquetes que más funciona para manipular datos de forma fácil es `dplyr`.  Este paquete tiene, entre otras, cinco funciones para manipular datos: `select()` `filter()` `arrange()``mutate()` `summarize()`.
+
+**Veámos cómo se usa**
+
+###select()
+Select nos permite seleccionar columnas. La sintaxis sería: `select(dataframe, col1, col2)` conde col1, col2, se refiere a los nombres de las columnas que queramos seleccionar.  
+
+![](/Users/Camila/Desktop/select.png) 
+
+Por ejemplo supongamos que queremos seleccionar únicamente las columnas de id y deuda: 
+```{r echo=T, message=FALSE, warning=FALSE}
+select(morosidad, id, deuda17, deuda16)
+```
+
+También podemos seleccionar todas las columnas menos algunas, esto lo hacemos poniendo `-` antes del nombre de la columna que no queremos seleccionar.  Por ejemplo, si queremos todas las columnas menos `Estado`:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+select(morosidad, -Estado)
+```
+
+Si queremos seleccionar un rango de columnas por ejemplo de `id` a `situacion` usamos `:`.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+select(morosidad, id:situacion.x)
+```
+
+Si queremos guardar el resultado de esa función en un nuevo objeto, debemos asignarlo con `<-`.  Por ejemplo para este ejericio **nos interesa quedarnos únicamente con columnas que no estén repetidas**.  Si observamos la base, nos damos cuenta que la columna de nombre, lugar de pago y situación se repiten, entonces vamos a deseleccionar esas columnas y crear un nuevo objeto que se llame `morosidad1`.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- select(morosidad, -nombre.y, -situacion.y, -lugar.pago.y)
+morosidad1
+```
+
+###filter()
+La función filter nos permite filtrar filas. 
+
+![](/Users/Camila/Desktop/filter.png) 
+
+La sintaxis es simple: `filter(base, condicion)`.  Donde condición es la condión lógica por la que queremos filtrar datos.  Para ello usamos operadores lógicos:
+
+* `>`: mayor que
+* `<`: menor que
+* `>=`: mayor o igual que
+* `<=`: menor o igual que
+* `==`: igual que  (se ponen **dos** signos de igual)
+* `!=`: diferente
+* `&`: y
+* `|`: o
+* `is.na(variable)`: filtra los valores en blanco de la variable seleccionada.
+* `!is.na(variable)`: filtra los valores que **no** están en blanco de la variable. 
+
+Por ejemplo si queremos filtrar solamente las deudas superiores a un millón:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+filter(morosidad1, deuda17>1000000)
+```
+
+O las deudas que crecieron entre 2016 y 2017:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+filter(morosidad1, deuda17>deuda16)
+```
+
+O solamente las deudas mayores a un millón y de díficil cobro:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+filter(morosidad1, deuda17>1000000 & situacion.x=="DIFICIL COBRO")
+```
+
+En este ejemplo, tenemos deudas del 2016 y del 2017, y **nos interesa analizar únicamente los casos de las empresas o personas que han estado morosas por los dos años**.  Para ello podemos usar la función filter:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- filter(morosidad1, !is.na(deuda17), !is.na(deuda16))
+```
+El código de arriba lo que hace es filtrar la base por todos aquellos registros que no tengan valores vacíos en 2017 y luego por todos los que no tienen registros vacíos en 2016. Como podemos ver, esto nos da como resultado menos registros en nuestra base de datos.
+
+###mutate()
+Mutate nos permite crear nuevas columnas de forma fácil.  
+
+Podemos crear una variable que me diga cuánto cambió la deuda, que es la diferencia entre `deuda17` y `deuda16`:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- mutate(morosidad1, cambio.deuda=deuda17-deuda16)
+```
+
+Ahora podemos crear una nueva variable que me categorice el cambio en la deuda en si aumentó o no.  Esto podemos hacerlo con la función `if_else()` o `ifelse` (funcionar igual).  La sintaxis es: `ifelse(condición, valor cierto, valor falso)`.  (Es similar a la función if en Excel).
+
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- mutate(morosidad1, tipo.cambio=ifelse(cambio.deuda<0,"disminuyó", "aumentó"))
+```
+
+Con mutate podemos crear multiples variables a la vez, separando cada una por coma, por ejemplo:
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- mutate(morosidad1, cambio.deuda=deuda17-deuda16,
+                     tipo.cambio=ifelse(cambio.deuda<0,"disminuyó", "aumentó"))
+```
+
+
+### arrange()
+
+Arrange nos permite ordenar las base por una o varias columnas
+
+Por ejemplo, queremos ordenar la base en orden ascendente por deuda17 y por cambio.deuda:
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- arrange(morosidad1, deuda17, cambio.deuda)
+```
+
+
+Si lo queremos en orden descendente usamos `desc()`
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad1 <- arrange(morosidad1, desc(deuda17), desc(cambio.deuda))
+```
+
+###Simplificar el trabajo: %>%
+Un operador muy útil cuando trabajamos con `dplyr` es `pipe operator` que visualmente se ve así `%>%`.  Este operador nos va a facilitar muchísimo el trabajo con funciones y nos permite hacer comando con menos líneas de código.  
+
+**¿Cómo funciona el %>%?**
+Lo primero es poner el ibjeto (tabla o dataframe) al cual queremos aplicar las operaciones de la forma `base %>% funcion()`.  Esto nos ahorra estar poniendo como primer argumento de las funciones de dplyr al objeto.  
+
+Por ejemplo, recapitulemos todas las líneas de código que usamos anteriormente para limpiar la base de datos: 
+```{r echo=T, message=FALSE, warning=FALSE, eval=FALSE}
+morosidad1 <- select(morosidad, -nombre.y, -situacion.y, -lugar.pago.y)
+morosidad1 <- filter(morosidad1, !is.na(deuda17), !is.na(deuda16))
+morosidad1 <- mutate(morosidad1, cambio.deuda=deuda17-deuda16)
+morosidad1 <- mutate(morosidad1, tipo.cambio=ifelse(cambio.deuda<0,"disminuyó", "aumentó"))
+morosidad1 <- arrange(morosidad1, desc(deuda17), desc(cambio.deuda))
+```
+
+Todos los pasos realizados anteriormente podríamos haberlos hecho de forma más simple usando el `%>%`:
+```{r echo=T, message=FALSE, warning=FALSE}
+morosidad2 <- morosidad %>%
+  select(-nombre.y, -situacion.y, -lugar.pago.y) %>%
+  filter(!is.na(deuda17), !is.na(deuda16)) %>%
+  mutate(cambio.deuda=deuda17-deuda16,
+       tipo.cambio=ifelse(cambio.deuda<0,"disminuyó", "aumentó")) %>%
+  arrange(desc(deuda17), desc(cambio.deuda))
+```
+
+###Exportar base limpia a otros formatos
+Ahora que tenemos la base limpia podemos exportarla a otros formatos por ejemplo a csv.  
+```{r echo=T, message=FALSE, warning=FALSE}
+write.csv(morosidad2, "baselimpia.csv")
+```
+
+
+# tidyr
+`tidyr` es un paquete diseñado para tener datos ¨tidy¨ o limpios.  Esos datos siguen dos principios que ya hemos visto reiteradamente: Cada variable está en una sola columna y cada fila es una observación. 
+
+![](/Users/Camila/Desktop/tidy.png) 
+
+Para entender mejor qué es "tidy data", puede leer este artículo: [Tidy data - Hadley Wickham](http://vita.had.co.nz/papers/tidy-data.pdf)
+
+Este paquete tiene 4 funciones principales `gather()` `spread()` `separate()` y `unite()`.
+
+Antes de comenzar a ver las funciones importemos los archivos de trabajo:
+```{r echo=T, message=FALSE, warning=FALSE}
+#Ponemos tbl_df() para convertirlo de una vez a una tibble
+estudiantes <- tbl_df(read.csv("students.csv", header = T, sep= ","))
+estudiantes2<- tbl_df(read.csv("students2.csv", header = T, sep= ","))
+```
+
+Veamos `estudiantes`:
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes
+```
+
+**¿Cuál es el problema?**
+male y female son valores de la variable sexo, por lo que hay que cambiar la estructura de la base de datos. Esta estructura de una base de datos se conoce como "formato ancho" y tenemos que convertirla a un "formato largo".  Para eso usamos la función gather().
+
+### gather()
+La función toma las columnas múltiples, las colapsa en una sola y crea una nueva columna con los valores respectivos.
+
+La sintaxis es `gather(data, key, value, columnas)` o ` data %>% gather(key, value, columnas)`.  Donde:
+
+* `data`: es la tabla o el data frame
+* `key`: es el nombre que le voy a dar a la variable que voy a "fundir".
+* `value`: nombre de la variable que va a guardar los valores.
+* `columna`: las columnas que quiero fundir.  Podemos ponerlas separadas por coma, o pondemos usar el operador `-` para seleccionar todas las columnas menos una.  
+
+En este ejemplo para reestructurar `estudiantes` el comando sería:
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes_long <- gather(estudiantes, sexo, frecuencia, -grade)
+estudiantes_long
+```
+
+### spread()
+Es la función contraria a `gather()`, que nos devolvería a la tabla original
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes_wide <- spread(estudiantes_long, sexo, frecuencia)
+estudiantes_wide
+```
+
+
+Veamos ahora qué pasa con `estudiantes2`:
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes2
+```
+
+En este caso tenemos un doble problema **tenemos valores de una misma variable en diferentes columnas y diferentes variables en una sola**.  En este caso nos separa a los hombres y mujeres segun la clase en la que están: 1 y 2.
+
+Entonces tenemos que hacer dos pasos.  Primero usamos la función `gather()`:
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes2_long <- gather(estudiantes2, sexo_clase, frecuencia, -grade)
+estudiantes2_long
+```
+
+Y ahora usamos la función `separate()`.
+
+### separate()
+Esta función nos permite separar columnas.  La sintaxis es: 
+
+`separate(data, col, into, sep)`, donde:
+
+* `data`: es la tabla o el data frame
+* `col`: la columna que hay que separar
+* `into`: las columnas por las que vamos a separar.  Se pueden poner como vector de la forma c("col1", "col2")
+* `sep`: separador, por ejemplo comas, puntos, guion bajo u otros caracteres.  Si no se especifica el argumento R trata de identificar el patrón para separar los datos.  Cuando se utiliza esta opción se debe poner sep=" "   (entre comillas iría el caracter que usemos para separar)
+
+En este ejemplo, queremos separar el sexo de la clase.  
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes2_long2 <- separate(estudiantes2_long, sexo_clase, c("sexo", "clase"))
+#En este caso R detectó el caracter para separar, el resultado es igual a si hubiéramos puesto la opción sep="_"
+estudiantes2_long2
+```
+
+Estos pasos podemos simplificarlos en uno solo con el uso del `%>%`:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes2_long <- estudiantes2 %>%
+  gather(sexo_clase, frecuencia, -grade) %>%
+  separate(sexo_clase, c("sexo", "clase"))  %>%
+  print
+#el comando print, nos imprime el resultado
+```
+
+### unite()
+Es el contrario a separate.
+`unite(data, col, ... , sep)`, donde:
+
+* `data`: es la tabla o el data frame
+* `col`: la nueva columna con los valores unidos
+* `...`: la lista de columnas que queremos unir
+* `sep`: separador que va a unir las columnas, por ejemplo _.
+
+En este caso si queremos volver a la tabla original: 
+```{r echo=T, message=FALSE, warning=FALSE}
+estudiantes2_unida <- estudiantes2_long %>%
+  unite(sexo_clase, sexo, clase, sep="-") %>%
+  print
+```
+
+#### Enlaces recomendados
+
+[Data Processing with dplyr & tidyr-Rpubs](https://rpubs.com/bradleyboehmke/data_wrangling)  
+[Datacamp](https://www.datacamp.com)  
+
+
+
+

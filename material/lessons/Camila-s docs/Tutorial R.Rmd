@@ -1,0 +1,300 @@
+---
+title: "Tutorial R para periodistas"
+author: "Camila Salazar"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    df_print: default
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(nycflights13)
+```
+
+## Inicio
+R es un entorno y lenguaje de programación para analizar datos.  R es una herramienta muy útil para hacer periodismo de datos, ya que nos permite realizar todo el proceso de obtener, limpiar, analizar y visualizar la información desde el mismo lugar.  En estos tutoriales aprenderá cómo utilizar el programa para sus proyectos periodísticos.
+
+__¿Por qué usar R en periodismo?__  
+
+* Nos permite hacer las diferentes tareas del data pipeline, desde un solo programa.
+* Reproductibilidad del flujo de trabajo.
+* R es gratuito y colaborativo, por lo que constantemente surgen nuevas actualizaciones según las necesidades de los usuarios.
+
+### Contenidos
+
+En este tutorial aprenderá:
+
+* Cómo instalar R
+* Cómo instalar RStudio
+* Cómo instalar paquetes en R
+* Generalidades del programa
+* Importar datos a R
+* Tipos de datos
+
+Empecemos
+
+## ¿Cómo instalar R?
+
+![](https://vimeo.com/203516510)
+
+Tal como se observa en el video, para instalar R vamos a la dirección [cloud.r-project](https://cloud.r-project.org) y seleccionamos R para Linux, Mac o Windows.  Una vez descargado, se siguen las instrucciones de instalación.  
+
+
+## ¿Cómo instalar RStudio?
+
+RStudio es una interfaz desarrollada para R.  ¿Qué significa esto? R Studio nos ayuda a escribir código, visualizar resultados y en general trabajar con el lenguaje de programación R de una forma más fácil.  Como recomendación, es mucho más sencillo trabajar con RStudio y es la herramienta que vamos a utilizar en los siguientes tutoriales.  
+
+Algo a tomar en cuenta es que es necesario tener instalado R para poder utilizar RStudio. Veamos cómo instalarlo: 
+
+![](https://vimeo.com/203516968)
+
+Tal como se observa en el video, para instalar R vamos a la dirección [rstudio.com](https://rstudio.com/download) y seleccionamos la versión para nuestro sistema operativo.  
+
+Una vez descargado, lo abrimos y estamos listos para comenzar. 
+
+### Quiz #1: Instalar R y RStudio
+
+```{r quiz3, echo=FALSE}
+quiz(caption = "Instalar R y RStudio",
+  question("¿Qué es R studio?",
+    answer("Una aplicación que nos ayuda a usar de forma más fácil R.", correct = TRUE, message = "RStudio tiene una interfaz amigable, que nos facilita escribir, usar y salvar código de R."),
+    answer("Una aplicación para usar R sin escribir código", message = "¡No! El código es una de las grandes ventajas que tiene R frente a otros programas como Excel.  El Código nos permite llevar un registro del trabajo que estamos haciendo y permite la reproductibilidad de los contenidos."),
+    answer("Un programa de hogas de cálculo como Excel"),
+    answer("Es lo mismo que R", message = "No.  Como ya vimos anteriormente son dos cosas diferentes.  R es un lenguaje, como el español.  RStudio es un programa que nos permite usar ese lenguaje, de la misma forma que un programa como Work nos permite escribir textos en español."),
+    allow_retry = TRUE
+  ),
+  question("¿RStudio es gratuito?",
+    answer("Sí", correct = TRUE, message = "Al igual que R, Rstudio es gratis y open-source."),
+    answer("No.")
+  ),
+  question("¿Es necesario instalar R si ya tengo RStudio?",
+    answer("Yes.", correct = TRUE, message = "R no viene con RStudio;hay que instalarlos de forma separada."), 
+    answer("No.", message = "R no viene con RStudio;hay que instalarlos de forma separada.")
+  )
+)
+```
+
+## Instalar y utilizar paquetes
+Un paquete de R es un conjunto de funciones, datasets, documentacion que permite ampliar la funcionalidad de R.  Por ejemplo, existen paquetes para hacer gráficos, importar archivos de Excel, hacer análisis estadístico, entre otros.  En la actualidad existen cerca de 10.500 paquetes en R.    
+
+¿Cómo instalarlos? 
+
+![](https://vimeo.com/203516241)
+
+###Instalar paquetes
+
+Como vimos en el video para instalar un paquete escribimos en la consola `install.packages()`, y ponemos entre __paréntesis y con comillas__ el nombre del paquete que queremos instalar.  Por ejemplo, si queremos instalar el paquete `tidyverse`, escribimos `install.packages("tidyverse")` en la consola.  
+Si queremos instalar varios paquetes a la vez lo hacemos así: `install.packages(c("tidyverse", "ggplot2", "xlsx"))`, es decir, ponemos los diferentes nombres de los paquetes en un vector (c)  y los separamos por comas.
+
+Es importante considerar que los paquetes se instalan una sola vez en la computadora, por lo que no hay necesidad de instalarlos cada vez que abrimos RStudio.
+
+###Cargar paquetes al programa
+Una vez que hemos instalado un paquete, tenemos que cargarlos a Rstudio para poder utilizarlos.  Para hacer esto usamos el comando `libray(nombre del paquete)`.  De esta forma si quisieramos utilizar el paquete `ggplot2`, el orden sería el siguente:
+`install.packages("ggplot2")`
+`library(ggplot2)`
+
+También existe otra forma de cargar paquetes al programa sin necesidad de instalarlos.  Esto se hace con el comando `require(nombre del paquete)`.
+
+¿Cuáles paquetes instalar?  Como se mencionó al inicio R tiene cerca de 10.500 paquetes.  Según las tareas que queramos realizar vamos a necesitar diferentes paquetes.  A lo largo de estos materiales vamos a ir conociendo algunos de ellos.  
+
+Para iniciar es recomendable instalar el paquete `tidyverse`, que contiene un conjunto de paquetes de uso frecuente. 
+
+
+### Quizz #2: Instalar paquetes
+
+```{r names, echo = FALSE}
+quiz(caption = "Quiz - Paquetes en R",
+  question("¿Cuál comando se utiliza para instalar paquetes?",
+    answer("`library()`", message = "No, library se utiliza luego de instalar un programa"),
+    answer("`install.packages()`", correct = TRUE),
+    answer("`install_packages()`"),
+    answer("No hay ningún comando se tiene que ir al sitio [cran.r-project.org](http://cran.r-project.org) y bajar los paquetes manualmente.", message = "R permite descargar los paquetes desde el programa, solo se necesita conexión a interntet"),
+    allow_retry = TRUE
+  ),
+  question("¿Cada cuánto hay que instalar un paquete?",
+    answer("Cada vez que abrimos R"),
+    answer("Cada vez que reseteamos nuestra computadora"),
+    answer("Solamente una vez. Una vez instalado, el paquete queda almacenado en nuestra computadora.", correct = TRUE),
+    answer("No es necesario instalar paquetes para usar R.", message = "Aunque algunas funciones se pueden realizar sin el uso de paquetes, estos son los que nos permiten ampliar las posibilidades de R y las tareas que podemos hacer con el programa"),
+    allow_retry = TRUE
+  ),
+  question("¿Cuál comando usamos para cargar los paquetes ya instalados?",
+    answer("`library.load()`"),
+    answer("`require()`",  message ="Este comando se utiliza cuando queremos usar un programa sin instalarlo previamente" ),
+    answer("`library()`", correct = TRUE),
+    answer("No es necesario un comando, una vez instalado el paquete se puede utlizar."),
+    allow_retry = TRUE
+  )
+)
+```
+
+## Antes de comenzar
+Una vez que ya hemos instalado R, RStudio y algunos paquetes, podemos comenzar a trabajar. Lo primero que tenemos que hacer es elegir un directorio de trabajo, donde vamos a guardar nuestros archivos y de dónde vamos a cargar nuestros archivos.  
+
+Para saber en cuál directorio estamos trabajando, usamos el comando `getwd()`.   Si queremos cambiar el directorio de trabajo usamos `setwd("directorio de trabajo")` y listo! 
+
+Lo ideal es tener todos los archivos que vayamos a necesitar en esa carpeta.  
+
+###¿Cómo pedir ayuda? 
+Siempre que vamos a aprender a usar un programa es muy importante saber cómo acceder a la ayuda. En R esto es muy fácil y solamente se debe escribir `?` delante del comando o el objeto.  Por ejemplo, si quisiéramos saber más sobre el comando `setwd()`, simplemente escribimos `?setwd()`
+
+Pruebe ese comando en la consola: 
+
+```{r help, exercise = TRUE}
+
+```
+
+<div id="help-hint">
+**Pista:** Escriba `?setwd()` y de click al botón azul.
+</div>
+
+```{r help-check, echo = FALSE}
+# checking code
+```
+
+## Importar archivos
+
+Cuando trabajamos con datos nos enfrenteamos a diferentes tipos de archivos: .csv, .xlsx, .dta, .sav, entre otros.   En este segmento vamos a ver cómo importar archivos a R para poder analizarlos.
+
+###Importar .csv
+Para importar archivos .csv usamos el comando `read.csv()`. En el argumento de la función, se debe poner la dirección de dónde está el archivo, ya sea en la computadora o en línea; se debe indicar si la primera fila corresponde a los nombres de las variables y detallar el tipo de separador de los datos y preferiblemente la codificación del archivo, para que lea los caracteres extraños correctamente.  Por ejemplo se vería así: `read.csv("archivo.csv", header = TRUE, sep=",", fileEncoding = "UTF-8")` 
+
+####Ejercicio
+En la consola de abajo corra el código para importar un archivo csv que se encuentra en la siguiente dirección `http://bit.ly/2vsPsRZ`
+```{r import, exercise=TRUE}
+base <- read.csv("http://bit.ly/2vsPsRZ", header = TRUE, sep=",", fileEncoding = "UTF-8")
+
+base
+```
+
+¡La base está importada!
+
+__Importante:__  
+
+Como puede ver en el código antes del comando escribimos `base <- `  ¿Por qué? Para almacenar elementos (bases de datos, gráficos, vectores, matrices) en R como objetos usamos el símbolo `<-`.  En el ejemplo anterior, queríamos importar una archivo .csv y almacenarlo como un objeto en R (en este caso un objeto llamado `base`), para poder utilizarlo luego.   Entonces una vez importado el archivo escribimos el nombre del objeto `base` para que se muestre en la consola.  
+
+
+####Otros comandos para importar archivos delimitados
+
+Con el comando `read.delim()` se pueden importar `.csv` u otros archivos delimitados como `.txt`.  El comando sería `read.delim("nombrearchivo", sep="separador")`, donde en lugar de separador pondríamos el caracter por el que están separados los datos, por ejemplo:  `,` `:` `;` `|` `$`, entre otros. 
+
+###Importar archivos de Excel
+
+Para importar archivos de Excel, existen diferentes paquetes: 
+
+* `readxl()`
+* `xlsx ()`
+
+```{r, eval=FALSE}
+#Con xlsx
+base <- read.xlsx("nombre del archivo", 
+                sheetName= "nombre de la hoja")
+
+#Con readxl
+base <- read_excel("nombre del archivo")
+```
+
+###Importar archivos de Stata y SPSS
+
+Se puede utilizar el paquete `foreign()`
+```{r, eval=FALSE}
+#Archivo de SPSS
+archivo <- read.spss("nombre del archivo.sav", use.value.labels = TRUE, to.data.frame = TRUE)
+
+##Se puede poner la opcion use.value.labes = FALSE, si se quiere obtener los codigos de la variables  y no las etiquetas.
+
+#Con readxl
+archivo <- read.dta("nombre del archivo")
+```
+
+##Tipos de datos 
+
+Ahora que aprendimos como importar archivos, podemos empezar a trabajar.  En este segmento vamos a aprender sobre dos estructuras de datos muy comunes en R, los **data frame** y las **tibbles**.  Estas son estructuras para alamacenar datos tabulares, como por ejemplo los archivos que importamos desde Excel.  Básicamenete estos objetos tienen variables (que pueden ser de diferente tipo) y filas, que corresponden a cada una de las observaciones.  
+
+Para estos ejemplos vamos a utilizar la base del paquete `nycflights13`, que contiene la base de datos `flights`.  Esta base describe a cada uno de los vuelos que salieron de Nueva York durante el 2013.  Los datos vienen del US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?flights`.
+
+Ya el paquete está cargado en el tutorial, pero si lo quisiera instalar desde su computadora recuerde los pasos:
+
+1.`install.packages('nycflights13')` para instalar el paquete  
+2. Cargue el paquete con `library(nycflights13)` 
+
+###Ver la base de datos
+Para ver la base de datos, puede escribir en la consola de abajo en nombre de la base: `flights`.
+
+```{r flights, exercise = TRUE}
+
+```
+
+<div id="flights-hint">
+**Pista:** Escriba flights y luego el botón azul. 
+</div>
+
+```{r flights-check}
+# checking code
+```
+
+Para ver la base de datos completa y no solamente las primeras filas usamos el comando `View()`.  En este caso `View(flights)`. Este comando nos permite ver la base completa en otra ventana. 
+
+### Tipos de variables
+ 
+```{r flights3, exercise = TRUE, exercise.eval = TRUE}
+flights
+``` 
+ 
+Como puede observar R muestra debajo del nombre de cada columna abreviaciones de letras. Estas describen el tipo de variable que está almacenada en cada columna de `flights`:
+
+* `int` se refiere a "intergers" o números enteros.
+
+* `dbl` se refiere a doubles, o números reales.
+
+* `chr` se refiere a caracteres, también conocidos como "strings".
+
+* `dttm` se refiere a date-times (una fecha + una hora).
+
+Otros tipos de variables comunes que no contiene esta base de datos pero que es frecuente encontrar son: 
+
+* `lgl` se refiere a logical, vectores que solo conienen `TRUE` o `FALSE`.
+
+* `fctr` se refiere a factors, que R utiliza para representar variables categóricas.
+
+* `date` se refiere a dates, o fechas.
+
+
+### Quiz #3: Tipos de datos
+
+```{r exercises1, exercise = TRUE}
+
+```
+
+```{r quiz1, echo = FALSE}
+quiz(caption = "Use la consola de arriba para poder responder las preguntas.",
+  question("¿Qué información contiene la variable `air_time`?  Lea la ayuda de la base de datos usano `?flights` para averiguarlo.",
+           answer("Hora de salida de avión"), 
+           answer("Tiempo que el avión está en aire, en minutos", correct= TRUE),
+           answer("Distancia ente aeropuertos"),
+           answer("Tiempo de retraso del avión"), 
+           allow_retry = TRUE
+  ),
+  question("¿Cuántas filas y variables tiene `flights`?",
+           answer("19 filas y 336.776 variables"), 
+           answer("336.766 filas y 7 variables"),
+           answer("336.766 filas y 19 variables", correct = TRUE),
+           answer("No se sabe"),
+           incorrect = "Pista: R enumera las filas y columnas cuando escribimos el nombre de la base en la consola. Examine el contenido de `flights` en la consola de arriba.", 
+           allow_retry = TRUE
+), 
+question("¿Qué tipos de variables hay en `flights`? Selecciones todas las que aplican.",
+         type = "multiple",
+         allow_retry = TRUE,
+         incorrect = "Revise de nuevo `flights`.",
+         answer("integers", correct = TRUE),
+         answer("doubles", correct = TRUE),
+         answer("factors"),
+         answer("characters", correct = TRUE)
+)
+)
+```
