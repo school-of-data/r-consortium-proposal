@@ -35,7 +35,8 @@ So many questions! I have not validated whether or not all of these present some
 - ??
 
 ## Analyze
-- Linear or logistic regressions!!
+- Linear, logistic, or poisson regressions!!
+- http://www.statmethods.net/advstats/glm.html
 - If that's too advanced,
   - Graphing something like suspect gender x frisk or no frisk
   - Histogram of the zipcodes where stops happen in
