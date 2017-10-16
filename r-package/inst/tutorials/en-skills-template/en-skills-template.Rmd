@@ -1,0 +1,63 @@
+---
+title: "Skills Lesson: Skills Lesson Name"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library("learnr")
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+This is where a very short introduction goes.
+
+Possible skills lessons could be:
+
+- Skills Lesson: Reading Data into R
+- Skills Lesson: Data Preparation
+- Skills Lesson: Visualising Data
+
+Skills lessons should be very short and simple.
+
+- Show important packages with 1 or 2 simple examples. 
+- Link to other pages for *further reading*.
+
+### Naming conventions
+Recipe files should be named `language-skills-name.Rmd` (example `de-skills-reading-data.Rmd`)
+
+- `language` should be `en` for English, `de` for German, `es` for Spanish and `fr` for French. File names should all be in English in order to know which lessons belong together.
+- `skills` is the same word for all skills lessons (look at the recipe template for recipe naming conventions).
+- `name` should be a descriptive name (e.g. `visualisation` for a data visualisation skills lesson).
+
+Titles of skills lessons should be `Skills Lesson: Skills Lesson Name` with upper case letters in English, 
+`Kompetenzlektion: Name` in German, ??? in Spanish and ??? in French.
+
+
+## Important packages and functions
+
+For this skill packages `ggplot2` and `dplyr` are especially important. 
+With them you can do things like
+```{r plot1, exercise = TRUE}
+library("ggplot2")
+d <- ggplot(diamonds, aes(carat, price))
+d + geom_point(alpha = 1/10)
+```
+and
+```{r summarise, exercise = TRUE, message=FALSE}
+library("dplyr")
+iris %>%
+  group_by(Species) %>%
+  summarise_all(mean)
+```
+
+
+## Further reading
+
+- [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+on **this** and **that**.
+- The [dplyr website](http://dplyr.tidyverse.org/).
+
+
+

@@ -1,0 +1,116 @@
+---
+title: "Data Recipe: Data Recipe Name"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library("learnr")
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Introduction 
+
+Add here some text introducing the example. 
+
+### Naming conventions
+Recipe files should be named `language-recipe-name.Rmd` (example `de-recipe-dual-use.Rmd`)
+
+- `language` should be `en` for English, `de` for German, `es` for Spanish and `fr` for French. File names should all be in English in order to know which lessons belong together.
+- `recipe` is the same word for all recipes (look at the skills lesson template for skills lesson naming conventions).
+- `name` should be a descriptive name (e.g. `brexit` for analysis of brexit data).
+
+Titles of recipes should be `Data Recipe: Data Recipe Name` with upper case letters in English, 
+`Datenrezept: Name` in German, ??? in Spanish and ??? in French.
+
+### What happens in the following?
+The following chapters are the steps of
+the School of Data Pipeline (see https://schoolofdata.org/methodology/).
+In this template the steps of the pipeline are explained in the respective
+sections. Please explain what a journalist would do for the
+given example in the given step.
+
+![](images/Data-pipeline-v2-EN.png)
+
+## DEFINE
+
+You can add interactive components such as questions 
+(for help, see https://rstudio.github.io/learnr/questions.html)
+
+```{r letter-a, echo=FALSE}
+question("Did you get what I was saying?",
+  answer("No"),
+  answer("Maybe"),
+  answer("Yes", correct = TRUE)
+)
+```
+
+
+> Define: Data-driven projects always have a "define the problem you're trying to solve" component. It's in this stage you start asking questions and come around the issues that will matter in the end. Defining your problem means going from a theme (e.g. air pollution) to one or multiple specific questions (has bikesharing reduced air pollution?). Being specific forces you to formulate your question in a way that hints at what kind of data will be needed. Which in turns helps you scope your project: is the data needed easily available? Or does it sound like some key datasets will probably be hard to get?
+
+
+## FIND
+
+> Find: While the problem definition phase hints at what data is needed, finding the data is another step, of varying difficulty. There are a lot of tools and techniques to do that, ranging from a simple question on your social network, to using the tools provided by a search engine (such as Google search operators), open data portals or a Freedom of Information request querying about what data is available in that branch of government. This phase can make or break your project, as you can't do much if you can't find the data! But this is also where creativity can make a difference: using proxy indicators, searching in non-obvious locations... don't give up too soon!
+
+## GET
+
+> Get: To get the data from its inital location to your computer can be short and easy or long and painful. Luckily, there's plenty of ways of doing that. You can crowdsource using online forms, you can perform offline data collection, you can use some crazy web scraping skills, or you could simply download the datasets from government sites, using their data portals or through a Freedom of Information request.
+
+## VERIFY
+
+> Verify: We got our hands in the data, but that doesn't mean it's the data we need. We have to check out if details are valid, such as the meta-data, the methodology of collection, if we know who organised the dataset and it's a credible source. We've heard a joke once, but it's only funny because it's true: all data is bad, we just need to find out how bad it is!
+
+## CLEAN
+
+The CLEAN and ANALYSE steps will likely be the longest parts with the most R code. 
+Make the R code interactive by including exercises 
+(for help see https://rstudio.github.io/learnr/exercises.html).
+
+Example:
+
+Look at the `airquality` data set on day 1 (hint: `Day == 1`).
+```{r subsetting, exercise=TRUE}
+
+```
+
+```{r subsetting-solution}
+subset(airquality, Day == 1)
+```
+
+
+
+> Clean: It's often the case the data we get and validate is messy. Duplicated rows, column names that don't match the records, values that contain characters which will make it difficult for a computer to process and so on. In this step, we need skills and tools that will help us get the data into a machine-readable format, so that we can analyse it. We're talking about tools like OpenRefine or LibreOffice Calc and concepts like relational databases.
+
+
+## ANALYSE
+
+If the code is more complex, already enter the solution. 
+By clicking a butten, the learner can then run the code but still
+has the possibily to change the code.
+
+Example:
+```{r first_plot, exercise = TRUE}
+library("ggplot2")
+p <- ggplot(mtcars, aes(wt, mpg))
+p + geom_point()
+```
+
+
+> Analyse: This is it! It's here where we get insights about the problem we defined in the beginning. We're gonna use our mad mathematical and statistical skills to interview a dataset like any good journalist. But we won't be using a recorder and a notebook. We can analyse datasets using many, many skills and tools. We can use visualisations to get insights of different variables, we can use programming languages packages, such as Pandas (Python) or simply R, we can use spreadsheet processors, such as LibreOffice Calc or even statistical suites like PSPP.
+
+## PRESENT
+
+> Present: And, of course, you will need to present your data. Presenting it is all about thinking of your audience, the questions you set out to answer and the medium you select to convey your message or start your conversation. You don't have to do all by yourself, it's good practice to get support from professional designers and storytellers, who are experts at understanding what are the best ways to present data visually and with words.
+
+
+## Summary and further reading
+
+In this lesson we learned           Further reading 
+----------------------------------- --------------------------------------------------------
+How to do a                         [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) on **a**. 
+                                    The [dplyr website](http://dplyr.tidyverse.org/). 
+How to do b                         The [ggplot2 website](http://ggplot2.tidyverse.org/)
+How to do c                         ...
+
