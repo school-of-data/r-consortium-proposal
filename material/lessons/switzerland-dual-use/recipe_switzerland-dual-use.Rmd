@@ -27,13 +27,13 @@ TODO:
 ----
 ## What are dual-use goods?
 Dual-use goods are goods that can be used for civil and military purposes. 
-In Switzerland, these goods are governed with a special legislation – 
-unlike in other countries, where they are looked at as conventional arms exports. 
+In Switzerland, these goods are controlled by special legislation,
+unlike in other countries where they are looked at as conventional arms exports. 
 
 The state secretariat for economic affairs (SECO) in Switzerland decides which
 dual-use goods may be exported and also 
 [provides the data](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html) 
-after each quarter.
+on a quarterly basis.
 
 The [SRF data](srf.ch/data) team - the data journalism team of Swiss Radio and TV -
 has been repeatedly analysing this data in the past years. 
@@ -52,9 +52,9 @@ You can find the entire analysis on the [SRF data GitHub repository](https://git
 and the article from January 2017 on the 
 [SRF website](http://www.srf.ch/news/schweiz/schweiz-bewilligt-millionendeal-mit-dem-irak).
 
+So let's jump right into the School of Data analysis pipeline!  As a reminder, you can find it [here](https://schoolofdata.org/methodology/).
 
-
-# Ask
+# Define
 
 At the beginning of 2017 SRF data analyst Timo Grossenbacher wanted to answer the 
 question   
