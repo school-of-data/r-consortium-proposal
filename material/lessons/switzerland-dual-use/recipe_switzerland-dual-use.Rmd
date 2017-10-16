@@ -298,6 +298,7 @@ ggplot(elic_2016_4, aes(x = Land)) +
   geom_bar() +                        
   coord_flip()   #this makes the bars horizontal
 ```
+
 ### Order the countries by export volume
 
 Let's sort the destination countries by number of exports they receive. This takes a few steps. First we group the rows by country ('Land'), using group_by(). Then the function `summarize()` computes by country the number of exports, here 'n', actually the number of rows of entries for each country. Here, group_by() is nested within summarize(). Then `order()` identifies the row order of the data based on the number of rows `n` associated with each country.  Then `factor()` helps us define that when plotted, the country levels should be in the specified order. `ggplot()` automatically understands that it should plot the factor levels in this order.
