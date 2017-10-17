@@ -533,6 +533,9 @@ p1 <- ggplot(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = per
   geom_polygon() 
 p1
 ```
+The previous command may take some time to show the plot that looks like this:
+
+![First map](p1.png)
 
 But this map is not quite correct, we need to make sure that it has the right proportions:
 ```{r}
@@ -554,7 +557,7 @@ p3 + labs(x = "Longitude",
 ```
 TADA!
 
-
+![Final map](p4.png)
 
 ##
 
