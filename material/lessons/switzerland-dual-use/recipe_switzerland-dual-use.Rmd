@@ -7,12 +7,13 @@ runtime: shiny_prerendered
 ---
 
 
-```{r echo=FALSE}
+```{r setup, echo=FALSE}
 # set the knitr option so that no chunks produce messages 
 # silently load the learnr library so that the file will run as a shiny document
 knitr::opts_chunk$set(message = FALSE)
 library("learnr")
 ```
+
 
 TODO:
 
@@ -172,6 +173,13 @@ str(elic_2016_q1_raw)
 
 # Clean
 
+```{r prepare-clean}
+#load("./www/elic_2016_1.RData")
+```
+
+
+
+
 In this section we will need the `dplyr` package
 ```{r}
 library("dplyr")   ## if not available install by typing install.packages("dplyr")
@@ -182,7 +190,7 @@ As a first step we want to combine the four 2016 data sets. You might have alrea
 realised that the first data set has one collumn that is just `NA`. `NA` is the 
 missing value indicator in R. So basically this collumn does not contain any 
 information. Let's see what happens to this collumn if we combine the four 
-data sets using function `bind_rows()`.
+data sets using function `bind_rows()`.  `bind_rows()` keeps all collumns in all data sets and fills a column with `NA` when a data set does not contain the column. Also it created a new collumn called`Quartal`. It did that because we told it that the `.id` collumn is `Quartal` and the values for each `Quartal` are given in the quotation marks `"`.
 
 ```{r}
 names(elic_2016_q1_raw)
@@ -197,17 +205,20 @@ elic_2016_1 <- bind_rows("16/01" = elic_2016_q1_raw,
 names(elic_2016_1)
 str(elic_2016_1)
 ```
-`bind_rows()` keeps all collumns in all data sets and fills them with `NA` for the 
-data sets that do not contain this collumn. Also it created a new collumn called
-`Quartal`. It did that because we told it that the `.id` collumn is `Quartal` and
-the values for each `Quartal` is given in the quotation marks `"`. 
+
+Use head() with the n= option to get the first 10 rows of elic_2016_1 
+```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean'}
+
+```
+
+
 
 Now we do not want to keep the collumn with just `NA` values and we want to 
 rename a few variables. We can do this with function `select()`:
 
 - To just select a variable, name it (e.g. `Quartal`)
 - To select and rename a variable, put `newname = oldname` (e.g. `GN = Geschäftsnummer`)
-- For variables with spaces or special symbols, use to show where it starts and ends
+- For variables with spaces or special symbols, use a single back-quote to show where it starts and ends
   (see e.g. `Wert [CHF]`)
 - To select all except one variable, use the minus symbol 
   (e.g. `select(.data = elic_2016_3, -Art)` below)
@@ -226,7 +237,7 @@ str(elic_2016_2)
 We are only interested in exports (variable `Art`, value `"Ausfuhr"`), so we use
 `filter()` to select the rows in the data set where this is the case. Before that
 we check how many rows contain other values. `elic_2016_2$Art` gives us the variable
-we are interested in and functin `table()` creates a table for the frequencies of
+we are interested in and function `table()` creates a table for the frequencies of
 the different values. 
 ```{r}
 table(elic_2016_2$Art)
