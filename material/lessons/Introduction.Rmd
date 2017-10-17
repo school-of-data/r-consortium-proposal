@@ -145,6 +145,26 @@ To load the packages run
 library("xlsx") 
 library("foreign") 
 ```
+If you use RStudio, you can also install and load the packages through Install button in the Packages tab and checkboxes in the package list in the same tab. Note: If you want to install all packages for the whole lesson, repeat the same thing for `dplyr`, `gmodels`, `ggplot2`, `GGally`, `raster`, `maptools`, `broom`, and `gpclib` packages or run the following commands:
+```{r, eval=FALSE}
+install.packages("dplyr")
+install.packages("gmodels")
+install.packages("ggplot2")
+install.packages("GGally")
+install.packages("raster")
+install.packages("maptools")
+install.packages("broom")
+install.packages("gpclib")
+
+library("dplyr")
+library("gmodels")
+library("ggplot2")
+library("GGally")
+library("raster")
+library("maptools")
+library("broom")
+library("gpclib")
+```
 Now we can read the data: 
 ```{r}
 # read results data
@@ -513,6 +533,9 @@ p1 <- ggplot(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = per
   geom_polygon() 
 p1
 ```
+The previous command may take some time to show the plot that looks like this:
+
+![First map](p1.png)
 
 But this map is not quite correct, we need to make sure that it has the right proportions:
 ```{r}
@@ -534,7 +557,7 @@ p3 + labs(x = "Longitude",
 ```
 TADA!
 
-
+![Final map](p4.png)
 
 ##
 

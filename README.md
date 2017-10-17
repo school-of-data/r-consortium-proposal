@@ -21,6 +21,7 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
 - A [data journalists view on R](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/why_use_R.md) by Timo Grossenbacher
 - The following data recipes
     + [Switzerland dual use goods](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/switzerland-dual-use/recipe_switzerland-dual-use.Rmd)
+     + [WIP - Visualisation of polls results during presidential election in France](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/polls.Rmd)
 - The following skills lessons 
     + NA
   
@@ -29,14 +30,6 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
  
  ### Wanna get involved?
  
-We are very thankful for any contributions. You don't need to be an R specialist or know R at all. Come talk to us to find out how you could possibly help :cake: :smiley: :clap:
+We are very thankful for any contributions. You don't need to be an R specialist or know R at all. 
  
-Send an email to heidi@schoolofdata.ch (Heidi is very friendly and will help you figure out how you can best contribute to the project) or join the #r-projects channel on the School of Data slack chat.
- 
-We currently need help with:
- 
- - Creating tutorials (data recipes and skills lessons)
- - Translation (no R knowledge required)
- - Beta testing (no R knowledge required): go through the existing material and point out 
- things you don't understand or points where you get stuck.
- - Planning of the website
+Check out [CONTRIBUTING.md](https://github.com/school-of-data/r-consortium-proposal/blob/master/CONTRIBUTING.md) for infos on how you can help :cake: :smiley: :clap:
