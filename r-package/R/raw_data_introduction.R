@@ -9,7 +9,7 @@
 #'
 #' @keywords datasets
 #'
-#' @aliases demographic1 demographic2
+#' @aliases demographic1 demographic2 gbr_sp
 #'
 #' @examples
 #' data(introduction_raw)

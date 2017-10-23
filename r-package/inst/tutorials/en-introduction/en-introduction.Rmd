@@ -21,44 +21,41 @@ library("learnr")
 ## Introduction
 _interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations_
 
-    Are you a journalist?
-    -> Yes -> No
+```{r q_journali, echo=FALSE}
+question("Are you a journalist?",
+  answer("Yes", correct = TRUE, message = "This course is for you!"),
+  answer("No", correct = TRUE, message = "This tutorial is delibarately, intensely, exclusively focused on journalists. If that's ok with you, please feel free to take a look at the course :)"),
+  correct = "Welcome!", incorrect = "Welcome!"
+)
+```
 
-    |____(if no) this tutorial is delibarately, intensely, exclusively focused on journalists. If you want to continue you'll have to pretend to be a journalist and, believe us, it's not pleasant. Do you still want to continue?
+```{r q_heard, echo=FALSE}
+question("Have you ever heard about R?",
+  answer("Yes", correct = TRUE),
+  answer("No", correct = TRUE),
+  correct = "Welcome! This course is for you!", incorrect = "Welcome! This course is for you!"
+)
+```
+Well, despite its mysterious and concise name, R is an open source programming
+language and environment for statistical computing, widely used among data analysts, statisticians,
+programmers and more recently, by data journalists.   Our mission today will be to convince you
+that R is worth your precious time and will help you improve your work in the newsroom.
 
-    ____ -> Yes -> No
+```{r q_use, echo=FALSE}
+question("Do you already use R your work?",
+  answer("Yes", correct = TRUE, message = "However, there is always something to learn, right?"),
+  answer("No", correct = TRUE, message = "We think R is a great tool for journalists. Let's see if we can convince you."),
+  correct = "Great! What follows is a beginner tutorial for R-newbies.", 
+  incorrect = "Great! What follows is a beginner tutorial for R-newbies."
+)
+```
 
-         |
-         |____ (if yes) Have you ever heard about this thing we call R?
+In the following we will show you a story that commonly comes up for journalists:
+**post-election analysis**.
+Our example are the Brexit votes.
 
-         ____-> Yes -> No
-             |
-             |____ (if no) Well, despite its mysterious and concise name, R is an open source programming
-             language and environment for statistical computing, widely used among data analysts, statisticians,
-             programmers and more recently, by data journalists.   Our mission today will be to convince you
-             that R is worth your precious time and will help you improve your work in the newsroom.
-
-             |
-             |____ (if yes) Do you already use R your work?
-
-              ____-> Yes -> No
-
-                    |
-                    |____________ (if yes) What follows is a beginner tutorial for R-newbies.
-                    You could jump directly to [our list of R recipes]() or still follow the introduction tutorial
-                    to steal ideas for your own R trainings (we know who you are!).
-
-                    |
-                    |____________ (if no) So an R atheist? Or maybe agnostic?
-                    Our mission will be to convice you to actually start using R in your workflow.
-                    If we fail, we allow you the privilege to send us an angry tweet.
-
-      --------------------
-     | Challenge accepted |
-      --------------------
 
 ## DEFINE
-_Here we set up the story that will be used to contextualise all actions in the tutorial_
 
 A referendum in your country is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes.  In order to see what would make a good story, you decide to analyse and visualise the data.
 Even though you normally work with spreadsheets, you want to try R.  Here are a few reasons why:
@@ -72,13 +69,22 @@ Allows you to make some graphics, but you are limited by the program to what typ
 You go through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
 ... | ...
 
-> **Wait, what?**
+> **Wait, what? I have to write code?**
 >
-> how do I even know how write R code? I'm not a programmer!
->
-> Well you don't need to: as long as you understand what you want to do, you will probably find an answer in the [documentation](), [tutorials]() or [existing projects]().
+> How do I even know how write R code? I'm not a programmer!
 
-We are going to guide you in each step, don't worry, it won't be that hard. Let's start with getting the data.
+Well you don't need to. We are here to help.
+We are going to guide you in each step, don't worry, it won't be that hard. 
+To get started with this tutorial, you don't even have to install anything.
+For now, you can just try stuff by writing code on this website. Let's try 
+if that works. Please run the following code by clicking the `Run Code` button:
+```{r try, exercise = TRUE}
+3 + 5
+```
+For those of you who do want to install R, we recommend installing R and the
+RStudio editor [ADD LINK HERE](). Not all R code chunks in the following will have
+a `Run Code` button. If you want to reproduce the following on your computer,
+you have to copy also these code chunks.
 
 In this lesson we will need a couple of add-on R-Packages.
 To install the packages run:
@@ -109,7 +115,10 @@ library("gpclib")
 ```
 R-packages have to be installed only once, but loaded every time.
 If you use RStudio, you can also install and load the packages through the
-Install button in the Packages tab.
+`Install` button in the `Packages` tab.
+
+![](input/install_pkgs.png)
+
 
 
 ## GET
@@ -200,8 +209,12 @@ download.file("https://github.com/school-of-data/r-consortium-proposal/blob/mast
 demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
 demographic2 <- read.dta("demographics2.dta")
 
+# spatial info
+library("raster")
+gbr_sp <- getData("GADM", country = "GBR", level = 2)
+
 # save intermediate results
-save(results, demographic1, demographic2, file = "raw_data_introduction.RData")
+save(results, demographic1, demographic2, gbr_sp, file = "introduction_raw.RData")
 ```
 
 
@@ -425,7 +438,7 @@ datahasc
 
 Now that you have cleaned your data, you're ready to start the analysis!
 
-```{r letter-a, echo=FALSE}
+```{r convinced, echo=FALSE}
 question("Are you convinced yet that R is worth your time?",
   answer("not really"),
   answer("hmmm, I need to see more to decide"),
@@ -580,7 +593,7 @@ sources. We use [GADM.org](http://www.gadm.org/) as a source here. The country o
 interest is Great Britain (GBR) and we need info on 2nd level administrative
 subdivision. Check out what other geographic information you can get by typing
 `?raster::getData` into the R console.
-```{r}
+```{r, eval=FALSE}
 ## get the spatial data for Great Britain (GBR)
 gbr_sp <- getData("GADM", country = "GBR", level = 2)
 ```
