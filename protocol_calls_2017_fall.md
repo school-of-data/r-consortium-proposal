@@ -1,3 +1,20 @@
+# 17.10.2017
+
+## Reorganisation of the project
+
+### [Communication in gitter](https://gitter.im/mozilla/open-leadership-training)
+
+### [Organisation Document](https://docs.google.com/document/d/1Q_i7b16EZrtadMW4Cx1csgCxGNm24Putf_u-kMu6aQc/edit?usp=sharing)
+
+### [GitHub issues](https://github.com/school-of-data/r-consortium-proposal/issues)
+
+
+## Moving foward
+
+1. Where are we on the data recipes?
+2. Where are we on the skills lessons?
+
+
 # 03.10.2017
 
 ## Report from summer camp (Peter)
