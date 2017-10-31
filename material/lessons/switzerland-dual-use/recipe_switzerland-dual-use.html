@@ -59,8 +59,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>This is what we will do, this is what we are doing and this is what we’ve done</li>
 </ul>
 <hr />
-<p>Dual-use goods are goods that can be used for civil and military purposes. In Switzerland, these goods are governed with a special legislation – unlike in other countries, where they are looked at as conventional arms exports.</p>
-<p>The state secretariat for economic affairs (SECO) in Switzerland decides which dual-use goods may be exported and also <a href="https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html">provides the data</a> after each quarter.</p>
+<div id="section-what-are-dual-use-goods" class="section level2">
+<h2>What are dual-use goods?</h2>
+<p>Dual-use goods are goods that can be used for civil and military purposes. In Switzerland, these goods are controlled by special legislation, unlike in other countries where they are looked at as conventional arms exports.</p>
+<p>The state secretariat for economic affairs (SECO) in Switzerland decides which dual-use goods may be exported and also <a href="https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html">provides the data</a> on a quarterly basis.</p>
 <p>The <a href="srf.ch/data">SRF data</a> team - the data journalism team of Swiss Radio and TV - has been repeatedly analysing this data in the past years. The reasons for using R for this task are various:</p>
 <ul>
 <li>R can read in Excel data (SECO provides the data in xlsx format)</li>
@@ -68,10 +70,14 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>R can export data to csv so it can be used in other programs (e.g. Excel)</li>
 <li>R produces good graphics and allows for individualised themes</li>
 <li>Reproducible documents (e.g. HTML or PDF) can be created with R, while changes and updates can be included without major effort</li>
+<li>R allows you to document how you have transformed the data to be accountable on your work to the readers</li>
+<li>With R reproducible documents (e.g. HTML or PDF) can be created, changes are included without major efforts</li>
 </ul>
 <p>You can find the entire analysis on the <a href="https://github.com/srfdata/2017-01-dual-use">SRF data GitHub repository</a> and the article from January 2017 on the <a href="http://www.srf.ch/news/schweiz/schweiz-bewilligt-millionendeal-mit-dem-irak">SRF website</a>.</p>
-<div id="section-ask" class="section level1">
-<h1>Ask</h1>
+<p>So let’s jump right into the School of Data analysis pipeline! As a reminder, you can find it <a href="https://schoolofdata.org/methodology/">here</a>.</p>
+</div>
+<div id="section-define" class="section level1">
+<h1>Define</h1>
 <p>At the beginning of 2017 SRF data analyst Timo Grossenbacher wanted to answer the question<br />
 <strong>Which dual-use goods were exported to which countries in each quarter of the years 2012 to 2016?</strong></p>
 <p>Having cleaned and visualised the data he realised that suddenly in 2016 Switzerland started exporting dual-use goods to Irak after not having done so in the years prior. This became the story in the January 2017 <a href="http://www.srf.ch/news/schweiz/schweiz-bewilligt-millionendeal-mit-dem-irak">article</a> .</p>
@@ -134,14 +140,14 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 <pre><code>## [1] &quot;Geschäftsnummer&quot;            &quot;Bestimmungsland&quot;           
 ## [3] &quot;Güterart&quot;                   &quot;Geschäftstyp&quot;              
 ## [5] &quot;Richtung&quot;                   &quot;Exportkontrollnummer [EKN]&quot;
-## [7] &quot;Wert [CHF]&quot;                 &quot;&quot;</code></pre>
+## [7] &quot;Wert [CHF]&quot;</code></pre>
 <ul>
 <li><code>head()</code> shows the first few rows of the data frame</li>
 </ul>
 <pre class="r"><code>head(elic_2016_q1_raw)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]},{"label":[""],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007724","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"38330","8":"NA"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"4546","8":"NA"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"122287","8":"NA"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D002.c1","7":"5000","8":"NA"},{"1":"8006915","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"132777","8":"NA"},{"1":"8006792","2":"Ägypten","3":"National kontrollierte Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5.1","7":"453","8":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007724","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"38330"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"4546"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"122287"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D002.c1","7":"5000"},{"1":"8006915","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"132777"},{"1":"8006792","2":"Ägypten","3":"National kontrollierte Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5.1","7":"453"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <ul>
@@ -150,7 +156,7 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 <pre class="r"><code>tail(elic_2016_q1_raw)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]},{"label":[""],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007295","2":"Vietnam","3":"Besondere militärische Güter\\r\\nBesondere militärische Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"ML13\\r\\nML22","7":"5000000","8":"NA"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"2000","8":"NA"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"18000","8":"NA"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"16320","8":"NA"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A001.f1","7":"10030","8":"NA"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"8330","8":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007295","2":"Vietnam","3":"Besondere militärische Güter\\r\\nBesondere militärische Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"ML13\\r\\nML22","7":"5000000"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"2000"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"18000"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"16320"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A001.f1","7":"10030"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"8330"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <ul>
@@ -164,7 +170,6 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 ##  Mean   :8007158                                        
 ##  3rd Qu.:8007748                                        
 ##  Max.   :8008218                                        
-##                                                         
 ##  Geschäftstyp         Richtung         Exportkontrollnummer [EKN]
 ##  Length:943         Length:943         Length:943                
 ##  Class :character   Class :character   Class :character          
@@ -172,39 +177,36 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 ##                                                                  
 ##                                                                  
 ##                                                                  
-##                                                                  
-##    Wert [CHF]                     
-##  Min.   :        0   Min.   : NA  
-##  1st Qu.:     1620   1st Qu.: NA  
-##  Median :    10500   Median : NA  
-##  Mean   :   422685   Mean   :NaN  
-##  3rd Qu.:   129224   3rd Qu.: NA  
-##  Max.   :120000000   Max.   : NA  
-##                      NA&#39;s   :943</code></pre>
+##    Wert [CHF]       
+##  Min.   :        0  
+##  1st Qu.:     1620  
+##  Median :    10500  
+##  Mean   :   422685  
+##  3rd Qu.:   129224  
+##  Max.   :120000000</code></pre>
 <ul>
 <li><code>str()</code> shows the type of each variable (here <code>num</code> for numeric and <code>chr</code> for character) and the first few values</li>
 </ul>
 <pre class="r"><code>str(elic_2016_q1_raw)</code></pre>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    943 obs. of  8 variables:
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    943 obs. of  7 variables:
 ##  $ Geschäftsnummer           : num  8007724 8007844 8007844 8007844 8006915 ...
 ##  $ Bestimmungsland           : chr  &quot;Ägypten&quot; &quot;Ägypten&quot; &quot;Ägypten&quot; &quot;Ägypten&quot; ...
 ##  $ Güterart                  : chr  &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; ...
 ##  $ Geschäftstyp              : chr  &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; ...
 ##  $ Richtung                  : chr  &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; ...
 ##  $ Exportkontrollnummer [EKN]: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
-##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...
-##  $                           : num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...</code></pre>
 </div>
 <div id="section-clean" class="section level1">
 <h1>Clean</h1>
 <p>In this section we will need the <code>dplyr</code> package</p>
 <pre class="r"><code>library(&quot;dplyr&quot;)   ## if not available install by typing install.packages(&quot;dplyr&quot;)</code></pre>
-<p>As a first step we want to combine the four 2016 data sets. You might have already realised that the first data set has one collumn that is just <code>NA</code>. <code>NA</code> is the missing value indicator in R. So basically this collumn does not contain any information. Let’s see what happens to this collumn if we combine the four data sets using function <code>bind_rows()</code>.</p>
+<p>As a first step we want to combine the four 2016 data sets. You might have already realised that the first data set has one collumn that is just <code>NA</code>. <code>NA</code> is the missing value indicator in R. So basically this collumn does not contain any information. Let’s see what happens to this collumn if we combine the four data sets using function <code>bind_rows()</code>. <code>bind_rows()</code> keeps all collumns in all data sets and fills a column with <code>NA</code> when a data set does not contain the column. Also it created a new collumn called<code>Quartal</code>. It did that because we told it that the <code>.id</code> collumn is <code>Quartal</code> and the values for each <code>Quartal</code> are given in the quotation marks <code>&quot;</code>.</p>
 <pre class="r"><code>names(elic_2016_q1_raw)</code></pre>
 <pre><code>## [1] &quot;Geschäftsnummer&quot;            &quot;Bestimmungsland&quot;           
 ## [3] &quot;Güterart&quot;                   &quot;Geschäftstyp&quot;              
 ## [5] &quot;Richtung&quot;                   &quot;Exportkontrollnummer [EKN]&quot;
-## [7] &quot;Wert [CHF]&quot;                 &quot;&quot;</code></pre>
+## [7] &quot;Wert [CHF]&quot;</code></pre>
 <pre class="r"><code>names(elic_2016_q2_raw)</code></pre>
 <pre><code>## [1] &quot;Geschäftsnummer&quot;            &quot;Bestimmungsland&quot;           
 ## [3] &quot;Güterart&quot;                   &quot;Geschäftstyp&quot;              
@@ -220,10 +222,9 @@ names(elic_2016_1)</code></pre>
 <pre><code>## [1] &quot;Quartal&quot;                    &quot;Geschäftsnummer&quot;           
 ## [3] &quot;Bestimmungsland&quot;            &quot;Güterart&quot;                  
 ## [5] &quot;Geschäftstyp&quot;               &quot;Richtung&quot;                  
-## [7] &quot;Exportkontrollnummer [EKN]&quot; &quot;Wert [CHF]&quot;                
-## [9] &quot;&quot;</code></pre>
+## [7] &quot;Exportkontrollnummer [EKN]&quot; &quot;Wert [CHF]&quot;</code></pre>
 <pre class="r"><code>str(elic_2016_1)</code></pre>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    3083 obs. of  9 variables:
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    3083 obs. of  8 variables:
 ##  $ Quartal                   : chr  &quot;16/01&quot; &quot;16/01&quot; &quot;16/01&quot; &quot;16/01&quot; ...
 ##  $ Geschäftsnummer           : num  8007724 8007844 8007844 8007844 8006915 ...
 ##  $ Bestimmungsland           : chr  &quot;Ägypten&quot; &quot;Ägypten&quot; &quot;Ägypten&quot; &quot;Ägypten&quot; ...
@@ -231,14 +232,19 @@ names(elic_2016_1)</code></pre>
 ##  $ Geschäftstyp              : chr  &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; &quot;Einzelbewilligung&quot; ...
 ##  $ Richtung                  : chr  &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; ...
 ##  $ Exportkontrollnummer [EKN]: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
-##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...
-##  $                           : num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
-<p><code>bind_rows()</code> keeps all collumns in all data sets and fills them with <code>NA</code> for the data sets that do not contain this collumn. Also it created a new collumn called <code>Quartal</code>. It did that because we told it that the <code>.id</code> collumn is <code>Quartal</code> and the values for each <code>Quartal</code> is given in the quotation marks <code>&quot;</code>.</p>
+##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...</code></pre>
+<div class="tutorial-exercise-support" data-label="prepare-clean1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData&quot;))</code></pre>
+</div>
+Use head() with the n= option to get the first 10 rows of elic_2016_1
+<div class="tutorial-exercise" data-label="check_values" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean1","exercise.checker":"NULL"}</script>
+</div>
 <p>Now we do not want to keep the collumn with just <code>NA</code> values and we want to rename a few variables. We can do this with function <code>select()</code>:</p>
 <ul>
 <li>To just select a variable, name it (e.g. <code>Quartal</code>)</li>
 <li>To select and rename a variable, put <code>newname = oldname</code> (e.g. <code>GN = Geschäftsnummer</code>)</li>
-<li>For variables with spaces or special symbols, use to show where it starts and ends (see e.g. <code>Wert [CHF]</code>)</li>
+<li>For variables with spaces or special symbols, use a single back-quote to show where it starts and ends (see e.g. <code>Wert [CHF]</code>)</li>
 <li>To select all except one variable, use the minus symbol (e.g. <code>select(.data = elic_2016_3, -Art)</code> below)</li>
 </ul>
 <pre class="r"><code>elic_2016_2 &lt;- select(.data = elic_2016_1,
@@ -258,11 +264,18 @@ str(elic_2016_2)</code></pre>
 ##  $ Typ     : chr  &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; &quot;Dual Use Güter&quot; ...
 ##  $ Signatur: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
 ##  $ Art     : chr  &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; ...</code></pre>
-<p>We are only interested in exports (variable <code>Art</code>, value <code>&quot;Ausfuhr&quot;</code>), so we use <code>filter()</code> to select the rows in the data set where this is the case. Before that we check how many rows contain other values. <code>elic_2016_2$Art</code> gives us the variable we are interested in and functin <code>table()</code> creates a table for the frequencies of the different values.</p>
-<pre class="r"><code>table(elic_2016_2$Art)</code></pre>
-<pre><code>## 
-##     Ausfuhr     Einfuhr Vermittlung 
-##        3062           1          20</code></pre>
+<div id="section-exercise" class="section level3">
+<h3>Exercise</h3>
+<p>We are only interested in exports (variable <code>Art</code>, value <code>&quot;Ausfuhr&quot;</code>), so we use <code>filter()</code> to select the rows in the data set where this is the case. Before that we check how many rows contain other values. <code>elic_2016_2$Art</code> gives us the variable we are interested in and function <code>table()</code> creates a table for the frequencies of the different values. Use table() to obtain the values of elic_2016_2$Art .</p>
+<div class="tutorial-exercise-support" data-label="prepare-clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise" data-label="clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean2","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="clean2-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>&quot;provide the full variable name as an argument to table()&quot;</code></pre>
+</div>
 <p>The data set after using <code>filter()</code> should have 3062 rows.</p>
 <pre class="r"><code>elic_2016_3 &lt;- filter(.data = elic_2016_2, Art == &quot;Ausfuhr&quot;)
 str(elic_2016_3)</code></pre>
@@ -332,6 +345,7 @@ elic_2016_4$Typ_raw &lt;- elic_2016_4$Typ
 # Next we assign the cleaned-up values in &#39;Typ&#39; to the data set column with the same name, effectively over-writing the original values.
 elic_2016_4$Typ &lt;- Typ</code></pre>
 </div>
+</div>
 <div id="section-analyse" class="section level1">
 <h1>Analyse</h1>
 <p>For this section we’ll produce some nice graphics with package <code>ggplot2</code></p>
@@ -342,7 +356,10 @@ elic_2016_4$Typ &lt;- Typ</code></pre>
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land)) +  
   geom_bar() +                        
   coord_flip()   #this makes the bars horizontal</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-22-1.png" width="672" /> ### Order the countries by export volume</p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="section-order-the-countries-by-export-volume" class="section level3">
+<h3>Order the countries by export volume</h3>
 <p>Let’s sort the destination countries by number of exports they receive. This takes a few steps. First we group the rows by country (‘Land’), using group_by(). Then the function <code>summarize()</code> computes by country the number of exports, here ‘n’, actually the number of rows of entries for each country. Here, group_by() is nested within summarize(). Then <code>order()</code> identifies the row order of the data based on the number of rows <code>n</code> associated with each country. Then <code>factor()</code> helps us define that when plotted, the country levels should be in the specified order. <code>ggplot()</code> automatically understands that it should plot the factor levels in this order.</p>
 <pre class="r"><code># This code groups elic_2016_4 by the variable country (&#39;Land&#39;), then uses summarise() to find the number of rows (the entries, i.e. exports) for each country. It assigns these values to the variable &#39;n&#39;. 
 n_land &lt;- summarise(group_by(elic_2016_4, Land), n = NROW(Land))
@@ -376,10 +393,10 @@ str(elic_2016_4$Land)</code></pre>
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land)) + 
   geom_bar() +
   coord_flip()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
-<div id="section-plot-the-countries-in-order-of-export-value" class="section level3">
-<h3>Plot the countries in order of export value</h3>
+<div id="section-plot-countries-in-order-of-export-value" class="section level3">
+<h3>Plot countries in order of export value</h3>
 <p>The following plot shows the worth of the goods that were exported to each country. Again we want to have the countries in a specific order, but this time the value we use to sort the data is the sum of the monitary value (the variable <code>Wert</code>) of exports to each country. So we re-order the countries based on the summed export value, and assign this order in the <code>levels =</code> specification.</p>
 <pre class="r"><code>wert_land &lt;- summarise(group_by(elic_2016_4, Land), sum = sum(Wert))
 # the re-ordering and assignment to a variable are here done in one line
@@ -390,7 +407,7 @@ elic_2016_4$Land &lt;- factor(elic_2016_4$Land, levels = ordered_land)</code></p
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land, y = Wert, fill = Typ)) + 
   geom_bar(stat = &quot;identity&quot;) +
   coord_flip()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>But wait, why are there countries listed, that do not seem to have gotten anything from switzerland? Let’s look at those:</p>
 <pre class="r"><code>library(&#39;knitr&#39;) # kable() in this package will make nice tables
 
@@ -548,31 +565,31 @@ elic_2016_4$Typ &lt;- factor(elic_2016_4$Typ, levels = rev(ordered_typ))</code><
   coord_flip() +  # Remember, we have to flip the plot to horizontal bars
   xlab(&quot;Land&quot;) # There is a lot of flexibility in the labeling of the plots. Here is a start.
 p_cntry</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-31-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-29-1.png" width="864" /></p>
 </div>
 </div>
 <div id="section-present" class="section level1">
 <h1>Present</h1>
 <p>One cool thing about using <code>ggplot2</code> in a newsroom is that you can have different themes (color and font schemes).</p>
 <pre class="r"><code>p_cntry + theme_minimal()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-32-1.png" width="624" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-30-1.png" width="624" /></p>
 <pre class="r"><code>p_cntry + theme_bw()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-32-2.png" width="624" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-30-2.png" width="624" /></p>
 <p>With the <code>ggthemes</code> package you can go even more wild and try themes that are similar to the themes of famous newsrooms…</p>
 <pre class="r"><code>library(&quot;ggthemes&quot;)</code></pre>
 <p>…such as the Economist,…</p>
 <pre class="r"><code>p_cntry + theme_economist() + scale_fill_economist()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-34-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-32-1.png" width="864" /></p>
 <p>…FiveThirtyEight,…</p>
 <pre class="r"><code>my_palette &lt;- c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, &quot;#F0E442&quot;, &quot;#0072B2&quot;, &quot;#D55E00&quot;)
 p_cntry + theme_fivethirtyeight() + scale_fill_manual(values = my_palette)</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-35-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-33-1.png" width="864" /></p>
 <p>…or the Wall Street Journal.</p>
 <pre class="r"><code>p_cntry + theme_wsj() + scale_fill_wsj()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-36-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-34-1.png" width="864" /></p>
 <p>And if you want to really badly go back to an ungly 2003 Excel style, you can do that too :)</p>
 <pre class="r"><code>p_cntry + theme_excel()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-37-1.png" width="624" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-35-1.png" width="624" /></p>
 <p>Or you take a theme you like and modify it. To create a School of Data themed plot, you can use the following colors and fonts. Gill Sans MT is used because it should work on both Windows and Mac.</p>
 <pre class="r"><code>scodablue &lt;- &quot;#00AFF0&quot; 
 scodagrey &lt;- &quot;#333333&quot;
@@ -586,14 +603,35 @@ p_cntry +
         panel.grid.minor.x = element_line(color = scodagrey2), 
         line = element_line(colour = scodagrey),
         legend.position = &quot;bottom&quot;)</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-38-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html/unnamed-chunk-36-1.png" width="864" /></p>
 
+<script type="application/shiny-prerendered" data-context="server-start">
+# set the knitr option so that no chunks produce messages 
+# silently load the learnr library so that the file will run as a shiny document
+knitr::opts_chunk$set(message = FALSE)
+library("learnr")
+</script>
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::register_http_handlers(session, metadata = NULL)
 </script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-check_values-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-check_values-code-editor`)), session)
+output$`tutorial-exercise-check_values-output` <- renderUI({
+  `tutorial-exercise-check_values-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-clean2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-clean2-code-editor`)), session)
+output$`tutorial-exercise-clean2-output` <- renderUI({
+  `tutorial-exercise-clean2-result`()
+})
+</script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
-{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css","rstudio-theme.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["learnr"]}]}]}
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css","rstudio-theme.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

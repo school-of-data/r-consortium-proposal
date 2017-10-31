@@ -173,9 +173,6 @@ str(elic_2016_q1_raw)
 
 # Clean
 
-```{r prepare-clean}
-#load("./www/elic_2016_1.RData")
-```
 
 
 
@@ -205,9 +202,15 @@ elic_2016_1 <- bind_rows("16/01" = elic_2016_q1_raw,
 names(elic_2016_1)
 str(elic_2016_1)
 ```
+```{r prepare-clean1, echo= FALSE}
+
+load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData"))
+
+```
+
 
 Use head() with the n= option to get the first 10 rows of elic_2016_1 
-```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean'}
+```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean1'}
 
 ```
 
@@ -233,15 +236,25 @@ elic_2016_2 <- select(.data = elic_2016_1,
                       Art = Richtung)
 str(elic_2016_2)
 ```
-
+### Exercise
 We are only interested in exports (variable `Art`, value `"Ausfuhr"`), so we use
 `filter()` to select the rows in the data set where this is the case. Before that
 we check how many rows contain other values. `elic_2016_2$Art` gives us the variable
 we are interested in and function `table()` creates a table for the frequencies of
-the different values. 
-```{r}
-table(elic_2016_2$Art)
+the different values. Use table() to obtain the values of elic_2016_2$Art . 
+
+```{r prepare-clean2}
+load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData"))
 ```
+
+
+```{r clean2, exercise=TRUE, exercise.setup = 'prepare-clean2'}
+
+```
+```{r clean2-hint}
+"provide the full variable name as an argument to table()"
+```
+
 The data set after using `filter()` should have 
 `r sum(elic_2016_2$Art == "Ausfuhr")` rows.
 ```{r}
