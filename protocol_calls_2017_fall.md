@@ -1,3 +1,38 @@
+# 31.10.2017
+
+## What is our progress on the project?
+See [progress document](https://docs.google.com/document/d/1Q_i7b16EZrtadMW4Cx1csgCxGNm24Putf_u-kMu6aQc/edit?usp=sharing).
+
+
+## Writing sprint / hackathon
+- Heidi will redo the doodle: only weekends ([link](https://doodle.com/poll/7dc4cecct83e3ei5))
+- OpenPizza?
+- Let's try to figure out how to pay people
+- Heidi sends out an email with the doodle
+
+## Organisation of the project next year
+- Heidi will start a postdoc and cannot do organisation + helping
+- Does anyone want to lead the project starting 2018?
+- Peter would be interested after solving his primary employment problem.
+- If we don't find anyone Cedric and David would also take over (this is not our preferred solution)
+
+# 17.10.2017
+
+## Reorganisation of the project
+
+### [Communication in gitter](https://gitter.im/mozilla/open-leadership-training)
+
+### [Organisation Document](https://docs.google.com/document/d/1Q_i7b16EZrtadMW4Cx1csgCxGNm24Putf_u-kMu6aQc/edit?usp=sharing)
+
+### [GitHub issues](https://github.com/school-of-data/r-consortium-proposal/issues)
+
+
+## Moving foward
+
+1. Where are we on the data recipes?
+2. Where are we on the skills lessons?
+
+
 # 03.10.2017
 
 ## Report from summer camp (Peter)
