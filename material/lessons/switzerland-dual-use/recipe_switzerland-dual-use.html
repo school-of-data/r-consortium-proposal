@@ -114,6 +114,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p>or equivalently</p>
 <pre class="r"><code>setwd(&quot;/home/heidi/Documents/switzerland-dual-use&quot;)</code></pre>
 <p>or assuming you have this file in the directory <code>switzerland-dual-use</code> and your file structure is as described above, you can use RStudio’s menu. Click on <code>Session</code>, then on <code>Set Working Directory</code> and specify the path including <code>switzerland-dual-use</code>.</p>
+<div id="section-set-your-working-directory-now-if-you-are-running-code-in-console" class="section level3">
+<h3>SET YOUR WORKING DIRECTORY NOW IF YOU ARE RUNNING CODE IN CONSOLE</h3>
 <p>To read Excel data into R, we need a special R package called <code>readxl</code>. To install the package run the following line in the Console window of RStudio:</p>
 <pre class="r"><code>install.packages(&quot;readxl&quot;)</code></pre>
 <p>To load the package, so you can access the functions, run the following in the Console window:</p>
@@ -123,6 +125,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 elic_2016_q2_raw &lt;- read_excel(path = &quot;data_raw/2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx&quot;)
 elic_2016_q3_raw &lt;- read_excel(path = &quot;data_raw/3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx&quot;)
 elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx&quot;)</code></pre>
+</div>
 </div>
 <div id="section-verify" class="section level2">
 <h2>Verify</h2>
@@ -195,7 +198,7 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 <h2>Clean</h2>
 <p>In this section we will need the <code>dplyr</code> package</p>
 <pre class="r"><code>library(&quot;dplyr&quot;)   ## if not available install by typing install.packages(&quot;dplyr&quot;)</code></pre>
-<p>As a first step we want to combine the four 2016 data sets. You might have already realised that the first data set has one collumn that is just <code>NA</code>. <code>NA</code> is the missing value indicator in R. So basically this collumn does not contain any information. Let’s see what happens to this collumn if we combine the four data sets using function <code>bind_rows()</code>. <code>bind_rows()</code> keeps all collumns in all data sets and fills a column with <code>NA</code> when a data set does not contain the column. Also it created a new collumn called<code>Quartal</code>. It did that because we told it that the <code>.id</code> collumn is <code>Quartal</code> and the values for each <code>Quartal</code> are given in the quotation marks <code>&quot;</code>.</p>
+<p>As a first step we want to combine the four 2016 data sets. You might have already realised that the first data set has one collumn that is just <code>NA</code>. <code>NA</code> is the missing value indicator in R. Thus, this collumn does not contain any information. Let’s see what happens to this collumn if we combine the four data sets using function <code>bind_rows()</code>. <code>bind_rows()</code> keeps all collumns in all data sets and fills a column with <code>NA</code> when a data set does not contain the column. Also it created a new collumn called<code>Quartal</code>. It did that because we told it that the <code>.id</code> collumn is <code>Quartal</code> and the values for each <code>Quartal</code> are given in the quotation marks <code>&quot;</code>.</p>
 <pre class="r"><code>names(elic_2016_q1_raw)</code></pre>
 <pre><code>## [1] &quot;Geschäftsnummer&quot;            &quot;Bestimmungsland&quot;           
 ## [3] &quot;Güterart&quot;                   &quot;Geschäftstyp&quot;              
@@ -228,7 +231,7 @@ names(elic_2016_1)</code></pre>
 ##  $ Exportkontrollnummer [EKN]: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
 ##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...</code></pre>
 <div class="tutorial-exercise-support" data-label="prepare-clean1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData&quot;))</code></pre>
+<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData&quot;))</code></pre>
 </div>
 <div id="section-exercise" class="section level3">
 <h3>Exercise</h3>
@@ -265,7 +268,7 @@ str(elic_2016_2)</code></pre>
 <h3>Exercise</h3>
 <p>We are only interested in exports (variable <code>Art</code>, value <code>&quot;Ausfuhr&quot;</code>), so we use <code>filter()</code> to select the rows in the data set where this is the case. Before that we check how many rows contain other values. <code>elic_2016_2$Art</code> gives us the variable we are interested in and function <code>table()</code> creates a table for the frequencies of the different values. Use table() to obtain the values of elic_2016_2$Art .</p>
 <div class="tutorial-exercise-support" data-label="prepare-clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData&quot;))</code></pre>
+<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData&quot;))</code></pre>
 </div>
 <div class="tutorial-exercise" data-label="clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean2","exercise.checker":"NULL"}</script>
@@ -289,7 +292,7 @@ str(elic_2016_3)</code></pre>
 <h3>Exercise</h3>
 <p>Now the collumn <code>Art</code> is not needed anymore. Let’s remove it from the data set and asign the new data set to the name elic_2016_4. Use select(), specifying the elic_2016_3 data frame and the variable as -Art. Then use str() to look at the new elic_2016_4 object.</p>
 <div class="tutorial-exercise-support" data-label="prepare-clean3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>  load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))</code></pre>
+<pre class="text"><code>  load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))</code></pre>
 </div>
 <div class="tutorial-exercise" data-label="clean3" data-caption="Code" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean3","exercise.checker":"NULL"}</script>
@@ -348,7 +351,8 @@ elic_2016_4$Typ &lt;- Typ</code></pre>
 <h3>Exercise</h3>
 <p>Use one of the R functions we used just above to check that the new values in elic_2016_4$Typ are as you expect.</p>
 <div class="tutorial-exercise-support" data-label="prepare-check1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))
+<pre class="text"><code>library(tidyverse)
+load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))
 
 elic_2016_4 &lt;- select(.data = elic_2016_3, -Art)
 
@@ -614,7 +618,11 @@ p_cntry</code></pre>
 <p>One cool thing about using <code>ggplot2</code> in a newsroom is that you can have different themes (color and font schemes).</p>
 <pre class="r"><code>p_cntry + theme_minimal()</code></pre>
 <p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-32-1.png" width="624" /></p>
-<pre class="r"><code>p_cntry + theme_bw()</code></pre>
+<pre class="r"><code># It makes more sense to express the values in hundreds of millions, instead of showing the values in scientific notation, which may confuse some readers.  You can change they-axis lables using the scales package.  You can change the plot and axis titles with labs(). ggplot2 offers endless ways to customize the look of your plot.
+library(scales)
+p_cntry + theme_bw() +
+  scale_y_continuous(labels=scales::unit_format(&#39;&#39;,1e-8)) +
+  labs(title=&quot;Top Export-Länder&quot;,y=&quot;Wert in Hundert-Millionen&quot;)</code></pre>
 <p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-32-2.png" width="624" /></p>
 <p>With the <code>ggthemes</code> package you can go even more wild and try themes that are similar to the themes of famous newsrooms…</p>
 <pre class="r"><code>library(&quot;ggthemes&quot;)</code></pre>

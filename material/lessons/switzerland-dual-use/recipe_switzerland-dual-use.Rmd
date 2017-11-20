@@ -125,6 +125,8 @@ setwd("/home/heidi/Documents/switzerland-dual-use")
 ```
 or assuming you have this file in the directory `switzerland-dual-use` and your file structure is as described above, you can use RStudio's menu. Click on `Session`, then on `Set Working Directory` and specify the path including `switzerland-dual-use`.
 
+### SET YOUR WORKING DIRECTORY NOW IF YOU ARE RUNNING CODE IN CONSOLE
+
 To read Excel data into R, we need a special R package called
 `readxl`. To install the package run the following line in the Console window of RStudio:
 ```{r, eval=FALSE}
@@ -199,13 +201,13 @@ str(elic_2016_1)
 
 ```{r prepare-clean1, echo= FALSE}
 
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData"))
+load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData"))
 
 ```
 
 ### Exercise
 Use head() with the n= option to get the first 10 rows of elic_2016_1 
-```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean1'}
+```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean1', cache=FALSE}
 
 ```
 
@@ -239,11 +241,11 @@ we are interested in and function `table()` creates a table for the frequencies 
 the different values. Use table() to obtain the values of elic_2016_2$Art . 
 
 ```{r prepare-clean2, echo= FALSE}
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData"))
+load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData"))
 ```
 
 
-```{r clean2, exercise=TRUE, exercise.setup = 'prepare-clean2'}
+```{r clean2, exercise=TRUE, exercise.setup = 'prepare-clean2',cache=FALSE}
 
 ```
 ```{r clean2-hint}
@@ -263,10 +265,10 @@ elic_2016_4 <- select(.data = elic_2016_3, -Art)
 #str(elic_2016_4)
 ```
 ```{r prepare-clean3, echo=FALSE}
-  load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+  load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
 ```
 
-```{r clean3, exercise=TRUE, exercise.completion=FALSE, exercise.setup = 'prepare-clean3'}
+```{r clean3, exercise=TRUE, exercise.completion=FALSE, exercise.setup = 'prepare-clean3', cache= FALSE}
 
 ```
 ```{r clean3-solution}
@@ -319,7 +321,8 @@ elic_2016_4$Typ <- Typ
 Use one of the R functions we used just above to check that the new values in elic_2016_4$Typ are as you expect.
 
 ```{r prepare-check1, echo=FALSE}
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/interactive/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+library(tidyverse)
+load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
 
 elic_2016_4 <- select(.data = elic_2016_3, -Art)
 
@@ -348,7 +351,7 @@ Typ <- change_charval(x = elic_2016_4$Typ, from = typ_from, to = typ_to)
 elic_2016_4$Typ_raw <- elic_2016_4$Typ
 elic_2016_4$Typ <- Typ
 ```
-```{r check1, exercise=TRUE, exercise.completion=FALSE, exercise.setup = 'prepare-check1'}
+```{r check1, exercise=TRUE, exercise.completion=FALSE, cache= FALSE, exercise.setup = 'prepare-check1'}
 
 ```
 ```{r check1-hint}
@@ -475,7 +478,15 @@ One cool thing about using `ggplot2` in a newsroom is that you can have differen
 
 ```{r}
 p_cntry + theme_minimal()
-p_cntry + theme_bw()
+
+# It makes more sense to express the values in hundreds of millions, instead of showing the values in scientific notation, which may confuse some readers.  You can change they-axis lables using the scales package.  You can change the plot and axis titles with labs(). ggplot2 offers endless ways to customize the look of your plot.
+
+library(scales)
+p_cntry + theme_bw() +
+  scale_y_continuous(labels=scales::unit_format('',1e-8)) +
+  labs(title="Top Export-Länder",y="Wert in Hundert-Millionen SFR")
+  
+
 ```
 
 
