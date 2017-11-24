@@ -8,7 +8,9 @@ runtime: shiny_prerendered
 ---
 # DEFINE
 Polls have become the main instrument to measure the pulse of an electoral campaign. They work somehow like weather predictions: the closer we get from the moment we are trying to forecast, the more precise they become. But they can also be misleading, think in 2016 about the Brexit referendum or the Trump unpredicted election. 
+
 Therefore, polls can give you blurring signals, information that can confuse the voter or the analyst. This is especially true during the campaign itself when journalists report every day several new polls with sometimes conflicting conclusions. For instance, in the US, during the presidential campaign, [RealClearPolitics](https://www.realclearpolitics.com/epolls/latest_polls/president/) referenced about 30 new polls a day. 
+
 In this complex landscape, visualisations can bring some clarity and help citizens understand the larger trends beyond each poll. During the French presidential campaign, several news websites have produced data visualisations to show the trends behind all the polls produced daily by the main polling institutes. For instance, [LeMonde](http://abonnes.lemonde.fr/election-presidentielle-2017/visuel/2017/04/12/que-disent-les-sondages-de-la-presidentielle-2017_5110324_4854003.html) produced this lign graph with a background showing the variation between polling institutes and the larger trends of intentions of the electorate. 
 ![](./img/lemonde.png)
 The [Huffington Post](http://elections.huffingtonpost.com/pollster/france-presidential-election-round-1) has produced a similar visualisation with dots for each data point in a poll and a trend line. 
