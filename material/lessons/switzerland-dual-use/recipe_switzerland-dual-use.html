@@ -103,19 +103,20 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
         ├── Statistik Dual-Use Jan. 2012 - Sep. 2014 Tracker.xlsx
         └── Statistik ML 2005-2013.xlsx</code></pre>
 <p>i.e. you should have the dual-use Excel files corresponding to years 2012 to 2016.</p>
-<p>Let’s try reading in the data of first two quarters of 2016:</p>
+<p>If you have already worked through the Introduction lesson, you probably already have RStudio installed and can try running the following code in the Console window. If you haven’t worked the Introduction lesson, you can either do that now, or just continue reading through this tutorial and do the exercises when you come to them.</p>
+<p>Let’s try reading in the data from first two quarters of 2016:</p>
 <ol style="list-style-type: decimal">
 <li>Open your R editor (e.g. RStudio)</li>
-<li>Set your working directory to the <code>switzerland-dual-use</code> directory. To do this first enter</li>
+<li>Set the R working directory to your <code>switzerland-dual-use</code> directory. To do this, first enter</li>
 </ol>
 <pre class="r"><code>getwd()</code></pre>
 <p>in the console. This will show your current working directory. E.g. for me it shows <code>[1] &quot;/home/heidi/Documents&quot;</code>. Next use <code>setwd()</code> to change to the correct diretory. For me it is <code>/home/heidi/Documents/switzerland-dual-use</code> and so I have to type</p>
 <pre class="r"><code>setwd(&quot;switzerland-dual-use&quot;)</code></pre>
 <p>or equivalently</p>
 <pre class="r"><code>setwd(&quot;/home/heidi/Documents/switzerland-dual-use&quot;)</code></pre>
-<p>or assuming you have this file in the directory <code>switzerland-dual-use</code> and your file structure is as described above, you can use RStudio’s menu. Click on <code>Session</code>, then on <code>Set Working Directory</code> and specify the path including <code>switzerland-dual-use</code>.</p>
-<div id="section-set-your-working-directory-now-if-you-are-running-code-in-console" class="section level3">
-<h3>SET YOUR WORKING DIRECTORY NOW IF YOU ARE RUNNING CODE IN CONSOLE</h3>
+<p>or assuming you have this file in the directory <code>switzerland-dual-use</code> and its file structure is as described above, you can use RStudio’s menu. Click on <code>Session</code>, then on <code>Set Working Directory</code> and manually specify the path including <code>switzerland-dual-use</code>.</p>
+<div id="section-set-your-r-working-directory-now" class="section level3">
+<h3>SET YOUR R WORKING DIRECTORY NOW</h3>
 <p>To read Excel data into R, we need a special R package called <code>readxl</code>. To install the package run the following line in the Console window of RStudio:</p>
 <pre class="r"><code>install.packages(&quot;readxl&quot;)</code></pre>
 <p>To load the package, so you can access the functions, run the following in the Console window:</p>
@@ -144,7 +145,7 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 <pre class="r"><code>head(elic_2016_q1_raw)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007724","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"38330"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"4546"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"122287"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D002.c1","7":"5000"},{"1":"8006915","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"132777"},{"1":"8006792","2":"Ägypten","3":"National kontrollierte Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5.1","7":"453"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007724","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"38330","_rn_":"1"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"4546","_rn_":"2"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A002.a1","7":"122287","_rn_":"3"},{"1":"8007844","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D002.c1","7":"5000","_rn_":"4"},{"1":"8006915","2":"Ägypten","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"2B350.i","7":"132777","_rn_":"5"},{"1":"8006792","2":"Ägypten","3":"National kontrollierte Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5.1","7":"453","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <ul>
@@ -153,7 +154,7 @@ elic_2016_q4_raw &lt;- read_excel(path = &quot;data_raw/4. Quartal 2016 Erteilte
 <pre class="r"><code>tail(elic_2016_q1_raw)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007295","2":"Vietnam","3":"Besondere militärische Güter\\r\\nBesondere militärische Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"ML13\\r\\nML22","7":"5000000"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"2000"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"18000"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"16320"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A001.f1","7":"10030"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"8330"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Geschäftsnummer"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Bestimmungsland"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Güterart"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Geschäftstyp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Richtung"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Exportkontrollnummer [EKN]"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Wert [CHF]"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"8007295","2":"Vietnam","3":"Besondere militärische Güter\\r\\nBesondere militärische Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"ML13\\r\\nML22","7":"5000000","_rn_":"938"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"2000","_rn_":"939"},{"1":"8006715","2":"Vietnam","3":"Nukleargüter","4":"Einzelbewilligung","5":"Ausfuhr","6":"0C003","7":"18000","_rn_":"940"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"16320","_rn_":"941"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5A001.f1","7":"10030","_rn_":"942"},{"1":"8006361","2":"Vietnam","3":"Dual Use Güter","4":"Einzelbewilligung","5":"Ausfuhr","6":"5D001.a","7":"8330","_rn_":"943"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <ul>
@@ -231,13 +232,19 @@ names(elic_2016_1)</code></pre>
 ##  $ Exportkontrollnummer [EKN]: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
 ##  $ Wert [CHF]                : num  38330 4546 122287 5000 132777 ...</code></pre>
 <div class="tutorial-exercise-support" data-label="prepare-clean1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData&quot;))</code></pre>
+<pre class="text"><code>library(ddj)
+data(&quot;elic_2016_1&quot;)
+#load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData&quot;))
+#load(url(&quot;https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_1.RData&quot;))</code></pre>
 </div>
-<div id="section-exercise" class="section level3">
-<h3>Exercise</h3>
-Use head() with the n= option to get the first 10 rows of elic_2016_1
+<div id="section-exercise-1" class="section level3">
+<h3>Exercise 1</h3>
+Use head() with the <code>n=</code> option to get the first 10 rows of elic_2016_1
 <div class="tutorial-exercise" data-label="check_values" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean1","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="check_values-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>head(elic_2016_1, n=10)</code></pre>
 </div>
 <p>Now we do not want to keep the collumn with just <code>NA</code> values and we want to rename a few variables. We can do this with function <code>select()</code>:</p>
 <ul>
@@ -264,11 +271,14 @@ str(elic_2016_2)</code></pre>
 ##  $ Signatur: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
 ##  $ Art     : chr  &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; ...</code></pre>
 </div>
-<div id="section-exercise-1" class="section level3">
-<h3>Exercise</h3>
+<div id="section-exercise-2" class="section level3">
+<h3>Exercise 2</h3>
 <p>We are only interested in exports (variable <code>Art</code>, value <code>&quot;Ausfuhr&quot;</code>), so we use <code>filter()</code> to select the rows in the data set where this is the case. Before that we check how many rows contain other values. <code>elic_2016_2$Art</code> gives us the variable we are interested in and function <code>table()</code> creates a table for the frequencies of the different values. Use table() to obtain the values of elic_2016_2$Art .</p>
 <div class="tutorial-exercise-support" data-label="prepare-clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData&quot;))</code></pre>
+<pre class="text"><code>library(ddj)
+data(&quot;elic_2016_2&quot;)
+#load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData&quot;))
+#load(url(&quot;https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_2.RData&quot;))</code></pre>
 </div>
 <div class="tutorial-exercise" data-label="clean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean2","exercise.checker":"NULL"}</script>
@@ -288,11 +298,14 @@ str(elic_2016_3)</code></pre>
 ##  $ Signatur: chr  &quot;2B350.i&quot; &quot;5A002.a1&quot; &quot;5A002.a1&quot; &quot;5D002.c1&quot; ...
 ##  $ Art     : chr  &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; &quot;Ausfuhr&quot; ...</code></pre>
 </div>
-<div id="section-exercise-2" class="section level3">
-<h3>Exercise</h3>
+<div id="section-exercise-3" class="section level3">
+<h3>Exercise 3</h3>
 <p>Now the collumn <code>Art</code> is not needed anymore. Let’s remove it from the data set and asign the new data set to the name elic_2016_4. Use select(), specifying the elic_2016_3 data frame and the variable as -Art. Then use str() to look at the new elic_2016_4 object.</p>
 <div class="tutorial-exercise-support" data-label="prepare-clean3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>  load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))</code></pre>
+<pre class="text"><code>library(ddj)
+data(&quot;elic_2016_3&quot;)
+#load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))
+#load(url(&quot;https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_3.RData&quot;))</code></pre>
 </div>
 <div class="tutorial-exercise" data-label="clean3" data-caption="Code" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prepare-clean3","exercise.checker":"NULL"}</script>
@@ -347,12 +360,15 @@ elic_2016_4$Typ_raw &lt;- elic_2016_4$Typ
 # Next we assign the cleaned-up values in &#39;Typ&#39; to the data set column with the same name, effectively over-writing the original values.
 elic_2016_4$Typ &lt;- Typ</code></pre>
 </div>
-<div id="section-exercise-3" class="section level3">
-<h3>Exercise</h3>
+<div id="section-exercise-4" class="section level3">
+<h3>Exercise 4</h3>
 <p>Use one of the R functions we used just above to check that the new values in elic_2016_4$Typ are as you expect.</p>
 <div class="tutorial-exercise-support" data-label="prepare-check1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>library(tidyverse)
-load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))
+library(ddj)
+data(&quot;elic_2016_3&quot;)
+#load(url(&quot;https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData&quot;))
+#load(url(&quot;https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_3.RData&quot;))
 
 elic_2016_4 &lt;- select(.data = elic_2016_3, -Art)
 
@@ -399,7 +415,7 @@ elic_2016_4$Typ &lt;- Typ</code></pre>
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land)) +  
   geom_bar() +   #this specifies the geom for a bar chart                     
   coord_flip()   #this makes the bars horizontal</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="section-order-the-countries-by-export-volume" class="section level3">
 <h3>Order the countries by export volume</h3>
@@ -437,7 +453,7 @@ str(elic_2016_4$Land)</code></pre>
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land)) + 
   geom_bar() +
   coord_flip()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 <div id="section-plot-countries-in-order-of-export-value" class="section level3">
 <h3>Plot countries in order of export value</h3>
@@ -451,7 +467,7 @@ elic_2016_4$Land &lt;- factor(elic_2016_4$Land, levels = ordered_land)</code></p
 <pre class="r"><code>ggplot(elic_2016_4, aes(x = Land, y = Wert, fill = Typ)) + 
   geom_bar(stat = &quot;identity&quot;) +
   coord_flip()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-26-1.png" width="672" /></p>
 <p>But wait, why are there countries listed, that do not seem to have gotten anything from switzerland? Let’s look at those:</p>
 <pre class="r"><code>library(&#39;knitr&#39;) # kable() in this package will make nice tables
 
@@ -610,35 +626,36 @@ elic_2016_4$Typ &lt;- factor(elic_2016_4$Typ, levels = rev(ordered_typ))</code><
   coord_flip() +  # Remember, we have to flip the plot to get horizontal bars
   xlab(&quot;Land&quot;) # There is a lot of flexibility in the labeling of the plots. Here is a start.
 p_cntry</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-31-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-32-1.png" width="864" /></p>
 </div>
 </div>
 <div id="section-present" class="section level2">
 <h2>Present</h2>
 <p>One cool thing about using <code>ggplot2</code> in a newsroom is that you can have different themes (color and font schemes).</p>
 <pre class="r"><code>p_cntry + theme_minimal()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-32-1.png" width="624" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-33-1.png" width="624" /></p>
 <pre class="r"><code># It makes more sense to express the values in hundreds of millions, instead of showing the values in scientific notation, which may confuse some readers.  You can change they-axis lables using the scales package.  You can change the plot and axis titles with labs(). ggplot2 offers endless ways to customize the look of your plot.
+
 library(scales)
 p_cntry + theme_bw() +
   scale_y_continuous(labels=scales::unit_format(&#39;&#39;,1e-8)) +
-  labs(title=&quot;Top Export-Länder&quot;,y=&quot;Wert in Hundert-Millionen&quot;)</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-32-2.png" width="624" /></p>
+  labs(title=&quot;Top Export-Länder&quot;,y=&quot;Wert in Hundert-Millionen SFR&quot;)</code></pre>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-33-2.png" width="624" /></p>
 <p>With the <code>ggthemes</code> package you can go even more wild and try themes that are similar to the themes of famous newsrooms…</p>
 <pre class="r"><code>library(&quot;ggthemes&quot;)</code></pre>
 <p>…such as the Economist,…</p>
 <pre class="r"><code>p_cntry + theme_economist() + scale_fill_economist()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-34-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-35-1.png" width="864" /></p>
 <p>…FiveThirtyEight,…</p>
 <pre class="r"><code>my_palette &lt;- c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, &quot;#F0E442&quot;, &quot;#0072B2&quot;, &quot;#D55E00&quot;)
 p_cntry + theme_fivethirtyeight() + scale_fill_manual(values = my_palette)</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-35-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-36-1.png" width="864" /></p>
 <p>…or the Wall Street Journal.</p>
 <pre class="r"><code>p_cntry + theme_wsj() + scale_fill_wsj()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-36-1.png" width="864" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-37-1.png" width="864" /></p>
 <p>And if you want to really badly go back to an ungly 2003 Excel style, you can do that too :)</p>
 <pre class="r"><code>p_cntry + theme_excel()</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-37-1.png" width="624" /></p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-38-1.png" width="624" /></p>
 <p>Or you take a theme you like and modify it. To create a School of Data themed plot, you can use the following colors and fonts. Gill Sans MT is used because it should work on both Windows and Mac.</p>
 <pre class="r"><code>scodablue &lt;- &quot;#00AFF0&quot; 
 scodagrey &lt;- &quot;#333333&quot;
@@ -652,7 +669,7 @@ p_cntry +
         panel.grid.minor.x = element_line(color = scodagrey2), 
         line = element_line(colour = scodagrey),
         legend.position = &quot;bottom&quot;)</code></pre>
-<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-38-1.png" width="864" /> You can learn more about ggplot <a href="http://r4ds.had.co.nz/data-visualisation.html">here</a>, <a href="http://r4ds.had.co.nz/graphics-for-communication.html">here</a> and <a href="http://ggplot2.tidyverse.org/reference/index.html">here</a>. You can easily find additional reference and instructional material. While ggplot takes some effort to learn, the ample references, on-line guides and cheat-sheets make it so that you don’t have to keep everything in your head.</p>
+<p><img src="recipe_switzerland-dual-use_files/figure-html4/unnamed-chunk-39-1.png" width="864" /> You can learn more about ggplot <a href="http://r4ds.had.co.nz/data-visualisation.html">here</a>, <a href="http://r4ds.had.co.nz/graphics-for-communication.html">here</a> and <a href="http://ggplot2.tidyverse.org/reference/index.html">here</a>. You can easily find additional reference and instructional material. While ggplot takes some effort to learn, the ample references, on-line guides and cheat-sheets make it so that you don’t have to keep everything in your head.</p>
 </div>
 <div id="section-summary" class="section level2">
 <h2>Summary</h2>
