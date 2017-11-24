@@ -1,11 +1,11 @@
 ---
-title: "Data Recipe: Data Recipe Name"
+title: "Introduction"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(message = FALSE, cache = FALSE)
+knitr::opts_chunk$set(message = FALSE, cache = TRUE)
 library("learnr")
 ```
 
@@ -69,16 +69,10 @@ Allows you to make some graphics, but you are limited by the program to what typ
 You go through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
 ... | ...
 
-<!-- > **Wait, what? I have to write code?** -->
-<!-- > -->
-<!-- > How do I even know how write R code? I'm not a programmer! -->
-
-<!-- Well you don't need to. We are here to help. -->
-<!-- We are going to guide you in each step, don't worry, it won't be that hard.  -->
+<!-- Image can be found at https://docs.google.com/drawings/d/1W33YQrXuUEeCD2Fbrsyk27HmWxLolZDVjlDFV4AGUzA/edit?usp=sharing -->
 ```{r, eval=TRUE, echo = FALSE, out.width='90%'}
 knitr::include_graphics("images/Wait_what.jpg")
 ```
-<!-- ![](images/Wait_what.jpg) -->
 
 To get started with this tutorial, you don't even have to install anything.
 For now, you can just try stuff by writing code on this website. Let's try 
@@ -87,7 +81,9 @@ if that works. Please run the following code by clicking the `Run Code` button:
 3 + 5
 ```
 For those of you who do want to install R, we recommend installing R and the
-RStudio editor [ADD LINK HERE](). Not all R code chunks in the following will have
+RStudio editor (for help, check out [this video](https://www.youtube.com/watch?v=d-u_7vdag-0)). 
+
+Not all R code chunks in the following will have
 a `Run Code` button. If you want to reproduce the entire tutorial on your computer,
 you have to copy also these code chunks.
 
@@ -148,14 +144,21 @@ go with our story. So, let's get started!
 
 ## GET
 
-Stretch your arms, grab a coffee, and let's get started! First, let's find the electoral data. 
+Stretch your arms, grab a coffee `r emo::ji("hotsprings")`, and let's get started 
+`r emo::ji("arrow_forward")`!
+
+> Note: You only need to do the first few steps of downloading and reading the data, 
+if you want to do it on your computer. Otherwise you can just read the steps and do 
+the exercises on this website.
+
+First, let's find the electoral data. 
 
 Today, we will analyze the **Brexit Referendum Results**.  The results data, 
 compiled by the Electoral Comission are available in .csv format [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/results.csv).
 
 You also want to align it with a dataset which gives various demographic information about regions, in order to try various analyses. We are going to use 2 files: a .dta file (a filetype that you can not open in Excel) that is available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta)  and a .xlsx file available [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx).
 
-Metadata:
+These are the columns in the three data sets:
 
 _Results_
 
@@ -199,7 +202,6 @@ You must have 3 files in your folder:
 `demographics1.xlsx`
 `demographics2.dta`
 
-<!-- Gibran: Should we introduce here the idea of the script and how you can run commands in the console while saving all of your work in the script for further reproducing it? -->
 
 Now let's try reading in the data:
 1. Open your R editor (e.g. RStudio)
@@ -216,6 +218,7 @@ library("foreign")
 ```
 
 Now we can read the data:
+<!-- Note: I am not actually evaluation this, see what I really do in the "read" chunk -->
 ```{r read_show, eval=FALSE}
 # read results data
 results <- read.csv("https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv", header = TRUE)
@@ -225,6 +228,7 @@ demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
 demographic2 <- read.dta("demographics2.dta")
 ```
 
+<!-- Note: this is what I did to create the RData file, but it needed to be done only once -->
 ```{r, echo=FALSE, eval=FALSE}
 results <- read.csv("https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv", header = TRUE)
 
@@ -241,17 +245,17 @@ library("raster")
 gbr_sp <- getData("GADM", country = "GBR", level = 2)
 
 # save intermediate results
-save(results, demographic1, demographic2, gbr_sp, file = "introduction_raw.RData")
+save(results, demographic1, demographic2, gbr_sp, file = "../../../data/introduction_raw.RData")
 ```
 
-
+<!-- Note: this is how I actually load the data, but I don't tell the students ;) -->
 ```{r read}
 # read data
 library("ddj")
 data(introduction_raw)
 ```
 
-(Note the the hash: it can be used to add comments. You should use it to help future you remember what you did.)
+Note the the hash: it can be used to add comments. You should use it to help future you remember what you did.
 Note also than the "string" or text on the left of the <- can be whatever name you want it to be, and the function on the right side of it is assigned to that number. This is what in R is called creating an object and assigning it with a function or value.
 
 See? That was easy! Now you have your data loaded into the program and can start working.
@@ -263,8 +267,8 @@ Are you seeing the magic yet?
 * Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.
 * Your stagiaire doesn't know where to find the relevant data? no problem, the links are all in the R code!
 
-> **Let's review the commands we learned in this step:**
->
+**Let's review the commands we learned in this step:**
+
 - Set the folder you work in (working directory) `setwd()`
 - Install Packages `install.packages()`
 - Load Libraries `library()`
@@ -273,20 +277,22 @@ Are you seeing the magic yet?
 - Add code comments `# my comment`
 
 
-> **Want to learn what other types of data can be imported into R**
->
-> [Check this!](https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo)
->
+<!-- > **Want to learn what other types of data can be imported into R** -->
+<!-- > -->
+<!-- > [Check this!](https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo) -->
+<!-- > -->
 
 Now let's move on with the analysis!
+`r emo::ji("relaxed")`
 
 ## VERIFY
 Now that you have imported your data into R, it's time to start exploring it.  Here are some useful commands:
 
 - `view()` shows your dataframe with all the variables and observations
 
-- `names()` shows the collumn names of the data frame:
-Check out the names of the results data.frame.
+- `names()` shows the collumn names of the data frame
+
+Try printing the names of the `results` data.frame.
 ```{r ex_look1, exercise=TRUE, exercise.setup = "read"}
 
 ```
@@ -295,37 +301,45 @@ Check out the names of the results data.frame.
 names(results)
 ```
 
-<!-- Check out the names of the demographic1 data.frame. -->
-<!-- ```{r ex_look2, exercise=TRUE, exercise.setup = "read"} -->
-<!-- ``` -->
+Try printing the names of the `demographic1` data.frame.
+```{r ex_look2, exercise=TRUE, exercise.setup = "read"}
 
-<!-- ```{r ex_look2-solution, exercise.setup = "read"} -->
+```
+
+<!-- Uncommenting this leads to an error. See https://github.com/rstudio/learnr/issues/125 -->
+<!-- ```{r ex_look2-solution} -->
 <!-- names(demographic1) -->
 <!-- ``` -->
 
-<!-- Check out the names of the demographic2 data.frame. -->
-<!-- ```{r ex_look3, exercise=TRUE, exercise.setup = "read"} -->
-<!-- ``` -->
+Check out the names of the demographic2 data.frame.
+```{r ex_look3, exercise=TRUE, exercise.setup = "read"}
+```
 
 <!-- ```{r ex_look3-solution, exercise.setup = "read"} -->
 <!-- names(demographic2) -->
 <!-- ``` -->
 
-<!-- - `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the -->
-<!-- first few values -->
-<!-- ```{r ex_look2, exercise=TRUE} -->
-<!-- str(results) -->
-<!-- ``` -->
+- `str()` shows the structure of the data set, i.e. the type of each variable 
+(here `num` for numeric and `chr` for character) and the first few values
+
+```{r ex_look4, exercise=TRUE, exercise.setup = "read"}
+str(results)
+```
+
+Check out the structure of the `demographic1` and `demographic2` data.frames.
+
+```{r ex_look5, exercise=TRUE, exercise.setup = "read"}
+```
 
 Now that you know the variables of your databases is time to start with the cleaning part.
 
 
 ## CLEAN
-Before you can start your analysis, you need a clean database with all the information.  Nevertheless you have the information scattered in 3 different data.frames, which you would like to combine.
+Before you can start your analysis, you need a clean database with all the information. At this point you have the information scattered in 3 different data.frames (`results`, `demographic1` and `demographic2`), which you would like to combine.
 
 Our objective is to add the demographic variables `median_age` `prof_ocu_1` `prof_ocu_2` `born_uk` `no_educ` and `higher_educ` to the results database.  But in order to do this, we need a common variable in all the datasets.  In the previous step, where we explored the data you can see that the three databases have the variable: `area_code`.
 
-That common variable will allow us to merge the databases using the `merge` function.
+That common variable will allow us to merge the databases using the `merge()` function.
 
 The following lines of code will merge the data sets. Add one line that shows 
 the variable names of all variables in the new data set called `mydata`.
@@ -353,20 +367,10 @@ data(introduction_raw, package = "ddj")
 mydata <- merge(results, demographic1, by.x = "Area_Code", by.y = "area_code")
 mydata <- merge(mydata, demographic2, by.x = "Area_Code", by.y = "area_code")
 ```
-You now have a new dataframe `mydata` with the electoral and the demographic information. Nevertheless we need to further clean the database.
+You now have a new dataframe `mydata` with the electoral and the demographic information. 
 
-<!-- HS: Do we need to delete the variables? If, so I would use package dplyr, function select. -->
-
-<!-- First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`. -->
-
-<!-- ```{r} -->
-<!-- ##Delete the variables we don't need -->
-<!-- mydata$new_id.x <- NULL -->
-<!-- mydata$area_name.x <- NULL -->
-<!-- mydata$new_id.y <- NULL -->
-<!-- mydata$area_name.y <- NULL -->
-<!-- ``` -->
-To analyze the data we also need the percentage of Remain, Leave and Rejected votes for each area.  We are going to create those three variables:
+For the analysis we also need the percentage of Remain, Leave and Rejected votes for each area.  
+This is how we create the three new variables needed (we call them `perc_remain`, `perc_leave` and `perc_rejected`):
 ```{r perc}
 mydata$perc_remain <- (mydata$Remain / mydata$Valid_Votes) * 100
 mydata$perc_leave <- (mydata$Leave / mydata$Valid_Votes) * 100
@@ -376,7 +380,8 @@ Also we want to sum `prof_ocu_1` and `prof_ocu_2` to create a new variable that 
 ```{r prof}
 mydata$prof_ocu <- mydata$prof_ocu_1 + mydata$prof_ocu_2
 ```
-We can also create a new categorical variable `Result` that shows which areas voted to leave and which voted to remain. To do this we are going to use the `ifelse()` function. 
+We can also create a new categorical variable `result` that shows which areas voted to leave and which voted to remain. 
+To do this we use the `ifelse()` function. 
 ```{r res}
 ## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50,
 ## and 0 otherwise
@@ -407,7 +412,17 @@ mydata$result <- ifelse(mydata$perc_remain < 50, 1, 0)
 table(mydata$result)
 ```
 Now we can add labels to the variable `Result`
-```{r}
+```{r, echo=FALSE, eval=FALSE}
+#Adding labels to 'Result'
+mydata$result <- factor(mydata$result,
+                        levels = c(1, 0),
+                        labels = c("leave", "remain"))
+
+## Table of the result
+table(mydata$result)
+```
+
+```{r ex_tab2, exercise = TRUE, exercise.setup = "prep_table"}
 #Adding labels to 'Result'
 mydata$result <- factor(mydata$result,
                         levels = c(1, 0),
@@ -424,20 +439,25 @@ We can also create a new categorical variable that allows to group the Remain vo
 mydata$Remain_cat <- cut(mydata$perc_remain, breaks = c(0, 25, 50, 75, 100))
 table(mydata$Remain_cat)
 ```
-Now we can add labels to the variable `Remain_cat`
+Now we can add labels to the variable `Remain_cat`, just as we did for `result` before:
 ```{r}
 mydata$Remain_cat <- factor(mydata$Remain_cat, labels = c("very low", "low", "high", "very high"))
 table(mydata$Remain_cat)
 ```
 
-We are almost done, don't give up just yet! Now to finish we want to aggregate regional data in new variables, in order the see the voting results by region. A simple way to do this is with the `summarise()` function from the `dplyr` package. If you don't have the package installed, install it with the command `install.packages("dplyr")`.
 
-```{r}
+We are almost done `r emo::ji("sunglasses")`, don't give up just yet! 
+
+To finish, we want to aggregate regional data in new variables, in order the see the voting results by region. A simple way to do this is with the `summarise()` function from the `dplyr` package. If you don't have the package installed, install it with the command `install.packages("dplyr")`.
+
+```{r, echo=TRUE}
 library("dplyr")
-datahasc <- summarise(group_by(mydata, HASC_code),        ## Group mydata by HASC code
-                        Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per HASC code, i.e. the sum of valid votes in the areas of the HASC code
-                        Remain = sum(Remain),
-                        Leave = sum(Leave))
+
+## Aggregate per HASC code
+datahasc <- summarise(group_by(mydata, HASC_code),    ## Group mydata by HASC code
+                      Valid_Votes = sum(Valid_Votes), ## Create a variable Valid_Votes which is the number of valid votes per HASC code, i.e. the sum of valid votes in the areas of the HASC code
+                      Remain = sum(Remain),           ## Number of remain votes per HASC code
+                      Leave = sum(Leave))             ## Number of Leave votes per HASC code
 
 ## Calculate the percentages
 datahasc$perc_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
@@ -446,22 +466,10 @@ datahasc$perc_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
 datahasc
 ```
 
-
-<!-- ```{r}  -->
-<!-- library("dplyr") -->
-<!-- dataregion <- summarise(group_by(mydata, Region),        ## Group mydata by variable Region -->
-<!--                         Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per region, i.e. the sum of valid votes in the areas of the region -->
-<!--                         Remain = sum(Remain),  -->
-<!--                         Leave = sum(Leave)) -->
-
-<!-- ## Calculate the percentages -->
-<!-- dataregion$perc_remain <- (dataregion$Remain / dataregion$Valid_Votes)*100 -->
-<!-- dataregion$perc_leave <- (dataregion$Leave/ dataregion$Valid_Votes)*100 -->
-
-<!-- dataregion -->
-<!-- ``` -->
-<!-- _Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_ -->
-<!-- I think we should keep it short, so I would leave it as is. -->
+<!-- Note: this saves the data used in the following steps (needs to be run only the first time) -->
+```{r save_clean, echo=FALSE, eval=FALSE}
+save(mydata, datahasc, file = "../../../data/introduction_clean.RData")
+```
 
 Now that you have cleaned your data, you're ready to start the analysis!
 
@@ -476,15 +484,16 @@ question("Are you convinced yet that R is worth your time?",
 
 
 **Let's list some advantages of R so far:**
+
 * With simple lines of code you can rearrange your data, create new variables, delete observations
 * Something went wrong? Don't worry, just fix your code, run it and the error goes away easily
 * You can keep your original datafiles in the workspace if you need to review them.
 
-> **Let's review what we learned in this step:**
->
-- Merge datasets `merge()`
+
+**Let's review what we learned in this step:**
+
+- Merge datasets
 - Create new variables
-<!-- - Delete variables -->
 - Create new categorical variables and asign labels
 - Create a new data set with summaries of an existing data set
 
