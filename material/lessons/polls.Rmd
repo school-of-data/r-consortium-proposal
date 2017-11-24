@@ -4,6 +4,7 @@ author: Samuel Goëta
 output: html_notebook
 ---
 # Define
+- issue with surveys: blurring signals, we want to know the trends rather than having a daily update on where each polling locates  
 ---
 # Find
 ---
