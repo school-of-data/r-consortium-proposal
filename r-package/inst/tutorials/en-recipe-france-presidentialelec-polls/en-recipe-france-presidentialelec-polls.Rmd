@@ -1,0 +1,100 @@
+---
+title: "Introduction"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+# Introduction 
+---
+# DEFINE
+Polls have become the main instrument to measure the pulse of an electoral campaign. They work somehow like weather predictions: the closer we get from the moment we are trying to forecast, the more precise they become. But they can also be misleading, think in 2016 about the Brexit referendum or the Trump unpredicted election. 
+Therefore, polls can give you blurring signals, information that can confuse the voter or the analyst. This is especially true during the campaign itself when journalists report every day several new polls with sometimes conflicting conclusions. For instance, in the US, during the presidential campaign, [RealClearPolitics](https://www.realclearpolitics.com/epolls/latest_polls/president/) referenced about 30 new polls a day. 
+In this complex landscape, visualisations can bring some clarity and help citizens understand the larger trends beyond each poll. During the French presidential campaign, several news websites have produced data visualisations to show the trends behind all the polls produced daily by the main polling institutes. For instance, [LeMonde](http://abonnes.lemonde.fr/election-presidentielle-2017/visuel/2017/04/12/que-disent-les-sondages-de-la-presidentielle-2017_5110324_4854003.html) produced this lign graph with a background showing the variation between polling institutes and the larger trends of intentions of the electorate. 
+![](./img/lemonde.png)
+The [Huffington Post](http://elections.huffingtonpost.com/pollster/france-presidential-election-round-1) has produced a similar visualisation with dots for each data point in a poll and a trend line. 
+![](img/huffpo.png)
+As this visualisation is very useful to understand the trend in an election, as journalists, we want to be able to produce this graph and adapt it to other contexts than the French election. 
+
+This is what we'll do in this recipe! We'll show you step by step how to produce the above visualisations.
+---
+# FIND
+---
+# GET
+
+```{r}
+#install.packages("rvest")
+library(rvest)
+polls <- read_html("https://en.wikipedia.org/wiki/Opinion_polling_for_the_French_presidential_election,_2017")
+polls_round1 <- polls %>% 
+#  html_node("#mw-content-text > table:nth-child(30)") %>%
+  html_node(xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "wikitable", " " ))]') %>% 
+  html_table(header = TRUE,fill=TRUE)
+```
+
+
+
+---
+# Verify
+---
+# Clean
+```{r}
+polls_round1 <- polls_round1[-c(1,2, 3, 4, 5, 94), ] #virer les lignes inutiles
+colnames(polls_round1) <- c("Poll source","Fieldwork date", "Sample size", "Abstention", "Arthaud", "Poutou", "Mélenchon", "Hamon", "Macron", "Lassalle","Fillon", "Dupont-Aignan", "Asselineau","Le Pen", "Cheminade") #enlever les partis des noms de colonnes
+save(polls_round1, file = "./polls_round1.rdata") #enregistrer parce que ça va planter
+load(file = "./polls_round1.rdata")
+library(tidyverse)
+polls_round1 <- polls_round1 %>% mutate_at(vars(`Abstention`:`Cheminade`),funs(parse_number),na=character()) #enlever les pourcentages et absention 0
+
+#install.packages("lubridate")
+#install.packages("rex")
+library(lubridate)
+library(rex)
+rex_mode() #charge les éléments de rex en mémoire (voir aide)
+get_date <- rex( #produit la regex à partir d'un langage lisible et compréhensible
+  maybe(numbers %>% between(1,2), #pas obligé de l'avoir, peut etre entre un et deux nombres puis un tiret
+  "–"),
+  capture(
+    name = "date", #groupe qu'on veut récupérer
+    numbers %>% between(1,2), #entre un et deux nombres
+    space, #puis un espace
+    letters %>% n_times(3), #3 lettres pour le mois 
+    space, 
+    "20", one_of(1:5), number #année
+  )
+)
+
+date <-re_matches(polls_round1$`Fieldwork date`, get_date)$date #crée le vecteur date
+
+polls_round1<- polls_round1 %>% 
+  mutate(date = date %>% dmy()) #ajoute la colonne
+
+polls_round1_long <- polls_round1 %>% gather(Candidates, Percentage, Abstention:Cheminade) #gather
+
+save(polls_round1_long, file = "./polls_round1_long.Rdata")
+
+
+```
+
+
+---
+# Visualize 
+
+devtools::install_github("hrbrmstr/hrbrthemes")
+library(hrbrthemes)
+
+polls_round1_long %>% 
+  filter(polls_round1_long$Candidates!="Abstention") %>% 
+  ggplot() +
+  geom_point(mapping = aes(x=date,y=Percentage,color = Candidates, alpha = "0.7")) + # 
+  geom_smooth(aes(date,y=Percentage,color = Candidates))+ 
+  labs(x = "Date of poll",
+       y = "Percentage of candidate in poll",
+       title = "Polls during the 2017 Presidential election in France",
+       subtitle = "Evolution of polls during the month preceding the first round of the 2017 Presidential election in France",
+       caption = "Source : Wikipedia")+
+  theme_ipsum() +
+  theme(legend.position="right") #reminder, keep track: do it after +
+
+--- 
+# Present
+
