@@ -2,6 +2,7 @@
 title: "Introduction"
 output: learnr::tutorial
 runtime: shiny_prerendered
+author: Samuel Goëta
 ---
 
 # Introduction 
@@ -21,19 +22,52 @@ This is what we'll do in this recipe! We'll show you step by step how to produce
 
 ---
 # FIND
+
+To find that data, a journalist may want to report in a spreadsheet every new poll published but this might reveal quite burdersome. But, fortunately, for us, the Wikipedia community has done a truly amazing work in reporting every new poll in a single page with a normalized template during the primary elections and the Presidential campaign on both the first and second rounds.
+![](./img/francepolls.png)
+Even better, there is an [entire category dedicated to opinion polling for elections](https://en.wikipedia.org/wiki/Category:Opinion_polling_for_elections) in which you can find opinion polling data for elections in the UK, Poland, Peru, Kenya, India, Iran… This a global effort to put opinion polling in perspective. 
+![](./img/category.png)
+
+
+You don't see the election going on in your country? Why don't you start reporting the latest opinion polls on Wikipedia? It's easy to do, very useful for the public and we might get help for other Wikipedia contributors.  
+
 ---
 # GET
 
+Now that we know where we can find the data, we need to actually be able to use it. Note that the data is on a webpage which means you need to extract that data from the webpage to a dataset. 
+
+One straightforward way would be to simply copy the table to a spreadsheet. This actually works: 
+
+![](./img/copy.gif)
+
+But, while this approach is convinient when the campaign is over, this can be overwhelming in an ongoing race. As a journalist, whenever you want to update your graph, you will need to redo the whole process outside of R and import back the data. 
+
+An alternative way would be to practice web scrapping which is the fancy name data scientists gave to extracting data from websites. R Studio has developed a package named `rvest` which allows users to extract data from a webpage and import them directly in a dataframe. So let's install and launch this package! 
 ```{r}
-#install.packages("rvest")
+install.packages("rvest")
 library(rvest)
-polls <- read_html("https://en.wikipedia.org/wiki/Opinion_polling_for_the_French_presidential_election,_2017")
-polls_round1 <- polls %>% 
-#  html_node("#mw-content-text > table:nth-child(30)") %>%
-  html_node(xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "wikitable", " " ))]') %>% 
-  html_table(header = TRUE,fill=TRUE)
 ```
 
+Ok! So the first thing with `rvest`is to import the whole html page in which your data is nested. This is done using `<-`as an assignment operator like you do when you generally import data in R and with the `read_html` which obviously reads the html source when you specify a URL.   
+```{r}
+polls <- read_html("https://en.wikipedia.org/wiki/Opinion_polling_for_the_French_presidential_election,_2017")
+```
+
+Right now, the entire source code of the Wikipedia page on the French presidential election is currently imported in R. But, in this visualisation, we will focus on the first round data similary to what LeMonde and the Huffington Post have done above. This is still done using the `rvest` package with its `html_node` fonction which allows you to easily extract pieces out of HTML documents using Xpath (a query language for selecting nodes from an XML document such as a webpage) and CSS selectors (a way of targeting  specific HTML elements based on the specific CSS styling applied to them). 
+
+To identify the Xpath, we will need to install a Chrome extension named [SelectorGadget](http://selectorgadget.com/) which will help know the Xpath and the CSS selector for the specific element we want to extract.
+
+Once we've installed Selector Gadget, go to the Wikipedia page and try to select the entire table we want to extact, here the opinion polls for the first round. 
+![](./img/select.gif)
+As you can see above, you will need to move around with the cursor to select the entire table and once it's selected, click to get the Xpath. After you click, it will be available at the bottom if you press `Xpath`. You should get the following Xpath : `//*[contains(concat( " ", @class, " " ), concat( " ", "wikitable", " " ))]`
+
+Then you will need to tell `rvest` your discovery by reporting the Xpath in the `html_node` fonction which extracts specific elements defined by their Xpath. The `html_table` fonction will import that data into a dataframe named `polls_round1`. 
+
+```{r}
+polls_round1 <- polls %>% 
+  html_node(xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "wikitable", " " ))]') %>% 
+  html_table(header = TRUE,fill=TRUE) #header=TRUE uses the first row as a header and fill=TRUE automatically fills rows with NAs when there is fewer than the maximum number of columns.
+```
 
 
 ---
