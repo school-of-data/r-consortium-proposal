@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="progressive" content="false" />
+<meta name="allow-skip" content="false" />
+
+<title>Data Recipe: Data Recipe Name</title>
+
+
+<!-- highlightjs -->
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="pageContent band">
+<div class="bandContent page">
+
+<div class="topics">
+
+<!-- # Introductory steps - phase 1 -->
+<!-- The introductory steps are a guided process through which: -->
+<!-- * we spell out clearly how R can be used for a basic data story -->
+<!-- * we introduce the reader to the basics of R, iterating on each notion learned in the previous step -->
+<!-- * we contextualise the step within a data-driven story writing workflow. -->
+<div id="section-introduction" class="section level2">
+<h2>Introduction</h2>
+<p><em>interactive quiz used as a way to start engaging the visitor right away, and to get statistics from various populations</em></p>
+
+<div id="htmlwidget-599622baee6abc810fc5" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-599622baee6abc810fc5">{"x":{"question":"Are you a journalist?","answers":[{"option":"Yes","correct":true,"message":"This course is for you!"},{"option":"No","correct":true,"message":"This tutorial is delibarately, intensely, exclusively focused on journalists. If that&#39;s ok with you, please feel free to take a look at the course :)"}],"label":"q_journali","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"Are you a journalist?","a":[{"option":"Yes","correct":true,"message":"This course is for you!"},{"option":"No","correct":true,"message":"This tutorial is delibarately, intensely, exclusively focused on journalists. If that&#39;s ok with you, please feel free to take a look at the course :)"}],"correct":"Welcome!","incorrect":"Welcome!"}]}},"evals":[],"jsHooks":[]}</script>
+<p>
+<div id="htmlwidget-f7a3b9b62db3839af688" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-f7a3b9b62db3839af688">{"x":{"question":"Have you ever heard about R?","answers":[{"option":"Yes","correct":true,"message":null},{"option":"No","correct":true,"message":null}],"label":"q_heard","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"Have you ever heard about R?","a":[{"option":"Yes","correct":true,"message":null},{"option":"No","correct":true,"message":null}],"correct":"Welcome! This course is for you!","incorrect":"Welcome! This course is for you!"}]}},"evals":[],"jsHooks":[]}</script> Well, despite its mysterious and concise name, R is an open source programming language and environment for statistical computing, widely used among data analysts, statisticians, programmers and more recently, by data journalists. Our mission today will be to convince you that R is worth your precious time and will help you improve your work in the newsroom.</p>
+
+<div id="htmlwidget-db91f103404d1c41370a" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-db91f103404d1c41370a">{"x":{"question":"Do you already use R your work?","answers":[{"option":"Yes","correct":true,"message":"However, there is always something to learn, right?"},{"option":"No","correct":true,"message":"We think R is a great tool for journalists. Let&#39;s see if we can convince you."}],"label":"q_use","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"Do you already use R your work?","a":[{"option":"Yes","correct":true,"message":"However, there is always something to learn, right?"},{"option":"No","correct":true,"message":"We think R is a great tool for journalists. Let&#39;s see if we can convince you."}],"correct":"Great! What follows is a beginner tutorial for R-newbies.","incorrect":"Great! What follows is a beginner tutorial for R-newbies."}]}},"evals":[],"jsHooks":[]}</script>
+<p>In the following we will show you a story that commonly comes up for journalists: <strong>post-election analysis</strong>. Our example are the Brexit votes.</p>
+</div>
+<div id="section-define" class="section level2">
+<h2>DEFINE</h2>
+<p>A referendum in your country is over and you are tasked to do a post-election analysis. You have data about the number of votes, demographics and geographic distribution of the votes. In order to see what would make a good story, you decide to analyse and visualise the data. Even though you normally work with spreadsheets, you want to try R. Here are a few reasons why:</p>
+<table style="width:92%;">
+<colgroup>
+<col width="45%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Spreadsheet</th>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>It’s a “point and click program”</td>
+<td>You write a functions directly in the R interface and R does all the magic</td>
+</tr>
+<tr class="even">
+<td>If you want to repeat a process you have to do it every time</td>
+<td>R allows for automation of processes that have to be repeated. Write once, reuse several times: Not only can you update your code easily, but you can easily share it with other projects.</td>
+</tr>
+<tr class="odd">
+<td>Only allows some types of files</td>
+<td>Can load different kinds of files that can be complicated or impossible to work with in a spreadsheet</td>
+</tr>
+<tr class="even">
+<td>Allows you to make some graphics, but you are limited by the program to what type and what do they look like</td>
+<td>Allows you to customize every aspect of your visualization</td>
+</tr>
+<tr class="odd">
+<td>You go through your analyzing process once and you can forget about making it immediately reproducible for someone else</td>
+<td>Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<!-- > **Wait, what? I have to write code?** -->
+<!-- > -->
+<!-- > How do I even know how write R code? I'm not a programmer! -->
+<!-- Well you don't need to. We are here to help. -->
+<!-- We are going to guide you in each step, don't worry, it won't be that hard.  -->
+<p><img src="images/Wait_what.jpg" width="80%" /> <!-- ![](images/Wait_what.jpg) --></p>
+To get started with this tutorial, you don’t even have to install anything. For now, you can just try stuff by writing code on this website. Let’s try if that works. Please run the following code by clicking the <code>Run Code</code> button:
+<div class="tutorial-exercise" data-label="try" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>3 + 5</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>For those of you who do want to install R, we recommend installing R and the RStudio editor <a href="">ADD LINK HERE</a>. Not all R code chunks in the following will have a <code>Run Code</code> button. If you want to reproduce the entire tutorial on your computer, you have to copy also these code chunks.</p>
+<p>In this lesson we will need a couple of add-on R-Packages. To install the packages run:</p>
+<pre class="r"><code>install.packages(&quot;xlsx&quot;)
+install.packages(&quot;foreign&quot;)
+install.packages(&quot;dplyr&quot;)
+install.packages(&quot;gmodels&quot;)
+install.packages(&quot;ggplot2&quot;)
+install.packages(&quot;GGally&quot;)
+install.packages(&quot;raster&quot;)
+install.packages(&quot;maptools&quot;)
+install.packages(&quot;broom&quot;)
+install.packages(&quot;gpclib&quot;)</code></pre>
+<p>Please make sure, that non of these return an error message. If they do, use the internet to find out what the error means and what to do to solve it by copy-pasting the error into a search engine. In 99 % of cases, someone else had the same error before you and someone from the very friendly R community helped that person to figure out how to solve it.</p>
+<p>To load the packages run:</p>
+<pre class="r"><code>library(&quot;xlsx&quot;)
+library(&quot;foreign&quot;)
+library(&quot;dplyr&quot;)
+library(&quot;gmodels&quot;)
+library(&quot;ggplot2&quot;)
+library(&quot;GGally&quot;)
+library(&quot;raster&quot;)
+library(&quot;maptools&quot;)
+library(&quot;broom&quot;)
+library(&quot;gpclib&quot;)</code></pre>
+<p>R-packages have to be installed only once, but loaded every time. If you use RStudio, you can also install and load the packages through the <code>Install</code> button in the <code>Packages</code> tab.</p>
+<p><img src="images/install_pkgs.png" width="40%" /> <!-- ![](images/install_pkgs.png) --></p>
+<p>Today, we will analyze the <strong>Brexit Referendum Results</strong>. Our goal is to answer the following questions: - Which areas voted to remain or to leave? - Which regions voted to remain or to leave? - Which were the more divided regions? - How do the demographic variables correlate with the leave and remain percentage of votes?</p>
+<p>We want to write a compelling story and creat some nice info graphics to go with our story. So, let’s get started!</p>
+</div>
+<div id="section-get" class="section level2">
+<h2>GET</h2>
+<p>Stretch your arms, grab a coffee, and let’s get started! First, let’s find the electoral data.</p>
+<p>Today, we will analyze the <strong>Brexit Referendum Results</strong>. The results data, compiled by the Electoral Comission are available in .csv format <a href="https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/results.csv">here</a>.</p>
+<p>You also want to align it with a dataset which gives various demographic information about regions, in order to try various analyses. We are going to use 2 files: a .dta file (a filetype that you can not open in Excel) that is available <a href="https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta">here</a> and a .xlsx file available <a href="https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx">here</a>.</p>
+<p>Metadata:</p>
+<p><em>Results</em></p>
+<ul>
+<li><code>id</code> Unique id</li>
+<li><code>Region_Code</code> Region Code</li>
+<li><code>Region</code> Region Name</li>
+<li><code>Area_Code</code> Unique area code</li>
+<li><code>Area</code> Area Name</li>
+<li><code>HASC_code</code> <a href="https://en.wikipedia.org/wiki/Hierarchical_administrative_subdivision_codes">HASC</a> code</li>
+<li><code>Electorate</code> Number of registered voters</li>
+<li><code>ExpectedBallots</code> Expected ballots</li>
+<li><code>VerifiedBallotPapers</code> Verified Ballots</li>
+<li><code>Pct_Turnout</code> Percentage of voter turnout. VerifiedBallotPapers/Electorate</li>
+<li><code>Votes_Cast</code> Casted Votes</li>
+<li><code>Valid_Votes</code> Number of Valid votes</li>
+<li><code>Remain</code> Number of “Remain” votes</li>
+<li><code>Leave</code> Number of “Leave” votes</li>
+<li><code>Rejected_Ballots</code> Number of rejected ballots</li>
+</ul>
+<p><em>Demographics1</em></p>
+<ul>
+<li><code>new_id</code> unique Id</li>
+<li><code>area_code</code> Unique area code</li>
+<li><code>area_name</code> Area Name</li>
+<li><code>median_age</code> Median age of residents</li>
+<li><code>prof_ocu_1</code> Percentage of residents with higher and intermediate professional occupations</li>
+<li><code>prof_ocu_2</code> Percentage of residents with junior professional occupations</li>
+</ul>
+<p><em>Demographics2</em></p>
+<ul>
+<li><code>new_id</code> unique Id</li>
+<li><code>area_code</code> Unique area code</li>
+<li><code>area_name</code> Area Name</li>
+<li><code>born_uk</code> Percentage of residents born in the UK</li>
+<li><code>no_educ</code> Percentage of residents with no formal education</li>
+<li><code>higher_educ</code> Percentage of residents with higher education</li>
+</ul>
+<p>Let’s download those 3 files and store them in a folder called <code>electoral-data</code>. You must have 3 files in your folder: <code>results.cvs</code> <code>demographics1.xlsx</code> <code>demographics2.dta</code></p>
+<!-- Gibran: Should we introduce here the idea of the script and how you can run commands in the console while saving all of your work in the script for further reproducing it? -->
+<p>Now let’s try reading in the data: 1. Open your R editor (e.g. RStudio) 2. Set your working directory to <code>electoral-data</code>. To do this enter</p>
+<pre class="r"><code>setwd(&quot;/PATH/electoral-data&quot;)</code></pre>
+<p>in the console. Then, we are going to need two specialised packages to read .dta and .xlsx files into R: <code>xlsx</code> and <code>foreign</code>. To load the packages run:</p>
+<pre class="r"><code>library(&quot;xlsx&quot;)
+library(&quot;foreign&quot;)</code></pre>
+<p>Now we can read the data:</p>
+<pre class="r"><code># read results data
+results &lt;- read.csv(&quot;https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv&quot;, header = TRUE)
+
+# read demographic data
+demographic1 &lt;- read.xlsx(&quot;demographics1.xlsx&quot;, sheetIndex = 1)
+demographic2 &lt;- read.dta(&quot;demographics2.dta&quot;)</code></pre>
+<div class="tutorial-exercise-support" data-label="read" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># read data
+library(&quot;ddj&quot;)
+data(introduction_raw)</code></pre>
+</div>
+<p>(Note the the hash: it can be used to add comments. You should use it to help future you remember what you did.) Note also than the “string” or text on the left of the &lt;- can be whatever name you want it to be, and the function on the right side of it is assigned to that number. This is what in R is called creating an object and assigning it with a function or value.</p>
+<p>See? That was easy! Now you have your data loaded into the program and can start working.</p>
+<p>Are you seeing the magic yet?</p>
+<ul>
+<li>A simple line of code can replace cumbersome manual operations that you have to do in Excel to import the data</li>
+<li>R loads all sort of file formats, and doesn’t complain</li>
+<li>Write once, reuse several times: Not only you can update your code easily, but you can easily share it with other projects.</li>
+<li>Your stagiaire doesn’t know where to find the relevant data? no problem, the links are all in the R code!</li>
+</ul>
+<blockquote>
+<p><strong>Let’s review the commands we learned in this step:</strong></p>
+<ul>
+<li>Set the folder you work in (working directory) <code>setwd()</code></li>
+<li>Install Packages <code>install.packages()</code></li>
+<li>Load Libraries <code>library()</code></li>
+<li>Read files <code>read.csv</code> <code>read.xlsx</code> <code>read.dta</code></li>
+<li>Creating objects and assigning values to them</li>
+<li>Add code comments <code># my comment</code></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Want to learn what other types of data can be imported into R</strong></p>
+<p><a href="https://www.datacamp.com/community/tutorials/r-data-import-tutorial#gs.oZSkvFo">Check this!</a></p>
+</blockquote>
+<p>Now let’s move on with the analysis!</p>
+</div>
+<div id="section-verify" class="section level2">
+<h2>VERIFY</h2>
+<p>Now that you have imported your data into R, it’s time to start exploring it. Here are some useful commands:</p>
+<ul>
+<li><p><code>view()</code> shows your dataframe with all the variables and observations</p></li>
+<li><code>names()</code> shows the collumn names of the data frame: Check out the names of the results data.frame.
+<div class="tutorial-exercise" data-label="ex_look1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"read","exercise.checker":"NULL"}</script>
+</div></li>
+</ul>
+<div class="tutorial-exercise-support" data-label="ex_look1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>names(results)</code></pre>
+</div>
+<!-- Check out the names of the demographic1 data.frame. -->
+<!-- ```{r ex_look2, exercise=TRUE, exercise.setup = "read"} -->
+<!-- ``` -->
+<!-- ```{r ex_look2-solution, exercise.setup = "read"} -->
+<!-- names(demographic1) -->
+<!-- ``` -->
+<!-- Check out the names of the demographic2 data.frame. -->
+<!-- ```{r ex_look3, exercise=TRUE, exercise.setup = "read"} -->
+<!-- ``` -->
+<!-- ```{r ex_look3-solution, exercise.setup = "read"} -->
+<!-- names(demographic2) -->
+<!-- ``` -->
+<!-- - `str()` shows the type of each variable (here `num` for numeric and `chr` for character) and the -->
+<!-- first few values -->
+<!-- ```{r ex_look2, exercise=TRUE} -->
+<!-- str(results) -->
+<!-- ``` -->
+<p>Now that you know the variables of your databases is time to start with the cleaning part.</p>
+</div>
+<div id="section-clean" class="section level2">
+<h2>CLEAN</h2>
+<p>Before you can start your analysis, you need a clean database with all the information. Nevertheless you have the information scattered in 3 different data.frames, which you would like to combine.</p>
+<p>Our objective is to add the demographic variables <code>median_age</code> <code>prof_ocu_1</code> <code>prof_ocu_2</code> <code>born_uk</code> <code>no_educ</code> and <code>higher_educ</code> to the results database. But in order to do this, we need a common variable in all the datasets. In the previous step, where we explored the data you can see that the three databases have the variable: <code>area_code</code>.</p>
+<p>That common variable will allow us to merge the databases using the <code>merge</code> function.</p>
+The following lines of code will merge the data sets. Add one line that shows the variable names of all variables in the new data set called <code>mydata</code>.
+<div class="tutorial-exercise" data-label="ex_merge" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>## merge the data sets
+mydata &lt;- merge(results, demographic1, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+mydata &lt;- merge(mydata, demographic2, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+
+## list all variables in mydata</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"read","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="ex_merge-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>## merge the data sets
+mydata &lt;- merge(results, demographic1, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+mydata &lt;- merge(mydata, demographic2, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+
+## list all variables in mydata
+names(mydata)</code></pre>
+</div>
+<p>You now have a new dataframe <code>mydata</code> with the electoral and the demographic information. Nevertheless we need to further clean the database.</p>
+<!-- HS: Do we need to delete the variables? If, so I would use package dplyr, function select. -->
+<!-- First, we are going to delete the variables that we don't need.  To do this we just type the name of our dataframe followed by $ and the variable we want to delete, like this: `mydata$variable <- NULL`. -->
+<!-- ```{r} -->
+<!-- ##Delete the variables we don't need -->
+<!-- mydata$new_id.x <- NULL -->
+<!-- mydata$area_name.x <- NULL -->
+<!-- mydata$new_id.y <- NULL -->
+<!-- mydata$area_name.y <- NULL -->
+<!-- ``` -->
+<p>To analyze the data we also need the percentage of Remain, Leave and Rejected votes for each area. We are going to create those three variables:</p>
+<pre class="r"><code>mydata$perc_remain &lt;- (mydata$Remain / mydata$Valid_Votes) * 100
+mydata$perc_leave &lt;- (mydata$Leave / mydata$Valid_Votes) * 100
+mydata$perc_rejected &lt;- (mydata$Rejected_Ballots / mydata$Votes_Cast) * 100</code></pre>
+<p>Also we want to sum <code>prof_ocu_1</code> and <code>prof_ocu_2</code> to create a new variable that contains the percentage of residents in each area with professional occupations:</p>
+<pre class="r"><code>mydata$prof_ocu &lt;- mydata$prof_ocu_1 + mydata$prof_ocu_2</code></pre>
+<p>We can also create a new categorical variable <code>Result</code> that shows which areas voted to leave and which voted to remain. To do this we are going to use the <code>ifelse()</code> function.</p>
+<pre class="r"><code>## This fuction creates a new variable that asigns the value 1 if the remain percentage is less than 50,
+## and 0 otherwise
+mydata$result &lt;- ifelse(mydata$perc_remain &lt; 50, 1, 0)</code></pre>
+To look at the number of areas who voted for and against remaining we can use the <code>table()</code> function. Try it!
+<div class="tutorial-exercise-support" data-label="prep_table" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>data(introduction_raw, package = &quot;ddj&quot;)
+
+## merge the data sets
+mydata &lt;- merge(results, demographic1, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+mydata &lt;- merge(mydata, demographic2, by.x = &quot;Area_Code&quot;, by.y = &quot;area_code&quot;)
+
+mydata$perc_remain &lt;- (mydata$Remain / mydata$Valid_Votes) * 100
+mydata$perc_leave &lt;- (mydata$Leave / mydata$Valid_Votes) * 100
+mydata$perc_rejected &lt;- (mydata$Rejected_Ballots / mydata$Votes_Cast) * 100
+mydata$prof_ocu &lt;- mydata$prof_ocu_1 + mydata$prof_ocu_2
+mydata$result &lt;- ifelse(mydata$perc_remain &lt; 50, 1, 0)</code></pre>
+</div>
+<div class="tutorial-exercise" data-label="ex_tab" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>## Table of the result</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"prep_table","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="ex_tab-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>## Table of the result
+table(mydata$result)</code></pre>
+</div>
+<p>Now we can add labels to the variable <code>Result</code></p>
+<pre class="r"><code>#Adding labels to &#39;Result&#39;
+mydata$result &lt;- factor(mydata$result,
+                        levels = c(1, 0),
+                        labels = c(&quot;leave&quot;, &quot;remain&quot;))
+
+## Table of the result
+table(mydata$result)</code></pre>
+<pre><code>## 
+##  leave remain 
+##    263    118</code></pre>
+<p>See the difference from before?</p>
+<p>We can also create a new categorical variable that allows to group the Remain vote in different categories:</p>
+<pre class="r"><code>## create 4 categories of voting percentages
+mydata$Remain_cat &lt;- cut(mydata$perc_remain, breaks = c(0, 25, 50, 75, 100))
+table(mydata$Remain_cat)</code></pre>
+<pre><code>## 
+##   (0,25]  (25,50]  (50,75] (75,100] 
+##        1      262      112        6</code></pre>
+<p>Now we can add labels to the variable <code>Remain_cat</code></p>
+<pre class="r"><code>mydata$Remain_cat &lt;- factor(mydata$Remain_cat, labels = c(&quot;very low&quot;, &quot;low&quot;, &quot;high&quot;, &quot;very high&quot;))
+table(mydata$Remain_cat)</code></pre>
+<pre><code>## 
+##  very low       low      high very high 
+##         1       262       112         6</code></pre>
+<p>We are almost done, don’t give up just yet! Now to finish we want to aggregate regional data in new variables, in order the see the voting results by region. A simple way to do this is with the <code>summarise()</code> function from the <code>dplyr</code> package. If you don’t have the package installed, install it with the command <code>install.packages(&quot;dplyr&quot;)</code>.</p>
+<pre class="r"><code>library(&quot;dplyr&quot;)
+datahasc &lt;- summarise(group_by(mydata, HASC_code),        ## Group mydata by HASC code
+                        Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per HASC code, i.e. the sum of valid votes in the areas of the HASC code
+                        Remain = sum(Remain),
+                        Leave = sum(Leave))
+
+## Calculate the percentages
+datahasc$perc_remain &lt;- (datahasc$Remain / datahasc$Valid_Votes)*100
+datahasc$perc_leave &lt;- (datahasc$Leave/ datahasc$Valid_Votes)*100
+
+datahasc</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["HASC_code"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["Valid_Votes"],"name":[2],"type":["int"],"align":["right"]},{"label":["Remain"],"name":[3],"type":["int"],"align":["right"]},{"label":["Leave"],"name":[4],"type":["int"],"align":["right"]},{"label":["perc_remain"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["perc_leave"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"GB.AB","2":"48696","3":"29494","4":"19202","5":"60.56760","6":"39.43240"},{"1":"GB.AG","2":"59258","3":"32747","4":"26511","5":"55.26174","6":"44.73826"},{"1":"GB.AR","2":"104714","3":"63985","4":"40729","5":"61.10453","6":"38.89547"},{"1":"GB.AS","2":"138961","3":"76445","4":"62516","5":"55.01184","6":"44.98816"},{"1":"GB.AY","2":"37951","3":"18618","4":"19333","5":"49.05800","6":"50.94200"},{"1":"GB.BA","2":"73880","3":"27750","4":"46130","5":"37.56091","6":"62.43909"},{"1":"GB.BD","2":"244870","3":"111167","4":"133703","5":"45.39837","6":"54.60163"},{"1":"GB.BE","2":"121404","3":"72523","4":"48881","5":"59.73691","6":"40.26309"},{"1":"GB.BG","2":"34802","3":"13215","4":"21587","5":"37.97196","6":"62.02804"},{"1":"GB.BH","2":"146675","3":"100648","4":"46027","5":"68.61974","6":"31.38026"},{"1":"GB.BJ","2":"74345","3":"33723","4":"40622","5":"45.36015","6":"54.63985"},{"1":"GB.BK","2":"466769","3":"245842","4":"220927","5":"52.66888","6":"47.33112"},{"1":"GB.BM","2":"91926","3":"41473","4":"50453","5":"45.11564","6":"54.88436"},{"1":"GB.BN","2":"105230","3":"60878","4":"44352","5":"57.85232","6":"42.14768"},{"1":"GB.BO","2":"64914","3":"37952","4":"26962","5":"58.46505","6":"41.53495"},{"1":"GB.BS","2":"228445","3":"141027","4":"87418","5":"61.73346","6":"38.26654"},{"1":"GB.BU","2":"300951","3":"154456","4":"146495","5":"51.32264","6":"48.67736"},{"1":"GB.BW","2":"65321","3":"28522","4":"36799","5":"43.66437","6":"56.33563"},{"1":"GB.BZ","2":"182432","3":"92398","4":"90034","5":"50.64791","6":"49.35209"},{"1":"GB.CA","2":"169604","3":"101788","4":"67816","5":"60.01509","6":"39.98491"},{"1":"GB.CC","2":"25427","3":"14691","4":"10736","5":"57.77717","6":"42.22283"},{"1":"GB.CG","2":"39742","3":"21711","4":"18031","5":"54.62986","6":"45.37014"},{"1":"GB.CH","2":"414662","3":"203417","4":"211245","5":"49.05610","6":"50.94390"},{"1":"GB.CI","2":"103035","3":"47654","4":"55381","5":"46.25030","6":"53.74970"},{"1":"GB.CM","2":"351627","3":"183193","4":"168434","5":"52.09867","6":"47.90133"},{"1":"GB.CN","2":"95133","3":"71295","4":"23838","5":"74.94245","6":"25.05755"},{"1":"GB.CO","2":"324629","3":"141343","4":"183286","5":"43.53986","6":"56.46014"},{"1":"GB.CP","2":"92473","3":"39178","4":"53295","5":"42.36696","6":"57.63304"},{"1":"GB.CU","2":"284991","3":"124181","4":"160810","5":"43.57366","6":"56.42634"},{"1":"GB.CW","2":"65504","3":"30147","4":"35357","5":"46.02314","6":"53.97686"},{"1":"GB.CY","2":"171134","3":"92913","4":"78221","5":"54.29254","6":"45.70746"},{"1":"GB.DA","2":"55166","3":"24172","4":"30994","5":"43.81684","6":"56.18316"},{"1":"GB.DB","2":"457312","3":"184601","4":"272711","5":"40.36653","6":"59.63347"},{"1":"GB.DE","2":"120655","3":"51612","4":"69043","5":"42.77651","6":"57.22349"},{"1":"GB.DG","2":"82667","3":"43864","4":"38803","5":"53.06108","6":"46.93892"},{"1":"GB.DH","2":"267398","3":"113521","4":"153877","5":"42.45395","6":"57.54605"},{"1":"GB.DI","2":"52072","3":"23955","4":"28117","5":"46.00361","6":"53.99639"},{"1":"GB.DO","2":"473409","3":"223488","4":"249921","5":"47.20823","6":"52.79177"},{"1":"GB.DS","2":"263905","3":"114548","4":"149357","5":"43.40501","6":"56.59499"},{"1":"GB.DU","2":"66385","3":"39688","4":"26697","5":"59.78459","6":"40.21541"},{"1":"GB.EA","2":"57833","3":"33891","4":"23942","5":"58.60149","6":"41.39851"},{"1":"GB.EB","2":"252294","3":"187796","4":"64498","5":"74.43538","6":"25.56462"},{"1":"GB.ED","2":"62374","3":"44534","4":"17840","5":"71.39834","6":"28.60166"},{"1":"GB.EF","2":"297939","3":"176635","4":"121304","5":"59.28563","6":"40.71437"},{"1":"GB.EG","2":"149041","3":"90024","4":"59017","5":"60.40217","6":"39.59783"},{"1":"GB.EL","2":"55764","3":"36026","4":"19738","5":"64.60440","6":"35.39560"},{"1":"GB.ER","2":"52941","3":"39345","4":"13596","5":"74.31858","6":"25.68142"},{"1":"GB.ES","2":"311938","3":"141830","4":"170108","5":"45.46737","6":"54.53263"},{"1":"GB.EX","2":"825496","3":"314872","4":"510624","5":"38.14337","6":"61.85663"},{"1":"GB.EY","2":"198915","3":"78779","4":"120136","5":"39.60435","6":"60.39565"},{"1":"GB.FI","2":"182220","3":"106754","4":"75466","5":"58.58523","6":"41.41477"},{"1":"GB.FK","2":"79258","3":"44987","4":"34271","5":"56.76020","6":"43.23980"},{"1":"GB.FL","2":"86797","3":"37867","4":"48930","5":"43.62708","6":"56.37292"},{"1":"GB.GC","2":"364770","3":"178819","4":"185951","5":"49.02240","6":"50.97760"},{"1":"GB.GD","2":"61182","3":"35517","4":"25665","5":"58.05139","6":"41.94861"},{"1":"GB.GG","2":"252809","3":"168335","4":"84474","5":"66.58584","6":"33.41416"},{"1":"GB.GR","2":"117365","3":"65248","4":"52117","5":"55.59409","6":"44.40591"},{"1":"GB.HA","2":"805155","3":"374151","4":"431004","5":"46.46944","6":"53.53056"},{"1":"GB.HD","2":"133022","3":"58040","4":"74982","5":"43.63188","6":"56.36812"},{"1":"GB.HE","2":"108270","3":"44148","4":"64122","5":"40.77584","6":"59.22416"},{"1":"GB.HF","2":"80242","3":"56188","4":"24054","5":"70.02318","6":"29.97682"},{"1":"GB.HI","2":"125657","3":"70308","4":"55349","5":"55.95231","6":"44.04769"},{"1":"GB.HK","2":"106266","3":"83398","4":"22868","5":"78.48042","6":"21.51958"},{"1":"GB.HL","2":"65005","3":"27678","4":"37327","5":"42.57826","6":"57.42174"},{"1":"GB.HP","2":"46100","3":"14029","4":"32071","5":"30.43167","6":"69.56833"},{"1":"GB.HR","2":"117225","3":"64042","4":"53183","5":"54.63169","6":"45.36831"},{"1":"GB.HT","2":"646553","3":"321242","4":"325311","5":"49.68533","6":"50.31467"},{"1":"GB.HU","2":"115076","3":"58755","4":"56321","5":"51.05756","6":"48.94244"},{"1":"GB.HV","2":"139086","3":"42201","4":"96885","5":"30.34166","6":"69.65834"},{"1":"GB.HY","2":"105846","3":"79991","4":"25855","5":"75.57300","6":"24.42700"},{"1":"GB.IC","2":"38698","3":"24688","4":"14010","5":"63.79658","6":"36.20342"},{"1":"GB.IT","2":"101600","3":"76420","4":"25180","5":"75.21654","6":"24.78346"},{"1":"GB.IW","2":"79380","3":"30207","4":"49173","5":"38.05367","6":"61.94633"},{"1":"GB.KC","2":"54739","3":"37601","4":"17138","5":"68.69143","6":"31.30857"},{"1":"GB.KE","2":"834301","3":"346701","4":"487600","5":"41.55587","6":"58.44413"},{"1":"GB.KH","2":"113355","3":"36709","4":"76646","5":"32.38410","6":"67.61590"},{"1":"GB.KT","2":"85270","3":"52533","4":"32737","5":"61.60783","6":"38.39217"},{"1":"GB.LA","2":"708417","3":"288453","4":"419964","5":"40.71797","6":"59.28203"},{"1":"GB.LC","2":"138972","3":"70980","4":"67992","5":"51.07504","6":"48.92496"},{"1":"GB.LE","2":"390372","3":"169014","4":"221358","5":"43.29563","6":"56.70437"},{"1":"GB.LI","2":"408900","3":"142444","4":"266456","5":"34.83590","6":"65.16410"},{"1":"GB.LN","2":"4399","3":"3312","4":"1087","5":"75.28984","6":"24.71016"},{"1":"GB.LT","2":"141924","3":"111584","4":"30340","5":"78.62236","6":"21.37764"},{"1":"GB.LU","2":"84481","3":"36708","4":"47773","5":"43.45119","6":"56.54881"},{"1":"GB.LW","2":"124473","3":"86955","4":"37518","5":"69.85852","6":"30.14148"},{"1":"GB.MB","2":"61358","3":"21181","4":"40177","5":"34.52036","6":"65.47964"},{"1":"GB.ME","2":"100100","3":"63003","4":"37097","5":"62.94006","6":"37.05994"},{"1":"GB.MK","2":"130456","3":"63393","4":"67063","5":"48.59340","6":"51.40660"},{"1":"GB.ML","2":"45468","3":"28217","4":"17251","5":"62.05903","6":"37.94097"},{"1":"GB.MM","2":"55630","3":"28061","4":"27569","5":"50.44221","6":"49.55779"},{"1":"GB.MN","2":"1324391","3":"616359","4":"708032","5":"46.53905","6":"53.46095"},{"1":"GB.MO","2":"48106","3":"24114","4":"23992","5":"50.12680","6":"49.87320"},{"1":"GB.MS","2":"688014","3":"357753","4":"330261","5":"51.99792","6":"48.00208"},{"1":"GB.MT","2":"28865","3":"12574","4":"16291","5":"43.56141","6":"56.43859"},{"1":"GB.MW","2":"138886","3":"49889","4":"88997","5":"35.92083","6":"64.07917"},{"1":"GB.NA","2":"390967","3":"159743","4":"231224","5":"40.85844","6":"59.14156"},{"1":"GB.NB","2":"178721","3":"82022","4":"96699","5":"45.89388","6":"54.10612"},{"1":"GB.NE","2":"78982","3":"23797","4":"55185","5":"30.12965","6":"69.87035"},{"1":"GB.NF","2":"497007","3":"207010","4":"289997","5":"41.65132","6":"58.34868"},{"1":"GB.NG","2":"120661","3":"59318","4":"61343","5":"49.16087","6":"50.83913"},{"1":"GB.NH","2":"104699","3":"55328","4":"49371","5":"52.84482","6":"47.15518"},{"1":"GB.NL","2":"88862","3":"29947","4":"58915","5":"33.70057","6":"66.29943"},{"1":"GB.NN","2":"154949","3":"95549","4":"59400","5":"61.66481","6":"38.33519"},{"1":"GB.NO","2":"73649","3":"32413","4":"41236","5":"44.01010","6":"55.98990"},{"1":"GB.NP","2":"75652","3":"32651","4":"43001","5":"43.15947","6":"56.84053"},{"1":"GB.NR","2":"67504","3":"38394","4":"29110","5":"56.87663","6":"43.12337"},{"1":"GB.NS","2":"124548","3":"59572","4":"64976","5":"47.83056","6":"52.16944"},{"1":"GB.NT","2":"457710","3":"183971","4":"273739","5":"40.19379","6":"59.80621"},{"1":"GB.NY","2":"357258","3":"160976","4":"196282","5":"45.05875","6":"54.94125"},{"1":"GB.OR","2":"11382","3":"7189","4":"4193","5":"63.16113","6":"36.83887"},{"1":"GB.OX","2":"378608","3":"215035","4":"163573","5":"56.79621","6":"43.20379"},{"1":"GB.PB","2":"87392","3":"34176","4":"53216","5":"39.10655","6":"60.89345"},{"1":"GB.PE","2":"68522","3":"29367","4":"39155","5":"42.85777","6":"57.14223"},{"1":"GB.PK","2":"81255","3":"49641","4":"31614","5":"61.09286","6":"38.90714"},{"1":"GB.PL","2":"85448","3":"35741","4":"49707","5":"41.82778","6":"58.17222"},{"1":"GB.PM","2":"133455","3":"53458","4":"79997","5":"40.05695","6":"59.94305"},{"1":"GB.PO","2":"79469","3":"36762","4":"42707","5":"46.25955","6":"53.74045"},{"1":"GB.PS","2":"98720","3":"41384","4":"57336","5":"41.92058","6":"58.07942"},{"1":"GB.RB","2":"128233","3":"69213","4":"59020","5":"53.97441","6":"46.02559"},{"1":"GB.RC","2":"72714","3":"24586","4":"48128","5":"33.81192","6":"66.18808"},{"1":"GB.RF","2":"88129","3":"57119","4":"31010","5":"64.81294","6":"35.18706"},{"1":"GB.RL","2":"22966","3":"11353","4":"11613","5":"49.43395","6":"50.56605"},{"1":"GB.RT","2":"116563","3":"53973","4":"62590","5":"46.30372","6":"53.69628"},{"1":"GB.RU","2":"108806","3":"75396","4":"33410","5":"69.29397","6":"30.70603"},{"1":"GB.SA","2":"61506","3":"36265","4":"25241","5":"58.96173","6":"41.03827"},{"1":"GB.SF","2":"417771","3":"178749","4":"239022","5":"42.78636","6":"57.21364"},{"1":"GB.SH","2":"12222","3":"6907","4":"5315","5":"56.51285","6":"43.48715"},{"1":"GB.SJ","2":"158333","3":"74928","4":"83405","5":"47.32305","6":"52.67695"},{"1":"GB.SL","2":"162592","3":"102568","4":"60024","5":"63.08305","6":"36.91695"},{"1":"GB.SM","2":"320803","3":"142009","4":"178794","5":"44.26673","6":"55.73327"},{"1":"GB.SN","2":"112965","3":"51220","4":"61745","5":"45.34148","6":"54.65852"},{"1":"GB.SO","2":"117590","3":"36027","4":"81563","5":"30.63781","6":"69.36219"},{"1":"GB.SP","2":"183153","3":"78987","4":"104166","5":"43.12624","6":"56.87376"},{"1":"GB.SQ","2":"129502","3":"94293","4":"35209","5":"72.81200","6":"27.18800"},{"1":"GB.SR","2":"672667","3":"350831","4":"321836","5":"52.15523","6":"47.84477"},{"1":"GB.SS","2":"93870","3":"39348","4":"54522","5":"41.91755","6":"58.08245"},{"1":"GB.ST","2":"493971","3":"183398","4":"310573","5":"37.12728","6":"62.87272"},{"1":"GB.SU","2":"106560","3":"49319","4":"57241","5":"46.28285","6":"53.71715"},{"1":"GB.SW","2":"120243","3":"58307","4":"61936","5":"48.49097","6":"51.50903"},{"1":"GB.SY","2":"678231","3":"260723","4":"417508","5":"38.44162","6":"61.55838"},{"1":"GB.TB","2":"75824","3":"27935","4":"47889","5":"36.84190","6":"63.15810"},{"1":"GB.TF","2":"48144","3":"19363","4":"28781","5":"40.21893","6":"59.78107"},{"1":"GB.TH","2":"108235","3":"73011","4":"35224","5":"67.45600","6":"32.54400"},{"1":"GB.TK","2":"89603","3":"32954","4":"56649","5":"36.77779","6":"63.22221"},{"1":"GB.TR","2":"79916","3":"22151","4":"57765","5":"27.71785","6":"72.28215"},{"1":"GB.TW","2":"558826","3":"244651","4":"314175","5":"43.77946","6":"56.22054"},{"1":"GB.VG","2":"72309","3":"36681","4":"35628","5":"50.72813","6":"49.27187"},{"1":"GB.WC","2":"341454","3":"145311","4":"196143","5":"42.55654","6":"57.44346"},{"1":"GB.WD","2":"43220","3":"26794","4":"16426","5":"61.99445","6":"38.00555"},{"1":"GB.WE","2":"78196","3":"53928","4":"24268","5":"68.96516","6":"31.03484"},{"1":"GB.WF","2":"108551","3":"64156","4":"44395","5":"59.10217","6":"40.89783"},{"1":"GB.WH","2":"88508","3":"51560","4":"36948","5":"58.25462","6":"41.74538"},{"1":"GB.WI","2":"14903","3":"8232","4":"6671","5":"55.23720","6":"44.76280"},{"1":"GB.WL","2":"288895","3":"137258","4":"151637","5":"47.51138","6":"52.48862"},{"1":"GB.WM","2":"1301711","3":"538378","4":"763333","5":"41.35926","6":"58.64074"},{"1":"GB.WR","2":"327110","3":"147972","4":"179138","5":"45.23616","6":"54.76384"},{"1":"GB.WS","2":"487512","3":"227613","4":"259899","5":"46.68870","6":"53.31130"},{"1":"GB.WT","2":"115144","3":"52657","4":"62487","5":"45.73143","6":"54.26857"},{"1":"GB.WW","2":"157884","3":"118463","4":"39421","5":"75.03167","6":"24.96833"},{"1":"GB.WX","2":"70366","3":"28822","4":"41544","5":"40.96012","6":"59.03988"},{"1":"GB.WY","2":"1114032","3":"503750","4":"610282","5":"45.21863","6":"54.78137"},{"1":"GB.XB","2":"128489","3":"47603","4":"80886","5":"37.04831","6":"62.95169"},{"1":"GB.YK","2":"109600","3":"63617","4":"45983","5":"58.04471","6":"41.95529"},{"1":"GB.ZG","2":"48899","3":"33112","4":"15787","5":"67.71509","6":"32.28491"},{"1":"GB.ZH","2":"107665","3":"49738","4":"57927","5":"46.19700","6":"53.80300"},{"1":"GB.ZT","2":"100415","3":"38433","4":"61982","5":"38.27416","6":"61.72584"},{"1":"Northern Ireland","2":"790149","3":"440707","4":"349442","5":"55.77518","6":"44.22482"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- ```{r}  -->
+<!-- library("dplyr") -->
+<!-- dataregion <- summarise(group_by(mydata, Region),        ## Group mydata by variable Region -->
+<!--                         Valid_Votes = sum(Valid_Votes),  ## Create a variable Valid_Votes which is the number of valid votes per region, i.e. the sum of valid votes in the areas of the region -->
+<!--                         Remain = sum(Remain),  -->
+<!--                         Leave = sum(Leave)) -->
+<!-- ## Calculate the percentages -->
+<!-- dataregion$perc_remain <- (dataregion$Remain / dataregion$Valid_Votes)*100 -->
+<!-- dataregion$perc_leave <- (dataregion$Leave/ dataregion$Valid_Votes)*100 -->
+<!-- dataregion -->
+<!-- ``` -->
+<!-- _Heidi: Do you think we can do somehing else here in cleaning, to introduce a package, maybe filter data?_ -->
+<!-- I think we should keep it short, so I would leave it as is. -->
+<p>Now that you have cleaned your data, you’re ready to start the analysis!</p>
+
+<div id="htmlwidget-424ce20c003ce9ddada3" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-424ce20c003ce9ddada3">{"x":{"question":"Are you convinced yet that R is worth your time?","answers":[{"option":"not really","correct":false,"message":null},{"option":"hmmm, I need to see more to decide","correct":false,"message":null},{"option":"yes, R won my heart","correct":true,"message":null}],"label":"convinced","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":false,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"Are you convinced yet that R is worth your time?","a":[{"option":"not really","correct":false,"message":null},{"option":"hmmm, I need to see more to decide","correct":false,"message":null},{"option":"yes, R won my heart","correct":true,"message":null}],"correct":"Wohooo!","incorrect":"Well, maybe the next section will convince you ;)"}]}},"evals":[],"jsHooks":[]}</script>
+<p><strong>Let’s list some advantages of R so far:</strong> * With simple lines of code you can rearrange your data, create new variables, delete observations * Something went wrong? Don’t worry, just fix your code, run it and the error goes away easily * You can keep your original datafiles in the workspace if you need to review them.</p>
+<blockquote>
+<p><strong>Let’s review what we learned in this step:</strong></p>
+<ul>
+<li>Merge datasets <code>merge()</code></li>
+<li>Create new variables <!-- - Delete variables --></li>
+<li>Create new categorical variables and asign labels</li>
+<li>Create a new data set with summaries of an existing data set</li>
+</ul>
+</blockquote>
+</div>
+<div id="section-analyze" class="section level2">
+<h2>ANALYZE</h2>
+<p>Let’s start with the most fun part. You need to write a story based on those electoral results, and you already have some questions you want to answer: - Which areas voted to remain or to leave? - Which regions? - Which were the more divided regions? - How do the demographic variables correlate with the leave and remain percentage of votes?</p>
+<p>First we need to tabulate the data:</p>
+<pre class="r"><code>## How many areas voted to remain or leave
+table(mydata$result)</code></pre>
+<pre><code>## 
+##  leave remain 
+##    263    118</code></pre>
+<pre class="r"><code>prop.table(table(mydata$result))</code></pre>
+<pre><code>## 
+##     leave    remain 
+## 0.6902887 0.3097113</code></pre>
+<p>You can see that 69% of the areas voted to leave the European Union. Now let’s see how are they are distributed by Region creating a two frequency table that shows row percentages. To do that we are going to use the <code>CrossTab()</code> function in the <code>gmodels</code> package (rember to install it with <code>install.packages(&quot;gmodels&quot;)</code>):</p>
+<pre class="r"><code>library(&quot;gmodels&quot;)
+CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected = FALSE,
+           prop.r = TRUE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE)</code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  381 
+## 
+##  
+##                          | mydata$result 
+##            mydata$Region |     leave |    remain | Row Total | 
+## -------------------------|-----------|-----------|-----------|
+##                     East |        42 |         5 |        47 | 
+##                          |     0.894 |     0.106 |     0.123 | 
+## -------------------------|-----------|-----------|-----------|
+##            East Midlands |        38 |         2 |        40 | 
+##                          |     0.950 |     0.050 |     0.105 | 
+## -------------------------|-----------|-----------|-----------|
+##                   London |         5 |        28 |        33 | 
+##                          |     0.152 |     0.848 |     0.087 | 
+## -------------------------|-----------|-----------|-----------|
+##               North East |        11 |         1 |        12 | 
+##                          |     0.917 |     0.083 |     0.031 | 
+## -------------------------|-----------|-----------|-----------|
+##         Northern Ireland |         0 |         1 |         1 | 
+##                          |     0.000 |     1.000 |     0.003 | 
+## -------------------------|-----------|-----------|-----------|
+##               North West |        32 |         7 |        39 | 
+##                          |     0.821 |     0.179 |     0.102 | 
+## -------------------------|-----------|-----------|-----------|
+##                 Scotland |         0 |        32 |        32 | 
+##                          |     0.000 |     1.000 |     0.084 | 
+## -------------------------|-----------|-----------|-----------|
+##               South East |        43 |        24 |        67 | 
+##                          |     0.642 |     0.358 |     0.176 | 
+## -------------------------|-----------|-----------|-----------|
+##               South West |        28 |         9 |        37 | 
+##                          |     0.757 |     0.243 |     0.097 | 
+## -------------------------|-----------|-----------|-----------|
+##                    Wales |        17 |         5 |        22 | 
+##                          |     0.773 |     0.227 |     0.058 | 
+## -------------------------|-----------|-----------|-----------|
+##            West Midlands |        29 |         1 |        30 | 
+##                          |     0.967 |     0.033 |     0.079 | 
+## -------------------------|-----------|-----------|-----------|
+## Yorkshire and The Humber |        18 |         3 |        21 | 
+##                          |     0.857 |     0.143 |     0.055 | 
+## -------------------------|-----------|-----------|-----------|
+##             Column Total |       263 |       118 |       381 | 
+## -------------------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<pre class="r"><code># Note that we set the prop.r = TRUE in order to show row percetages.
+# If we wanted for instance to show column percentages
+# we can set prop.c = TRUE</code></pre>
+<p>With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland and Northern Ireland. This could be interesting for your story!</p>
+<p>We can also calculate some summary statistics for the <code>perc_remain</code> variable:</p>
+<pre class="r"><code>summary(mydata$perc_remain)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   24.44   39.65   45.73   46.88   52.85   78.62</code></pre>
+<pre class="r"><code>table(mydata$Remain_cat)</code></pre>
+<pre><code>## 
+##  very low       low      high very high 
+##         1       262       112         6</code></pre>
+<p>You can see that only one area had a very low vote to Remain with 24.4% of the vote.</p>
+<p>We can also tabulate the 10 areas with the highest Leave vote:</p>
+<pre class="r"><code>## order data by percentage of leave votes
+order_leave &lt;- order(mydata$perc_leave, decreasing = TRUE)
+mydata &lt;- mydata[order_leave, ]
+
+## show the first 10 observations, show only some of the variables
+mydata[1:10, c(&quot;Region&quot;, &quot;Area&quot;, &quot;Leave&quot;, &quot;Remain&quot;, &quot;perc_leave&quot;)]</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Region"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["Area"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["Leave"],"name":[3],"type":["int"],"align":["right"]},{"label":["Remain"],"name":[4],"type":["int"],"align":["right"]},{"label":["perc_leave"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"East Midlands","2":"Boston","3":"22974","4":"7430","5":"75.56243"},{"1":"East Midlands","2":"South Holland","3":"36423","4":"13074","5":"73.58628"},{"1":"East","2":"Castle Point","3":"37691","4":"14154","5":"72.69939"},{"1":"East","2":"Thurrock","3":"57765","4":"22151","5":"72.28215"},{"1":"East","2":"Great Yarmouth","3":"35844","4":"14284","5":"71.50495"},{"1":"East","2":"Fenland","3":"37571","4":"15055","5":"71.39247"},{"1":"East Midlands","2":"Mansfield","3":"39927","4":"16417","5":"70.86291"},{"1":"East Midlands","2":"Bolsover","3":"29730","4":"12242","5":"70.83294"},{"1":"East Midlands","2":"East Lindsey","3":"56613","4":"23515","5":"70.65320"},{"1":"Yorkshire and The Humber","2":"North East Lincolnshire","3":"55185","4":"23797","5":"69.87035"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>So far you have answered some of your questions: the majority of areas in the UK voted to leave the EU. London, Scotland and Northern Ireland voted by majority to Remain.</p>
+<p>So it’s time to go deeper in the analysis. We can calculate some correlations between the leave vote and some of the demographic variables. The hyphotesis is that the regions with older population, less educated residents and less diverse voted to Leave the EU.</p>
+<p>Now let’s calculate some correlations. To calculate a correlation between two variables just use the fuction <code>cor()</code> and plot it using <code>plot(x, y)</code>:</p>
+<pre class="r"><code>cor(mydata$perc_leave, mydata$no_educ)</code></pre>
+<pre><code>## [1] 0.5563877</code></pre>
+<pre class="r"><code>plot(perc_leave ~ no_educ, data = mydata)</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-17-1.png" width="624" /></p>
+<p>To see if our correlation is statistically significant we can use a linear model:</p>
+<pre class="r"><code>### look at Pr(&lt;|t|) in the no_educ row. The p-value is very small
+### =&gt; statistically significant linear relation between no_educ and perc_leave
+model &lt;- lm(perc_leave ~ no_educ, data = mydata)
+summary(model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = perc_leave ~ no_educ, data = mydata)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -30.006  -2.928   2.432   6.015  15.049 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  27.4191     2.0207   13.57   &lt;2e-16 ***
+## no_educ       1.1250     0.0863   13.04   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.663 on 379 degrees of freedom
+## Multiple R-squared:  0.3096, Adjusted R-squared:  0.3077 
+## F-statistic: 169.9 on 1 and 379 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>### visualise the estimated relation
+plot(perc_leave ~ no_educ, data = mydata)
+abline(model)</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-18-1.png" width="624" /> <em>Do we even want to go into stats so deeply?</em></p>
+<p>To calculate a correlation matrix, let’s create a new dataframe only with the varaibles we need and then use the <code>cor()</code> function again:</p>
+<pre class="r"><code>corvars &lt;- c(&quot;perc_leave&quot;, &quot;perc_remain&quot;, &quot;median_age&quot;, &quot;born_uk&quot;,
+             &quot;no_educ&quot;, &quot;higher_educ&quot;, &quot;prof_ocu&quot;)
+datacor &lt;- mydata[, corvars]
+
+
+#Lets calculate the correlation matrix
+cor(datacor)</code></pre>
+<pre><code>##             perc_leave perc_remain median_age    born_uk    no_educ
+## perc_leave   1.0000000  -1.0000000  0.3344219  0.4781973  0.5563877
+## perc_remain -1.0000000   1.0000000 -0.3344219 -0.4781973 -0.5563877
+## median_age   0.3344219  -0.3344219  1.0000000  0.7368753  0.1892295
+## born_uk      0.4781973  -0.4781973  0.7368753  1.0000000  0.4524213
+## no_educ      0.5563877  -0.5563877  0.1892295  0.4524213  1.0000000
+## higher_educ -0.7708179   0.7708179 -0.2176862 -0.5447494 -0.8812980
+## prof_ocu    -0.5849986   0.5849986 -0.1497925 -0.4035716 -0.9095549
+##             higher_educ   prof_ocu
+## perc_leave   -0.7708179 -0.5849986
+## perc_remain   0.7708179  0.5849986
+## median_age   -0.2176862 -0.1497925
+## born_uk      -0.5447494 -0.4035716
+## no_educ      -0.8812980 -0.9095549
+## higher_educ   1.0000000  0.8868166
+## prof_ocu      0.8868166  1.0000000</code></pre>
+<p>You can see that there’s a positive correlation between the Remain vote and the areas with a high number of residents with higher education and professional occupations. On the contrary, there seem to be a positive correlation between the areas with a higher proportion of no educated residents and the leave vote.</p>
+<p>*Don’t forget: Correlation DOES NOT imply causation!!</p>
+<p>But wait, we can understand better the data if we plot a correlation matrix. To do that we need the package <code>GGally</code> and the package <code>ggplot2</code>:</p>
+<pre class="r"><code>library(&quot;ggplot2&quot;)
+library(&quot;GGally&quot;)
+ggpairs(datacor)</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-20-1.png" width="624" /></p>
+<!-- ![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png) -->
+<p>Now you have some interesting insights and can start writing your story! But wait! how about we try some nice visualizations for the data?</p>
+<blockquote>
+<p><strong>Let’s review the commands we learned in this step:</strong> - …. -….. …</p>
+</blockquote>
+</div>
+<div id="section-visualize" class="section level2">
+<h2>VISUALIZE</h2>
+<!-- https://freakonometrics.hypotheses.org/49832 helped me here -->
+<p>A common task in the work of a journalist is to bring the results into a form that are nice to look at. Often this form is a map. For this we need a couple of packages:</p>
+<pre class="r"><code>## remeber to install all packages
+## with install.packages()
+library(&quot;raster&quot;)
+library(&quot;maptools&quot;)
+library(&quot;broom&quot;)
+library(&quot;ggplot2&quot;)</code></pre>
+<p>Maps are complicated and on some computers the code below won’t work. A fix is to use</p>
+<pre class="r"><code>library(&quot;gpclib&quot;)
+gpclibPermit()</code></pre>
+<p>BUT the licence for gpclib is not Free or Open Source and explicitly forbids commercial use, which is why we recommend not to use it if not needed.</p>
+<p>Now let’s get started: First we need to get the spatial data needed to create a map. <code>getData</code> can get you geographic data from all over the world from different sources. We use <a href="http://www.gadm.org/">GADM.org</a> as a source here. The country of interest is Great Britain (GBR) and we need info on 2nd level administrative subdivision. Check out what other geographic information you can get by typing <code>?raster::getData</code> into the R console.</p>
+<pre class="r"><code>## get the spatial data for Great Britain (GBR)
+gbr_sp &lt;- getData(&quot;GADM&quot;, country = &quot;GBR&quot;, level = 2)</code></pre>
+<p>Next, we convert the data to a data frame we can work with (this is just a technical detail you don’t need to understand at this point):</p>
+<pre class="r"><code>gbr &lt;- fortify(gbr_sp, region = &quot;HASC_2&quot;)
+str(gbr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    432920 obs. of  7 variables:
+##  $ long : num  -5.46 -5.46 -5.46 -5.46 -5.46 ...
+##  $ lat  : num  55.6 55.6 55.6 55.6 55.6 ...
+##  $ order: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ hole : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ piece: Factor w/ 234 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ id   : chr  &quot;GB.AB&quot; &quot;GB.AB&quot; &quot;GB.AB&quot; &quot;GB.AB&quot; ...
+##  $ group: Factor w/ 1113 levels &quot;GB.AB.1&quot;,&quot;GB.AB.2&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p>Our data set <code>datahasc</code> has no detailed info on the districts in Northern Ireland (check out for yourself <code>datahasc$HASC_code</code>) so we have to change the HASC code (gbr$id) for these districts to just “Northern Ireland” to be able to merge the geographical data with the voting results.</p>
+<pre class="r"><code># (1) get data from spatial object which contains info on HASC code and which
+#     of the codes correspond to Northern Ireland
+mapdat &lt;- gbr_sp@data
+
+# (2) get the HASC codes that correspond to Northern Ireland
+NI_HASC &lt;- mapdat$HASC_2[mapdat$NAME_1 == &quot;Northern Ireland&quot;]
+
+# (3) change the relevant HASC codes in gbr to &quot;Northern Ireland&quot;
+table(gbr$id[gbr$id %in% NI_HASC])</code></pre>
+<pre><code>## 
+## GB.AD GB.AM GB.AN GB.BB GB.BF GB.BL GB.BY GB.CF GB.CK GB.CL GB.CR GB.CS 
+##  4892    67    70    52   456    72    57   491    57   642    53    27 
+## GB.DN GB.DW GB.FE GB.LB GB.LD GB.LM GB.LR GB.MF GB.MY GB.ND GB.NM GB.NW 
+##   100  3835   169    52   359   860  1953    71  2293   680   979   174 
+## GB.OM GB.SB 
+##    76   128</code></pre>
+<pre class="r"><code>gbr$id[gbr$id %in% NI_HASC] &lt;- &quot;Northern Ireland&quot;</code></pre>
+<p>Now we can merge</p>
+<pre class="r"><code>## Merge the map data with the brexit data for the HASC areas we created earlier
+gbr_brexit &lt;- merge(gbr, datahasc, by.x = &quot;id&quot;, by.y = &quot;HASC_code&quot;, all.x = TRUE)</code></pre>
+<p>For plotting spatial data it is important that the order is correct. Let’s get the order right: fortunately we have a variable <code>order</code> in our gbr_brexit data set (you always get the order with the geographic data, see <code>str(gbr)</code>. The function <code>order()</code> gives us the info on how we need to reorder our data set:</p>
+<pre class="r"><code>ord &lt;- order(gbr_brexit$order)
+gbr_brexit &lt;- gbr_brexit[ord, ]</code></pre>
+<p>Now we can plot the map. <code>ggplot</code> is like lego bricks. In this case our foundation is the <code>gbr_brexit</code> data. Longitude and latitude variables (<code>long</code> and <code>lat</code>) go on the x and y axes, <code>group</code> is a variable with the geographic details needed and we want to color (<code>fill</code>) the administrative divisions according to the percentage of remain votes <code>perc_remain</code>. <code>geom_polygon</code> is responsible for plotting the colored polygons:</p>
+<pre class="r"><code>p1 &lt;- ggplot(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = perc_remain)) +
+  geom_polygon()
+p1</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-28-1.png" width="624" /> The previous command may take some time to show the plot that looks like this:</p>
+<div class="figure">
+<img src="p1.png" alt="First map" />
+<p class="caption">First map</p>
+</div>
+<p>But this map is not quite correct, we need to make sure that it has the right proportions:</p>
+<pre class="r"><code>p2 &lt;- p1 + coord_map()
+p2</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-29-1.png" width="624" /></p>
+<p>Also it seems like the x axis is a bit too long, let’s shorten it:</p>
+<pre class="r"><code>p3 &lt;- p2 + xlim(-10, NA)
+p3</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-30-1.png" width="624" /></p>
+<p>We can now add nicer x- and y-axis labels as well as the legend title:</p>
+<pre class="r"><code>p3 + labs(x = &quot;Longitude&quot;,
+          y = &quot;Latitude&quot;,
+          fill = &quot;Percentage\nRemain&quot;) # pro tip: \n creates a line break</code></pre>
+<p><img src="en-introduction_files/figure-html/unnamed-chunk-31-1.png" width="624" /> TADA!</p>
+<div class="figure">
+<img src="p4.png" alt="Final map" />
+<p class="caption">Final map</p>
+</div>
+</div>
+<div id="section-section" class="section level2">
+<h2></h2>
+<p>…</p>
+<p>…</p>
+<p>This was the last step! Are you convinced yet? If not, check out <a href="">other scenarios</a> or <a href="">send us an angry tweet</a></p>
+</div>
+<div id="section-introductory-steps---recipes" class="section level2">
+<h2>Introductory steps - Recipes</h2>
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-try-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-try-code-editor`)), session)
+output$`tutorial-exercise-try-output` <- renderUI({
+  `tutorial-exercise-try-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ex_look1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ex_look1-code-editor`)), session)
+output$`tutorial-exercise-ex_look1-output` <- renderUI({
+  `tutorial-exercise-ex_look1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ex_merge-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ex_merge-code-editor`)), session)
+output$`tutorial-exercise-ex_merge-output` <- renderUI({
+  `tutorial-exercise-ex_merge-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ex_tab-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ex_tab-code-editor`)), session)
+output$`tutorial-exercise-ex_tab-output` <- renderUI({
+  `tutorial-exercise-ex_tab-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css","rstudio-theme.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+
+</div> <!-- topics -->
+
+<div class="topicsContainer">
+<div class="topicsPositioner">
+<div class="band">
+<div class="bandContent topicsListContainer">
+
+<!-- begin doc-metadata -->
+<div id="doc-metadata">
+<h2 class="title toc-ignore" style="display:none;">Data Recipe: Data Recipe Name</h2>
+</div>
+<!-- end doc-metadata -->
+
+</div> <!-- bandContent.topicsListContainer -->
+</div> <!-- band -->
+</div> <!-- topicsPositioner -->
+</div> <!-- topicsContainer -->
+
+
+</div> <!-- bandContent page -->
+</div> <!-- pageContent band -->
+
+
+
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+
+</html>
