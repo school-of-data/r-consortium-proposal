@@ -75,7 +75,7 @@ You go through your analyzing process once and you can forget about making it im
 
 <!-- Well you don't need to. We are here to help. -->
 <!-- We are going to guide you in each step, don't worry, it won't be that hard.  -->
-```{r, eval=TRUE, echo = FALSE, out.width='80%'}
+```{r, eval=TRUE, echo = FALSE, out.width='90%'}
 knitr::include_graphics("images/Wait_what.jpg")
 ```
 <!-- ![](images/Wait_what.jpg) -->
