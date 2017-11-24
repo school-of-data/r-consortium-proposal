@@ -5,6 +5,7 @@
 \alias{results}
 \alias{demographic1}
 \alias{demographic2}
+\alias{gbr_sp}
 \title{Raw data used in introduction data recipe}
 \format{Three objects of type \code{data.frame} named results, demographic1 and demographic2.}
 \usage{

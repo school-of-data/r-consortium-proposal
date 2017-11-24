@@ -3,7 +3,9 @@ Title: Data Journalism R Learning Materials
 Date: 2017-09-01
 Version: 0.0-1
 Authors@R: c(person(given = "Heidi", family = "Seibold", 
-                    role = c("aut", "cre"), email = "Heidi.Seibold@uzh.ch"))
+                    role = c("aut", "cre"), email = "Heidi.Seibold@uzh.ch"),
+             person(given = "Peter", family = "Pearman", 
+                    role = c("aut"), email = "pbpearman@gmail.com"))
 Description: R learning materials created with learnr. Material is focused on
   teaching journalists and is available in languages English, German, French and
   Spanish.
