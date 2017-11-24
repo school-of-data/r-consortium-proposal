@@ -331,6 +331,18 @@ Check out the structure of the `demographic1` and `demographic2` data.frames.
 ```{r ex_look5, exercise=TRUE, exercise.setup = "read"}
 ```
 
+- `summary()` gives a summary of all columns in the data.frame
+
+```{r ex_look6, exercise=TRUE, exercise.setup = "read"}
+summary(results)
+```
+
+Check out the summary of the `demographic1` and `demographic2` data.frames.
+
+```{r ex_look7, exercise=TRUE, exercise.setup = "read"}
+```
+
+
 Now that you know the variables of your databases is time to start with the cleaning part.
 
 
@@ -450,7 +462,7 @@ We are almost done `r emo::ji("sunglasses")`, don't give up just yet!
 
 To finish, we want to aggregate regional data in new variables, in order the see the voting results by region. A simple way to do this is with the `summarise()` function from the `dplyr` package. If you don't have the package installed, install it with the command `install.packages("dplyr")`.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library("dplyr")
 
 ## Aggregate per HASC code
@@ -470,6 +482,29 @@ datahasc
 ```{r save_clean, echo=FALSE, eval=FALSE}
 save(mydata, datahasc, file = "../../../data/introduction_clean.RData")
 ```
+
+```{r read_clean}
+data(introduction_clean, package = "ddj")
+```
+
+This code is a bit difficult to understand. Feel free to play around with it
+to understand what is happening. You cant break anything!
+```{r hasc, exercise = TRUE, exercise.setup = "read_clean"}
+library("dplyr")
+
+## Aggregate per HASC code
+datahasc <- summarise(group_by(mydata, HASC_code),    ## Group mydata by HASC code
+                      Valid_Votes = sum(Valid_Votes), ## Create a variable Valid_Votes which is the number of valid votes per HASC code, i.e. the sum of valid votes in the areas of the HASC code
+                      Remain = sum(Remain),           ## Number of remain votes per HASC code
+                      Leave = sum(Leave))             ## Number of Leave votes per HASC code
+
+## Calculate the percentages
+datahasc$perc_remain <- (datahasc$Remain / datahasc$Valid_Votes)*100
+datahasc$perc_leave <- (datahasc$Leave/ datahasc$Valid_Votes)*100
+
+summary(datahasc)
+```
+
 
 Now that you have cleaned your data, you're ready to start the analysis!
 
@@ -501,19 +536,24 @@ question("Are you convinced yet that R is worth your time?",
 ## ANALYZE
 Let's start with the most fun part. You need to write a story based on those electoral results, and you already have some questions
 you want to answer:
+
 - Which areas voted to remain or to leave?
 - Which regions?
 - Which were the more divided regions?
 - How do the demographic variables correlate with the leave and remain percentage of votes?
 
-First we need to tabulate the data:
-```{r}
+Let's remind ourselves how many areas voted remain and leave respectively.
+```{r tabres1, exercise = TRUE, exercise.setup = "read_clean"}
 ## How many areas voted to remain or leave
 table(mydata$result)
+```
+```{r tabres2, exercise = TRUE, exercise.setup = "read_clean"}
+## What percentage of areas voted to remain or leave
 prop.table(table(mydata$result))
 ```
-You can see that 69% of the areas voted to leave the European Union.  Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package (rember to install it with `install.packages("gmodels")`):
-```{r}
+You can see that 69% of the areas voted to leave the European Union.  
+Now let's see how are they are distributed by Region creating a two frequency table that shows row percentages.  To do that we are going to use the `CrossTab()` function in the `gmodels` package (rember to install it with `install.packages("gmodels")`):
+```{r crosstab, exercise = TRUE, exercise.setup = "read_clean"}
 library("gmodels")
 CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected = FALSE,
            prop.r = TRUE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE)
@@ -522,18 +562,21 @@ CrossTable(mydata$Region, mydata$result, digits=3, max.width = 5, expected = FAL
 # If we wanted for instance to show column percentages
 # we can set prop.c = TRUE
 ```
-With that table you can see that the only regions in wich the majority of areas voted to remain in the EU are located in London, Scotland
+With that table you can see that the only regions in wich the majority of areas 
+voted to remain in the EU are located in London, Scotland
 and Northern Ireland.  This could be interesting for your story!
 
 We can also calculate some summary statistics for the `perc_remain` variable:
-```{r}
+```{r summary_pr1, exercise = TRUE, exercise.setup = "read_clean"}
 summary(mydata$perc_remain)
+```
+```{r summary_pr2, exercise = TRUE, exercise.setup = "read_clean"}
 table(mydata$Remain_cat)
 ```
 You can see that only one area had a very low vote to Remain with 24.4% of the vote.
 
 We can also tabulate the 10 areas with the highest Leave vote:
-```{r}
+```{r highest_leave, exercise = TRUE, exercise.setup = "read_clean"}
 ## order data by percentage of leave votes
 order_leave <- order(mydata$perc_leave, decreasing = TRUE)
 mydata <- mydata[order_leave, ]
@@ -545,15 +588,18 @@ So far you have answered some of your questions: the majority of areas in the UK
 
 So it's time to go deeper in the analysis.  We can calculate some correlations between the leave vote and some of the demographic variables.  The hyphotesis is that the regions with older population, less educated residents and less diverse voted to Leave the EU.
 
-Now let's calculate some correlations.  To calculate a correlation between two variables just use the fuction `cor()` and plot it using `plot(x, y)`:
-```{r}
+Now let's calculate some correlations.  To calculate a correlation between two variables just use the fuction `cor()`. 
+```{r cor1, exercise = TRUE, exercise.setup = "read_clean"}
 cor(mydata$perc_leave, mydata$no_educ)
+```
+You can plot the two variables using the `plot()` function.
+```{r cor2, exercise = TRUE, exercise.setup = "read_clean"}
 plot(perc_leave ~ no_educ, data = mydata)
 ```
 
 
 To see if our correlation is statistically significant we can use a linear model:
-```{r}
+```{r cor3, exercise = TRUE, exercise.setup = "read_clean"}
 ### look at Pr(<|t|) in the no_educ row. The p-value is very small
 ### => statistically significant linear relation between no_educ and perc_leave
 model <- lm(perc_leave ~ no_educ, data = mydata)
@@ -563,39 +609,54 @@ summary(model)
 plot(perc_leave ~ no_educ, data = mydata)
 abline(model)
 ```
-_Do we even want to go into stats so deeply?_
 
 
-To calculate a correlation matrix, let's create a new dataframe only with the varaibles we need and then use the `cor()` function again:
-```{r}
+To calculate a correlation matrix, let's create a new dataframe only with the 
+varaibles we need and then use the `cor()` function again:
+```{r cor4, exercise = TRUE, exercise.setup = "read_clean"}
 corvars <- c("perc_leave", "perc_remain", "median_age", "born_uk",
              "no_educ", "higher_educ", "prof_ocu")
-datacor <- mydata[, corvars]
+data_cor <- mydata[, corvars]
 
 
 #Lets calculate the correlation matrix
-cor(datacor)
+cor(data_cor)
 ```
 You can see that there's a positive correlation between the Remain vote and the areas with a high number of residents with higher education and professional occupations.  On the contrary, there seem to be a positive correlation between the areas with a higher proportion of no educated residents and the leave vote.
 
 *Don't forget: Correlation DOES NOT imply causation!!
 
-But wait, we can understand better the data if we plot a correlation matrix.  To do that we need the package `GGally` and the package `ggplot2`:
-```{r}
+But wait, we can understand the data better if we plot a correlation matrix.  
+To do that we need the package `GGally` and the package `ggplot2`:
+```{r data_cor, echo=FALSE}
+data(introduction_clean, package = "ddj")
+corvars <- c("perc_leave", "perc_remain", "median_age", "born_uk",
+             "no_educ", "higher_educ", "prof_ocu")
+data_cor <- mydata[, corvars]
+```
+
+
+```{r cor5, exercise = TRUE, exercise.setup = "data_cor"}
 library("ggplot2")
 library("GGally")
-ggpairs(datacor)
-
+ggpairs(data_cor)
 ```
 
 <!-- ![alt text](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Rplot.png) -->
 
-Now you have some interesting insights and can start writing your story! But wait! how about we try some nice visualizations for the data?
+Now you have some interesting insights and can start writing your story! 
+But wait! We actually have some more great visualisations prepared for you in the
+next section.
 
-> **Let's review the commands we learned in this step:**
-- ....
--.....
-...
+**Let's review the commands we learned in this step:**
+
+- `table()`, `prop.table()` and `CrossTable()` for tables
+- `order()` for retrieving the order of a variable
+- `cor()` for correlation
+- `plot()` for simple plot of two variables and `ggpairs()` for a correlation 
+plot
+- `lm()` for computing a linear model and `abline()` for ploting the estimated
+relation between two variables
 
 
 
@@ -641,11 +702,18 @@ gbr <- fortify(gbr_sp, region = "HASC_2")
 str(gbr)
 ```
 
+```{r read_sp}
+data(introduction_raw, package = "ddj")
+gbr <- fortify(gbr_sp, region = "HASC_2")
+```
+
+
+
 Our data set `datahasc` has no detailed info on the districts in Northern Ireland
 (check out for yourself `datahasc$HASC_code`) so we have to change the HASC code (gbr$id)
 for these districts to just "Northern Ireland" to be able to merge the geographical data
 with the voting results.
-```{r}
+```{r spatial, exercise = TRUE, exercise.setup = "read_sp"}
 # (1) get data from spatial object which contains info on HASC code and which
 #     of the codes correspond to Northern Ireland
 mapdat <- gbr_sp@data
@@ -654,22 +722,65 @@ mapdat <- gbr_sp@data
 NI_HASC <- mapdat$HASC_2[mapdat$NAME_1 == "Northern Ireland"]
 
 # (3) change the relevant HASC codes in gbr to "Northern Ireland"
-table(gbr$id[gbr$id %in% NI_HASC])
+gbr$id[gbr$id %in% NI_HASC] <- "Northern Ireland"
+str(gbr)
+```
+
+```{r read_sp2, echo = FALSE}
+data(introduction_raw, package = "ddj")
+gbr <- fortify(gbr_sp, region = "HASC_2")
+
+# (1) get data from spatial object which contains info on HASC code and which
+#     of the codes correspond to Northern Ireland
+mapdat <- gbr_sp@data
+
+# (2) get the HASC codes that correspond to Northern Ireland
+NI_HASC <- mapdat$HASC_2[mapdat$NAME_1 == "Northern Ireland"]
+
+# (3) change the relevant HASC codes in gbr to "Northern Ireland"
 gbr$id[gbr$id %in% NI_HASC] <- "Northern Ireland"
 ```
 
 Now we can merge
-```{r}
+```{r merge_spatial, exercise = TRUE, exercise.setup = "read_sp2"}
 ## Merge the map data with the brexit data for the HASC areas we created earlier
 gbr_brexit <- merge(gbr, datahasc, by.x = "id", by.y = "HASC_code", all.x = TRUE)
 ```
 
+
 For plotting spatial data it is important that the order is correct. Let's get
-the order right:
-fortunately we have a variable `order` in our gbr_brexit data set (you always get
-the order with the geographic data, see `str(gbr)`.
+the order right: Fortunately we have a variable `order` in our gbr_brexit data 
+set (you always get the order with the geographic data, see `str(gbr)`).
 The function `order()` gives us the info on how we need to reorder our data set:
+```{r, echo=FALSE}
+## Merge the map data with the brexit data for the HASC areas we created earlier
+gbr_brexit <- merge(gbr, datahasc, by.x = "id", by.y = "HASC_code", all.x = TRUE)
+```
+
 ```{r}
+head(gbr_brexit)
+ord <- order(gbr_brexit$order)
+gbr_brexit <- gbr_brexit[ord, ]
+head(gbr_brexit)
+```
+
+```{r read_sp3, echo = FALSE}
+data(introduction_raw, package = "ddj")
+gbr <- fortify(gbr_sp, region = "HASC_2")
+
+# (1) get data from spatial object which contains info on HASC code and which
+#     of the codes correspond to Northern Ireland
+mapdat <- gbr_sp@data
+
+# (2) get the HASC codes that correspond to Northern Ireland
+NI_HASC <- mapdat$HASC_2[mapdat$NAME_1 == "Northern Ireland"]
+
+# (3) change the relevant HASC codes in gbr to "Northern Ireland"
+gbr$id[gbr$id %in% NI_HASC] <- "Northern Ireland"
+
+## Merge the map data with the brexit data for the HASC areas we created earlier
+gbr_brexit <- merge(gbr, datahasc, by.x = "id", by.y = "HASC_code", all.x = TRUE)
+
 ord <- order(gbr_brexit$order)
 gbr_brexit <- gbr_brexit[ord, ]
 ```
@@ -679,45 +790,48 @@ is the `gbr_brexit` data. Longitude and latitude variables (`long` and `lat`) go
 on the x and y axes, `group` is a variable with the geographic details needed and
 we want to color (`fill`) the administrative divisions according to the percentage
 of remain votes `perc_remain`. `geom_polygon` is responsible for plotting the
-colored polygons:
-```{r}
-p1 <- ggplot(data = gbr_brexit, aes(x = long, y = lat, group = group, fill = perc_remain)) +
+colored polygons (this may take some time):
+```{r pl1, exercise = TRUE, exercise.setup = "read_sp3"}
+ggplot(data = gbr_brexit, 
+       aes(x = long, y = lat, 
+           group = group, 
+           fill = perc_remain)) +
   geom_polygon()
-p1
 ```
-The previous command may take some time to show the plot that looks like this:
 
-![First map](p1.png)
 
 But this map is not quite correct, we need to make sure that it has the right proportions:
-```{r}
-p2 <- p1 + coord_map()
-p2
+```{r pl2, exercise = TRUE, exercise.setup = "read_sp3"}
+ggplot(data = gbr_brexit,
+       aes(x = long, y = lat, 
+           group = group, 
+           fill = perc_remain)) +
+  geom_polygon() + coord_map()
 ```
 
 Also it seems like the x axis is a bit too long, let's shorten it:
-```{r}
-p3 <- p2 + xlim(-10, NA)
-p3
+```{r pl3, exercise = TRUE, exercise.setup = "read_sp3"}
+ggplot(data = gbr_brexit,
+       aes(x = long, y = lat, 
+           group = group, 
+           fill = perc_remain)) +
+  geom_polygon() + coord_map() + xlim(-10, NA)
 ```
 
 We can now add nicer x- and y-axis labels as well as the legend title:
-```{r}
-p3 + labs(x = "Longitude",
-          y = "Latitude",
-          fill = "Percentage\nRemain") # pro tip: \n creates a line break
+```{r pl4, exercise = TRUE, exercise.setup = "read_sp3"}
+ggplot(data = gbr_brexit,
+       aes(x = long, y = lat, 
+           group = group, 
+           fill = perc_remain)) +
+  geom_polygon() + coord_map() + xlim(-10, NA) + 
+  labs(x = "Longitude", y = "Latitude",
+       fill = "Percentage\nRemain") # pro tip: \n creates a line break
 ```
 TADA!
 
-![Final map](p4.png)
 
-##
+This was the last step! Are you convinced yet? 
+If not, check out [other scenarios]() or [send us an angry tweet]() `r emo::ji("wink")`
 
-...
-
-...
-
-This was the last step! Are you convinced yet? If not, check out [other scenarios]() or [send us an angry tweet]()
-
-## Introductory steps - Recipes
 
