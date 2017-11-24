@@ -123,9 +123,9 @@ or equivalently
 ```{r, eval=FALSE}
 setwd("/home/heidi/Documents/switzerland-dual-use")
 ```
-or assuming you have this file in the directory `switzerland-dual-use` and your file structure is as described above, you can use RStudio's menu. Click on `Session`, then on `Set Working Directory` and specify the path including `switzerland-dual-use`.
+or assuming you have this file in the directory `switzerland-dual-use` and its file structure is as described above, you can use RStudio's menu. Click on `Session`, then on `Set Working Directory` and manually specify the path including `switzerland-dual-use`.
 
-### SET YOUR WORKING DIRECTORY NOW IF YOU ARE RUNNING CODE IN CONSOLE
+### SET YOUR R WORKING DIRECTORY NOW 
 
 To read Excel data into R, we need a special R package called
 `readxl`. To install the package run the following line in the Console window of RStudio:
@@ -200,16 +200,22 @@ str(elic_2016_1)
 ```
 
 ```{r prepare-clean1, echo= FALSE}
-
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData"))
+library(ddj)
+data("elic_2016_1")
+#load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_1.RData"))
+#load(url("https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_1.RData"))
 
 ```
 
-### Exercise
-Use head() with the n= option to get the first 10 rows of elic_2016_1 
+### Exercise 1
+Use head() with the `n=` option to get the first 10 rows of elic_2016_1 
 ```{r check_values, exercise=TRUE, exercise.setup = 'prepare-clean1', cache=FALSE}
 
 ```
+```{r check_values-solution}
+head(elic_2016_1, n=10)
+```
+
 
 
 
@@ -233,7 +239,7 @@ elic_2016_2 <- select(.data = elic_2016_1,
                       Art = Richtung)
 str(elic_2016_2)
 ```
-### Exercise
+### Exercise 2
 We are only interested in exports (variable `Art`, value `"Ausfuhr"`), so we use
 `filter()` to select the rows in the data set where this is the case. Before that
 we check how many rows contain other values. `elic_2016_2$Art` gives us the variable
@@ -241,7 +247,10 @@ we are interested in and function `table()` creates a table for the frequencies 
 the different values. Use table() to obtain the values of elic_2016_2$Art . 
 
 ```{r prepare-clean2, echo= FALSE}
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData"))
+library(ddj)
+data("elic_2016_2")
+#load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_2.RData"))
+#load(url("https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_2.RData"))
 ```
 
 
@@ -258,14 +267,17 @@ The data set after using `filter()` should have
 elic_2016_3 <- filter(.data = elic_2016_2, Art == "Ausfuhr")
 str(elic_2016_3)
 ```
-### Exercise
+### Exercise 3
 Now the collumn `Art` is not needed anymore. Let's remove it from the data set and asign the new data set to the name elic_2016_4. Use select(), specifying the elic_2016_3 data frame and the variable as -Art. Then use str() to look at the new elic_2016_4 object.
 ```{r rm_Art, message=FALSE, results="hide", echo=FALSE}
 elic_2016_4 <- select(.data = elic_2016_3, -Art)
 #str(elic_2016_4)
 ```
 ```{r prepare-clean3, echo=FALSE}
-  load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+library(ddj)
+data("elic_2016_3")
+#load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+#load(url("https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_3.RData"))
 ```
 
 ```{r clean3, exercise=TRUE, exercise.completion=FALSE, exercise.setup = 'prepare-clean3', cache= FALSE}
@@ -317,12 +329,15 @@ elic_2016_4$Typ_raw <- elic_2016_4$Typ
 # Next we assign the cleaned-up values in 'Typ' to the data set column with the same name, effectively over-writing the original values.
 elic_2016_4$Typ <- Typ
 ```
-### Exercise
+### Exercise 4
 Use one of the R functions we used just above to check that the new values in elic_2016_4$Typ are as you expect.
 
 ```{r prepare-check1, echo=FALSE}
 library(tidyverse)
-load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+library(ddj)
+data("elic_2016_3")
+#load(url("https://github.com/pbpearman/r-consortium-proposal/raw/master/material/lessons/switzerland-dual-use/data_clean/elic_2016_3.RData"))
+#load(url("https://github.com/school-of-data/r-consortium-proposal/raw/master/r-package/data/elic_2016_3.RData"))
 
 elic_2016_4 <- select(.data = elic_2016_3, -Art)
 
