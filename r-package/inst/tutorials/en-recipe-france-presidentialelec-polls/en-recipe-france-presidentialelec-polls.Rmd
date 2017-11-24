@@ -14,8 +14,9 @@ In this complex landscape, visualisations can bring some clarity and help citize
 The [Huffington Post](http://elections.huffingtonpost.com/pollster/france-presidential-election-round-1) has produced a similar visualisation with dots for each data point in a poll and a trend line. 
 ![](img/huffpo.png)
 As this visualisation is very useful to understand the trend in an election, as journalists, we want to be able to produce this graph and adapt it to other contexts than the French election. 
-
 This is what we'll do in this recipe! We'll show you step by step how to produce the above visualisations.
+
+
 ---
 # FIND
 ---
