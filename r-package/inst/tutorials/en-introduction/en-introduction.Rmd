@@ -69,12 +69,17 @@ Allows you to make some graphics, but you are limited by the program to what typ
 You go through your analyzing process once and you can forget about making it immediately reproducible for someone else | Allows you to save the code through which you processed your database. This makes the whole methodology immediately reproducible by anyone else whom you shared the script with.
 ... | ...
 
-> **Wait, what? I have to write code?**
->
-> How do I even know how write R code? I'm not a programmer!
+<!-- > **Wait, what? I have to write code?** -->
+<!-- > -->
+<!-- > How do I even know how write R code? I'm not a programmer! -->
 
-Well you don't need to. We are here to help.
-We are going to guide you in each step, don't worry, it won't be that hard. 
+<!-- Well you don't need to. We are here to help. -->
+<!-- We are going to guide you in each step, don't worry, it won't be that hard.  -->
+```{r, eval=TRUE, echo = FALSE, out.width='80%'}
+knitr::include_graphics("images/Wait_what.jpg")
+```
+<!-- ![](images/Wait_what.jpg) -->
+
 To get started with this tutorial, you don't even have to install anything.
 For now, you can just try stuff by writing code on this website. Let's try 
 if that works. Please run the following code by clicking the `Run Code` button:
@@ -124,10 +129,10 @@ R-packages have to be installed only once, but loaded every time.
 If you use RStudio, you can also install and load the packages through the
 `Install` button in the `Packages` tab.
 
-```{r, eval=TRUE, echo = FALSE}
-knitr::include_graphics("input/install_pkgs.png")
+```{r, eval=TRUE, echo = FALSE, out.width='40%'}
+knitr::include_graphics("images/install_pkgs.png")
 ```
-<!-- ![](input/install_pkgs.png) -->
+<!-- ![](images/install_pkgs.png) -->
 
 Today, we will analyze the **Brexit Referendum Results**.  Our goal is to
 answer the following questions:
