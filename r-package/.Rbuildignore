@@ -1,0 +1,4 @@
+^.*.rdx
+^.*.rdb
+inst/tutorials/en-introduction/en-introduction_cache
+inst/tutorials/en-introduction/en-introduction_files
