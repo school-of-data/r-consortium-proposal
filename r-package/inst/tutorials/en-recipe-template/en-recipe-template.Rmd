@@ -6,13 +6,14 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library("learnr")
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
 ## Introduction 
 
-Add here some text introducing the example. 
+This template shows you how to create a data recipe. You can also look at 
+existing recipes for further help.
 
 ### Naming conventions
 Recipe files should be named `language-recipe-name.Rmd` (example `de-recipe-dual-use.Rmd`)
@@ -58,6 +59,48 @@ question("Did you get what I was saying?",
 
 > Get: To get the data from its inital location to your computer can be short and easy or long and painful. Luckily, there's plenty of ways of doing that. You can crowdsource using online forms, you can perform offline data collection, you can use some crazy web scraping skills, or you could simply download the datasets from government sites, using their data portals or through a Freedom of Information request.
 
+We try to make our examples as close to reality as possible. Thus we use data that people can find online.
+They can download it and read in the funny file formats that the data comes in.
+Doing that in the learnr environment, however, is not a good idea. Best is to show, the learners what to
+do, but actually do something else in the background.
+
+#### Example:
+What the students see:
+```{r}
+# read data into R
+results <- read.csv("https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv", header = TRUE)
+```
+
+What you do in the background (use `echo=FALSE` to hide it; note that this does not show in the html so **look into the Rmd file** to understand what is happening here!):    
+```{r read, echo=FALSE}
+data(introduction_raw, package = "ddj")
+```
+     
+
+You can store the data as `RData` in the R package in the `data` folder and
+document it in the `R` folder. See as an example: `data/introduction_raw.RData` and
+`R/raw_data_introduction.R`. I created the `RData` file via:
+```{r, eval=FALSE}
+results <- read.csv("https://raw.githubusercontent.com/school-of-data/r-consortium-proposal/master/material/lessons/results.csv", header = TRUE)
+
+# download data
+download.file("https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics1.xlsx?raw=true", destfile = "demographics1.xlsx")
+download.file("https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/demographics2.dta?raw=true", destfile = "demographics2.dta")
+
+# read demographic data
+demographic1 <- read.xlsx("demographics1.xlsx", sheetIndex = 1)
+demographic2 <- read.dta("demographics2.dta")
+
+# spatial info
+library("raster")
+gbr_sp <- getData("GADM", country = "GBR", level = 2)
+
+# save intermediate results
+save(results, demographic1, demographic2, gbr_sp, file = "../../../data/introduction_raw.RData")
+# Note, that my working directory is the directory of this template, so I need to go a couple of folder back with ../
+```
+
+
 ## VERIFY
 
 > Verify: We got our hands in the data, but that doesn't mean it's the data we need. We have to check out if details are valid, such as the meta-data, the methodology of collection, if we know who organised the dataset and it's a credible source. We've heard a joke once, but it's only funny because it's true: all data is bad, we just need to find out how bad it is!
@@ -68,16 +111,18 @@ The CLEAN and ANALYSE steps will likely be the longest parts with the most R cod
 Make the R code interactive by including exercises 
 (for help see https://rstudio.github.io/learnr/exercises.html).
 
-Example:
+#### Example:
 
-Look at the `airquality` data set on day 1 (hint: `Day == 1`).
-```{r subsetting, exercise=TRUE}
+Try printing the names of the `results` data.frame.
+```{r ex_look1, exercise=TRUE, exercise.setup = "read"}
 
 ```
 
-```{r subsetting-solution}
-subset(airquality, Day == 1)
+```{r ex_look1-solution}
+names(results)
 ```
+Note that you need to add `exercise.setup = "read"` to reference the R chunk
+that reads in the data.
 
 
 
@@ -107,10 +152,10 @@ p + geom_point()
 
 ## Summary and further reading
 
-In this lesson we learned           Further reading 
------------------------------------ --------------------------------------------------------
-How to do a                         [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) on **a**. 
-                                    The [dplyr website](http://dplyr.tidyverse.org/). 
-How to do b                         The [ggplot2 website](http://ggplot2.tidyverse.org/)
-How to do c                         ...
+|In this lesson we learned           | Further reading                                        |
+| ---------------------------------- | -------------------------------------------------------|
+|How to do a                         |[RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) on **a**. |
+|                                    |The [dplyr website](http://dplyr.tidyverse.org/). |
+|How to do b                         |The [ggplot2 website](http://ggplot2.tidyverse.org/) |
+|How to do c                         |...|
 
