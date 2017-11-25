@@ -703,6 +703,10 @@ str(gbr)
 ```
 
 ```{r read_sp}
+library("raster")
+library("maptools")
+library("broom")
+library("ggplot2")
 data(introduction_raw, package = "ddj")
 gbr <- fortify(gbr_sp, region = "HASC_2")
 ```
@@ -727,6 +731,10 @@ str(gbr)
 ```
 
 ```{r read_sp2, echo = FALSE}
+library("raster")
+library("maptools")
+library("broom")
+library("ggplot2")
 data(introduction_raw, package = "ddj")
 gbr <- fortify(gbr_sp, region = "HASC_2")
 
@@ -765,6 +773,10 @@ head(gbr_brexit)
 ```
 
 ```{r read_sp3, echo = FALSE}
+library("raster")
+library("maptools")
+library("broom")
+library("ggplot2")
 data(introduction_raw, package = "ddj")
 gbr <- fortify(gbr_sp, region = "HASC_2")
 
