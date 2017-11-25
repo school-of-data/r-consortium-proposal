@@ -1,5 +1,5 @@
-<!-- If you are testing our R learning content for Jouralists, please use this template. 
-Otherwise you can just delete this. -->
+*If you are testing our R learning content for Jouralists, please use this template. 
+Otherwise you can just delete this.*
 
 *Thank you for helping us with the testing of the R learning content for Journalists :clap:! Please check out the steps you need to do [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/CONTRIBUTING.md#beta-testing) :book:.*
 
