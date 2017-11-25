@@ -1,0 +1,63 @@
+---
+title: "Data Recipe: Data Recipe Name"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library("learnr")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction 
+
+```{r}
+plot(1:5)
+```
+
+
+```{r, eval=FALSE}
+# install.packages("foreign")
+library(foreign)
+# install.packages("survey")
+library(survey)
+```
+
+
+```{r, eval=FALSE}
+data <- read.dbf("TB_SEC_XII.dbf", as.is = T)
+save(data, file = "../../../data/mexico-gender-violence_raw.RData")
+```
+
+
+## DEFINE
+
+
+
+## FIND
+
+
+## GET
+
+
+## VERIFY
+
+## CLEAN
+
+
+## ANALYSE
+
+
+## PRESENT
+
+
+## Summary and further reading
+
+|In this lesson we learned           | Further reading                                        |
+| ---------------------------------- | -------------------------------------------------------|
+|How to do a                         |[RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) on **a**. |
+|                                    |The [dplyr website](http://dplyr.tidyverse.org/). |
+|How to do b                         |The [ggplot2 website](http://ggplot2.tidyverse.org/) |
+|How to do c                         |...|
+
