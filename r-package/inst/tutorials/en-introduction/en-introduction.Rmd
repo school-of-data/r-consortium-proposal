@@ -5,7 +5,7 @@ runtime: shiny_prerendered
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(message = FALSE, cache = TRUE)
+knitr::opts_chunk$set(message = FALSE, cache = FALSE)
 library("learnr")
 ```
 
@@ -660,7 +660,7 @@ relation between two variables
 
 
 
-## VISUALIZE
+## PRESENT
 <!-- https://freakonometrics.hypotheses.org/49832 helped me here -->
 
 A common task in the work of a journalist is to bring the results into a form
@@ -847,3 +847,19 @@ This was the last step! Are you convinced yet?
 If not, check out [other scenarios]() or [send us an angry tweet]() `r emo::ji("wink")`
 
 
+
+## Summary and further reading
+
+| In this lesson we learned          |          Further reading | 
+| ---------------------------------- | -------------------------------------------------------|
+| How to read csv and xlsx data               | [RStudio Data Import Cheat Sheet](https://www.rstudio.com/resources/cheatsheets/).  |
+| How to access map data                      | [The blog post that shows the analysis we did](https://freakonometrics.hypotheses.org/49832), just we did it more nicely ;) |
+| How to look at our data in different ways   |  |
+| How to get percentages, tables and correlations | |
+| How to merge and clean data                 | [Data cleaning section](https://rddj.info/#data-cleaning-and-manipulation) on the RDDJ website. |
+| How to plot maps with ggplot2               | The [ggplot2 website](http://ggplot2.tidyverse.org/) |
+
+And much more... 
+
+We hope you had fun! `r emo::ji("smile")`
+ 
