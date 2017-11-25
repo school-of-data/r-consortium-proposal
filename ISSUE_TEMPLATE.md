@@ -3,6 +3,8 @@ Otherwise you can just delete this.*
 
 *Thank you for helping us with the testing of the R learning content for Journalists! Please check out the steps you need to do [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/CONTRIBUTING.md#beta-testing).*
 
+*Pro tip: click on preview to see what your edits look like.**
+
 ### Name: <!-- Name of the recipe or skills lessen you are testing -->
 
 ## Writing, tone: 
