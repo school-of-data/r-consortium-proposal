@@ -1,6 +1,8 @@
 <!-- If you are testing our R learning content for Jouralists, please use this template. 
 Otherwise you can just delete this. -->
 
+*Thank you for helping us with the testing of the R learning content for Journalists :clap:! Please check out the steps you need to do [here](https://github.com/school-of-data/r-consortium-proposal/blob/master/CONTRIBUTING.md#beta-testing) :book:.*
+
 ### Name: <!-- Name of the recipe or skills lessen you are testing -->
 
 ## Writing, tone: 
@@ -40,4 +42,7 @@ Otherwise you can just delete this. -->
 **Anything else you would like to mention?**
 
 
-**Thank you so much for your help! :tada: :cake: :clap:**
+*Almost done: To show that you have finished the testing, comment on this issue with the words "I finished beta testing. @HeidiSeibold please update learning content now.".*
+
+
+*Thank you so much for your help! :tada: :cake: :clap:*
