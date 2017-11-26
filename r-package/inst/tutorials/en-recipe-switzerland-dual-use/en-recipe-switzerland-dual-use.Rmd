@@ -133,16 +133,22 @@ To read Excel data into R, we need a special R package called
 install.packages("readxl")
 ```
 To load the package, so you can access the functions, run the following in the Console window:
-```{r}
+```{r eval=FALSE}
 library("readxl") 
 ```
 Now we can read in the data from the four quarters of 2016:
-```{r}
+```{r eval= FALSE}
 elic_2016_q1_raw <- read_excel(path = "data_raw/1_Quartal_2016_Bewilligungen.xlsx")
 elic_2016_q2_raw <- read_excel(path = "data_raw/2. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
 elic_2016_q3_raw <- read_excel(path = "data_raw/3. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
 elic_2016_q4_raw <- read_excel(path = "data_raw/4. Quartal 2016 Erteilte Ausfuhrbewilligungen.xlsx")
 ```
+```{r echo=FALSE}
+library(ddj)
+data(list=c("elic_2016_q1_raw","elic_2016_q2_raw","elic_2016_q3_raw","elic_2016_q4_raw"))
+```
+
+
 
 ## Verify
 To check whether reading in the files worked and the data are as we wanted, there are a couple of useful commands in R. Let's now first work with `elic_2016_q1_raw`:
