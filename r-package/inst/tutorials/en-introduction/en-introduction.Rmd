@@ -290,34 +290,31 @@ Now that you have imported your data into R, it's time to start exploring it.  H
 
 - `view()` shows your dataframe with all the variables and observations
 
-- `names()` shows the collumn names of the data frame
+- `names()` shows the collumn names of the data frame, e.g. for the `results` data.frame:
 
-Try printing the names of the `results` data.frame.
 ```{r ex_look1, exercise=TRUE, exercise.setup = "read"}
-
-```
-
-```{r ex_look1-solution}
 names(results)
+
 ```
+
 
 Try printing the names of the `demographic1` data.frame.
 ```{r ex_look2, exercise=TRUE, exercise.setup = "read"}
 
 ```
 
-<!-- Uncommenting this leads to an error. See https://github.com/rstudio/learnr/issues/125 -->
-<!-- ```{r ex_look2-solution} -->
-<!-- names(demographic1) -->
-<!-- ``` -->
-
-Check out the names of the demographic2 data.frame.
-```{r ex_look3, exercise=TRUE, exercise.setup = "read"}
+```{r ex_look2-solution}
+names(demographic1)
 ```
 
-<!-- ```{r ex_look3-solution, exercise.setup = "read"} -->
-<!-- names(demographic2) -->
-<!-- ``` -->
+Check out the names of the `demographic2` data.frame.
+```{r ex_look3, exercise=TRUE, exercise.setup = "read"}
+
+```
+
+```{r ex_look3-solution, exercise.setup = "read"}
+names(demographic2)
+```
 
 - `str()` shows the structure of the data set, i.e. the type of each variable 
 (here `num` for numeric and `chr` for character) and the first few values
@@ -329,6 +326,12 @@ str(results)
 Check out the structure of the `demographic1` and `demographic2` data.frames.
 
 ```{r ex_look5, exercise=TRUE, exercise.setup = "read"}
+
+```
+
+```{r ex_look5-solution}
+str(demographic1)
+str(demographic2)
 ```
 
 - `summary()` gives a summary of all columns in the data.frame
@@ -340,8 +343,13 @@ summary(results)
 Check out the summary of the `demographic1` and `demographic2` data.frames.
 
 ```{r ex_look7, exercise=TRUE, exercise.setup = "read"}
+
 ```
 
+```{r ex_look7-solution}
+summary(demographic1)
+summary(demographic2)
+```
 
 Now that you know the variables of your databases is time to start with the cleaning part.
 
