@@ -40,9 +40,8 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
 
 ### Beta testing
 
-1. Find content you'd like to test. Currently the *Introduction* <!-- and the *Swiss dual use data recipe* are --> is 
-ready for beta testing. To take a look at <!-- them -->it, 
-open R and run:
+1. Find content you'd like to test. Currently the *Introduction* and the *Swiss dual use data recipe* are 
+ready for beta testing. To take a look at them, open R and run:
 ```
 devtools::install_github("school-of-data/r-consortium-proposal", 
                          subdir="r-package")
@@ -52,13 +51,11 @@ and then
 ## install.packages("learnr") # install learnr if you don't have it yet
 learnr::run_tutorial("en-introduction", package = "ddj")
 ```
-<!-- 
 for looking at the *Introduction* or
 ```
 learnr::run_tutorial("en-recipe-switzerland-dual-use", package = "ddj")
 ```
 for the *Swiss dual use data recipe*.
--->
 
 2. Open an [issue](https://github.com/school-of-data/r-consortium-proposal/issues/new) and fill it out. You don't have to do it all at once. Do it in your pace and come back when you have time! The template shows you how to give us a sign that you are done. Do that in the end.
 
