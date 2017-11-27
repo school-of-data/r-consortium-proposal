@@ -48,7 +48,6 @@ devtools::install_github("school-of-data/r-consortium-proposal",
 ```
 and then 
 ```
-## install.packages("learnr") # install learnr if you don't have it yet
 learnr::run_tutorial("en-introduction", package = "ddj")
 ```
 for looking at the *Introduction* or
