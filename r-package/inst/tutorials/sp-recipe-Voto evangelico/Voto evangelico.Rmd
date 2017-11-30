@@ -1,0 +1,307 @@
+---
+title: "Ejercicio analisis"
+author: Camila Salazar
+output: html_document
+self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ¿Cuánto ha variado el voto evangélico en CR en las últimas 5 elecciones?
+
+Este análisis se realizó para el trabajo ["Voto por diputados evangélicos se triplicó en cinco elecciones"](http://www.nacion.com/gnfactory/investigacion/2017/partidos-evangelicos/index.html?desktop=true), publicado en el diario La Nación el 26 de junio de 2017.
+ 
+Para ello se construyó una base, con datos del TSE, de las elecciones de 1998, 2002, 2006, 2010 y 2014.  Se usaron los datos de votación para diputados de partidos evangélicos:  Alianza Nacional Cristiana, Renovación Costarricense y Restauración Nacional.
+
+##Paquetes y carga de archivos
+Lo primero que hacemos es cargar el archivo de excel con todas sus hojas.  Luego la función `read_excel_allsheets` recorre el archivo para leer todas las hojas, y finalmente, las guardamos en una lista (un objeto de R).
+
+Con la función `join_all` del paquete `plyr` unimos todas las hojas en un mismo archivo.  Finalmente reemplazamos los blancos con 0, para facilitar el análisis.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(tidyr)
+library(plyr)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(ggthemes)
+
+#Cargar hojas del archivo
+diputados <- excel_sheets("diputados.xlsx") 
+
+#leer hojas del archivo
+read_excel_allsheets <- function(diputados) {
+  sheets <- readxl::excel_sheets(diputados)
+  x <-    lapply(sheets, function(X) readxl::read_excel(diputados, sheet = X))
+  names(x) <- sheets
+  x
+}
+
+#crear lista con archivos
+mysheets <- read_excel_allsheets("diputados.xlsx")
+
+#Unir bases
+evangelicos <- join_all(mysheets, by = "codigod", type = "left", match="all")
+
+#reemplazar blancos con cero
+evangelicos[is.na(evangelicos)] <- 0
+```
+
+##Limpieza
+La base de datos contiene la cantidad de votos válidos por distrito total y para los partidos Renovación Costarricense (rc), Restauración Nacional (rn) y Alianza Nacional Cristiana (anc).   Lo primero que tenemos que hacer es crear nuevas variables que sume la cantidad de votos válidos para esos partidos por cada distrito.  Eso lo hacemos con el paquete `dplyr`.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+evangelicos <- evangelicos %>%
+  mutate(tot14=rc14+rn14,
+         tot10=rc10+rn10,
+         tot06=rc06+rn06,
+         tot02=rc02+anc02,
+         tot98=rc98+anc98) %>%
+  select(provincia, codigoc, canton, HASC, codigod, distrito, starts_with("valido"), starts_with("tot"))
+```
+
+###Agrupar por cantones
+El análisis se va a enfocar en la votación por cantones y no distritos, por lo que es necesario agrupar los datos por cantones.  Además se crean variables de porcentaje de voto evangélico por cantón. 
+```{r echo=T, message=FALSE, warning=FALSE}
+cantones <- evangelicos %>%
+  group_by(codigoc, canton, HASC) %>%
+  summarise(validos14=sum(validos14),
+    tot14=sum(tot14),
+    validos10=sum(validos10),
+    tot10=sum(tot10),
+    validos06=sum(validos06),
+    tot06=sum(tot06),
+    validos02=sum(validos02),
+    tot02=sum(tot02),
+    validos98=sum(validos98),
+    tot98=sum(tot98))  %>%
+  mutate(por14=tot14/validos14*100,
+         por10=tot10/validos10*100,
+         por06=tot06/validos06*100,
+         por02=tot02/validos02*100,
+         por98=tot98/validos98*100) %>%
+  select(codigoc, canton, HASC, starts_with("por"))
+```
+Ahora podemos empezar a analizar los datos, por ejemplo, preguntarnos **en cuáles cantones el porcentaje de voto evangélico superó el 10%, en la última elección.
+```{r echo=T, message=FALSE, warning=FALSE}
+cantones %>%
+  select(canton, por14)%>%
+  filter(por14>=10) %>%
+  arrange(desc(por14))
+```
+Los datos muestran que en 2014, 17 cantones tuvieron un porcentaje de votación a partidos evangélicos superior al 10%.  Matina fue el cantón con mayor porcentaje, con un 24%.  al compararlo con las elecciones anteriores, en 2010, solo 2 cantones mostraron ese comportamiento, en 2006 fueron 5 cantones, en 2002, cuatro y en 1998 solamente 2.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+cantones %>%
+  select(canton, por10)%>%
+  filter(por10>=10) %>%
+  arrange(desc(por10))
+
+cantones %>%
+  select(canton, por06)%>%
+  filter(por06>=10)%>%
+  arrange(desc(por06))
+
+cantones %>%
+  select(canton, por02)%>%
+  filter(por02>=10)%>%
+  arrange(desc(por02))
+
+cantones %>%
+  select(canton, por98)%>%
+  filter(por98>=10)%>%
+  arrange(desc(por98))
+```
+
+###Agrupar por provincia
+También podemos agrupar los datos por provincia y ver cómo ha cambiado el voto evangélico.
+```{r echo=T, message=FALSE, warning=FALSE}
+provincia <- evangelicos %>%
+  group_by(provincia) %>%
+  summarise(validos14=sum(validos14),
+            tot14=sum(tot14),
+            validos10=sum(validos10),
+            tot10=sum(tot10),
+            validos06=sum(validos06),
+            tot06=sum(tot06),
+            validos02=sum(validos02),
+            tot02=sum(tot02),
+            validos98=sum(validos98),
+            tot98=sum(tot98))  %>%
+              mutate(Y2014=tot14/validos14*100,
+                     Y2010=tot10/validos10*100,
+                     Y2006=tot06/validos06*100,
+                     Y2002=tot02/validos02*100,
+                     Y1998=tot98/validos98*100) %>%
+              select(provincia, starts_with("Y"))
+provincia
+```
+Se observa que Limón es la provincia con mayor porcentaje de votación para estos partidos.  Podemos hacer un gráfico para ver cómo ha evolucionado el voto evangélico.  Para ello, lo primero que debemos hacer es reestructurar la base, de forma que tengamos en una sola variable el año y en la otra el porcentaje.  Esto lo hacemos con la función `gather` del paquete `tidyr`.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+provincia2 <- provincia%>%
+  gather(anio, porcentaje,-provincia) %>%
+  arrange(anio)
+head(provincia2, 10)
+```
+
+Ahora vamos a usar el paquete `ggplot2` y `ggthemes` para graficar.   `ggplot2` funciona agregando elementos.  En la primera línea: `ggplot(provincia2, aes(x=anio, y=porcentaje, group=provincia, colour=provincia))`, lo primero es seleccionar el dataframe del cual vamos a tomar los datos.  Luego viene el apartado de **aesthetics** donde especificamos qué variables queremos graficar.     
+
+En este caso queremos la variable de año en el eje X, y el porcentaje en el eje Y.  Además queremos que nos agrupe los datos por provincia y que cada provincia sea de un color específico.    
+
+Luego podemos ir agregando elementos con el signo de **+**.  `geom_line(size=1)`, lo que nos dice es qué tipo de gráfico queremos, en este caso es un gráfico de líneas; por ejemplo si fuera de barras, pondríamos geom_bar(). 
+
+Los demás elementos que se agregaron fue para darle estilo, por ejemplo un título, un tema (en este caso para que se viera similar a los gráficos del medio FiveThirtyEight), etcétera.  
+
+```{r echo=T, message=FALSE, warning=FALSE}
+graficoprovincias<- ggplot(provincia2, aes(x=anio, y=porcentaje, group=provincia, colour=provincia)) + 
+  geom_line(size=1) +
+  ggtitle("Evolucion del voto evangelico") +
+  theme_fivethirtyeight() +
+  ylab("Porcentaje de votos a partidos evangelicos") +
+  theme(axis.title = element_text()) + 
+  theme(axis.title.x = element_blank())
+
+graficoprovincias
+```
+
+
+En estos enlaces, puede ver más detalle de cómo hacer gráficos con ggplot2:   
+
+[ggplot2 Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)  
+[Bar and line graphs](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/)  
+[Tutorial Harvard](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html)
+
+##Ver el total del país
+Ahora calculemos cómo ha variado el voto evangélico a nivel nacional. 
+```{r echo=T, message=FALSE, warning=FALSE}
+total<- evangelicos %>%
+  summarise(validos14=sum(validos14),
+            tot14=sum(tot14),
+            validos10=sum(validos10),
+            tot10=sum(tot10),
+            validos06=sum(validos06),
+            tot06=sum(tot06),
+            validos02=sum(validos02),
+            tot02=sum(tot02),
+            validos98=sum(validos98),
+            tot98=sum(tot98))  %>%
+  mutate(Y2014=tot14/validos14*100,
+         Y2010=tot10/validos10*100,
+         Y2006=tot06/validos06*100,
+         Y2002=tot02/validos02*100,
+         Y1998=tot98/validos98*100) %>%
+  select(starts_with("Y"))
+total
+#Cuánto varió
+total$Y2014/total$Y1998
+```
+Los resultados muestran que entre 1998 y el 2014, el voto evangélico a nivel nacional se triplicó, al pasar de 2,6 a 8,1.    Podemos ver la evolución en un gráfico: 
+
+```{r echo=T, message=FALSE, warning=FALSE}
+total <- total%>%
+  gather(anio, porcentaje) %>%
+  arrange(desc(anio))
+
+graficoevolucion <- ggplot(total, aes(x=anio, y=porcentaje, group=1)) + 
+  geom_line(size=1.5, color="#00cef6") +
+  ggtitle("Evolucion del voto evangelico") +
+  theme_fivethirtyeight() +
+  ylab("Porcentaje de votos a partidos evangélicos") +
+  theme(axis.title = element_text()) + 
+  theme(axis.title.x = element_blank())
+graficoevolucion
+```
+
+##Mapas
+Una forma visual efectiva para ver la votación es por medio de mapas. Para hacer mapas en R vamos a requerir de varios paquetes: 
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library("gpclib")
+library("raster")
+library("maptools")
+library("broom")
+library(mapproj)
+gpclibPermit()
+```
+
+Ahora es necesario importar geodatos para Costa Rica de la web.  Luego con el comando `fortify` transformamos esos datos en polígonos que nos permiten mapear la información.  Finalmente con el comando `merge`, unidos los geodatos con la base que habíamos creado previamente sobre el porcentaje de votación por cantones y ordenamos los polígonos para que el programa sepa en qué orden debe dibujar el mapa. 
+
+```{r echo=T, message=FALSE, warning=FALSE}
+#Importar geodatos
+cr <- getData("GADM", country = "CRI", level = 2)
+#transformar geodatos
+cr2<- fortify(cr, region = "HASC_2")
+#Unir bases
+cr_mapa <- merge(cr2, cantones, by.x= "id", by.y="HASC", all.x = TRUE)
+#ordenar pol?gonos
+ord2<- order(cr_mapa$order)
+cr_mapa <- cr_mapa[ord2, ]
+```
+
+Ahora estamos listos para dibujar los mapas.  ¿Cómo leemos el código?:  
+* `geom_polygon()` es el tipo de gráfico para hacer mapas.  Lo primero es especificar los datos, que están en la base de datos que creamos `cr_mapa`.  Luego especificamos los aesthetics.  Siempre que hacemos un mapa vamos a poner en el eje X la longitud y en el Y la latitud.  Luego agrupamos por la variable `group` y finalmente rellenamos con la variable de porcentaje de votos.  
+* `coord_map()` especifica que es un mapa de coordenadas.  
+* `ylim()` sirve para decirle al gráfico en donde centrar las coordenadas.  Si es un mapa de CR, lo recomendable es poner `ylim(8, NA)`.  
+* `scale_fill_gradient()` indica que queremos colorear el mapa con una escala.  En este caso, los colores se seleccionaron de forma manual, poniendo el valor más bajo y el más alto, y R colorea según esa escala.  Además se establecen los límites que van de 0 a 25%.  Esto es muy importante, porque como año a año los porcentajes cambian, si no establecemos un límite los colores cambiarían y lo que necesitamos es que la escala de color se mantenga igual a lo largo de los años para ver la evolución.  
+* `labs` agrega etiquetas al mapa.  
+* `theme_void()` se usa para que el fondo salga en blanco.
+
+```{r echo=T, message=FALSE, warning=FALSE}
+m_1998 <-ggplot() +
+  geom_polygon(data = cr_mapa, aes(x = long, y = lat, group = group, fill = por98)) +
+  coord_map() + ylim(8, NA) + 
+  scale_fill_gradient(low = "#c6c6c6", high = "#1f4263", limits = c(0, 25)) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Voto a partidos cristianos", 
+       subtitle = "Elecciones 1998") +
+  theme_void()
+
+m_2002 <-ggplot() +
+  geom_polygon(data = cr_mapa, aes(x = long, y = lat, group = group, fill = por02)) +
+  coord_map() + ylim(8, NA) + 
+  scale_fill_gradient(low = "#c6c6c6", high = "#1f4263", limits = c(0, 25)) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Voto a partidos cristianos", 
+       subtitle = "Elecciones 2002") +
+  theme_void()
+
+m_2006 <-ggplot() +
+  geom_polygon(data = cr_mapa, aes(x = long, y = lat, group = group, fill = por06)) +
+  coord_map() + ylim(8, NA) + 
+  scale_fill_gradient(low = "#c6c6c6", high = "#1f4263", limits = c(0, 25)) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Voto a partidos cristianos", 
+       subtitle = "Elecciones 2006") +
+  theme_void()
+m_2010 <-ggplot() +
+  geom_polygon(data = cr_mapa, aes(x = long, y = lat, group = group, fill = por10)) +
+  coord_map() + ylim(8, NA) + 
+  scale_fill_gradient(low = "#c6c6c6", high = "#1f4263", limits = c(0, 25)) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Voto a partidos cristianos", 
+       subtitle = "Elecciones 2010")+
+  theme_void()
+m_2014 <-ggplot() +
+  geom_polygon(data = cr_mapa, aes(x = long, y = lat, group = group, fill = por14)) +
+  coord_map() + ylim(8, NA) + 
+  scale_fill_gradient(low = "#c6c6c6", high = "#1f4263", limits = c(0, 25)) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Voto a partidos cristianos", 
+       subtitle = "Elecciones 2014")+
+  theme_void()
+```
+```{r echo=F, message=FALSE, warning=FALSE}
+m_1998
+m_2002
+m_2006
+m_2010
+m_2014
+```
