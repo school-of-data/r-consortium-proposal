@@ -1,0 +1,169 @@
+---
+title: "Introducción a análisis exploratorio de datos con R"
+author: "Camila Salazar"
+date: "October 9, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ¿Qué vamos a aprender?
+
+En este tutorial vamos a aprender cómo realizar análisis exploratorio de datos con R. El primer paso para analizar datos es comenzar a explorar las variables de nuestra base de datos para: 
+
+* Encontrar patrones  
+* Identificar errores   
+* Plantear nuevas hipótesis o preguntas  
+* Identificar relaciones entre variables  
+* Empezar a encontrar respuestas a nuestras preguntas de investigación  
+
+Es importante considerar que este es un primer paso y no corresponde a un análisis estadístico riguroso, pero puede permitirnos encontrar respuestas o guiarnos en el tipo de análisis que queremos realizar.
+
+## ¿Qué es análisis exploratorio?
+
+Lectura recomendada: [Exploratory Data Analysis-Howard Seltman](http://www.stat.cmu.edu/~hseltman/309/Book/chapter4.pdf)
+El análisis exploratorio puede ser **gráfico** o **no gráfico** y **univariado** o **multivariado** (normalmente de dos variables).
+
+* *No gráfico*: Calcula estadísticas descriptivas de las variables
+* *Gráfico*: Calcula estadísticas de forma gráfica 
+* *Univariado*: Analiza una sola variable a la vez
+* *Multivariado*: Analiza dos o más variables
+
+A su vez, cada uno de esas dividisiones puede subdividirse según los tipos de datos con los que trabajemos: **cateógicos** o **numéricos**.
+
+## Cargar paquetes
+
+Lo primero que tenemos que hacer es cargar los paquetes que vamos a utilizar para el análisis.  En este caso vamos a usar: 
+```{r echo=T, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2) 
+library(readxl)
+library(gmodels)
+```
+
+(Recordar que si no ha instalada estos paquetes debe correr primero el comando: `install.packages("nombre del paquete")`)
+
+## Importar archivos
+Antes de comenzar, hay que cambiar el directorio de trabajo y seleccionar el folder en donde tenemos nuestros archivos.  Esto se hace con el comando `setwd()`.
+
+Ahora podemos importar los archivos de varias formas.  Podemos hacerlo desde el menú de arriba, usando: File -> Import Dataset y seleccionando el tipo de archivo que queremos importar.  
+
+También podemos hacerlo escribiendo el código.  Es siempre recomendable asignar el archivo que importamos a un objeto con el símbolo `<-`.  Inicialmente vamos a importar unos archivos .xlsx, por lo que usamos el paquete `readxl`, que ya instalamos.  
+
+Los archivos que vamos a usar inicialmente son:
+```{r echo=T, message=FALSE, warning=FALSE}
+#Recuerden cambiar el directorio de trabajo
+setwd("/Users/Camila/Documents/Curso periodismo datos/2017/Clases/Analisis_R")
+encuesta <- read_xlsx("encuesta.xlsx")
+encuesta <- tbl_df(encuesta)
+```
+
+El archivo contiene información sobre las personas que viven solas en Costa Rica.  Los datos se extrajeron de la Encuesta Nacional de Hogares del 2016 y contienen las siguientes variables:
+
+* `id`:  identificador único  
+* `REGION`: Región de planificación donde vive la persona (Central, Chorotega, Pacífico Central, Brunca, Huetar Atlántica, Huetar Norte)  
+* `ZONA`: Zona en la que vive la persona (urbana o rural)  
+* `Tipo_vivienda`: Tenencia de la vivienda (Propia totalmente pagada, Propia pagando a plazos, Alquilada, En precario, Otra tenencia)  
+* `Mensualidad`: Mensualidad pagada por la vivienda, cuando esta no es propia pagada  
+* `M2`: Metros cuadrados de construcción de la vivienda  
+* `Sexo`: Sexo (Hombre o Mujer)  
+* `Edad`: Edad de la persona  
+* `Estado_civil`: Estado civil  
+* `NivInst`: Nivel de escolaridad:
+*0- Sin nivel de instrucción:Persona con ninguna educación, con preparatoria o educación especial sin aprobación de niveles*  
+*1- Primaria incompleta:Persona de primero hasta quinto grado y primaria con año aprobado no declarado*  
+*2- Primaria completa:Persona con sexto grado*  
+*3- Secundaria académica incompleta :Persona de primer año hasta cuarto año de secundaria y secundaria con año aprobado no declarado*  
+*4- Secundaria académica completa:Persona con quinto año de secundaria, con o sin título de bachiller*  
+*5- Secundaria técnica incompleta:Persona con primer año hasta quinto año en secundaria técnica y secundaria técnica con año aprobado no declarado.*  
+*6- Secundaria técnica completa:Persona con secundaria técnica concluida con o sin título de bachiller.*  
+*7- Educación superior de pregrado y grado:Persona que tiene desde un año hasta tres años en para-universitaria, incluyendo año no declarado, y desde un año hasta seis años de universidad, incluyendo año no declarado*  
+*8- Educación superior de posgrado:Persona con estudios universitarios de especialidad, maestría o doctorado desde un año hasta seis años, incluyendo año no declarado.*     
+* `Escolari`: Años de escolaridad  
+* `CondAct`: Condición de actividad (Ocupado, Desempleado, Fuera de la fuerza de trabajo)  
+* `ingreso`: Ingreso total neto del Hogar  
+* `np`: Nivel de pobreza (Pobreza no extrema, Pobreza extrema, No pobre)  
+* `quintil`: Quintil de ingreso per cápita del hogar  
+
+
+
+## Explorar los datos
+
+Una vez que cargamos el archivo podemos comenzar a explorar los datos.  (Recordar comandos de [Tutorial de limpieza con R](http://rpubs.com/camilamila/limpieza)).
+
+```{r echo=T, message=FALSE, warning=FALSE}
+glimpse(encuesta)
+```
+
+Con esto podemos ver que tenemos cuatro variables numericas (dbl) y el resto con caracteres.  
+
+También hay otros comandos exploratorios como: `str()`, `head()`, `tail()`, `class()`, `class()`
+
+**Tip**
+Podemos convertir las variables de texto a factores (variables con categorías) con el comando `as.factor()`.  Por ejemplo si queremos convertir la variable de REGION, el comando sería: 
+
+```{r echo=T, message=FALSE, warning=FALSE}
+encuesta$REGION<-as.factor(encuesta$REGION)
+```
+
+Note que el `$` se utiliza para llamar a variables de un dataframe.  En el ejemplo anterior, el comando se lee: guarde la variable REGION del dataframe encuesta como un factor.  
+
+##Variables categóricas
+Para las variables categóricas podemos calcular tablas de frecuencia, es decir, ver el número de ocurrencias de cada categoría de la variable.  Esto lo hacemos con el comando `table()`.
+
+###Frecuencias simples
+Entonces si quisieramos calcular la frecuencia de la variable ZONA el comando sería: 
+```{r echo=T, message=FALSE, warning=FALSE}
+table(encuesta$ZONA)
+```
+Y podemos ver que 447 personas viven en Zona Rural y 1014 en Urbana.  
+
+### Tablas de contingencia
+Ahora si queremos tabular dos variables, simplemente las separamos por coma. 
+
+Por ejemplo la frecuencia de Tipo de vivienda según Zona:
+```{r echo=T, message=FALSE, warning=FALSE}
+table(encuesta$Tipo_vivienda, encuesta$ZONA)
+```
+
+### Proporciones
+Los números absolutos a veces no son útiles para entender los datos, por lo que es mejor utilizar proporciones.  Para ello usamos el comando `prop.table()`.  
+
+Por ejemplo si quisieramos mostrar la tabla anterior como proporciones, lo que hacemos es ingresar ese comando dentro del comando de `prop.table()`.
+```{r echo=T, message=FALSE, warning=FALSE}
+prop.table(table(encuesta$Tipo_vivienda, encuesta$ZONA))
+```
+
+En este caso nos muestra los datos como proporciones totales, pero ¿cómo hacemos si queremos ver porcentajes por fila o columna?.
+
+Esto lo hacemos poniendo una coma y luego 1 (filas) o 2 (columnas).  
+
+```{r echo=T, message=FALSE, warning=FALSE}
+#Filas
+prop.table(table(encuesta$Tipo_vivienda, encuesta$ZONA),1)
+#Columnas
+prop.table(table(encuesta$Tipo_vivienda, encuesta$ZONA),2)
+```
+
+###CrossTable()
+
+Un comando muy útil para simplificar los pasos es el comando `CrossTable()` del paquete `gmodels()`.  El comando nos permite presentar en una misma tabla los porcentajes por fila o columna y el total de la tabla.  
+
+```{r echo=T, message=FALSE, warning=FALSE}
+CrossTable(encuesta$Tipo_vivienda, encuesta$ZONA)
+```
+
+En este caso, el cuadro de arriba, nos dice qué es lo que se muestra en la tabla: N (número de observaciones), Chi-square (estadístico, no interesa por ahora), N/Row total (porcentaje por fila), N/Col Total (porcentaje por columna), N/Table Total (porcentaje total).
+
+Tambien podemos simplificar la tabla para que nos muestre menos resultados, cambiando las opciones:
+`prop.r=TRUE`: porcentaje por filas.  Si lo ponemos = F no lo muestra.  
+`prop.c=TRUE`: porcentaje por columnas.  Si lo ponemos = F no lo muestra  
+`prop.t=TRUE`: porcentaje total de la tabla.  Si lo ponemos = F no lo muestra  
+`prop.chisq=TRUE`: Chi-square. Si lo ponemos = F no lo muestra  
+
+Entonces por ejemplo si solo queremos el porcentaje por fila y columna, la tabla sería: 
+```{r echo=T, message=FALSE, warning=FALSE}
+CrossTable(encuesta$Tipo_vivienda, encuesta$ZONA, prop.t=F, prop.chisq = F)
+```
