@@ -1,0 +1,1054 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://assets-cdn.github.com">
+  <link rel="dns-prefetch" href="https://avatars0.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars1.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars2.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
+  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
+
+
+
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-c9193575f18b28be82c0a963e144ff6fa7a809dd8ae003a1d1e5979bed3f7f00.css" integrity="sha256-yRk1dfGLKL6CwKlj4UT/b6eoCd2K4AOh0eWXm+0/fwA=" media="all" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-6536549f7712e1f35def45bde8e2dbb9c4304a1dd4d28e3368cceaab0deb093a.css" integrity="sha256-ZTZUn3cS4fNd70W96OLbucQwSh3U0o4zaMzqqw3rCTo=" media="all" rel="stylesheet" />
+  
+  
+  
+  
+
+  <meta name="viewport" content="width=device-width">
+  
+  <title>r-consortium-proposal/Tutorial R.Rmd at master · school-of-data/r-consortium-proposal</title>
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+  <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+  <meta property="fb:app_id" content="1401488693436528">
+
+    
+    <meta content="https://avatars0.githubusercontent.com/u/6851842?s=400&amp;v=4" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="school-of-data/r-consortium-proposal" property="og:title" /><meta content="https://github.com/school-of-data/r-consortium-proposal" property="og:url" /><meta content="r-consortium-proposal - Application for https://www.r-consortium.org/projects/call-for-proposals" property="og:description" />
+
+  <link rel="assets" href="https://assets-cdn.github.com/">
+  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6MjI2NjQxNjM5OmE2Mzc0MWYwMTUzZmIwMmFjNzc3ZDc2NGQ3MjRkZjk5YmQxNDU5NTAwODBkZGYwMjQzNjllODUyZWVjYzFiNjc=--0b5b3b0d6d61f9eaf3ebacbd70a0c75ad62c2b78">
+  <meta name="pjax-timeout" content="1000">
+  <link rel="sudo-modal" href="/sessions/sudo_modal">
+  <meta name="request-id" content="C232:108B3:1643FF0:2471E43:5A1F66DA" data-pjax-transient>
+  
+
+  <meta name="selected-link" value="repo_source" data-pjax-transient>
+
+  <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="C232:108B3:1643FF0:2471E43:5A1F66DA" name="octolytics-dimension-request_id" /><meta content="iad" name="octolytics-dimension-region_edge" /><meta content="iad" name="octolytics-dimension-region_render" /><meta content="24500400" name="octolytics-actor-id" /><meta content="Camilamila" name="octolytics-actor-login" /><meta content="97158eb7991b519533560746ae1359d667774f3c4840252ec9bbac9d69caddc3" name="octolytics-actor-hash" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
+
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged In">
+
+
+  
+
+      <meta name="hostname" content="github.com">
+  <meta name="user-login" content="Camilamila">
+
+      <meta name="expected-hostname" content="github.com">
+    <meta name="js-proxy-site-detection-payload" content="MGI1NWMwZTY0OTZjMmFjZWI4MjhkOWNjY2JkZDMzYTViM2M5MzdkMTAzNTFmNjk5ZGIzYjM5NDJhYjVmMmUxMXx7InJlbW90ZV9hZGRyZXNzIjoiMTg2LjMyLjE3LjIwMiIsInJlcXVlc3RfaWQiOiJDMjMyOjEwOEIzOjE2NDNGRjA6MjQ3MUU0Mzo1QTFGNjZEQSIsInRpbWVzdGFtcCI6MTUxMjAwNzM5NiwiaG9zdCI6ImdpdGh1Yi5jb20ifQ==">
+
+    <meta name="enabled-features" content="UNIVERSE_BANNER,FREE_TRIALS">
+
+  <meta name="html-safe-nonce" content="dd68c8a628861aa5f95560a9bd97714e342957c7">
+
+  <meta http-equiv="x-pjax-version" content="0e2a4c1df76905f111dfbb9010eb7ec6">
+  
+
+      <link href="https://github.com/school-of-data/r-consortium-proposal/commits/master.atom" rel="alternate" title="Recent Commits to r-consortium-proposal:master" type="application/atom+xml">
+
+  <meta name="description" content="r-consortium-proposal - Application for https://www.r-consortium.org/projects/call-for-proposals">
+  <meta name="go-import" content="github.com/school-of-data/r-consortium-proposal git https://github.com/school-of-data/r-consortium-proposal.git">
+
+  <meta content="6851842" name="octolytics-dimension-user_id" /><meta content="school-of-data" name="octolytics-dimension-user_login" /><meta content="76120062" name="octolytics-dimension-repository_id" /><meta content="school-of-data/r-consortium-proposal" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="76120062" name="octolytics-dimension-repository_network_root_id" /><meta content="school-of-data/r-consortium-proposal" name="octolytics-dimension-repository_network_root_nwo" /><meta content="false" name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" />
+
+
+    <link rel="canonical" href="https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" data-pjax-transient>
+
+
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://assets-cdn.github.com/favicon.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+  <meta name="u2f-support" content="true">
+
+  </head>
+
+  <body class="logged-in env-production emoji-size-boost page-blob">
+    
+
+  <div class="position-relative js-header-wrapper ">
+    <a href="#start-of-content" tabindex="1" class="bg-black text-white p-3 show-on-focus js-skip-to-content">Skip to content</a>
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+
+    
+    
+    
+
+
+
+        
+<header class="Header  f5" role="banner">
+  <div class="d-flex px-3 flex-justify-between container-lg">
+    <div class="d-flex flex-justify-between">
+      <a class="header-logo-invertocat" href="https://github.com/" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
+  <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+
+
+    </div>
+
+    <div class="HeaderMenu d-flex flex-justify-between flex-auto">
+      <div class="d-flex">
+            <div class="">
+              <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
+  <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/search" class="js-site-search-form" data-scoped-search-url="/school-of-data/r-consortium-proposal/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+        <a href="/school-of-data/r-consortium-proposal/blob/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="header-search-scope no-underline">This repository</a>
+      <input type="text"
+        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
+        data-hotkey="s"
+        name="q"
+        value=""
+        placeholder="Search"
+        aria-label="Search this repository"
+        data-unscoped-placeholder="Search GitHub"
+        data-scoped-placeholder="Search"
+        autocapitalize="off">
+        <input type="hidden" class="js-site-search-type-field" name="type" >
+    </label>
+</form></div>
+
+            </div>
+
+          <ul class="d-flex pl-2 flex-items-center text-bold list-style-none" role="navigation">
+            <li>
+              <a href="/pulls" aria-label="Pull requests you created" class="js-selected-navigation-item HeaderNavlink px-2" data-ga-click="Header, click, Nav menu - item:pulls context:user" data-hotkey="g p" data-selected-links="/pulls /pulls/assigned /pulls/mentioned /pulls">
+                Pull requests
+</a>            </li>
+            <li>
+              <a href="/issues" aria-label="Issues you created" class="js-selected-navigation-item HeaderNavlink px-2" data-ga-click="Header, click, Nav menu - item:issues context:user" data-hotkey="g i" data-selected-links="/issues /issues/assigned /issues/mentioned /issues">
+                Issues
+</a>            </li>
+                <li>
+                  <a href="/marketplace" class="js-selected-navigation-item HeaderNavlink px-2" data-ga-click="Header, click, Nav menu - item:marketplace context:user" data-selected-links=" /marketplace">
+                    Marketplace
+</a>                </li>
+            <li>
+              <a href="/explore" class="js-selected-navigation-item HeaderNavlink px-2" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship showcases showcases_search showcases_landing /explore">
+                Explore
+</a>            </li>
+          </ul>
+      </div>
+
+      <div class="d-flex">
+        
+<ul class="user-nav d-flex flex-items-center list-style-none" id="user-links">
+  <li class="dropdown js-menu-container">
+    <span class="d-inline-block  px-2">
+      
+
+    </span>
+  </li>
+
+  <li class="dropdown js-menu-container">
+    <details class="dropdown-details details-reset js-dropdown-details d-flex px-2 flex-items-center">
+      <summary class="HeaderNavlink"
+         aria-label="Create new…"
+         data-ga-click="Header, create new, icon:add">
+        <svg aria-hidden="true" class="octicon octicon-plus float-left mr-1 mt-1" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5z"/></svg>
+        <span class="dropdown-caret mt-1"></span>
+      </summary>
+
+      <ul class="dropdown-menu dropdown-menu-sw">
+        
+<a class="dropdown-item" href="/new" data-ga-click="Header, create new repository">
+  New repository
+</a>
+
+  <a class="dropdown-item" href="/new/import" data-ga-click="Header, import a repository">
+    Import repository
+  </a>
+
+<a class="dropdown-item" href="https://gist.github.com/" data-ga-click="Header, create new gist">
+  New gist
+</a>
+
+  <a class="dropdown-item" href="/organizations/new" data-ga-click="Header, create new organization">
+    New organization
+  </a>
+
+
+
+  <div class="dropdown-divider"></div>
+  <div class="dropdown-header">
+    <span title="school-of-data/r-consortium-proposal">This repository</span>
+  </div>
+    <a class="dropdown-item" href="/school-of-data/r-consortium-proposal/issues/new" data-ga-click="Header, create new issue">
+      New issue
+    </a>
+
+      </ul>
+    </details>
+  </li>
+
+  <li class="dropdown js-menu-container">
+
+    <details class="dropdown-details details-reset js-dropdown-details d-flex pl-2 flex-items-center">
+      <summary class="HeaderNavlink name mt-1"
+        aria-label="View profile and more"
+        data-ga-click="Header, show menu, icon:avatar">
+        <img alt="@Camilamila" class="avatar float-left mr-1" src="https://avatars1.githubusercontent.com/u/24500400?s=40&amp;v=4" height="20" width="20">
+        <span class="dropdown-caret"></span>
+      </summary>
+
+      <ul class="dropdown-menu dropdown-menu-sw">
+        <li class="dropdown-header header-nav-current-user css-truncate">
+          Signed in as <strong class="css-truncate-target">Camilamila</strong>
+        </li>
+
+        <li class="dropdown-divider"></li>
+
+        <li><a class="dropdown-item" href="/Camilamila" data-ga-click="Header, go to profile, text:your profile">
+          Your profile
+        </a></li>
+        <li><a class="dropdown-item" href="/Camilamila?tab=stars" data-ga-click="Header, go to starred repos, text:your stars">
+          Your stars
+        </a></li>
+          <li><a class="dropdown-item" href="https://gist.github.com/" data-ga-click="Header, your gists, text:your gists">Your Gists</a></li>
+
+        <li class="dropdown-divider"></li>
+
+        <li><a class="dropdown-item" href="https://help.github.com" data-ga-click="Header, go to help, text:help">
+          Help
+        </a></li>
+
+        <li><a class="dropdown-item" href="/settings/profile" data-ga-click="Header, go to settings, icon:settings">
+          Settings
+        </a></li>
+
+        <li><!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/logout" class="logout-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="IGQqMwKY2+U030mpHSDOouvGxzKed85m+tmMfiOW4gg/qWK6DdJw8L7TUWObuhxNYzR5Qf8dHYndY+kB5Bdzrg==" /></div>
+          <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
+            Sign out
+          </button>
+        </form></li>
+      </ul>
+    </details>
+  </li>
+</ul>
+
+
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/logout" class="sr-only right-0" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="RUk0+t87uSUd05RL55ucw41YK4wzVCqkhQs6vgaxM7hahHxz0HESMJffjIFhAU4sBaqV/1I++UuisV/BwTCiHg==" /></div>
+          <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
+            Sign out
+          </button>
+</form>      </div>
+    </div>
+  </div>
+</header>
+
+
+      
+
+  </div>
+
+  <div id="start-of-content" class="show-on-focus"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+
+  <div role="main">
+        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
+    <div id="js-repo-pjax-container" data-pjax-container>
+      
+
+
+
+  
+
+
+
+    <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav ">
+      <div class="repohead-details-container clearfix container ">
+
+        <ul class="pagehead-actions">
+  <li>
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="xG/E9Hz33XgtWP/oYlVKCntqauL0V0xUQN3Mc4FiEfzeN9RdcTupRqTHMiD8Vo/dlXD2NVgdgHPFwe1PBEiufw==" /></div>      <input class="form-control" id="repository_id" name="repository_id" type="hidden" value="76120062" />
+
+        <div class="select-menu js-menu-container js-select-menu">
+          <a href="/school-of-data/r-consortium-proposal/subscription"
+            class="btn btn-sm btn-with-count select-menu-button js-menu-target"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Toggle repository notifications menu"
+            data-ga-click="Repository, click Watch settings, action:blob#show">
+            <span class="js-select-button">
+                <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+                Watch
+            </span>
+          </a>
+            <a class="social-count js-social-count"
+              href="/school-of-data/r-consortium-proposal/watchers"
+              aria-label="10 users are watching this repository">
+              10
+            </a>
+
+        <div class="select-menu-modal-holder">
+          <div class="select-menu-modal subscription-menu-modal js-menu-content">
+            <div class="select-menu-header js-navigation-enable" tabindex="-1">
+              <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+              <span class="select-menu-title">Notifications</span>
+            </div>
+
+              <div class="select-menu-list js-navigation-container" role="menu">
+
+                <div class="select-menu-item js-navigation-item selected" role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+                  <div class="select-menu-item-text">
+                    <input checked="checked" id="do_included" name="do" type="radio" value="included" />
+                    <span class="select-menu-item-heading">Not watching</span>
+                    <span class="description">Be notified when participating or @mentioned.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+                      Watch
+                    </span>
+                  </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+                  <div class="select-menu-item-text">
+                    <input id="do_subscribed" name="do" type="radio" value="subscribed" />
+                    <span class="select-menu-item-heading">Watching</span>
+                    <span class="description">Be notified of all conversations.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+                        Unwatch
+                    </span>
+                  </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+                  <div class="select-menu-item-text">
+                    <input id="do_ignore" name="do" type="radio" value="ignore" />
+                    <span class="select-menu-item-heading">Ignoring</span>
+                    <span class="description">Never be notified.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-mute" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8 2.81v10.38c0 .67-.81 1-1.28.53L3 10H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h2l3.72-3.72C7.19 1.81 8 2.14 8 2.81zm7.53 3.22l-1.06-1.06-1.97 1.97-1.97-1.97-1.06 1.06L11.44 8 9.47 9.97l1.06 1.06 1.97-1.97 1.97 1.97 1.06-1.06L13.56 8l1.97-1.97z"/></svg>
+                        Stop ignoring
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+</form>
+  </li>
+
+  <li>
+    
+  <div class="js-toggler-container js-social-container starring-container ">
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/unstar" class="starred js-social-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="X+z3AQMJLvPX4FUEf8l+p4QSIeSG+wn0/Nkm9v5T8B7CNfW5eSQBM47rbH29zcLJG4FUtYQc60GfKBHwz7+ikg==" /></div>
+      <input type="hidden" name="context" value="repository"></input>
+      <button
+        type="submit"
+        class="btn btn-sm btn-with-count js-toggler-target"
+        aria-label="Unstar this repository" title="Unstar school-of-data/r-consortium-proposal"
+        data-ga-click="Repository, click unstar button, action:blob#show; text:Unstar">
+        <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"/></svg>
+        Unstar
+      </button>
+        <a class="social-count js-social-count" href="/school-of-data/r-consortium-proposal/stargazers"
+           aria-label="9 users starred this repository">
+          9
+        </a>
+</form>
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/star" class="unstarred js-social-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="DAdfkzmTAWdT+z7wD++P//pNro/zLDPHoFM02V800vTtZB75493vMFO0qCb6Sm/PBmJ/3is/FkKW+Nd+Lbu1vA==" /></div>
+      <input type="hidden" name="context" value="repository"></input>
+      <button
+        type="submit"
+        class="btn btn-sm btn-with-count js-toggler-target"
+        aria-label="Star this repository" title="Star school-of-data/r-consortium-proposal"
+        data-ga-click="Repository, click star button, action:blob#show; text:Star">
+        <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"/></svg>
+        Star
+      </button>
+        <a class="social-count js-social-count" href="/school-of-data/r-consortium-proposal/stargazers"
+           aria-label="9 users starred this repository">
+          9
+        </a>
+</form>  </div>
+
+  </li>
+
+  <li>
+          <a href="#fork-destination-box" class="btn btn-sm btn-with-count"
+              title="Fork your own copy of school-of-data/r-consortium-proposal to your account"
+              aria-label="Fork your own copy of school-of-data/r-consortium-proposal to your account"
+              rel="facebox"
+              data-ga-click="Repository, show fork modal, action:blob#show; text:Fork">
+              <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+            Fork
+          </a>
+
+          <div id="fork-destination-box" style="display: none;">
+            <h2 class="facebox-header" data-facebox-id="facebox-header">Where should we fork this repository?</h2>
+            <include-fragment src=""
+                class="js-fork-select-fragment fork-select-fragment"
+                data-url="/school-of-data/r-consortium-proposal/fork?fragment=1">
+              <img alt="Loading" height="64" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-128.gif" width="64" />
+            </include-fragment>
+          </div>
+
+    <a href="/school-of-data/r-consortium-proposal/network" class="social-count"
+       aria-label="8 users forked this repository">
+      8
+    </a>
+  </li>
+</ul>
+
+        <h1 class="public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"/></svg>
+  <span class="author" itemprop="author"><a href="/school-of-data" class="url fn" rel="author">school-of-data</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="/school-of-data/r-consortium-proposal" data-pjax="#js-repo-pjax-container">r-consortium-proposal</a></strong>
+
+</h1>
+
+      </div>
+      
+<nav class="reponav js-repo-nav js-sidenav-container-pjax container"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/school-of-data/r-consortium-proposal" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches repo_packages /school-of-data/r-consortium-proposal" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"/></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a href="/school-of-data/r-consortium-proposal/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /school-of-data/r-consortium-proposal/issues" itemprop="url">
+        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg>
+        <span itemprop="name">Issues</span>
+        <span class="Counter">1</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/school-of-data/r-consortium-proposal/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /school-of-data/r-consortium-proposal/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="Counter">0</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+    <a href="/school-of-data/r-consortium-proposal/projects" class="js-selected-navigation-item reponav-item" data-hotkey="g b" data-selected-links="repo_projects new_repo_project repo_project /school-of-data/r-consortium-proposal/projects">
+      <svg aria-hidden="true" class="octicon octicon-project" height="16" version="1.1" viewBox="0 0 15 16" width="15"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/></svg>
+      Projects
+      <span class="Counter" >0</span>
+</a>
+    <a href="/school-of-data/r-consortium-proposal/wiki" class="js-selected-navigation-item reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /school-of-data/r-consortium-proposal/wiki">
+      <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"/></svg>
+      Wiki
+</a>
+
+  <a href="/school-of-data/r-consortium-proposal/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors dependency_graph pulse /school-of-data/r-consortium-proposal/pulse">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"/></svg>
+    Insights
+</a>
+    <a href="/school-of-data/r-consortium-proposal/settings" class="js-selected-navigation-item reponav-item" data-selected-links="repo_settings repo_branch_settings hooks integration_installations /school-of-data/r-consortium-proposal/settings">
+      <svg aria-hidden="true" class="octicon octicon-gear" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+      Settings
+</a>
+</nav>
+
+
+    </div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+  <a href="/school-of-data/r-consortium-proposal/blob/a29c38226a7e5efa2f4f3e30bd65f02fde314751/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+  <!-- blob contrib key: blob_contributors:v21:925772fcb8985229694548dd5d3df373 -->
+
+  <div class="file-navigation js-zeroclipboard-container">
+    
+<div class="select-menu branch-select-menu js-menu-container js-select-menu float-left">
+  <button class=" btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    
+    type="button" aria-label="Switch branches or tags" aria-expanded="false" aria-haspopup="true">
+      <i>Branch:</i>
+      <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax>
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+        <span class="select-menu-title">Switch branches/tags</span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Find or create a branch…" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Find or create a branch…">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Find or create a branch…" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/school-of-data/r-consortium-proposal/blob/HeidiSeibold-patch-1/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd"
+               data-name="HeidiSeibold-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                HeidiSeibold-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/school-of-data/r-consortium-proposal/blob/HeidiSeibold-recipe-process/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd"
+               data-name="HeidiSeibold-recipe-process"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                HeidiSeibold-recipe-process
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/school-of-data/r-consortium-proposal/blob/github_pages/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd"
+               data-name="github_pages"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                github_pages
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/school-of-data/r-consortium-proposal/blob/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                master
+              </span>
+            </a>
+        </div>
+
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/branches" class="js-create-branch select-menu-item select-menu-new-item-form js-navigation-item js-new-item-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="uODTRTm96qDWPBnSQM+U7YVOjRVP7WydKD+YwySbIkQXHEb7nfpEX35M0rs9+qsw80vXR+QzESzx8vw2IfFRXw==" /></div>
+          <svg aria-hidden="true" class="octicon octicon-git-branch select-menu-item-icon" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+            <div class="select-menu-item-text">
+              <span class="select-menu-item-heading">Create branch: <span class="js-new-item-name"></span></span>
+              <span class="description">from ‘master’</span>
+            </div>
+            <input type="hidden" name="name" id="name" class="js-new-item-value">
+            <input type="hidden" name="branch" id="branch" value="master">
+            <input type="hidden" name="path" id="path" value="material/lessons/Camila-s%20docs/Tutorial%20R.Rmd">
+</form>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="BtnGroup float-right">
+      <a href="/school-of-data/r-consortium-proposal/find/master"
+            class="js-pjax-capture-input btn btn-sm BtnGroup-item"
+            data-pjax
+            data-hotkey="t">
+        Find file
+      </a>
+      <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm BtnGroup-item tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
+    </div>
+    <div class="breadcrumb js-zeroclipboard-target">
+      <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/school-of-data/r-consortium-proposal"><span>r-consortium-proposal</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/school-of-data/r-consortium-proposal/tree/master/material"><span>material</span></a></span><span class="separator">/</span><span class="js-path-segment"><a href="/school-of-data/r-consortium-proposal/tree/master/material/lessons"><span>lessons</span></a></span><span class="separator">/</span><span class="js-path-segment"><a href="/school-of-data/r-consortium-proposal/tree/master/material/lessons/Camila-s%20docs"><span>Camila-s docs</span></a></span><span class="separator">/</span><strong class="final-path">Tutorial R.Rmd</strong>
+    </div>
+  </div>
+
+
+  
+  <div class="commit-tease">
+      <span class="float-right">
+        <a class="commit-tease-sha" href="/school-of-data/r-consortium-proposal/commit/2ac272aaf1f4a11aec24c1ba114afeaa7cba9e0b" data-pjax>
+          2ac272a
+        </a>
+        <relative-time datetime="2017-10-08T22:41:40Z">Oct 8, 2017</relative-time>
+      </span>
+      <div>
+        <img alt="@Camilamila" class="avatar" height="20" src="https://avatars1.githubusercontent.com/u/24500400?s=40&amp;v=4" width="20" />
+        <a href="/Camilamila" class="user-mention" rel="contributor">Camilamila</a>
+          <a href="/school-of-data/r-consortium-proposal/commit/2ac272aaf1f4a11aec24c1ba114afeaa7cba9e0b" class="message" data-pjax="true" title="Add files via upload">Add files via upload</a>
+      </div>
+
+    <div class="commit-tease-contributors">
+      <button type="button" class="btn-link muted-link contributors-toggle" data-facebox="#blob_contributors_box">
+        <strong>1</strong>
+         contributor
+      </button>
+      
+    </div>
+
+    <div id="blob_contributors_box" style="display:none">
+      <h2 class="facebox-header" data-facebox-id="facebox-header">Users who have contributed to this file</h2>
+      <ul class="facebox-user-list" data-facebox-id="facebox-description">
+          <li class="facebox-user-list-item">
+            <img alt="@Camilamila" height="24" src="https://avatars0.githubusercontent.com/u/24500400?s=48&amp;v=4" width="24" />
+            <a href="/Camilamila">Camilamila</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="file">
+    <div class="file-header">
+  <div class="file-actions">
+
+    <div class="BtnGroup">
+      <a href="/school-of-data/r-consortium-proposal/raw/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="btn btn-sm BtnGroup-item" id="raw-url">Raw</a>
+        <a href="/school-of-data/r-consortium-proposal/blame/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b">Blame</a>
+      <a href="/school-of-data/r-consortium-proposal/commits/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="btn btn-sm BtnGroup-item" rel="nofollow">History</a>
+    </div>
+
+        <a class="btn-octicon tooltipped tooltipped-nw"
+           href="https://desktop.github.com"
+           aria-label="Open this file in GitHub Desktop"
+           data-ga-click="Repository, open with desktop, type:mac">
+            <svg aria-hidden="true" class="octicon octicon-device-desktop" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M15 2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 9H1V3h14v8z"/></svg>
+        </a>
+
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/edit/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="inline-form js-update-url-with-hash" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Bi4Obc8hmB9Kkvh6KX95no+eBUf6TnZntQvvU7oSyyaqhZCKWAwujbH7NQsC+eKcq3QLRxODWwqD771s1eKvJw==" /></div>
+          <button class="btn-octicon tooltipped tooltipped-nw" type="submit"
+            aria-label="Edit this file" data-hotkey="e" data-disable-with>
+            <svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg>
+          </button>
+</form>        <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/school-of-data/r-consortium-proposal/delete/master/material/lessons/Camila-s%20docs/Tutorial%20R.Rmd" class="inline-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="+r7OMxRvW0+/DCmJihpd83x3Fn1v4VQoxUKqK4U1gDmiJul/hLEj8+lA3gGvUt4cLn6GsqjOq34lKKlQrSfLNQ==" /></div>
+          <button class="btn-octicon btn-octicon-danger tooltipped tooltipped-nw" type="submit"
+            aria-label="Delete this file" data-disable-with>
+            <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
+          </button>
+</form>  </div>
+
+  <div class="file-info">
+      300 lines (211 sloc)
+      <span class="file-info-divider"></span>
+    14.3 KB
+  </div>
+</div>
+
+    
+  <div id="readme" class="readme blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="text"><table data-table-type="yaml-metadata">
+  <thead>
+  <tr>
+  <th>title</th>
+  <th>author</th>
+  <th>output</th>
+  <th>runtime</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>Tutorial R para periodistas</div></td>
+  <td><div>Camila Salazar</div></td>
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>learnr::tutorial</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>progressive</th>
+  <th>allow_skip</th>
+  <th>df_print</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>true</div></td>
+  <td><div>true</div></td>
+  <td><div>default</div></td>
+  </tr>
+  </tbody>
+</table>
+</div></td>
+  </tr>
+  </tbody>
+</table>
+</div></td>
+  <td><div>shiny_prerendered</div></td>
+  </tr>
+  </tbody>
+</table>
+
+<pre lang="{r"><code>library(learnr)
+library(tidyverse)
+library(nycflights13)
+</code></pre>
+<h2><a href="#inicio" aria-hidden="true" class="anchor" id="user-content-inicio"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inicio</h2>
+<p>R es un entorno y lenguaje de programación para analizar datos.  R es una herramienta muy útil para hacer periodismo de datos, ya que nos permite realizar todo el proceso de obtener, limpiar, analizar y visualizar la información desde el mismo lugar.  En estos tutoriales aprenderá cómo utilizar el programa para sus proyectos periodísticos.</p>
+<p><strong>¿Por qué usar R en periodismo?</strong></p>
+<ul>
+<li>Nos permite hacer las diferentes tareas del data pipeline, desde un solo programa.</li>
+<li>Reproductibilidad del flujo de trabajo.</li>
+<li>R es gratuito y colaborativo, por lo que constantemente surgen nuevas actualizaciones según las necesidades de los usuarios.</li>
+</ul>
+<h3><a href="#contenidos" aria-hidden="true" class="anchor" id="user-content-contenidos"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contenidos</h3>
+<p>En este tutorial aprenderá:</p>
+<ul>
+<li>Cómo instalar R</li>
+<li>Cómo instalar RStudio</li>
+<li>Cómo instalar paquetes en R</li>
+<li>Generalidades del programa</li>
+<li>Importar datos a R</li>
+<li>Tipos de datos</li>
+</ul>
+<p>Empecemos</p>
+<h2><a href="#cómo-instalar-r" aria-hidden="true" class="anchor" id="user-content-cómo-instalar-r"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>¿Cómo instalar R?</h2>
+<p><a href="https://camo.githubusercontent.com/bfff1edd9c7f6c768063a4cbfed3a029a28ae003/68747470733a2f2f76696d656f2e636f6d2f323033353136353130" target="_blank"><img src="https://camo.githubusercontent.com/bfff1edd9c7f6c768063a4cbfed3a029a28ae003/68747470733a2f2f76696d656f2e636f6d2f323033353136353130" alt="" data-canonical-src="https://vimeo.com/203516510" style="max-width:100%;"></a></p>
+<p>Tal como se observa en el video, para instalar R vamos a la dirección <a href="https://cloud.r-project.org" rel="nofollow">cloud.r-project</a> y seleccionamos R para Linux, Mac o Windows.  Una vez descargado, se siguen las instrucciones de instalación.</p>
+<h2><a href="#cómo-instalar-rstudio" aria-hidden="true" class="anchor" id="user-content-cómo-instalar-rstudio"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>¿Cómo instalar RStudio?</h2>
+<p>RStudio es una interfaz desarrollada para R.  ¿Qué significa esto? R Studio nos ayuda a escribir código, visualizar resultados y en general trabajar con el lenguaje de programación R de una forma más fácil.  Como recomendación, es mucho más sencillo trabajar con RStudio y es la herramienta que vamos a utilizar en los siguientes tutoriales.</p>
+<p>Algo a tomar en cuenta es que es necesario tener instalado R para poder utilizar RStudio. Veamos cómo instalarlo:</p>
+<p><a href="https://camo.githubusercontent.com/03665d0dc734737d8d6e841441e4f67ded842510/68747470733a2f2f76696d656f2e636f6d2f323033353136393638" target="_blank"><img src="https://camo.githubusercontent.com/03665d0dc734737d8d6e841441e4f67ded842510/68747470733a2f2f76696d656f2e636f6d2f323033353136393638" alt="" data-canonical-src="https://vimeo.com/203516968" style="max-width:100%;"></a></p>
+<p>Tal como se observa en el video, para instalar R vamos a la dirección <a href="https://rstudio.com/download" rel="nofollow">rstudio.com</a> y seleccionamos la versión para nuestro sistema operativo.</p>
+<p>Una vez descargado, lo abrimos y estamos listos para comenzar.</p>
+<h3><a href="#quiz-1-instalar-r-y-rstudio" aria-hidden="true" class="anchor" id="user-content-quiz-1-instalar-r-y-rstudio"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quiz #1: Instalar R y RStudio</h3>
+<pre lang="{r"><code>quiz(caption = "Instalar R y RStudio",
+  question("¿Qué es R studio?",
+    answer("Una aplicación que nos ayuda a usar de forma más fácil R.", correct = TRUE, message = "RStudio tiene una interfaz amigable, que nos facilita escribir, usar y salvar código de R."),
+    answer("Una aplicación para usar R sin escribir código", message = "¡No! El código es una de las grandes ventajas que tiene R frente a otros programas como Excel.  El Código nos permite llevar un registro del trabajo que estamos haciendo y permite la reproductibilidad de los contenidos."),
+    answer("Un programa de hogas de cálculo como Excel"),
+    answer("Es lo mismo que R", message = "No.  Como ya vimos anteriormente son dos cosas diferentes.  R es un lenguaje, como el español.  RStudio es un programa que nos permite usar ese lenguaje, de la misma forma que un programa como Work nos permite escribir textos en español."),
+    allow_retry = TRUE
+  ),
+  question("¿RStudio es gratuito?",
+    answer("Sí", correct = TRUE, message = "Al igual que R, Rstudio es gratis y open-source."),
+    answer("No.")
+  ),
+  question("¿Es necesario instalar R si ya tengo RStudio?",
+    answer("Yes.", correct = TRUE, message = "R no viene con RStudio;hay que instalarlos de forma separada."), 
+    answer("No.", message = "R no viene con RStudio;hay que instalarlos de forma separada.")
+  )
+)
+</code></pre>
+<h2><a href="#instalar-y-utilizar-paquetes" aria-hidden="true" class="anchor" id="user-content-instalar-y-utilizar-paquetes"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Instalar y utilizar paquetes</h2>
+<p>Un paquete de R es un conjunto de funciones, datasets, documentacion que permite ampliar la funcionalidad de R.  Por ejemplo, existen paquetes para hacer gráficos, importar archivos de Excel, hacer análisis estadístico, entre otros.  En la actualidad existen cerca de 10.500 paquetes en R.</p>
+<p>¿Cómo instalarlos?</p>
+<p><a href="https://camo.githubusercontent.com/036915a5b8ded33ae6043e6bd57eb11d9587be80/68747470733a2f2f76696d656f2e636f6d2f323033353136323431" target="_blank"><img src="https://camo.githubusercontent.com/036915a5b8ded33ae6043e6bd57eb11d9587be80/68747470733a2f2f76696d656f2e636f6d2f323033353136323431" alt="" data-canonical-src="https://vimeo.com/203516241" style="max-width:100%;"></a></p>
+<p>###Instalar paquetes</p>
+<p>Como vimos en el video para instalar un paquete escribimos en la consola <code>install.packages()</code>, y ponemos entre <strong>paréntesis y con comillas</strong> el nombre del paquete que queremos instalar.  Por ejemplo, si queremos instalar el paquete <code>tidyverse</code>, escribimos <code>install.packages("tidyverse")</code> en la consola.<br>
+Si queremos instalar varios paquetes a la vez lo hacemos así: <code>install.packages(c("tidyverse", "ggplot2", "xlsx"))</code>, es decir, ponemos los diferentes nombres de los paquetes en un vector (c)  y los separamos por comas.</p>
+<p>Es importante considerar que los paquetes se instalan una sola vez en la computadora, por lo que no hay necesidad de instalarlos cada vez que abrimos RStudio.</p>
+<p>###Cargar paquetes al programa
+Una vez que hemos instalado un paquete, tenemos que cargarlos a Rstudio para poder utilizarlos.  Para hacer esto usamos el comando <code>libray(nombre del paquete)</code>.  De esta forma si quisieramos utilizar el paquete <code>ggplot2</code>, el orden sería el siguente:
+<code>install.packages("ggplot2")</code>
+<code>library(ggplot2)</code></p>
+<p>También existe otra forma de cargar paquetes al programa sin necesidad de instalarlos.  Esto se hace con el comando <code>require(nombre del paquete)</code>.</p>
+<p>¿Cuáles paquetes instalar?  Como se mencionó al inicio R tiene cerca de 10.500 paquetes.  Según las tareas que queramos realizar vamos a necesitar diferentes paquetes.  A lo largo de estos materiales vamos a ir conociendo algunos de ellos.</p>
+<p>Para iniciar es recomendable instalar el paquete <code>tidyverse</code>, que contiene un conjunto de paquetes de uso frecuente.</p>
+<h3><a href="#quizz-2-instalar-paquetes" aria-hidden="true" class="anchor" id="user-content-quizz-2-instalar-paquetes"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quizz #2: Instalar paquetes</h3>
+<pre lang="{r"><code>quiz(caption = "Quiz - Paquetes en R",
+  question("¿Cuál comando se utiliza para instalar paquetes?",
+    answer("`library()`", message = "No, library se utiliza luego de instalar un programa"),
+    answer("`install.packages()`", correct = TRUE),
+    answer("`install_packages()`"),
+    answer("No hay ningún comando se tiene que ir al sitio [cran.r-project.org](http://cran.r-project.org) y bajar los paquetes manualmente.", message = "R permite descargar los paquetes desde el programa, solo se necesita conexión a interntet"),
+    allow_retry = TRUE
+  ),
+  question("¿Cada cuánto hay que instalar un paquete?",
+    answer("Cada vez que abrimos R"),
+    answer("Cada vez que reseteamos nuestra computadora"),
+    answer("Solamente una vez. Una vez instalado, el paquete queda almacenado en nuestra computadora.", correct = TRUE),
+    answer("No es necesario instalar paquetes para usar R.", message = "Aunque algunas funciones se pueden realizar sin el uso de paquetes, estos son los que nos permiten ampliar las posibilidades de R y las tareas que podemos hacer con el programa"),
+    allow_retry = TRUE
+  ),
+  question("¿Cuál comando usamos para cargar los paquetes ya instalados?",
+    answer("`library.load()`"),
+    answer("`require()`",  message ="Este comando se utiliza cuando queremos usar un programa sin instalarlo previamente" ),
+    answer("`library()`", correct = TRUE),
+    answer("No es necesario un comando, una vez instalado el paquete se puede utlizar."),
+    allow_retry = TRUE
+  )
+)
+</code></pre>
+<h2><a href="#antes-de-comenzar" aria-hidden="true" class="anchor" id="user-content-antes-de-comenzar"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Antes de comenzar</h2>
+<p>Una vez que ya hemos instalado R, RStudio y algunos paquetes, podemos comenzar a trabajar. Lo primero que tenemos que hacer es elegir un directorio de trabajo, donde vamos a guardar nuestros archivos y de dónde vamos a cargar nuestros archivos.</p>
+<p>Para saber en cuál directorio estamos trabajando, usamos el comando <code>getwd()</code>.   Si queremos cambiar el directorio de trabajo usamos <code>setwd("directorio de trabajo")</code> y listo!</p>
+<p>Lo ideal es tener todos los archivos que vayamos a necesitar en esa carpeta.</p>
+<p>###¿Cómo pedir ayuda?
+Siempre que vamos a aprender a usar un programa es muy importante saber cómo acceder a la ayuda. En R esto es muy fácil y solamente se debe escribir <code>?</code> delante del comando o el objeto.  Por ejemplo, si quisiéramos saber más sobre el comando <code>setwd()</code>, simplemente escribimos <code>?setwd()</code></p>
+<p>Pruebe ese comando en la consola:</p>
+<pre lang="{r"><code>
+</code></pre>
+<div id="user-content-help-hint">
+**Pista:** Escriba `?setwd()` y de click al botón azul.
+</div>
+<pre lang="{r"><code># checking code
+</code></pre>
+<h2><a href="#importar-archivos" aria-hidden="true" class="anchor" id="user-content-importar-archivos"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importar archivos</h2>
+<p>Cuando trabajamos con datos nos enfrenteamos a diferentes tipos de archivos: .csv, .xlsx, .dta, .sav, entre otros.   En este segmento vamos a ver cómo importar archivos a R para poder analizarlos.</p>
+<p>###Importar .csv
+Para importar archivos .csv usamos el comando <code>read.csv()</code>. En el argumento de la función, se debe poner la dirección de dónde está el archivo, ya sea en la computadora o en línea; se debe indicar si la primera fila corresponde a los nombres de las variables y detallar el tipo de separador de los datos y preferiblemente la codificación del archivo, para que lea los caracteres extraños correctamente.  Por ejemplo se vería así: <code>read.csv("archivo.csv", header = TRUE, sep=",", fileEncoding = "UTF-8")</code></p>
+<p>####Ejercicio
+En la consola de abajo corra el código para importar un archivo csv que se encuentra en la siguiente dirección <code>http://bit.ly/2vsPsRZ</code></p>
+<pre lang="{r"><code>base &lt;- read.csv("http://bit.ly/2vsPsRZ", header = TRUE, sep=",", fileEncoding = "UTF-8")
+
+base
+</code></pre>
+<p>¡La base está importada!</p>
+<p><strong>Importante:</strong></p>
+<p>Como puede ver en el código antes del comando escribimos <code>base &lt;-</code>  ¿Por qué? Para almacenar elementos (bases de datos, gráficos, vectores, matrices) en R como objetos usamos el símbolo <code>&lt;-</code>.  En el ejemplo anterior, queríamos importar una archivo .csv y almacenarlo como un objeto en R (en este caso un objeto llamado <code>base</code>), para poder utilizarlo luego.   Entonces una vez importado el archivo escribimos el nombre del objeto <code>base</code> para que se muestre en la consola.</p>
+<p>####Otros comandos para importar archivos delimitados</p>
+<p>Con el comando <code>read.delim()</code> se pueden importar <code>.csv</code> u otros archivos delimitados como <code>.txt</code>.  El comando sería <code>read.delim("nombrearchivo", sep="separador")</code>, donde en lugar de separador pondríamos el caracter por el que están separados los datos, por ejemplo:  <code>,</code> <code>:</code> <code>;</code> <code>|</code> <code>$</code>, entre otros.</p>
+<p>###Importar archivos de Excel</p>
+<p>Para importar archivos de Excel, existen diferentes paquetes:</p>
+<ul>
+<li><code>readxl()</code></li>
+<li><code>xlsx ()</code></li>
+</ul>
+<pre lang="{r,"><code>#Con xlsx
+base &lt;- read.xlsx("nombre del archivo", 
+                sheetName= "nombre de la hoja")
+
+#Con readxl
+base &lt;- read_excel("nombre del archivo")
+</code></pre>
+<p>###Importar archivos de Stata y SPSS</p>
+<p>Se puede utilizar el paquete <code>foreign()</code></p>
+<pre lang="{r,"><code>#Archivo de SPSS
+archivo &lt;- read.spss("nombre del archivo.sav", use.value.labels = TRUE, to.data.frame = TRUE)
+
+##Se puede poner la opcion use.value.labes = FALSE, si se quiere obtener los codigos de la variables  y no las etiquetas.
+
+#Con readxl
+archivo &lt;- read.dta("nombre del archivo")
+</code></pre>
+<p>##Tipos de datos</p>
+<p>Ahora que aprendimos como importar archivos, podemos empezar a trabajar.  En este segmento vamos a aprender sobre dos estructuras de datos muy comunes en R, los <strong>data frame</strong> y las <strong>tibbles</strong>.  Estas son estructuras para alamacenar datos tabulares, como por ejemplo los archivos que importamos desde Excel.  Básicamenete estos objetos tienen variables (que pueden ser de diferente tipo) y filas, que corresponden a cada una de las observaciones.</p>
+<p>Para estos ejemplos vamos a utilizar la base del paquete <code>nycflights13</code>, que contiene la base de datos <code>flights</code>.  Esta base describe a cada uno de los vuelos que salieron de Nueva York durante el 2013.  Los datos vienen del US <a href="http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&amp;Link=0" rel="nofollow">Bureau of Transportation Statistics</a>, y están documentados en <code>?flights</code>.</p>
+<p>Ya el paquete está cargado en el tutorial, pero si lo quisiera instalar desde su computadora recuerde los pasos:</p>
+<p>1.<code>install.packages('nycflights13')</code> para instalar el paquete<br>
+2. Cargue el paquete con <code>library(nycflights13)</code></p>
+<p>###Ver la base de datos
+Para ver la base de datos, puede escribir en la consola de abajo en nombre de la base: <code>flights</code>.</p>
+<pre lang="{r"><code>
+</code></pre>
+<div id="user-content-flights-hint">
+**Pista:** Escriba flights y luego el botón azul. 
+</div>
+<pre lang="{r"><code># checking code
+</code></pre>
+<p>Para ver la base de datos completa y no solamente las primeras filas usamos el comando <code>View()</code>.  En este caso <code>View(flights)</code>. Este comando nos permite ver la base completa en otra ventana.</p>
+<h3><a href="#tipos-de-variables" aria-hidden="true" class="anchor" id="user-content-tipos-de-variables"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos de variables</h3>
+<pre lang="{r"><code>flights
+</code></pre>
+<p>Como puede observar R muestra debajo del nombre de cada columna abreviaciones de letras. Estas describen el tipo de variable que está almacenada en cada columna de <code>flights</code>:</p>
+<ul>
+<li>
+<p><code>int</code> se refiere a "intergers" o números enteros.</p>
+</li>
+<li>
+<p><code>dbl</code> se refiere a doubles, o números reales.</p>
+</li>
+<li>
+<p><code>chr</code> se refiere a caracteres, también conocidos como "strings".</p>
+</li>
+<li>
+<p><code>dttm</code> se refiere a date-times (una fecha + una hora).</p>
+</li>
+</ul>
+<p>Otros tipos de variables comunes que no contiene esta base de datos pero que es frecuente encontrar son:</p>
+<ul>
+<li>
+<p><code>lgl</code> se refiere a logical, vectores que solo conienen <code>TRUE</code> o <code>FALSE</code>.</p>
+</li>
+<li>
+<p><code>fctr</code> se refiere a factors, que R utiliza para representar variables categóricas.</p>
+</li>
+<li>
+<p><code>date</code> se refiere a dates, o fechas.</p>
+</li>
+</ul>
+<h3><a href="#quiz-3-tipos-de-datos" aria-hidden="true" class="anchor" id="user-content-quiz-3-tipos-de-datos"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quiz #3: Tipos de datos</h3>
+<pre lang="{r"><code>
+</code></pre>
+<pre lang="{r"><code>quiz(caption = "Use la consola de arriba para poder responder las preguntas.",
+  question("¿Qué información contiene la variable `air_time`?  Lea la ayuda de la base de datos usano `?flights` para averiguarlo.",
+           answer("Hora de salida de avión"), 
+           answer("Tiempo que el avión está en aire, en minutos", correct= TRUE),
+           answer("Distancia ente aeropuertos"),
+           answer("Tiempo de retraso del avión"), 
+           allow_retry = TRUE
+  ),
+  question("¿Cuántas filas y variables tiene `flights`?",
+           answer("19 filas y 336.776 variables"), 
+           answer("336.766 filas y 7 variables"),
+           answer("336.766 filas y 19 variables", correct = TRUE),
+           answer("No se sabe"),
+           incorrect = "Pista: R enumera las filas y columnas cuando escribimos el nombre de la base en la consola. Examine el contenido de `flights` en la consola de arriba.", 
+           allow_retry = TRUE
+), 
+question("¿Qué tipos de variables hay en `flights`? Selecciones todas las que aplican.",
+         type = "multiple",
+         allow_retry = TRUE,
+         incorrect = "Revise de nuevo `flights`.",
+         answer("integers", correct = TRUE),
+         answer("doubles", correct = TRUE),
+         answer("factors"),
+         answer("characters", correct = TRUE)
+)
+)
+</code></pre>
+</article>
+  </div>
+
+  </div>
+
+  <button type="button" data-facebox="#jump-to-line" data-facebox-class="linejump" data-hotkey="l" class="d-none">Jump to Line</button>
+  <div id="jump-to-line" style="display:none">
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+      <input class="form-control linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
+      <button type="submit" class="btn">Go</button>
+</form>  </div>
+
+  </div>
+  <div class="modal-backdrop js-touch-events"></div>
+</div>
+
+    </div>
+  </div>
+
+  </div>
+
+      
+<div class="footer container-lg px-3" role="contentinfo">
+  <div class="position-relative d-flex flex-justify-between py-6 mt-6 f6 text-gray border-top border-gray-light ">
+    <ul class="list-style-none d-flex flex-wrap ">
+      <li class="mr-3">&copy; 2017 <span title="0.17719s from unicorn-506107531-gd71q">GitHub</span>, Inc.</li>
+        <li class="mr-3"><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li class="mr-3"><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li class="mr-3"><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li class="mr-3"><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage" class="footer-octicon" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+    <ul class="list-style-none d-flex flex-wrap ">
+        <li class="mr-3"><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+      <li class="mr-3"><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li class="mr-3"><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li class="mr-3"><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li class="mr-3"><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+  </div>
+</div>
+
+
+
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+    <button type="button" class="flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+    </button>
+    You can't perform that action at this time.
+  </div>
+
+
+    
+    <script crossorigin="anonymous" integrity="sha256-R7c3eUp64zkx0aUKgHD8RyBMQTxCRYqXgUMLHeA4450=" src="https://assets-cdn.github.com/assets/frameworks-47b737794a7ae33931d1a50a8070fc47204c413c42458a9781430b1de038e39d.js"></script>
+    
+    <script async="async" crossorigin="anonymous" integrity="sha256-2SXbOQbClm5PqyyQtrELszP12o+Heu5lfY4EhUqqPSU=" src="https://assets-cdn.github.com/assets/github-d925db3906c2966e4fab2c90b6b10bb333f5da8f877aee657d8e04854aaa3d25.js"></script>
+    
+    
+    
+    
+  <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+  </div>
+  <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+    </button>
+  </div>
+</div>
+
+
+  </body>
+</html>
+
