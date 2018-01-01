@@ -1,7 +1,8 @@
 ---
-title: "Data Recipe: Data Recipe Name"
+title: "Data Recipe: Incorporar el diseño de muestra para conocer la dimensión de la violencia de género en la población mexicana"
 output: learnr::tutorial
 runtime: shiny_prerendered
+author: Gibran Mena
 ---
 
 ```{r setup, include=FALSE}
@@ -10,12 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Introduction 
+## Introduction
 
-```{r}
-plot(1:5)
-```
-
+En una encuesta de muestreo estratificado, cada una de las observaciones de la base de datos tiene un "peso" determinado, que le es asignado de acuerdo con el diseño muestral de la encuesta. Factores como la correlación de las observaciones disminuyen el tamaño estadístico de la muestra. Incorporar los elementos del diseño muestral, tales como el estrato, factor y conglomerado, hacen la diferencia entre tener un análisis con consistencia interna, es decir, que represente sólo al número mismo de personas encuestadas, o con consistencia externa, es decir que represente a la totalidad de la población.
+En esta lección aprenderás a incorporar los elementos del diseño muestral en una encuesta cuyo tema son las dinámicas de las relaciones en México, y que incluye temas como los de violencia de género, para tener un retrato fiel de la población objetiva a partir de una muestra estratificada. 
 
 ```{r, eval=FALSE}
 # install.packages("foreign")
@@ -25,18 +24,154 @@ library(survey)
 ```
 
 
+## DEFINE
+
+Desde 2003, con con frecuencia inconstante, el Instituto Nacional de Estadística y Geografía (INEGI) ha desplegado la Encuesta Nacional sobre las Dinámicas de las Relaciones en los Hogares (ENDIREH) en México, en todas las entidades de la república. Los cuestionarios versan sobre las relaciones entre personas no sólo en el hogar, sino también en centros de estudio y trabajo. Esta encuesta ha sido utilizada por colectivos y organizaciones para detectar diversas formas de violencia de género en contra de la mujer. 
+
+Los resultados de la encuesta de 2016 fueron publicados en agosto de 2017. Sus resultados son tomados por organizaciones y periodistas con frecuencia, pero son raras las ocasiones en que se incorporan los elementos del diseño de la misma. Esta receta presenta el uso apropiado del paquete `svyby` para corregir este error común contestando la pregunta de cuál es la proporción de mujeres que han sido objeto de golpes o agresiones físicas atendiendo a su estado civil. Es decir, en cuanto son solteras con novio o pareja (o exnovio o expareja), casadas o unidas con alguna pareja, o separadas, divorciadas, viudas. 
+
+
+Para trabajar con esta receta te sugiero
+
+- Crear una carpeta llamada `ENDIREH-violencia-género`
+- Dentro de esta carpeta, crea otras dos `Inp` y `Out`
+
+Para obtener una estructura de carpetas como esta:
+
+```{}
+└── ENDIREH-violencia-género
+    ├── Inp
+    └── Out
+```
+
+## FIND
+
+La base de datos es pública y se encuentra en el sitio del Instituto Nacional de Estadística y Geografía (INEGI), el principal órgano estadístico público mexicano. 
+
+http://www.beta.inegi.org.mx/proyectos/enchogares/especiales/endireh/2016/default.html
+
+Para descargar simplemente da click en `descargar todos los archivos`
+
+De entre todas las bases, utilizaremos TB_SEC_XII.dbf
+Te sugiero que pongas los archivos TB_SEC_XII.dbf y el diccionario de datos fd_endireh2016.xlsx, en la carpeta `Inp` creada anteriormente
+
+
+## GET
+
+Radicamos el directorio de trabajo en la carpeta `Inp`
+> setwd("~/Desktop/ENDIREH-violencia-género/Inp")
+
+Usaremos la función `read` de la biblioteca `foreign` que antes instalamos.
+
 ```{r, eval=FALSE}
 data <- read.dbf("TB_SEC_XII.dbf", as.is = T)
 save(data, file = "../../../data/mexico-gender-violence_raw.RData")
 ```
 
+## ANALYSE
 
-## DEFINE
+Comencemos por explorar la base. Las variables con que contamos son:
+
+```{r, eval=FALSE}
+names(data)
+```
+
+Una de las variables, T_INSTRUM, se refiere al tipo de cuestionario usado por la encuesta. Existen distintos tipos de cuestionario para mujeres en distintos estados civiles. Una ojeada al diccionario de datos nos da la siguiente información sobre esta variable:
+
+A1. Mujer casada o unida con pareja residente
+A2. Mujer casada o unida con pareja ausente temporal
+B1. Mujer separada o divorciada
+B2. Mujer viuda
+C1. Mujer soltera con novio o pareja o exnovio o expareja
+C2. Mujer soltera que nunca ha tenido novio
+
+Una tabla nos dice cuántas mujeres en cada estado civil entrevistó la encuesta
+
+El primer ejercicio de análisis, para el que a propósito encontraremos proporciones SIN hacer uso del diseño muestral.
+
+Para ello cruzaremos las variables del tipo de cuestionario (referida al estado civil de la mujer en cuestión) y la variable P12_17_1, si la golpeó alguna de sus parejas o esposos anteriores, para la que encontramos los siguientes casos: 
+
+ 1 - Sí
+ 2 - No
+ 9 - No especificado
+ b - blanco
+ 
+Elaboramos una tabla de frecuencia considerando nuestras dos variables
+
+```{r, eval=FALSE}
+tab <- table(data$P12_17_1, data$T_INSTRUM)
+```
+
+Eliminamos los registros que no nos son útiles, la fila 3(No especificado) y la columna C2 (son mujeres que nunca han tenido una pareja y por lo tanto jamás han sido violentadas por esta)
+
+```{r, eval=FALSE}
+tab <- tab[-3, -6]
+```
+
+Una tabla de frecuencia por sí misma no es utilizable porque nos da números absolutos. Requerimos tener números relativos, proporciones o porcentajes. Para generar esta tabla de proporciones usamos el elemento `margin`de la función `prop.table`, margin=1 señala que la variable indepentiente son las filas, mientras que margin=2 indica que son las columnas la variable independiente. En este caso queremos averiguar la probabilidad o proporción de que una mujer sea violentada DADO su estado civil, por lo que variable independiente será dicho estado (margin=2). El último argumento de la función (3), indica el redondeo a tres decimales.
+
+```{r, eval=FALSE}
+round(prop.table(tab, margin=2), 3)
+```
+
+Aparentemente, las mujeres solteras que tienen un novio o pareja o exnovio o expareja, tienen una probabilidad radicalmente menor (10%) de recibir golpes o agresiones físicas que las mujeres casadas, unidas o divorciadas (ronda el 40% la probabilidad) y, en menor medida, que las mujeres viudas (con un 35% de probabilidad)
+
+Por último, hacemos una prueba de hipótesis. Para ello aplicamos la prueba de la Chi Cuadrada, que nos dice la probabilidad de presentarse estas mismas proporciones (esta misma distribución de datos) dada una hipótesis nula (suponiendo que nuestra hipótesis de relación entre estado civil y violencia fuese falsa).
+
+```{r, eval=FALSE}
+chisq.test(tab)
+```
+
+Como puede observarse, el valor p o `p value` de 2.2e-16, una probabilidad muy baja de que la misma distribución de datos se daría en caso de ser cierta la hipótesis nula (ninguna relación entre estado civil y violencia física).
+
+## VERIFY
+
+No obstante, veamos si cambia la probabilidad de estas relaciones en los casos en que, de hecho, incorporamos el diseño muestral de la encuesta, lo cual nos da un análisis correcto de la misma. 
+
+Para ello usaremos la biblioteca de R `survey`que instalamos y requerimos o "activamos" previamente. 
+
+Los elementos del diseño de muestra de ENDIREH son los siguientes, y pueden encontrarse en el diccionario de datos
+
+Factor vivienda
+Factor de la mujer
+Estrato
+UPM de diseño: conglomerado
+Estrato de diseño
+
+Vamos a incorporarlos y almacenarlos en un objeto llamado "disenio"
+
+```{r, eval=FALSE}
+disenio <- svydesign(~UPM_DIS, strata=~EST_DIS, weight=~FAC_MUJ, data=data)
+```
+
+Ahora almacenamos en una base de datos temporal las medias ponderadas con los factores del diseño para cada uno de los estados civiles de las mujeres con las que hemos estado trabajando
+
+```{r, eval=FALSE}
+tmp <- svymean(~as.factor(data$T_INSTRUM), disenio, na.rm=TRUE)
+```
+
+Almacenamos igualmente en un objeto de nombre cualquiera el resultado de calcular la ponderación con la función `svyby`, considerando los subsets que necesitamos. En este caso, queremos 
+
+
+base <- svyby(~P12_17_1, ~subset(T_INSTRUM, P12_C_4!=9), disenio, svymean, na.rm=TRUE) 
 
 
 
-## FIND
 
+
+## Summary and further reading
+
+|In this lesson we learned           | Further reading                                        |
+| ---------------------------------- | -------------------------------------------------------|
+|How to do a                         |[RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) on **a**. |
+|                                    |The [dplyr website](http://dplyr.tidyverse.org/). |
+|How to do b                         |The [ggplot2 website](http://ggplot2.tidyverse.org/) |
+|How to do c                         |...|
+
+
+```{r}
+plot(1:5)
+```
 
 ## GET
 
