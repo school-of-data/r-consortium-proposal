@@ -26,7 +26,6 @@ This is what we'll do in this recipe! We'll show you step by step how to produce
 To find that data, a journalist may want to report in a spreadsheet every new poll published but this might reveal quite burdersome. But, fortunately, for us, the Wikipedia community has done a truly amazing work in reporting every new poll in a single page with a normalized template during the primary elections and the Presidential campaign on both the first and second rounds.
 ![](./img/francepolls.png)
 Even better, there is an [entire category dedicated to opinion polling for elections](https://en.wikipedia.org/wiki/Category:Opinion_polling_for_elections) in which you can find opinion polling data for elections in the UK, Poland, Peru, Kenya, India, Iran… This a global effort to put opinion polling in perspective. 
-![](./img/category.png)
 
 
 You don't see the election going on in your country? Why don't you start reporting the latest opinion polls on Wikipedia? It's easy to do, very useful for the public and we might get help for other Wikipedia contributors.  
@@ -61,7 +60,7 @@ But there's an ever easier way, you can just use your browser. Right click on th
 
 ![](./img/css.gif)
 
-You should get the following CSS selector : `#mw-content-text > div > table:nth-child(66)`.
+You should get the following CSS selector : `#mw-content-text > div > table:nth-child(66)`. Note that this might change if the page structure is updated.
 
 Then you will need to tell `rvest` your discovery by reporting the CSS in the `html_node` fonction which extracts specific elements defined by their position. The `html_table` fonction will import that data into a dataframe we will name `polls_round1`. 
 
@@ -69,22 +68,32 @@ Then you will need to tell `rvest` your discovery by reporting the CSS in the `h
 library(tidyverse)
 polls_round1 <- polls %>% 
   html_node("#mw-content-text > div > table:nth-child(66)") %>% 
-  html_table(header = TRUE,fill=TRUE)  #header=TRUE uses the first row as a header and fill=TRUE automatically fills rows with NAs when there is fewer than the maximum number of columns.
+  html_table(header = TRUE,fill=TRUE)  #header=TRUE uses the first row as a header and fill=TRUE automatically fills rows with NAs when there is fewer than the maximum number of columns.  
 ```
 
 
 ---
 # Verify
+It's always important to check the quality of the data. In this exemple, questions you can ask yourself can be: who are the listed polling institutions? What is the founding source of these polls? What are the polling methods? Is the sample sufficient to represent the country population? 
+
 ---
 # Clean
+Once you have checked the quality of the data, you will need to clean it before using them. Let's have a look at `polls_round1`, the data frame containing the polls results. You can see that the first four rows are redundant with the colomn header and the last row contains methodological information. Let's see remove that to make the data processable by creating a vector,a sequence of data elements, with `c` and removing it with `-` :
 ```{r}
-polls_round1 <- polls_round1[-c(1,2, 3, 4, 5, 94), ] #virer les lignes inutiles
-colnames(polls_round1) <- c("Poll source","Fieldwork date", "Sample size", "Abstention", "Arthaud", "Poutou", "Mélenchon", "Hamon", "Macron", "Lassalle","Fillon", "Dupont-Aignan", "Asselineau","Le Pen", "Cheminade") #enlever les partis des noms de colonnes
-save(polls_round1, file = "./polls_round1.rdata") #enregistrer parce que ça va planter
-load(file = "./polls_round1.rdata")
-library(tidyverse)
-polls_round1 <- polls_round1 %>% mutate_at(vars(`Abstention`:`Cheminade`),funs(parse_number),na=character()) #enlever les pourcentages et absention 0
+polls_round1 <- polls_round1[-c(1,2, 3, 4, 5, 94), ] 
+```
+This is better but we lost column names. So let's rename all columnn names by using the `colnames` fonctions. 
+```{r}
+colnames(polls_round1) <- c("Poll source","Fieldwork date", "Sample size", "Abstention", "Arthaud", "Poutou", "Melenchon", "Hamon", "Macron", "Lassalle","Fillon", "Dupont-Aignan", "Asselineau","Le Pen", "Cheminade") #enlever les partis des noms de colonnes
+```
+Let's look again at our dataframe in the "environment" section of R Studio. If you look at the values for each candidates (Arthaud, Lassalle or Macron for instance), you will see `chr` which means that it's a chain of character for R. This means it is not considered as figures. The reason is we still have percentages which it does not process so let's remove them. 
 
+To do this, we will use `mutate_at` which is [one of the verbs in `dplyr`](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) to wrangle with the data. We will use `vars`to include the columns containing data for abstention and each candidate then we call the function `pars_number` by using `funs` to keep only what's before the percentage. Finally, we will record that data back in `polls_round1`. 
+```{r}
+polls_round1 <- polls_round1 %>% mutate_at(vars(`Arthaud`:`Cheminade`),funs(parse_number),na=character()) #enlever les pourcentages et absention 0
+```
+
+```{r}
 #install.packages("lubridate")
 #install.packages("rex")
 library(lubridate)
@@ -112,14 +121,13 @@ polls_round1_long <- polls_round1 %>% gather(Candidates, Percentage, Abstention:
 
 save(polls_round1_long, file = "./polls_round1_long.Rdata")
 
-
 ```
 
 
 ---
 # Visualize 
 ```{r}
-devtools::install_github("hrbrmstr/hrbrthemes")
+#devtools::install_github("hrbrmstr/hrbrthemes")
 library(hrbrthemes)
 
 polls_round1_long %>% 
