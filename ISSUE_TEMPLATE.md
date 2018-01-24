@@ -6,6 +6,17 @@ Otherwise you can just delete this.*
 *Pro tip: click on "Preview" to see what your edits look like.*
 
 ### Name: <!-- Name of the recipe or skills lessen you are testing -->
+### R skills:
+
+- **Have you used R before?** 
+<!-- Add your answer here -->
+
+- **Do you have RStudio and R already installed?**
+<!-- Add your answer here -->
+
+- **What is the most advanced thing/project/analysis that you have done with R?**
+<!-- Add your answer here -->
+
 
 ## Writing, tone: 
 
