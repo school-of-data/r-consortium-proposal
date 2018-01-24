@@ -12,7 +12,7 @@ We currently need help with:
  
  - Creating tutorials (data recipes and skills lessons)
  - Translation (no R knowledge required)
- - Beta testing (no R knowledge required): go through the existing material and point out 
+ - Beta testing (see below): go through the existing material and point out 
  things you don't understand or points where you get stuck. 
  - Planning of the website
  
@@ -39,6 +39,9 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
 
 
 ### Beta testing
+
+You have R and RStudio installed and know how to run R code and install packages?
+You speak English? Then you are the right person to help us in beta testing! :raised_hands:
 
 1. Find content you'd like to test. Currently the *Introduction* and the *Swiss dual use data recipe* are 
 ready for beta testing. To take a look at them, open R and run:
