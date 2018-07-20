@@ -21,7 +21,7 @@ learnr::run_tutorial("en-skills-template", package = "ddj")
 - A [data journalists view on R](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/why_use_R.md) by Timo Grossenbacher
 - The following data recipes
     + [Switzerland dual use goods](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/switzerland-dual-use/recipe_switzerland-dual-use.Rmd)
-     + [WIP - Visualisation of polls results during presidential election in France](https://github.com/school-of-data/r-consortium-proposal/blob/master/material/lessons/polls.Rmd)
+     + [WIP - Visualisation of polls results during presidential election in France](https://github.com/school-of-data/r-consortium-proposal/blob/master/r-package/inst/tutorials/en-recipe-france-presidentialelec-polls/en-recipe-france-presidentialelec-polls.Rmd)
 - The following skills lessons 
     + NA
   
